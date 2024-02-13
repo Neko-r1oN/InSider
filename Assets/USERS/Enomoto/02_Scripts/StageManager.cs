@@ -5,18 +5,18 @@ using UnityEngine.AI;
 
 public class StageManager : MonoBehaviour
 {
-    void Awake()
-    {
-        // ベイクを開始
-        StartBake();
-    }
+    //void Awake()
+    //{
+    //    // ベイクを開始
+    //    StartBake();
+    //}
 
-    /// <summary>
-    /// ベイクを開始
-    /// </summary>
-    public void StartBake()
-    {        
-        // ベイクする
-        this.gameObject.GetComponent<NavMeshSurface>().BuildNavMesh();
-    }
+    ///// <summary>
+    ///// ベイクを開始
+    ///// </summary>
+    //public void StartBake()
+    //{        
+    //    // ベイクする
+    //    this.gameObject.GetComponent<NavMeshSurface>().BuildNavMesh();
+    //}
 }
