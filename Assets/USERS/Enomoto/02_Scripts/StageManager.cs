@@ -15,7 +15,7 @@ public class StageManager : MonoBehaviour
     /// ベイクを開始
     /// </summary>
     public void StartBake()
-    {        
+    {
         // ベイクする
         //this.gameObject.GetComponent<NavMeshSurface>().BuildNavMesh();
     }
