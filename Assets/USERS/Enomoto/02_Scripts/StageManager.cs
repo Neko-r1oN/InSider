@@ -17,6 +17,6 @@ public class StageManager : MonoBehaviour
     public void StartBake()
     {        
         // ÉxÉCÉNÇ∑ÇÈ
-        this.gameObject.GetComponent<NavMeshSurface>().BuildNavMesh();
+        //this.gameObject.GetComponent<NavMeshSurface>().BuildNavMesh();
     }
 }
