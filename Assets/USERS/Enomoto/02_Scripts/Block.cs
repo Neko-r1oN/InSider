@@ -93,6 +93,6 @@ public class Block : MonoBehaviour
         Destroy(desObject);
 
         // ベイクを開始
-        stageManager.GetComponent<StageManager>().StartBake();
+        //stageManager.GetComponent<StageManager>().StartBake();
     }
 }

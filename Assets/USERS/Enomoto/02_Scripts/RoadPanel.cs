@@ -108,7 +108,7 @@ public class RoadPanel : MonoBehaviour
         // 破棄する
         Destroy(desObject);
 
-        // ベイクを開始
-        stageManager.GetComponent<StageManager>().StartBake();
+        //// ベイクを開始
+        //stageManager.GetComponent<StageManager>().StartBake();
     }
 }
