@@ -5,6 +5,7 @@ using UnityEngine.UI;   // UI用
 using UnityEngine.AI;   // AI用
 using Unity.AI.Navigation;
 
+
 public class Player : MonoBehaviour
 {
     [SerializeField] Text modeText; // モード表示
@@ -23,6 +24,8 @@ public class Player : MonoBehaviour
 
     // プレイヤーのY座標を固定
     const float pos_Y = 0.9f;
+
+    int stamina = 100;
 
     public enum PLAYER_MODE
     {
@@ -44,7 +47,7 @@ public class Player : MonoBehaviour
         // 初期化
         clickedTarget = transform.position;
 
-        modeText.text = "  現在のモード：移動";
+        modeText.text = "現在のモード：移動";
     }
 
     // Update is called once per frame
@@ -55,21 +58,29 @@ public class Player : MonoBehaviour
         {
             modeText.text = "  現在のモード：移動";
             mode = PLAYER_MODE.MOVE;
+            stamina -= 10;
+            Debug.Log("残りスタミナ" + stamina);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             modeText.text = "  現在のモード：採掘";
             mode = PLAYER_MODE.MINING;
+            stamina -= 10;
+            Debug.Log("残りスタミナ" + stamina);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             modeText.text = "  現在のモード：埋める";
             mode = PLAYER_MODE.FILL;
+            stamina -= 10;
+            Debug.Log("残りスタミナ+ stamina");
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             modeText.text = "  現在のモード：何もしない";
             mode = PLAYER_MODE.NOTHING;
+            stamina -= 10;
+            Debug.Log("残りスタミナ" + stamina);
         }
 
         // Y座標を固定 → 目的地に到達したかどうかの判定が難しくなるため
@@ -100,6 +111,15 @@ public class Player : MonoBehaviour
                 }
 
             }
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if(agent.velocity.magnitude <= 0)
+        {// 移動量が0以下
+            // 滑らかに回転
+            transform.forward = Vector3.Slerp(transform.forward, Vector3.back, Time.deltaTime * 8f);    // 後ろを向く
         }
     }
 
@@ -175,5 +195,10 @@ public class Player : MonoBehaviour
         //        }
         //    }
         //}
+    }
+
+    void PushButton()
+    {
+        
     }
 }
