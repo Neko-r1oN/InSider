@@ -22,6 +22,12 @@ public class ButtonManager : MonoBehaviour
 
     public void CutOpen()
     {//切り開くを選んだ場合
+
+        if (player.GetComponent<Player>().isEnd == false)
+        {// プレイヤーが移動中の場合
+            return;
+        }
+
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.MINING;
         stamina -= 10;
         Debug.Log("残りスタミナ"+ stamina);
@@ -29,6 +35,12 @@ public class ButtonManager : MonoBehaviour
 
     public void fill()
     {//埋めるを選んだ場合
+
+        if (player.GetComponent<Player>().isEnd == false)
+        {// プレイヤーが移動中の場合
+            return;
+        }
+
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.FILL;
         stamina -= 10;
         Debug.Log("残りスタミナ" + stamina);
@@ -36,6 +48,11 @@ public class ButtonManager : MonoBehaviour
 
     public void Nothing()
     {
+        if (player.GetComponent<Player>().isEnd == false)
+        {// プレイヤーが移動中の場合
+            return;
+        }
+
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.NOTHING;
         stamina -= 10;
         Debug.Log("残りスタミナ" + stamina);
