@@ -114,6 +114,15 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if(agent.velocity.magnitude <= 0)
+        {// ˆÚ“®—Ê‚ª0ˆÈ‰º
+            // ŠŠ‚ç‚©‚É‰ñ“]
+            transform.forward = Vector3.Slerp(transform.forward, Vector3.back, Time.deltaTime * 8f);    // Œã‚ë‚ðŒü‚­
+        }
+    }
+
     private void OnTriggerStay(Collider other)
     {
         //******************************

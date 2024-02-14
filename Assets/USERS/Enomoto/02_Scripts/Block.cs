@@ -8,7 +8,7 @@ public class Block : MonoBehaviour
     [SerializeField] GameObject roadPrefab;
 
     // ステージの管理
-    GameObject stageManager;
+    GameObject startPanel;
 
     // プレイヤー
     GameObject player;
@@ -23,7 +23,7 @@ public class Block : MonoBehaviour
     void Start()
     {
         // 取得する
-        stageManager = GameObject.Find("StageManager");
+        startPanel = GameObject.Find("StageBaker");
         player = GameObject.Find("Player");
         defaultMaterial = gameObject.GetComponent<Renderer>().material.color;
     }
@@ -84,15 +84,15 @@ public class Block : MonoBehaviour
     /// <param name="pos">生成する座標</param>
     /// <param name="rotY">生成するときの回転</param>
     /// <param name="desObject">破棄するオブジェクト</param>
-    private void Bake(GameObject prefab, Vector3 pos, int rotY, GameObject desObject)
+    private void Bake(GameObject prefab, Vector3 pos, int rotY, GameObject dieObject)
     {
         // オブジェクトを生成する
         GameObject block = Instantiate(prefab, pos, Quaternion.identity);
 
         // 破棄する
-        Destroy(desObject);
+        Destroy(dieObject);
 
         // ベイクを開始
-        //stageManager.GetComponent<StageManager>().StartBake();
+        startPanel.GetComponent<StageBake>().StartBake();
     }
 }
