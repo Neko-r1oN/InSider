@@ -8,8 +8,6 @@ using Unity.AI.Navigation;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] Text modeText; // モード表示
-
     // 自分自身
     NavMeshAgent agent;
 
@@ -25,6 +23,10 @@ public class Player : MonoBehaviour
     // プレイヤーのY座標を固定
     const float pos_Y = 0.9f;
 
+    // 完全に移動が完了したかどうか
+    public bool isEnd = false;
+
+    // スタミナ
     int stamina = 100;
 
     public enum PLAYER_MODE
@@ -46,43 +48,11 @@ public class Player : MonoBehaviour
 
         // 初期化
         clickedTarget = transform.position;
-
-        modeText.text = "現在のモード：移動";
     }
 
     // Update is called once per frame
     void Update()
     {
-        // モード変更
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            modeText.text = "  現在のモード：移動";
-            mode = PLAYER_MODE.MOVE;
-            stamina -= 10;
-            Debug.Log("残りスタミナ" + stamina);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            modeText.text = "  現在のモード：採掘";
-            mode = PLAYER_MODE.MINING;
-            stamina -= 10;
-            Debug.Log("残りスタミナ" + stamina);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            modeText.text = "  現在のモード：埋める";
-            mode = PLAYER_MODE.FILL;
-            stamina -= 10;
-            Debug.Log("残りスタミナ+ stamina");
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            modeText.text = "  現在のモード：何もしない";
-            mode = PLAYER_MODE.NOTHING;
-            stamina -= 10;
-            Debug.Log("残りスタミナ" + stamina);
-        }
-
         // Y座標を固定 → 目的地に到達したかどうかの判定が難しくなるため
         transform.position = new Vector3(transform.position.x, pos_Y, transform.position.z);
 
@@ -121,6 +91,20 @@ public class Player : MonoBehaviour
             // 滑らかに回転
             transform.forward = Vector3.Slerp(transform.forward, Vector3.back, Time.deltaTime * 8f);    // 後ろを向く
         }
+
+        if(agent.velocity.magnitude > 0)
+        {// 移動中は偽
+            isEnd = false;
+        }
+        else if (Mathf.Abs(transform.localEulerAngles.y) >= 179f&& isEnd == false) // 条件を絶対値にする
+        {// 回転が終了すると
+
+            // 回転を調整
+            transform.localEulerAngles = new Vector3(0, 180, 0);
+
+            isEnd = true;
+            Debug.Log("OKOKOKOKOKOKOKOKOKO");
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -158,47 +142,5 @@ public class Player : MonoBehaviour
                 other.GetComponent<RoadPanel>().isFill = false;
             }
         }
-
-        //// クリックした
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    if (mode == PLAYER_MODE.MINING || mode == PLAYER_MODE.FILL)
-        //    {// モード：MINING || モード：FILL
-
-        //        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //        RaycastHit hit = new RaycastHit();
-
-        //        if (Physics.Raycast(ray, out hit))
-        //        {// Rayが当たったオブジェクトの情報をhitに渡す
-
-        //            //******************************
-        //            //  採掘モード
-        //            //******************************
-        //            if (other.gameObject.tag == "Block" && hit.transform.gameObject == other.gameObject
-        //                && mode == PLAYER_MODE.MINING)
-        //            {// ブロックの場合
-
-        //                // 生成 → 破棄 → ベイク
-        //                Bake(roadPrefab, new Vector3(other.transform.position.x, 0f, other.transform.position.z), 0, other.gameObject);
-        //            }
-
-        //            //******************************
-        //            //  埋めるモード
-        //            //******************************
-        //            else if (other.gameObject.tag == "RoadPanel" && hit.transform.gameObject == other.gameObject
-        //                && mode == PLAYER_MODE.FILL)
-        //            {// 道パネルの場合
-
-        //                // 生成 → 破棄 → ベイク
-        //                Bake(blockPrefab, new Vector3(other.transform.position.x, 1.3f, other.transform.position.z), 0, other.gameObject);
-        //            }
-        //        }
-        //    }
-        //}
-    }
-
-    void PushButton()
-    {
-        
     }
 }
