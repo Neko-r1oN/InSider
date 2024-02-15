@@ -5,7 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/game.unity
+  - enabled: 0
+    path: Assets/Scenes/gameUeno.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 0
+    path: Assets/USERS/Kawaguti/00_Scenes/GameUIManager.unity
+    guid: 3245db1ac06c8b8448ea546c643281c7
+  - enabled: 1
+    path: Assets/USERS/Ueno/00_Scenes/UenoUI.unity
+    guid: 996830a230966ec4fb563d0628cd483d
   m_configObjects: {}

@@ -23,7 +23,7 @@ public class RoadPanel : MonoBehaviour
     void Start()
     {
         // Žæ“¾‚·‚é
-        startPanel = GameObject.Find("StageBaker");
+        startPanel = GameObject.Find("StageManager");
         player = GameObject.Find("Player");
         defaultMaterial = gameObject.GetComponent<Renderer>().material.color;
     }
