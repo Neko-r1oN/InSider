@@ -72,4 +72,14 @@ public class TitleManajor : MonoBehaviour
 #endif
     }
 
+    /// <summary>
+    /// ƒƒjƒ…[‚ğ•Â‚¶‚éˆ—
+    /// </summary>
+    public void OnCloseClick()
+    {
+        titleMenu.SetActive(false);
+        spaceText.SetActive(true);
+    }
+
+
 }
