@@ -16,19 +16,28 @@ public class Block : MonoBehaviour
     // RoadUI
     GameObject roadUI;
 
+    GameObject uiMnager;
+
     // デフォルトカラー
     Color defaultMaterial;
 
     // 採掘の対象になっている場合
     public bool isMining = false;
 
+    //public void SearchUI()
+    //{
+        
+
+    //    roadUI = uiMnager.GetComponent<UIManager>().GetRoadUI();
+    //}
     // Start is called before the first frame update
     void Start()
     {
         // 取得する
         startPanel = GameObject.Find("StageManager");
         player = GameObject.Find("Player");
-        roadUI = GameObject.Find("RoadUI");
+        //SearchUI();
+        uiMnager = GameObject.Find("UIManager");
         defaultMaterial = gameObject.GetComponent<Renderer>().material.color;
     }
 
@@ -57,9 +66,9 @@ public class Block : MonoBehaviour
                     gameObject.GetComponent<Renderer>().material.color = Color.green; // 緑色
 
                     // 左クリックした && 選択肢のUIが非表示の場合
-                    if(Input.GetMouseButtonDown(0) && roadUI.GetComponent<UIManager>().ActiveRoad() == false)
+                    if(Input.GetMouseButtonDown(0) && uiMnager.GetComponent<UIManager>().ActiveRoad() == false)
                     {
-                        roadUI.GetComponent<UIManager>().SetRoad(true);
+                        uiMnager.GetComponent<UIManager>().SetRoad(true);
 
                         // 生成 → 破棄 → ベイク
                         Bake(roadPrefab, new Vector3(transform.position.x, 0f, transform.position.z), 0, this.gameObject);

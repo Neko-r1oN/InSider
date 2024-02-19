@@ -12,6 +12,7 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] GameObject moveButton; // moveボタンの取得
     [SerializeField] GameObject nothingButton; //nothingボタンの取得
     [SerializeField] GameObject sabotageButton; //sabotageボタンの取得
+
     int stamina = 100;
 
     private void Start()
@@ -62,6 +63,7 @@ public class ButtonManager : MonoBehaviour
         }
 
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.FILL;
+        player.GetComponent<Player>().SubStamina(10);
         stamina -= 10;
         Debug.Log("残りスタミナ" + stamina);
     }

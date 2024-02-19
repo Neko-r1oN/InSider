@@ -6,10 +6,23 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] GameObject road;
 
+    public GameObject GetRoadUI()
+    {
+        return road;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         road = GameObject.Find("RoadUI");
+
+        //GameObject[] blocks = GameObject.FindGameObjectsWithTag("Block");
+
+        //foreach (GameObject block in blocks)
+        //{
+        //    block.GetComponent<Block>().SearchUI();
+        //}
+
         road.SetActive(false);
     }
 
@@ -26,6 +39,6 @@ public class UIManager : MonoBehaviour
 
     public bool ActiveRoad()
     {
-        return road;
+        return road.activeSelf;
     }
 }

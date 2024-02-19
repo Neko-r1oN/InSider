@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;   // UI用
 using UnityEngine.AI;   // AI用
 using Unity.AI.Navigation;
+using DG.Tweening;
 
 
 public class Player : MonoBehaviour
@@ -16,6 +17,12 @@ public class Player : MonoBehaviour
 
     // アニメーター
     Animator animator;
+
+    // スタミナゲージ
+    GameObject staminaGauge;
+
+    // スタミナゲージ内の値
+    Text staminaNum;
 
     // 目的地を設定したかどうか
     bool isSetTarget = false;
@@ -45,6 +52,12 @@ public class Player : MonoBehaviour
     {
         // NavMeshAgentを取得する
         agent = GetComponent<NavMeshAgent>();
+
+        // staminaGaugeを取得する
+        staminaGauge = GameObject.Find("staminaGauge");
+
+        // スタミナゲージ内の値を取得する
+        staminaNum = GameObject.Find("StaminaNum").GetComponent<Text>();
 
         // 初期化
         clickedTarget = transform.position;
@@ -142,5 +155,24 @@ public class Player : MonoBehaviour
                 other.GetComponent<RoadPanel>().isFill = false;
             }
         }
+    }
+
+    public void SubStamina(int num)
+    {
+        // スタミナを減らす
+        stamina -= num;
+        if (stamina <= 0)
+        {// スタミナが0以下になった時
+            // 0に固定する
+            stamina = 0;
+        }
+        // スライダーを減らすアニメーション(DOTween)
+        staminaGauge.GetComponent<Slider>().DOValue(stamina, 1.5f);
+
+        // スタミナゲージ内の数値を減らす
+        staminaNum.text = "" + stamina;
+
+        // 残りスタミナを表示(デバックのみ)
+        Debug.Log("残りスタミナ" + stamina);
     }
 }
