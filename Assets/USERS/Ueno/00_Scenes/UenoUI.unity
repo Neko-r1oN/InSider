@@ -6664,9 +6664,6 @@ MonoBehaviour:
   m_Text: '    / 100'
 --- !u!222 &1658125051
 CanvasRenderer:
-  subStamina: 10
---- !u!4 &1176317764
-Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
