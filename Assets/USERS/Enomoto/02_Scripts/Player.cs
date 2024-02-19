@@ -1,98 +1,115 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;   // UI—p
-using UnityEngine.AI;   // AI—p
+using UnityEngine.UI;   // UIç”¨
+using UnityEngine.AI;   // AIç”¨
 using Unity.AI.Navigation;
 using DG.Tweening;
 
 
 public class Player : MonoBehaviour
 {
-    // ©•ª©g
+    // è‡ªåˆ†è‡ªèº«
     NavMeshAgent agent;
 
-    // ƒNƒŠƒbƒN‚µ‚½ƒpƒlƒ‹‚ÌÀ•W‚ğŠi”[
+    // ã‚¯ãƒªãƒƒã‚¯ã—ãŸãƒ‘ãƒãƒ«ã®åº§æ¨™ã‚’æ ¼ç´
     Vector3 clickedTarget;
 
-    // ƒAƒjƒ[ƒ^[
+    // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚¿ãƒ¼
     Animator animator;
 
-    // ƒXƒ^ƒ~ƒiƒQ[ƒW
+    // ã‚¹ã‚¿ãƒŸãƒŠã‚²ãƒ¼ã‚¸
     GameObject staminaGauge;
 
-    // ƒXƒ^ƒ~ƒiƒQ[ƒW“à‚Ì’l
+    // ã‚¹ã‚¿ãƒŸãƒŠã‚²ãƒ¼ã‚¸å†…ã®å€¤
     Text staminaNum;
-
-    // –Ú“I’n‚ğİ’è‚µ‚½‚©‚Ç‚¤‚©
+    
+    // ç›®çš„åœ°ã‚’è¨­å®šã—ãŸã‹ã©ã†ã‹
     bool isSetTarget = false;
 
-    // ƒvƒŒƒCƒ„[‚ÌYÀ•W‚ğŒÅ’è
+    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®Yåº§æ¨™ã‚’å›ºå®š
     const float pos_Y = 0.9f;
 
-    // Š®‘S‚ÉˆÚ“®‚ªŠ®—¹‚µ‚½‚©‚Ç‚¤‚©
+    // å®Œå…¨ã«ç§»å‹•ãŒå®Œäº†ã—ãŸã‹ã©ã†ã‹
     public bool isEnd = false;
 
-    // ƒXƒ^ƒ~ƒi
+    // ã‚¹ã‚¿ãƒŸãƒŠ
     int stamina = 100;
+
+    // ã‚¹ã‚¿ãƒŸãƒŠã‚²ãƒ¼ã‚¸ã®æ•°å€¤
+    GameObject staminaNum;
 
     public enum PLAYER_MODE
     {
-        MOVE,   // ˆÚ“®
-        MINING, // ÌŒ@
-        FILL,   // –„‚ß‚é
-        NOTHING // ‰½‚à‚µ‚È‚¢
+        MOVE,   // ç§»å‹•
+        MINING, // æ¡æ˜
+        FILL,   // åŸ‹ã‚ã‚‹
+        NOTHING // ä½•ã‚‚ã—ãªã„
     }
 
-    // ƒvƒŒƒCƒ„[‚Ìƒ‚[ƒh
+    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒ¢ãƒ¼ãƒ‰
     public PLAYER_MODE mode = PLAYER_MODE.MOVE;
 
     // Start is called before the first frame update
     void Start()
     {
-        // NavMeshAgent‚ğæ“¾‚·‚é
+        // NavMeshAgentã‚’å–å¾—ã™ã‚‹
         agent = GetComponent<NavMeshAgent>();
 
-        // staminaGauge‚ğæ“¾‚·‚é
+        // staminaGaugeã‚’å–å¾—ã™ã‚‹
         staminaGauge = GameObject.Find("staminaGauge");
 
-        // ƒXƒ^ƒ~ƒiƒQ[ƒW“à‚Ì’l‚ğæ“¾‚·‚é
+        // ã‚¹ã‚¿ãƒŸãƒŠã‚²ãƒ¼ã‚¸å†…ã®å€¤ã‚’å–å¾—ã™ã‚‹
         staminaNum = GameObject.Find("StaminaNum").GetComponent<Text>();
 
-        // ‰Šú‰»
+        // åˆæœŸåŒ–
         clickedTarget = transform.position;
+
+        // ã‚¹ã‚¿ãƒŸãƒŠã‚²ãƒ¼ã‚¸ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆæƒ…å ±ã‚’å–å¾—
+        staminaGauge = GameObject.Find("staminaGauge");
+
+        // StaminaNumæƒ…å ±ã‚’å–å¾—
+        staminaNum = GameObject.Find("StaminaNum");
+
+        // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚¿ãƒ¼æƒ…å ±ã‚’å–å¾—
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // YÀ•W‚ğŒÅ’è ¨ –Ú“I’n‚É“’B‚µ‚½‚©‚Ç‚¤‚©‚Ì”»’è‚ª“ï‚µ‚­‚È‚é‚½‚ß
+        // Yåº§æ¨™ã‚’å›ºå®š â†’ ç›®çš„åœ°ã«åˆ°é”ã—ãŸã‹ã©ã†ã‹ã®åˆ¤å®šãŒé›£ã—ããªã‚‹ãŸã‚
         transform.position = new Vector3(transform.position.x, pos_Y, transform.position.z);
 
-        // ƒNƒŠƒbƒN‚µ‚½ && ƒ‚[ƒhFMOVE
+        // ç¾åœ¨ã®ã‚¹ã‚¿ãƒŸãƒŠã‚’è¡¨ç¤º
+        staminaNum.GetComponent<Text>().text = "" + stamina;
+
+        // ã‚¯ãƒªãƒƒã‚¯ã—ãŸ && ãƒ¢ãƒ¼ãƒ‰ï¼šMOVE
         if (Input.GetMouseButtonDown(0) && mode == PLAYER_MODE.MOVE)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit = new RaycastHit();
 
             if (Physics.Raycast(ray, out hit))
-            {// Ray‚ª“–‚½‚Á‚½ƒIƒuƒWƒFƒNƒg‚Ìî•ñ‚ğhit‚É“n‚·
+            {// RayãŒå½“ãŸã£ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æƒ…å ±ã‚’hitã«æ¸¡ã™
 
                 if (hit.transform.tag == "RoadPanel")
-                {// “¹ƒpƒlƒ‹‚Ìê‡
-                    // æ“¾‚·‚é
+                {// é“ãƒ‘ãƒãƒ«ã®å ´åˆ
+                    // å–å¾—ã™ã‚‹
                     clickedTarget = hit.collider.transform.position;
 
-                    // ’²®
+                    // èª¿æ•´
                     clickedTarget = new Vector3(clickedTarget.x, pos_Y, clickedTarget.z);
 
-                    // ^
+                    // çœŸ
                     isSetTarget = true;
 
-                    // –Ú“I’n‚ÖˆÚ“®
+                    // ç›®çš„åœ°ã¸ç§»å‹•
                     agent.destination = clickedTarget;
-                }
 
+                    // ã‚¹ã‚¿ãƒŸãƒŠã‚’æ¸›ã‚‰ã™
+                    SubStamina(10);
+                }
             }
         }
     }
@@ -100,58 +117,63 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         if(agent.velocity.magnitude <= 0)
-        {// ˆÚ“®—Ê‚ª0ˆÈ‰º
-            // ŠŠ‚ç‚©‚É‰ñ“]
-            transform.forward = Vector3.Slerp(transform.forward, Vector3.back, Time.deltaTime * 8f);    // Œã‚ë‚ğŒü‚­
+        {// ç§»å‹•é‡ãŒ0ä»¥ä¸‹
+            // æ»‘ã‚‰ã‹ã«å›è»¢
+            transform.forward = Vector3.Slerp(transform.forward, Vector3.back, Time.deltaTime * 8f);    // å¾Œã‚ã‚’å‘ã
         }
 
-        if(agent.velocity.magnitude > 0)
-        {// ˆÚ“®’†‚Í‹U
+        if (agent.velocity.magnitude > 0)
+        {// ç§»å‹•ä¸­ã¯å½
+            // ä»»æ„ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’trueã«å¤‰æ›´
+            animator.SetBool("Run", true);
+
             isEnd = false;
         }
-        else if (Mathf.Abs(transform.localEulerAngles.y) >= 179f&& isEnd == false) // ğŒ‚ğâ‘Î’l‚É‚·‚é
-        {// ‰ñ“]‚ªI—¹‚·‚é‚Æ
+        else if (Mathf.Abs(transform.localEulerAngles.y) >= 179f && isEnd == false) // æ¡ä»¶ã‚’çµ¶å¯¾å€¤ã«ã™ã‚‹
+        {// å›è»¢ãŒçµ‚äº†ã™ã‚‹ã¨
 
-            // ‰ñ“]‚ğ’²®
+            // å›è»¢ã‚’èª¿æ•´
             transform.localEulerAngles = new Vector3(0, 180, 0);
 
             isEnd = true;
-            Debug.Log("OKOKOKOKOKOKOKOKOKO");
+
+            // ä»»æ„ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’falseã«å¤‰æ›´
+            animator.SetBool("Run", false);
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
         //******************************
-        //  ÌŒ@ƒ‚[ƒh
+        //  æ¡æ˜ãƒ¢ãƒ¼ãƒ‰
         //******************************
         if(other.gameObject.tag == "Block")
-        {// ÌŒ@‰Â”\‚ÈƒuƒƒbƒN
+        {// æ¡æ˜å¯èƒ½ãªãƒ–ãƒ­ãƒƒã‚¯
             if (mode == PLAYER_MODE.MINING)
-            {// ÌŒ@ƒ‚[ƒh‚Ìê‡
-                // ‚±‚ÌƒuƒƒbƒN‚à‘ÎÛ‚É‚·‚é
+            {// æ¡æ˜ãƒ¢ãƒ¼ãƒ‰ã®å ´åˆ
+                // ã“ã®ãƒ–ãƒ­ãƒƒã‚¯ã‚‚å¯¾è±¡ã«ã™ã‚‹
                 other.GetComponent<Block>().isMining = true;
             }
             else
             {
-                // ‘ÎÛ‚©‚çŠO‚·
+                // å¯¾è±¡ã‹ã‚‰å¤–ã™
                 other.GetComponent<Block>().isMining = false;
             }
         }
 
         //******************************
-        //  –„‚ß‚éƒ‚[ƒh
+        //  åŸ‹ã‚ã‚‹ãƒ¢ãƒ¼ãƒ‰
         //******************************
         if(other.gameObject.tag == "RoadPanel")
-        {// –„‚ß‚é‚±‚Æ‚ª‰Â”\‚È“¹ƒpƒlƒ‹
+        {// åŸ‹ã‚ã‚‹ã“ã¨ãŒå¯èƒ½ãªé“ãƒ‘ãƒãƒ«
             if (mode == PLAYER_MODE.FILL)
-            {// –„‚ß‚éƒ‚[ƒh‚Ìê‡
-                // ‚±‚Ì“¹ƒpƒlƒ‹‚à‘ÎÛ‚É‚·‚é
+            {// åŸ‹ã‚ã‚‹ãƒ¢ãƒ¼ãƒ‰ã®å ´åˆ
+                // ã“ã®é“ãƒ‘ãƒãƒ«ã‚‚å¯¾è±¡ã«ã™ã‚‹
                 other.GetComponent<RoadPanel>().isFill = true;
             }
             else
             {
-                // ‘ÎÛ‚©‚çŠO‚·
+                // å¯¾è±¡ã‹ã‚‰å¤–ã™
                 other.GetComponent<RoadPanel>().isFill = false;
             }
         }
@@ -159,20 +181,20 @@ public class Player : MonoBehaviour
 
     public void SubStamina(int num)
     {
-        // ƒXƒ^ƒ~ƒi‚ğŒ¸‚ç‚·
+        // ã‚¹ã‚¿ãƒŸãƒŠã‚’æ¸›ã‚‰ã™
         stamina -= num;
         if (stamina <= 0)
-        {// ƒXƒ^ƒ~ƒi‚ª0ˆÈ‰º‚É‚È‚Á‚½
-            // 0‚ÉŒÅ’è‚·‚é
+        {// ã‚¹ã‚¿ãƒŸãƒŠãŒ0ä»¥ä¸‹ã«ãªã£ãŸæ™‚
+            // 0ã«å›ºå®šã™ã‚‹
             stamina = 0;
         }
-        // ƒXƒ‰ƒCƒ_[‚ğŒ¸‚ç‚·ƒAƒjƒ[ƒVƒ‡ƒ“(DOTween)
+        // ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã‚’æ¸›ã‚‰ã™ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³(DOTween)
         staminaGauge.GetComponent<Slider>().DOValue(stamina, 1.5f);
 
-        // ƒXƒ^ƒ~ƒiƒQ[ƒW“à‚Ì”’l‚ğŒ¸‚ç‚·
+        // ã‚¹ã‚¿ãƒŸãƒŠã‚²ãƒ¼ã‚¸å†…ã®æ•°å€¤ã‚’æ¸›ã‚‰ã™
         staminaNum.text = "" + stamina;
 
-        // c‚èƒXƒ^ƒ~ƒi‚ğ•\¦(ƒfƒoƒbƒN‚Ì‚İ)
-        Debug.Log("c‚èƒXƒ^ƒ~ƒi" + stamina);
+        // æ®‹ã‚Šã‚¹ã‚¿ãƒŸãƒŠã‚’è¡¨ç¤º(ãƒ‡ãƒãƒƒã‚¯ã®ã¿)
+        Debug.Log("æ®‹ã‚Šã‚¹ã‚¿ãƒŸãƒŠ" + stamina);
     }
 }
