@@ -6,8 +6,16 @@ using UnityEngine.UI;
 public class ButtonManager : MonoBehaviour
 {
     GameObject player;
+    [SerializeField] GameObject roadUI; // RoadUIã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å–å¾—
+    [SerializeField] GameObject actionButton; // actionãƒœã‚¿ãƒ³ã®å–å¾—
+    [SerializeField] GameObject fillButton; // fillãƒœã‚¿ãƒ³ã®å–å¾—
+    [SerializeField] GameObject moveButton; // moveãƒœã‚¿ãƒ³ã®å–å¾—
+    [SerializeField] GameObject nothingButton; //nothingãƒœã‚¿ãƒ³ã®å–å¾—
+    [SerializeField] GameObject sabotageButton; //sabotageãƒœã‚¿ãƒ³ã®å–å¾—
 
-    // ƒXƒ^ƒ~ƒiÁ”ï•ª‚Ì”’l‚ğŒˆ‚ß‚é•Ï”
+    int stamina = 100;
+
+    // ã‚¹ã‚¿ãƒŸãƒŠæ¶ˆè²»åˆ†ã®æ•°å€¤ã‚’æ±ºã‚ã‚‹å¤‰æ•°
     public int subStamina;
     
     private void Start()
@@ -17,48 +25,79 @@ public class ButtonManager : MonoBehaviour
 
     public void PlayerMove()
     {
-        // ƒvƒŒƒCƒ„[‚Ìƒ‚[ƒh‚ğMOVE‚É•ÏX
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒ¢ãƒ¼ãƒ‰ã‚’MOVEã«å¤‰æ›´
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.MOVE;
     }
 
     public void CutOpen()
-    {//Ø‚èŠJ‚­‚ğ‘I‚ñ‚¾ê‡
+    {//åˆ‡ã‚Šé–‹ãã‚’é¸ã‚“ã å ´åˆ
 
         if (player.GetComponent<Player>().isEnd == false)
-        {// ƒvƒŒƒCƒ„[‚ªˆÚ“®’†‚Ìê‡
+        {// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒç§»å‹•ä¸­ã®å ´åˆ
             return;
         }
 
-        // ƒvƒŒƒCƒ„[‚Ìƒ‚[ƒh‚ğMINING‚É•ÏX
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒ¢ãƒ¼ãƒ‰ã‚’MININGã«å¤‰æ›´
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.MINING;
+
+        //roadUI.SetActive(true);
+
+        if (roadUI == true)
+        {
+            // ãã®ä»–ã®ãƒœã‚¿ãƒ³ã‚’éè¡¨ç¤º
+            moveButton.SetActive(false);
+            fillButton.SetActive(false);
+            nothingButton.SetActive(false);
+            sabotageButton.SetActive(false);
+            actionButton.SetActive(false);
+        }
+
+        
+        stamina -= 10;
+        Debug.Log("æ®‹ã‚Šã‚¹ã‚¿ãƒŸãƒŠ"+ stamina);
     }
 
     public void fill()
-    {//–„‚ß‚é‚ğ‘I‚ñ‚¾ê‡
+    {//åŸ‹ã‚ã‚‹ã‚’é¸ã‚“ã å ´åˆ
 
         if (player.GetComponent<Player>().isEnd == false)
-        {// ƒvƒŒƒCƒ„[‚ªˆÚ“®’†‚Ìê‡
+        {// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒç§»å‹•ä¸­ã®å ´åˆ
             return;
         }
 
-        // ƒvƒŒƒCƒ„[‚Ìƒ‚[ƒh‚ğFILL‚É•ÏX
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒ¢ãƒ¼ãƒ‰ã‚’FILLã«å¤‰æ›´
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.FILL;
-
-        // ƒXƒ^ƒ~ƒi‚ğŒ¸‚ç‚·
-        //player.GetComponent<Player>().SubStamina(subStamina);
+        player.GetComponent<Player>().SubStamina(10);
+        stamina -= 10;
+        Debug.Log("æ®‹ã‚Šã‚¹ã‚¿ãƒŸãƒŠ" + stamina);
     }
 
     public void Nothing()
     {
         if (player.GetComponent<Player>().isEnd == false)
-        {// ƒvƒŒƒCƒ„[‚ªˆÚ“®’†‚Ìê‡
+        {// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒç§»å‹•ä¸­ã®å ´åˆ
             return;
         }
 
-        // ƒvƒŒƒCƒ„[‚Ìƒ‚[ƒh‚ğNOTHING‚É•ÏX
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒ¢ãƒ¼ãƒ‰ã‚’NOTHINGã«å¤‰æ›´
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.NOTHING;
 
-        // ƒXƒ^ƒ~ƒi‚ğŒ¸‚ç‚·
+        // ã‚¹ã‚¿ãƒŸãƒŠã‚’æ¸›ã‚‰ã™
         player.GetComponent<Player>().SubStamina(subStamina);
+    }
+
+    public void ButtonCancel()
+    {
+        if(roadUI == true)
+        {
+            roadUI.SetActive(false);
+
+            // ãã®ä»–ã®ãƒœã‚¿ãƒ³ã‚’è¡¨ç¤º
+            moveButton.SetActive(true);
+            fillButton.SetActive(true);
+            nothingButton.SetActive(true);
+            sabotageButton.SetActive(true);
+            actionButton.SetActive(true);
+        }
     }
 }
