@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
     int stamina = 100;
 
     // スタミナゲージの数値
-    GameObject staminaNum;
+    //GameObject staminaNum;
 
     public enum PLAYER_MODE
     {
@@ -69,7 +69,7 @@ public class Player : MonoBehaviour
         staminaGauge = GameObject.Find("staminaGauge");
 
         // StaminaNum情報を取得
-        staminaNum = GameObject.Find("StaminaNum");
+        //staminaNum = GameObject.Find("StaminaNum");
 
         // アニメーター情報を取得
         animator = GetComponent<Animator>();
