@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;   // UI用
 using UnityEngine.AI;   // AI用
 using Unity.AI.Navigation;
+using DG.Tweening;
 
 
 public class Player : MonoBehaviour
@@ -17,6 +18,9 @@ public class Player : MonoBehaviour
     // アニメーター
     Animator animator;
 
+    // スタミナゲージ
+    GameObject staminaGauge;
+
     // 目的地を設定したかどうか
     bool isSetTarget = false;
 
@@ -28,6 +32,9 @@ public class Player : MonoBehaviour
 
     // スタミナ
     int stamina = 100;
+
+    // スタミナゲージの数値
+    GameObject staminaNum;
 
     public enum PLAYER_MODE
     {
@@ -48,6 +55,15 @@ public class Player : MonoBehaviour
 
         // 初期化
         clickedTarget = transform.position;
+
+        // スタミナゲージのオブジェクト情報を取得
+        staminaGauge = GameObject.Find("staminaGauge");
+
+        // StaminaNum情報を取得
+        staminaNum = GameObject.Find("StaminaNum");
+
+        // アニメーター情報を取得
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -55,6 +71,9 @@ public class Player : MonoBehaviour
     {
         // Y座標を固定 → 目的地に到達したかどうかの判定が難しくなるため
         transform.position = new Vector3(transform.position.x, pos_Y, transform.position.z);
+
+        // 現在のスタミナを表示
+        staminaNum.GetComponent<Text>().text = "" + stamina;
 
         // クリックした && モード：MOVE
         if (Input.GetMouseButtonDown(0) && mode == PLAYER_MODE.MOVE)
@@ -78,8 +97,10 @@ public class Player : MonoBehaviour
 
                     // 目的地へ移動
                     agent.destination = clickedTarget;
-                }
 
+                    // スタミナを減らす
+                    SubStamina(10);
+                }
             }
         }
     }
@@ -92,18 +113,23 @@ public class Player : MonoBehaviour
             transform.forward = Vector3.Slerp(transform.forward, Vector3.back, Time.deltaTime * 8f);    // 後ろを向く
         }
 
-        if(agent.velocity.magnitude > 0)
+        if (agent.velocity.magnitude > 0)
         {// 移動中は偽
+            // 任意のアニメーションをtrueに変更
+            animator.SetBool("Run", true);
+
             isEnd = false;
         }
-        else if (Mathf.Abs(transform.localEulerAngles.y) >= 179f&& isEnd == false) // 条件を絶対値にする
+        else if (Mathf.Abs(transform.localEulerAngles.y) >= 179f && isEnd == false) // 条件を絶対値にする
         {// 回転が終了すると
 
             // 回転を調整
             transform.localEulerAngles = new Vector3(0, 180, 0);
 
             isEnd = true;
-            Debug.Log("OKOKOKOKOKOKOKOKOKO");
+
+            // 任意のアニメーションをfalseに変更
+            animator.SetBool("Run", false);
         }
     }
 
@@ -142,5 +168,23 @@ public class Player : MonoBehaviour
                 other.GetComponent<RoadPanel>().isFill = false;
             }
         }
+    }
+
+    public void SubStamina(int num)
+    {
+        // スタミナを減らす
+        stamina -= num;
+
+        if(stamina <= 0)
+        {// スタミナが0以下になった時
+            // 0に固定する
+            stamina = 0;
+        }
+
+        // スライダーを減らすアニメーション(DOTween)
+        staminaGauge.GetComponent<Slider>().DOValue(stamina,1.5f);
+
+        // 残りスタミナを表示(デバックのみ)
+        Debug.Log("残りスタミナ" + stamina);
     }
 }

@@ -6,8 +6,10 @@ using UnityEngine.UI;
 public class ButtonManager : MonoBehaviour
 {
     GameObject player;
-    int stamina = 100;
 
+    // スタミナ消費分の数値を決める変数
+    public int subStamina;
+    
     private void Start()
     {
         player = GameObject.Find("Player");
@@ -15,9 +17,8 @@ public class ButtonManager : MonoBehaviour
 
     public void PlayerMove()
     {
+        // プレイヤーのモードをMOVEに変更
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.MOVE;
-        stamina -= 10;
-        Debug.Log("残りスタミナ" + stamina);
     }
 
     public void CutOpen()
@@ -28,9 +29,8 @@ public class ButtonManager : MonoBehaviour
             return;
         }
 
+        // プレイヤーのモードをMININGに変更
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.MINING;
-        stamina -= 10;
-        Debug.Log("残りスタミナ"+ stamina);
     }
 
     public void fill()
@@ -41,9 +41,11 @@ public class ButtonManager : MonoBehaviour
             return;
         }
 
+        // プレイヤーのモードをFILLに変更
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.FILL;
-        stamina -= 10;
-        Debug.Log("残りスタミナ" + stamina);
+
+        // スタミナを減らす
+        //player.GetComponent<Player>().SubStamina(subStamina);
     }
 
     public void Nothing()
@@ -53,8 +55,10 @@ public class ButtonManager : MonoBehaviour
             return;
         }
 
+        // プレイヤーのモードをNOTHINGに変更
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.NOTHING;
-        stamina -= 10;
-        Debug.Log("残りスタミナ" + stamina);
+
+        // スタミナを減らす
+        player.GetComponent<Player>().SubStamina(subStamina);
     }
 }

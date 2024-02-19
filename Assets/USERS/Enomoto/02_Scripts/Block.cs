@@ -16,6 +16,9 @@ public class Block : MonoBehaviour
     // デフォルトカラー
     Color defaultMaterial;
 
+    // Animator
+    Animator animator;
+
     // 採掘の対象になっている場合
     public bool isMining = false;
 
@@ -25,6 +28,8 @@ public class Block : MonoBehaviour
         // 取得する
         startPanel = GameObject.Find("StageManager");
         player = GameObject.Find("Player");
+        // アニメーター情報取得
+        animator = player.GetComponent<Animator>();
         defaultMaterial = gameObject.GetComponent<Renderer>().material.color;
     }
 
@@ -54,6 +59,12 @@ public class Block : MonoBehaviour
                     // 左クリックした
                     if(Input.GetMouseButtonDown(0))
                     {
+                        // 任意のアニメーションをtrueに変更
+                        animator.SetBool("Mining", true);
+
+                        // スタミナを減らす
+                        player.GetComponent<Player>().SubStamina(10);
+
                         // 生成 → 破棄 → ベイク
                         Bake(roadPrefab, new Vector3(transform.position.x, 0f, transform.position.z), 0, this.gameObject);
                     }
@@ -61,6 +72,9 @@ public class Block : MonoBehaviour
                 else
                 {
                     gameObject.GetComponent<Renderer>().material.color = Color.yellow; // 黄色
+
+                    // 任意のアニメーションをfalseに変更
+                    animator.SetBool("Mining", false);
                 }
             }
 
