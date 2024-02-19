@@ -72,8 +72,17 @@ public class RoadPanel : MonoBehaviour
                     // 左クリックした
                     if (Input.GetMouseButtonDown(0))
                     {
-                        // 生成 → 破棄 → ベイク
-                        Bake(blockPrefab, new Vector3(transform.position.x, 1.3f, transform.position.z), 0, this.gameObject);
+                        // オブジェクトを生成する
+                        GameObject block = Instantiate(blockPrefab, new Vector3(transform.position.x, 1.3f, transform.position.z), Quaternion.identity);
+
+                        // 破棄する
+                        Destroy(this.gameObject);
+
+                        // ベイクを開始
+                        startPanel.GetComponent<StageBake>().StartBake();
+
+                        //// 生成 → 破棄 → ベイク
+                        //Bake(blockPrefab, new Vector3(transform.position.x, 1.3f, transform.position.z), 0, this.gameObject);
                     }
                 }
                 else

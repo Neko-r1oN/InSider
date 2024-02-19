@@ -13,6 +13,9 @@ public class Block : MonoBehaviour
     // プレイヤー
     GameObject player;
 
+    // RoadUI
+    GameObject roadUI;
+
     // デフォルトカラー
     Color defaultMaterial;
 
@@ -25,6 +28,7 @@ public class Block : MonoBehaviour
         // 取得する
         startPanel = GameObject.Find("StageManager");
         player = GameObject.Find("Player");
+        roadUI = GameObject.Find("RoadUI");
         defaultMaterial = gameObject.GetComponent<Renderer>().material.color;
     }
 
@@ -39,6 +43,7 @@ public class Block : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit = new RaycastHit();
 
+
         if (Physics.Raycast(ray, out hit))
         {// Rayが当たったオブジェクトの情報をhitに渡す
 
@@ -51,9 +56,11 @@ public class Block : MonoBehaviour
                 {// 自分にカーソルが当たった
                     gameObject.GetComponent<Renderer>().material.color = Color.green; // 緑色
 
-                    // 左クリックした
-                    if(Input.GetMouseButtonDown(0))
+                    // 左クリックした && 選択肢のUIが非表示の場合
+                    if(Input.GetMouseButtonDown(0) && roadUI.GetComponent<UIManager>().ActiveRoad() == false)
                     {
+                        roadUI.GetComponent<UIManager>().SetRoad(true);
+
                         // 生成 → 破棄 → ベイク
                         Bake(roadPrefab, new Vector3(transform.position.x, 0f, transform.position.z), 0, this.gameObject);
                     }
