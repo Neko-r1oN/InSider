@@ -15,6 +15,9 @@ public class TitleManager : MonoBehaviour
     static public string UserName { get; set; }
     AudioSource audio;
     [SerializeField] AudioClip ClickSound;
+    Color color;
+
+  
 
     public static bool isStart = false;
     // Start is called before the first frame update
@@ -32,6 +35,8 @@ public class TitleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
         if (Input.GetKey(KeyCode.Escape))
         {//ESCâüÇµÇΩç€ÇÃèàóù
 #if UNITY_EDITOR
@@ -43,6 +48,8 @@ public class TitleManager : MonoBehaviour
             Application.Quit();
 #endif
         }
+       
+
         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Return))
         {
             StartText.SetActive(false);
