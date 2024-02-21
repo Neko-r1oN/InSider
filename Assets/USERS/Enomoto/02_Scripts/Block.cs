@@ -4,27 +4,47 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    // “¹ƒpƒlƒ‹‚ÌƒvƒŒƒtƒ@ƒu
+    // é“ãƒ‘ãƒãƒ«ã®ãƒ—ãƒ¬ãƒ•ã‚¡ãƒ–
     [SerializeField] GameObject roadPrefab;
 
-    // ƒXƒe[ƒW‚ÌŠÇ—
+    // ã‚¹ãƒ†ãƒ¼ã‚¸ã®ç®¡ç†
     GameObject startPanel;
 
-    // ƒvƒŒƒCƒ„[
+    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
     GameObject player;
 
-    // ƒfƒtƒHƒ‹ƒgƒJƒ‰[
+    // RoadUI
+    GameObject roadUI;
+
+    GameObject uiMnager;
+
+    // ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚«ãƒ©ãƒ¼
     Color defaultMaterial;
 
-    // ÌŒ@‚Ì‘ÎÛ‚É‚È‚Á‚Ä‚¢‚éê‡
+    // Animator
+    Animator animator;
+
+    // æ¡æ˜ã®å¯¾è±¡ã«ãªã£ã¦ã„ã‚‹å ´åˆ
     public bool isMining = false;
 
+    //public void SearchUI()
+    //{
+        
+
+    //    roadUI = uiMnager.GetComponent<UIManager>().GetRoadUI();
+    //}
     // Start is called before the first frame update
     void Start()
     {
-        // æ“¾‚·‚é
+        // å–å¾—ã™ã‚‹
         startPanel = GameObject.Find("StageManager");
         player = GameObject.Find("Player");
+
+        //SearchUI();
+        uiMnager = GameObject.Find("UIManager");
+        // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚¿ãƒ¼æƒ…å ±å–å¾—
+        animator = player.GetComponent<Animator>();
+
         defaultMaterial = gameObject.GetComponent<Renderer>().material.color;
     }
 
@@ -32,44 +52,56 @@ public class Block : MonoBehaviour
     void Update()
     {
         if(player.GetComponent<Player>().mode != Player.PLAYER_MODE.MINING)
-        {// ÌŒ@ƒ‚[ƒhˆÈŠO‚Ìê‡
-            isMining = false;    // ‹U
+        {// æ¡æ˜ãƒ¢ãƒ¼ãƒ‰ä»¥å¤–ã®å ´åˆ
+            isMining = false;    // å½
         }
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit = new RaycastHit();
 
+
         if (Physics.Raycast(ray, out hit))
-        {// Ray‚ª“–‚½‚Á‚½ƒIƒuƒWƒFƒNƒg‚Ìî•ñ‚ğhit‚É“n‚·
+        {// RayãŒå½“ãŸã£ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æƒ…å ±ã‚’hitã«æ¸¡ã™
 
             //**********************
-            //  uÌŒ@v‚Ì‘ÎÛ‚É‚È‚Á‚Ä‚¢‚éê‡iÌŒ@ƒ‚[ƒh‚Ìê‡j
+            //  ã€Œæ¡æ˜ã€ã®å¯¾è±¡ã«ãªã£ã¦ã„ã‚‹å ´åˆï¼ˆæ¡æ˜ãƒ¢ãƒ¼ãƒ‰ã®å ´åˆï¼‰
             //**********************
             if (isMining == true)
             {
                 if (hit.transform.gameObject == this.gameObject)
-                {// ©•ª‚ÉƒJ[ƒ\ƒ‹‚ª“–‚½‚Á‚½
-                    gameObject.GetComponent<Renderer>().material.color = Color.green; // —ÎF
+                {// è‡ªåˆ†ã«ã‚«ãƒ¼ã‚½ãƒ«ãŒå½“ãŸã£ãŸ
+                    gameObject.GetComponent<Renderer>().material.color = Color.green; // ç·‘è‰²
 
-                    // ¶ƒNƒŠƒbƒN‚µ‚½
-                    if(Input.GetMouseButtonDown(0))
+                    // å·¦ã‚¯ãƒªãƒƒã‚¯ã—ãŸ && é¸æŠè‚¢ã®UIãŒéè¡¨ç¤ºã®å ´åˆ
+                    if(Input.GetMouseButtonDown(0) && uiMnager.GetComponent<UIManager>().ActiveRoad() == false)
                     {
-                        // ¶¬ ¨ ”jŠü ¨ ƒxƒCƒN
+
+                        uiMnager.GetComponent<UIManager>().SetRoad(true);
+                        // ä»»æ„ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’trueã«å¤‰æ›´
+                        animator.SetBool("Mining", true);
+
+                        // ã‚¹ã‚¿ãƒŸãƒŠã‚’æ¸›ã‚‰ã™
+                        player.GetComponent<Player>().SubStamina(10);
+
+                        // ç”Ÿæˆ â†’ ç ´æ£„ â†’ ãƒ™ã‚¤ã‚¯
                         Bake(roadPrefab, new Vector3(transform.position.x, 0f, transform.position.z), 0, this.gameObject);
                     }
                 }
                 else
                 {
-                    gameObject.GetComponent<Renderer>().material.color = Color.yellow; // ‰©F
+                    gameObject.GetComponent<Renderer>().material.color = Color.yellow; // é»„è‰²
+
+                    // ä»»æ„ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’falseã«å¤‰æ›´
+                    animator.SetBool("Mining", false);
                 }
             }
 
             //************************************
-            //  ‚»‚Ì‘¼
+            //  ãã®ä»–
             //************************************
             else
             {
-                // ƒfƒtƒHƒ‹ƒgƒJƒ‰[‚É–ß‚·
+                // ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚«ãƒ©ãƒ¼ã«æˆ»ã™
                 gameObject.GetComponent<Renderer>().material.color = defaultMaterial;
             }
 
@@ -78,21 +110,21 @@ public class Block : MonoBehaviour
     }
 
     /// <summary>
-    /// ¶¬A”jŠüAƒxƒCƒN‚·‚é
+    /// ç”Ÿæˆã€ç ´æ£„ã€ãƒ™ã‚¤ã‚¯ã™ã‚‹
     /// </summary>
-    /// <param name="prefab">¶¬‚·‚éƒIƒuƒWƒFƒNƒg</param>
-    /// <param name="pos">¶¬‚·‚éÀ•W</param>
-    /// <param name="rotY">¶¬‚·‚é‚Æ‚«‚Ì‰ñ“]</param>
-    /// <param name="desObject">”jŠü‚·‚éƒIƒuƒWƒFƒNƒg</param>
+    /// <param name="prefab">ç”Ÿæˆã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
+    /// <param name="pos">ç”Ÿæˆã™ã‚‹åº§æ¨™</param>
+    /// <param name="rotY">ç”Ÿæˆã™ã‚‹ã¨ãã®å›è»¢</param>
+    /// <param name="desObject">ç ´æ£„ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
     private void Bake(GameObject prefab, Vector3 pos, int rotY, GameObject dieObject)
     {
-        // ƒIƒuƒWƒFƒNƒg‚ğ¶¬‚·‚é
+        // ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã™ã‚‹
         GameObject block = Instantiate(prefab, pos, Quaternion.identity);
 
-        // ”jŠü‚·‚é
+        // ç ´æ£„ã™ã‚‹
         Destroy(dieObject);
 
-        // ƒxƒCƒN‚ğŠJn
+        // ãƒ™ã‚¤ã‚¯ã‚’é–‹å§‹
         startPanel.GetComponent<StageBake>().StartBake();
     }
 }
