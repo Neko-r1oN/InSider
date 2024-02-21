@@ -73,7 +73,7 @@ public class TitleManager : MonoBehaviour
 
         UserName = nameField.text;
         Initiate.DoneFading();
-        SceneManager.LoadScene("TitleLoad");
+        //SceneManager.LoadScene("");
 
     }
     public void BackButton()

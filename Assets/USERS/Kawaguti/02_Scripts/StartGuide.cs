@@ -19,11 +19,11 @@ public class StartGuide : MonoBehaviour
 
 	[Header("ループ開始時の色")]
 	[SerializeField]
-	Color32 startColor = new Color32(255, 255, 255, 255);
+	Color32 startColor = new Color32(255, 255, 255, 0);
 	//ループ終了(折り返し)時の色を0～255までの整数で指定。
 	[Header("ループ終了時の色")]
 	[SerializeField]
-	Color32 endColor = new Color32(255, 255, 255, 0);
+	Color32 endColor = new Color32(255, 255, 255, 255);
 
 
 	//インスペクターから設定した場合は、GetComponentする必要がなくなる為、Awakeを削除しても良い。
