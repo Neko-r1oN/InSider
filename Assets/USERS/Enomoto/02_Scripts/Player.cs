@@ -36,9 +36,6 @@ public class Player : MonoBehaviour
     // スタミナ
     int stamina = 100;
 
-    // スタミナゲージの数値
-    //GameObject staminaNum;
-
     public enum PLAYER_MODE
     {
         MOVE,   // 移動
@@ -67,9 +64,6 @@ public class Player : MonoBehaviour
 
         // スタミナゲージのオブジェクト情報を取得
         staminaGauge = GameObject.Find("staminaGauge");
-
-        // StaminaNum情報を取得
-        //staminaNum = GameObject.Find("StaminaNum");
 
         // アニメーター情報を取得
         animator = GetComponent<Animator>();
@@ -106,6 +100,8 @@ public class Player : MonoBehaviour
 
                     // 目的地へ移動
                     agent.destination = clickedTarget;
+
+                    
 
                     // スタミナを減らす
                     SubStamina(10);
@@ -188,8 +184,29 @@ public class Player : MonoBehaviour
             // 0に固定する
             stamina = 0;
         }
+
         // スライダーを減らすアニメーション(DOTween)
-        staminaGauge.GetComponent<Slider>().DOValue(stamina, 1.5f);
+        staminaGauge.GetComponent<Slider>().DOValue(stamina, 1f);
+
+        // スタミナゲージ内の数値を減らす
+        staminaNum.text = "" + stamina;
+
+        // 残りスタミナを表示(デバックのみ)
+        Debug.Log("残りスタミナ" + stamina);
+    }
+
+    public void AddStamina(int num)
+    {
+        // スタミナを減らす
+        stamina += num;
+        if (stamina >= 100)
+        {// スタミナが0以下になった時
+            // 0に固定する
+            stamina = 100;
+        }
+
+        // スライダーを減らすアニメーション(DOTween)
+        staminaGauge.GetComponent<Slider>().DOValue(stamina, 1f);
 
         // スタミナゲージ内の数値を減らす
         staminaNum.text = "" + stamina;

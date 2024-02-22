@@ -1007,7 +1007,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 215204777}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 431783953}
+        m_TargetAssemblyTypeName: RoadManager, Assembly-CSharp
+        m_MethodName: Road
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &215204777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1173,6 +1185,7 @@ MonoBehaviour:
   moveButton: {fileID: 1484576395}
   nothingButton: {fileID: 64882670}
   sabotageButton: {fileID: 358197498}
+  subStamina: 10
 --- !u!1 &281190403
 GameObject:
   m_ObjectHideFlags: 0
@@ -2299,6 +2312,59 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 431392932}
   m_CullTransparentMesh: 1
+--- !u!1 &431783952
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 431783954}
+  - component: {fileID: 431783953}
+  m_Layer: 0
+  m_Name: RoadManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &431783953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431783952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0a6b5b19331b304fb8383cdb8f10f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RoadPrefab:
+  - {fileID: 8812383710127928791, guid: 3f50729d4d20cb047b0e8c59a071fafc, type: 3}
+  - {fileID: 1631761169785977595, guid: 248af63362345224b821cb1b47beacbe, type: 3}
+  - {fileID: 4389177261052337465, guid: bd8d28008e5cd1247a06507eab7ad861, type: 3}
+  - {fileID: 5897978446177207732, guid: af89dd68d8f61f440be426e72a29bb1f, type: 3}
+  - {fileID: 8945609788489815613, guid: 9b60bd1df16f059448c00e21e733890f, type: 3}
+  targetBlock: {fileID: 0}
+  rotY: 0
+  roadNum: 0
+--- !u!4 &431783954
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431783952}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.34636325, y: 4.158085, z: -1.2635378}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &432722938
 GameObject:
   m_ObjectHideFlags: 0
@@ -4100,7 +4166,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 991642139}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 431783953}
+        m_TargetAssemblyTypeName: RoadManager, Assembly-CSharp
+        m_MethodName: Road
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &991642139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4220,7 +4298,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1024087863}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 431783953}
+        m_TargetAssemblyTypeName: RoadManager, Assembly-CSharp
+        m_MethodName: Road
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1024087863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4787,7 +4877,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1226799062}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4842,7 +4932,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1226799065}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 431783953}
+        m_TargetAssemblyTypeName: RoadManager, Assembly-CSharp
+        m_MethodName: Road
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1226799065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6696,13 +6798,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1670351636}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1379852948}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 98}
@@ -6751,7 +6853,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1670351639}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 431783953}
+        m_TargetAssemblyTypeName: RoadManager, Assembly-CSharp
+        m_MethodName: Road
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1670351639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6951,7 +7065,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1840864169}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 275448279}
+        m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
+        m_MethodName: RotRoad
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1840864169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7194,6 +7320,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   road: {fileID: 1379852947}
+  roadUIList:
+  - {fileID: 215204774}
+  - {fileID: 1670351636}
+  - {fileID: 1226799062}
+  - {fileID: 991642136}
+  - {fileID: 1024087860}
 --- !u!4 &1891997155
 Transform:
   m_ObjectHideFlags: 0
@@ -9333,3 +9465,4 @@ SceneRoots:
   - {fileID: 869312227}
   - {fileID: 275448278}
   - {fileID: 1891997155}
+  - {fileID: 431783954}
