@@ -16,7 +16,12 @@ public class Block : MonoBehaviour
     // RoadUI
     GameObject roadUI;
 
+    // UIManager
     GameObject uiMnager;
+
+    GameObject RoadManager;
+
+    //MeshRenderer mr;
 
     // デフォルトカラー
     Color defaultMaterial;
@@ -27,21 +32,20 @@ public class Block : MonoBehaviour
     // 採掘の対象になっている場合
     public bool isMining = false;
 
-    //public void SearchUI()
-    //{
-        
-
-    //    roadUI = uiMnager.GetComponent<UIManager>().GetRoadUI();
-    //}
-    // Start is called before the first frame update
     void Start()
     {
         // 取得する
         startPanel = GameObject.Find("StageManager");
         player = GameObject.Find("Player");
 
-        //SearchUI();
+        // UIManager
         uiMnager = GameObject.Find("UIManager");
+
+        // RoadManager取得する
+        RoadManager = GameObject.Find("RoadManager");
+
+        //mr = GameObject.Find("Road1").GetComponent<MeshRenderer>();
+
         // アニメーター情報取得
         animator = player.GetComponent<Animator>();
 
@@ -75,16 +79,19 @@ public class Block : MonoBehaviour
                     // 左クリックした && 選択肢のUIが非表示の場合
                     if(Input.GetMouseButtonDown(0) && uiMnager.GetComponent<UIManager>().ActiveRoad() == false)
                     {
-
                         uiMnager.GetComponent<UIManager>().SetRoad(true);
-                        // 任意のアニメーションをtrueに変更
-                        animator.SetBool("Mining", true);
 
                         // スタミナを減らす
                         player.GetComponent<Player>().SubStamina(10);
 
+                        // ブロックの情報を渡す
+                        RoadManager.GetComponent<RoadManager>().targetBlock = this.gameObject;
+
+                        // 任意のアニメーションをtrueに変更
+                        animator.SetBool("Mining", true);
+
                         // 生成 → 破棄 → ベイク
-                        Bake(roadPrefab, new Vector3(transform.position.x, 0f, transform.position.z), 0, this.gameObject);
+                        //Bake(roadPrefab, new Vector3(transform.position.x, 0f, transform.position.z), 0, this.gameObject);
                     }
                 }
                 else
@@ -116,15 +123,15 @@ public class Block : MonoBehaviour
     /// <param name="pos">生成する座標</param>
     /// <param name="rotY">生成するときの回転</param>
     /// <param name="desObject">破棄するオブジェクト</param>
-    private void Bake(GameObject prefab, Vector3 pos, int rotY, GameObject dieObject)
-    {
-        // オブジェクトを生成する
-        GameObject block = Instantiate(prefab, pos, Quaternion.identity);
+    //private void Bake(GameObject prefab, Vector3 pos, int rotY, GameObject dieObject)
+    //{
+    //    // オブジェクトを生成する
+    //    GameObject block = Instantiate(prefab, pos, Quaternion.identity);
 
-        // 破棄する
-        Destroy(dieObject);
+    //    // 破棄する
+    //    Destroy(dieObject);
 
-        // ベイクを開始
-        startPanel.GetComponent<StageBake>().StartBake();
-    }
+    //    // ベイクを開始
+    //    startPanel.GetComponent<StageBake>().StartBake();
+    //}
 }

@@ -5,6 +5,10 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] GameObject road;
+    //[SerializeField] GameObject textUI;
+    [SerializeField] List<GameObject> roadUIList;
+
+    RoadManager roadManager;
 
     public GameObject GetRoadUI()
     {
@@ -16,29 +20,43 @@ public class UIManager : MonoBehaviour
     {
         road = GameObject.Find("RoadUI");
 
-        //GameObject[] blocks = GameObject.FindGameObjectsWithTag("Block");
+        GameObject roadManagerObject = GameObject.Find("RoadManager");
 
-        //foreach (GameObject block in blocks)
-        //{
-        //    block.GetComponent<Block>().SearchUI();
-        //}
+        roadManager = roadManagerObject.GetComponent<RoadManager>();
 
         road.SetActive(false);
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        //textUI = GameObject.Find("TextUI");
+
+        //textUI.SetActive(false);
     }
 
     public void SetRoad(bool set)
     {
+        //if(set == true)
+        //{
+
+        //}
+        //else if(set == false)
+        //{
+
+        //}
+
         road.SetActive(set);
     }
 
     public bool ActiveRoad()
     {
         return road.activeSelf;
+    }
+
+    public void RotRoadUI()
+    {
+        for(int i = 0; i < roadUIList.Count; i++)
+        {
+            roadUIList[i].transform.Rotate(0f, 0f, -90f);
+
+            Debug.Log(-roadManager.rotY);
+        }
     }
 }

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+
 
 public class ButtonManager : MonoBehaviour
 {
@@ -13,7 +15,15 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] GameObject nothingButton; //nothingボタンの取得
     [SerializeField] GameObject sabotageButton; //sabotageボタンの取得
 
+    RoadManager roadManager;
+
+    UIManager uIManager;
+
+    System.Random rnd = new System.Random();
+
     int stamina = 100;
+
+    int rand;
 
     // スタミナ消費分の数値を決める変数
     public int subStamina;
@@ -21,6 +31,16 @@ public class ButtonManager : MonoBehaviour
     private void Start()
     {
         player = GameObject.Find("Player");
+
+        GameObject roadManagerObject = GameObject.Find("RoadManager");
+
+        roadManager = roadManagerObject.GetComponent<RoadManager>();
+
+        GameObject uiManagerObject = GameObject.Find("UIManager");
+
+        uIManager = uiManagerObject.GetComponent<UIManager>();
+
+        rand = rnd.Next(0, 31);
     }
 
     public void PlayerMove()
@@ -40,8 +60,6 @@ public class ButtonManager : MonoBehaviour
         // プレイヤーのモードをMININGに変更
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.MINING;
 
-        //roadUI.SetActive(true);
-
         if (roadUI == true)
         {
             // その他のボタンを非表示
@@ -51,7 +69,6 @@ public class ButtonManager : MonoBehaviour
             sabotageButton.SetActive(false);
             actionButton.SetActive(false);
         }
-
         
         stamina -= 10;
         Debug.Log("残りスタミナ"+ stamina);
@@ -82,8 +99,12 @@ public class ButtonManager : MonoBehaviour
         // プレイヤーのモードをNOTHINGに変更
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.NOTHING;
 
+        rand = rnd.Next(0, 31);
+
+        Debug.Log(rand);
+
         // スタミナを減らす
-        player.GetComponent<Player>().SubStamina(subStamina);
+        player.GetComponent<Player>().AddStamina(rand);
     }
 
     public void ButtonCancel()
@@ -99,5 +120,21 @@ public class ButtonManager : MonoBehaviour
             sabotageButton.SetActive(true);
             actionButton.SetActive(true);
         }
+    }
+
+    public void DisplayButton()
+    {
+        // ボタンを表示
+        moveButton.SetActive(true);
+        fillButton.SetActive(true);
+        nothingButton.SetActive(true);
+        sabotageButton.SetActive(true);
+        actionButton.SetActive(true);
+    }
+
+    public void RotRoad()
+    {
+        roadManager.AddRotButton();
+        uIManager.RotRoadUI();
     }
 }
