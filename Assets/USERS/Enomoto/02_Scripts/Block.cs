@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    // 道パネルのプレファブ
-    [SerializeField] GameObject roadPrefab;
-
     // ステージの管理
     GameObject startPanel;
 

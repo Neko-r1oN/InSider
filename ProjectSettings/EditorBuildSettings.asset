@@ -5,12 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/gameShoki.unity
-    guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/USERS/Ueno/00_Scenes/gameUeno.unity
-    guid: 27698a6c3051f204d9dcc38f6244f21a
+    path: Assets/Scenes/game.unity
+    guid: 36c54ac01de45c746afa1e5a975e25e3
   - enabled: 1
     path: Assets/USERS/Ueno/00_Scenes/UenoUI.unity
     guid: a87ab4b633a45df40b3307a4fee47d01
