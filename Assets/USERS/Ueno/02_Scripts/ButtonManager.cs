@@ -8,16 +8,19 @@ using System;
 public class ButtonManager : MonoBehaviour
 {
     GameObject player;
-    [SerializeField] GameObject roadUI; // RoadUIオブジェクトの取得
-    [SerializeField] GameObject actionButton; // actionボタンの取得
-    [SerializeField] GameObject fillButton; // fillボタンの取得
-    [SerializeField] GameObject moveButton; // moveボタンの取得
-    [SerializeField] GameObject nothingButton; //nothingボタンの取得
-    [SerializeField] GameObject sabotageButton; //sabotageボタンの取得
+    [SerializeField] GameObject roadUI;         // RoadUIオブジェクトの取得
+    [SerializeField] GameObject actionButton;   // actionボタンの取得
+    [SerializeField] GameObject fillButton;     // fillボタンの取得
+    [SerializeField] GameObject moveButton;     // moveボタンの取得
+    [SerializeField] GameObject nothingButton;  // nothingボタンの取得
+    [SerializeField] GameObject sabotageButton; // sabotageボタンの取得
+    //[SerializeField] GameObject cameraButton;   // カメラ切り替えボタンの取得
 
     RoadManager roadManager;
 
     UIManager uIManager;
+
+    CameraManager cameraManager;
 
     System.Random rnd = new System.Random();
 
@@ -39,6 +42,10 @@ public class ButtonManager : MonoBehaviour
         GameObject uiManagerObject = GameObject.Find("UIManager");
 
         uIManager = uiManagerObject.GetComponent<UIManager>();
+
+        GameObject cameraManagerObject = GameObject.Find("CameraManager");
+
+        cameraManager = cameraManagerObject.GetComponent<CameraManager>();
 
         rand = rnd.Next(0, 31);
     }
@@ -136,5 +143,10 @@ public class ButtonManager : MonoBehaviour
     {
         roadManager.AddRotButton();
         uIManager.RotRoadUI();
+    }
+
+    public void Camera()
+    {
+        cameraManager.SwitchCamera();
     }
 }

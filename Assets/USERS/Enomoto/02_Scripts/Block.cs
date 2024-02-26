@@ -16,6 +16,7 @@ public class Block : MonoBehaviour
     // UIManager
     GameObject uiMnager;
 
+    // RoadManager
     GameObject RoadManager;
 
     //MeshRenderer mr;
@@ -60,7 +61,6 @@ public class Block : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit = new RaycastHit();
 
-
         if (Physics.Raycast(ray, out hit))
         {// Rayが当たったオブジェクトの情報をhitに渡す
 
@@ -76,7 +76,7 @@ public class Block : MonoBehaviour
                     // 左クリックした && 選択肢のUIが非表示の場合
                     if(Input.GetMouseButtonDown(0) && uiMnager.GetComponent<UIManager>().ActiveRoad() == false)
                     {
-                        uiMnager.GetComponent<UIManager>().SetRoad(true);
+                        uiMnager.GetComponent<UIManager>().ShowRoad(player.GetComponent<Player>().selectRoadNum);
 
                         // スタミナを減らす
                         player.GetComponent<Player>().SubStamina(10);

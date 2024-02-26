@@ -59,7 +59,7 @@ public class RoadManager : MonoBehaviour
         Bake(roadPrefab, new Vector3(targetBlock.transform.position.x, 0f, targetBlock.transform.position.z), targetBlock);
 
         // 道選択UIを閉じる
-        uiMnager.GetComponent<UIManager>().SetRoad(false);
+        uiMnager.GetComponent<UIManager>().HideRoad(player.GetComponent<Player>().selectRoadNum);
 
         // 消えているボタンを表示する
         buttonManager.DisplayButton();
@@ -71,6 +71,8 @@ public class RoadManager : MonoBehaviour
    public void Road(int num)
     {
         Road(RoadPrefab[num]);
+
+        player.GetComponent<Player>().selectRoadNum = num;
 
         //roadNum = num;
     }

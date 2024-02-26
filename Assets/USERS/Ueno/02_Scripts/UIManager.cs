@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class UIManager : MonoBehaviour
 
         roadManager = roadManagerObject.GetComponent<RoadManager>();
 
+        // RoadUIを非表示にする
         road.SetActive(false);
 
         //textUI = GameObject.Find("TextUI");
@@ -31,32 +33,45 @@ public class UIManager : MonoBehaviour
         //textUI.SetActive(false);
     }
 
-    public void SetRoad(bool set)
+    public void ShowRoad(int selectNum)
     {
-        //if(set == true)
-        //{
+        road.SetActive(true);
 
-        //}
-        //else if(set == false)
-        //{
+        if (selectNum >= 0)
+        {
+            roadUIList[selectNum].SetActive(false);
 
-        //}
+            //roadUIList[selectNum].GetComponent<Image>().material.color 
+            //    = new Color32(0, 0, 0, 150);
+        }
+    }
 
-        road.SetActive(set);
+    public void HideRoad(int selectNum)
+    {
+        if(selectNum >= 0)
+        {
+            roadUIList[selectNum].SetActive(true);
+
+            //roadUIList[selectNum].GetComponent<Image>().material.color 
+            //    = new Color32(0, 0, 0, 150);
+        }
+
+        road.SetActive(false);
     }
 
     public bool ActiveRoad()
     {
+        // true・falseを返す
         return road.activeSelf;
     }
 
     public void RotRoadUI()
     {
         for(int i = 0; i < roadUIList.Count; i++)
-        {
-            roadUIList[i].transform.Rotate(0f, 0f, -90f);
+        {// リストの中身をカウントする
 
-            Debug.Log(-roadManager.rotY);
+            // リストの全てを回転する
+            roadUIList[i].transform.Rotate(0f, 0f, -90f);
         }
     }
 }

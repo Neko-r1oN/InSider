@@ -6,7 +6,6 @@ using UnityEngine.AI;   // AI用
 using Unity.AI.Navigation;
 using DG.Tweening;
 
-
 public class Player : MonoBehaviour
 {
     // 自分自身
@@ -23,7 +22,10 @@ public class Player : MonoBehaviour
 
     // スタミナゲージ内の値
     Text staminaNum;
-    
+
+    // 連続選択ができないよう前回の選択した数値を保存
+    public int selectRoadNum = -1;
+
     // 目的地を設定したかどうか
     bool isSetTarget = false;
 
@@ -100,8 +102,6 @@ public class Player : MonoBehaviour
 
                     // 目的地へ移動
                     agent.destination = clickedTarget;
-
-                    
 
                     // スタミナを減らす
                     SubStamina(10);
