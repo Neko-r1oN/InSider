@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/game.unity
-    guid: 36c54ac01de45c746afa1e5a975e25e3
+    path: Assets/USERS/Kawaguti/00_Scenes/TitleKawaguchi.unity
+    guid: 7fdd4e02a742c354a96e2f1c3fc7d9df
   - enabled: 1
-    path: Assets/USERS/Ueno/00_Scenes/UenoUI.unity
-    guid: a87ab4b633a45df40b3307a4fee47d01
+    path: Assets/Scenes/StandbyScene_copy.unity
+    guid: 84357c46c70c96749a85d1cac2cc7d82
   m_configObjects: {}

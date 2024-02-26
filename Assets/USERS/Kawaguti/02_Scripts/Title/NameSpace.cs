@@ -13,6 +13,7 @@ public class NameSpace : MonoBehaviour
             MoveName();
         }
     }
+
     public void MoveName()
     {
         this.transform.DOMove(new Vector3(950f, 500f, 0f), 0.1f).SetEase(Ease.OutBounce);
