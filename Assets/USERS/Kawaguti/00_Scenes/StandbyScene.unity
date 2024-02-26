@@ -1344,8 +1344,10 @@ GameObject:
   - component: {fileID: 531978277}
   - component: {fileID: 531978279}
   - component: {fileID: 531978278}
+  - component: {fileID: 531978280}
+  - component: {fileID: 531978281}
   m_Layer: 5
-  m_Name: time
+  m_Name: StandbyText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1367,8 +1369,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -45}
-  m_SizeDelta: {x: 540, y: 90}
+  m_AnchoredPosition: {x: 0, y: -83.140015}
+  m_SizeDelta: {x: 589.7, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &531978278
 MonoBehaviour:
@@ -1391,19 +1393,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 64
+    m_Font: {fileID: 12800000, guid: 7c84f9500a3cce5448a88df7ce4ff867, type: 3}
+    m_FontSize: 88
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 6
-    m_MaxSize: 64
+    m_MaxSize: 88
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5F85\u6A5F\u30B7\u30FC\u30F3(\u4EEE)"
+  m_Text: 
 --- !u!222 &531978279
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1412,6 +1414,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 531978276}
   m_CullTransparentMesh: 1
+--- !u!114 &531978280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531978276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
+  m_EffectDistance: {x: 5.24, y: -2.93}
+  m_UseGraphicAlpha: 1
+--- !u!114 &531978281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531978276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e21f2022dc6b9e6428a95792312d521b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &553195853 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1ccac277d54ce46e98c92c8a17de7fdb,
@@ -1821,9 +1850,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca44aeb6ad8c01f459044dc6c5900af6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StandText: {fileID: 0}
   OKbutton: {fileID: 701032640}
   Cancelbutton: {fileID: 390007915}
   OKIcon: {fileID: 254324094}
+  ClickSound: {fileID: 8300000, guid: 6daeaadb92aa33e45b10365f7c8b802d, type: 3}
 --- !u!82 &704451751
 AudioSource:
   m_ObjectHideFlags: 0
