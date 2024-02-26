@@ -76,7 +76,6 @@ public class RoadManager : MonoBehaviour
 
         //roadNum = num;
     }
-
    
     public void AddRotButton()
     { //“¹‚Ì‰ñ“]

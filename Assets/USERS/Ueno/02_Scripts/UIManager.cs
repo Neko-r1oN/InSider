@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] List<GameObject> roadUIList;
 
     RoadManager roadManager;
+    GameObject player;
 
     public GameObject GetRoadUI()
     {
@@ -20,6 +21,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         road = GameObject.Find("RoadUI");
+        player = GameObject.Find("Player");
 
         GameObject roadManagerObject = GameObject.Find("RoadManager");
 
@@ -57,6 +59,8 @@ public class UIManager : MonoBehaviour
         }
 
         road.SetActive(false);
+
+        player.GetComponent<Player>().mode = Player.PLAYER_MODE.MOVE;
     }
 
     public bool ActiveRoad()

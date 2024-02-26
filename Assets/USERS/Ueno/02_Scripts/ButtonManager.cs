@@ -47,6 +47,8 @@ public class ButtonManager : MonoBehaviour
 
         cameraManager = cameraManagerObject.GetComponent<CameraManager>();
 
+        player.GetComponent<Player>().mode = Player.PLAYER_MODE.MOVE;
+
         rand = rnd.Next(0, 31);
     }
 
