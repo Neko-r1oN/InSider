@@ -11,8 +11,8 @@ public class GoldManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //1.5•bŠÔŠu‚ÅŠÖ”‚ğÀs
-        InvokeRepeating("SlowGold", 1.0f, 0.2f);
+        //0•bŒã‚É0.1•bŠÔŠu‚ÅŠÖ”‚ğÀs
+        InvokeRepeating("SlowGold", 0.0f, 0.1f);
     }
     // Update is called once per frame
     void Update()

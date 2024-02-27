@@ -1,29 +1,41 @@
+/////////////////////////////////////////////
+//
+//リザルトシーンスクリプト
+//Auther : Kawaguchi Kyousuke
+//Date 2024.02/27
+//
+////////////////////////////////////////////
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ResultManager : MonoBehaviour
 {
-    //発生するオブジェクトをInspectorから指定する用
-    public GameObject spawnObject;
-    //発生間隔用
-    public float interval = 3.0f;
+    AudioSource audio;
+    [SerializeField] AudioClip ClickSound;
 
+    public static bool isResult;
 
     void Start()
     {
-        //コルーチンの開始
-        StartCoroutine("Spawn");
+        isResult = false;
+        audio = GetComponent<AudioSource>();
     }
 
-    IEnumerator Spawn()
+    private void Update()
     {
-        //無限ループの開始
-        while (true)
+        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Return))
         {
-            //自分をつけたオブジェクトの位置に、発生するオブジェクトをインスタンス化して生成する
-            Instantiate(spawnObject, transform.position, Quaternion.identity);
-            yield return new WaitForSeconds(interval);
+            audio.PlayOneShot(ClickSound);
+            if (isResult == false)
+            {
+                
+                Invoke("StartResult", 1.5f);
+            }
         }
+    }
+    void StartResult()
+    {
+        isResult = true;
     }
 }
