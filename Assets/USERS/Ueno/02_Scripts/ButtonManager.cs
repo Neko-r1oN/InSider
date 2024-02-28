@@ -89,10 +89,6 @@ public class ButtonManager : MonoBehaviour
             sabotageButton.SetActive(false);
             actionButton.SetActive(false);
         }
-
-        // スタミナを減らす
-        player.GetComponent<Player>().SubStamina(10);
-        Debug.Log("残りスタミナ"+ stamina);
     }
 
     public void fill()
@@ -120,7 +116,7 @@ public class ButtonManager : MonoBehaviour
         // プレイヤーのモードをNOTHINGに変更
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.NOTHING;
 
-        rand = rnd.Next(0, 31); // 0～30までのランダムの数値
+        rand = rnd.Next(0, 71); // 0～30までのランダムの数値
 
         // スタミナを増やす
         player.GetComponent<Player>().AddStamina(rand);

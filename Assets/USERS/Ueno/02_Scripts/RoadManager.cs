@@ -22,6 +22,7 @@ public class RoadManager : MonoBehaviour
     public GameObject targetBlock;
     public int rotY;
 
+
     public int roadNum; 
 
     // Start is called before the first frame update
@@ -71,6 +72,27 @@ public class RoadManager : MonoBehaviour
    public void Road(int num)
     {
         Road(RoadPrefab[num]);
+
+        if(num == 0)
+        {
+            player.GetComponent<Player>().SubStamina(20);
+        }
+        else if(num == 1)
+        {
+            player.GetComponent<Player>().SubStamina(15);
+        }
+        else if (num == 2)
+        {
+            player.GetComponent<Player>().SubStamina(30);
+        }
+        else if (num == 3)
+        {
+            player.GetComponent<Player>().SubStamina(40);
+        }
+        else if (num == 4)
+        {
+            player.GetComponent<Player>().SubStamina(10);
+        }
 
         player.GetComponent<Player>().selectRoadNum = num;
 

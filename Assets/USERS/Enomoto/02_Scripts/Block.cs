@@ -78,9 +78,6 @@ public class Block : MonoBehaviour
                     {
                         uiMnager.GetComponent<UIManager>().ShowRoad(player.GetComponent<Player>().selectRoadNum);
 
-                        // スタミナを減らす
-                        player.GetComponent<Player>().SubStamina(10);
-
                         // ブロックの情報を渡す
                         RoadManager.GetComponent<RoadManager>().targetBlock = this.gameObject;
 

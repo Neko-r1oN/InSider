@@ -27,6 +27,8 @@ public class Player : MonoBehaviour
     // ランダム関数
     System.Random rnd = new System.Random();
 
+    NavMeshPath path = null;
+
     // 連続選択ができないよう前回の選択した数値を保存
     public int selectRoadNum = -1;
 
@@ -40,7 +42,7 @@ public class Player : MonoBehaviour
     public bool isEnd = false;
 
     // スタミナ
-    int stamina = 100;
+    public int stamina = 100;
 
     // ランダムの数値を入れる変数
     int rand;
@@ -59,6 +61,11 @@ public class Player : MonoBehaviour
 
     // プレイヤーのモード
     public PLAYER_MODE mode = PLAYER_MODE.MOVE;
+
+    private void Awake()
+    {
+        path = new NavMeshPath();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -94,6 +101,8 @@ public class Player : MonoBehaviour
         // Y座標を固定 → 目的地に到達したかどうかの判定が難しくなるため
         transform.position = new Vector3(transform.position.x, pos_Y, transform.position.z);
 
+        
+
         // 現在のスタミナを表示
         staminaNum.GetComponent<Text>().text = "" + stamina;
 
@@ -114,16 +123,24 @@ public class Player : MonoBehaviour
                     // 調整
                     clickedTarget = new Vector3(clickedTarget.x, pos_Y, clickedTarget.z);
 
+                    NavMesh.CalculatePath(transform.position, clickedTarget, NavMesh.AllAreas, path);
+
+                    var length = path.corners[path.corners.Length - 1] - clickedTarget;
+
                     // 真
                     isSetTarget = true;
 
-                    // 目的地へ移動
-                    agent.destination = clickedTarget;
-
+                    if (length.magnitude < 1.0f)
+                    {
+                        // 目的地へ移動
+                        agent.destination = clickedTarget;
+                    }
+                    else
+                    {
+                        Debug.Log("パスを取得できませせん");
+                    }
+                        
                     // エージェントのベロシティが0以下になったら判定
-
-                    // スタミナを減らす
-                    SubStamina(10);
                 }
             }
         }
@@ -196,8 +213,17 @@ public class Player : MonoBehaviour
 
     public void SubStamina(int num)
     {
-        // スタミナを減らす
-        stamina -= num;
+        if(this.gameObject.tag == "Secrecy")
+        {
+            // スタミナを減らす
+            stamina -= num - 10;
+        }
+        else
+        {
+            // スタミナを減らす
+            stamina -= num;
+        }
+       
         if (stamina <= 0)
         {// スタミナが0以下になった時
             // 0に固定する
@@ -209,9 +235,6 @@ public class Player : MonoBehaviour
 
         // スタミナゲージ内の数値を減らす
         staminaNum.text = "" + stamina;
-
-        // 残りスタミナを表示(デバックのみ)
-        Debug.Log("残りスタミナ" + stamina);
     }
 
     public void AddStamina(int num)
