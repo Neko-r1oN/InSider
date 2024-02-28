@@ -18,6 +18,7 @@ public class ChaseCamera : MonoBehaviour
 
     private void Update()
     {
+        //Startで求めたプレイヤーとの位置関係を常にキープするようにカメラを動かす
         transform.position = player.transform.position + offset;
     }
 }

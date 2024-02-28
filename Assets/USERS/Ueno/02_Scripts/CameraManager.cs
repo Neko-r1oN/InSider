@@ -7,7 +7,6 @@ public class CameraManager : MonoBehaviour
     GameObject player;
     GameObject mainCamera;
     GameObject subCamera;
-    Vector3 offset;
 
     // Start is called before the first frame update
     void Start()
@@ -19,16 +18,6 @@ public class CameraManager : MonoBehaviour
 
         // サブカメラを非表示にする
         subCamera.SetActive(false);
-
-        // カメラとプレイヤーの相対距離を求める
-        offset = transform.position - player.transform.position;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //Startで求めたプレイヤーとの位置関係を常にキープするようにカメラを動かす
-        transform.position = player.transform.position + offset;
     }
 
     public void SwitchCamera()

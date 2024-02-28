@@ -5,6 +5,7 @@ using UnityEngine.UI;   // UI用
 using UnityEngine.AI;   // AI用
 using Unity.AI.Navigation;
 using DG.Tweening;
+using System;
 
 public class Player : MonoBehaviour
 {
@@ -23,6 +24,9 @@ public class Player : MonoBehaviour
     // スタミナゲージ内の値
     Text staminaNum;
 
+    // ランダム関数
+    System.Random rnd = new System.Random();
+
     // 連続選択ができないよう前回の選択した数値を保存
     public int selectRoadNum = -1;
 
@@ -37,6 +41,13 @@ public class Player : MonoBehaviour
 
     // スタミナ
     int stamina = 100;
+
+    // ランダムの数値を入れる変数
+    int rand;
+
+    int pioneerCount = 0; // 開拓者の人数をカウント
+
+    int secrecyCount = 0; // 内密者の人数をカウント
 
     public enum PLAYER_MODE
     {
@@ -69,6 +80,12 @@ public class Player : MonoBehaviour
 
         // アニメーター情報を取得
         animator = GetComponent<Animator>();
+
+        // 0～6までのランダムの数値が入る
+        rand = rnd.Next(0, 7); 
+
+        // 引数にランダムの数値を入れる
+        SetPost(rand);
     }
 
     // Update is called once per frame
@@ -102,6 +119,8 @@ public class Player : MonoBehaviour
 
                     // 目的地へ移動
                     agent.destination = clickedTarget;
+
+                    // エージェントのベロシティが0以下になったら判定
 
                     // スタミナを減らす
                     SubStamina(10);
@@ -197,11 +216,11 @@ public class Player : MonoBehaviour
 
     public void AddStamina(int num)
     {
-        // スタミナを減らす
+        // スタミナを増やす
         stamina += num;
         if (stamina >= 100)
-        {// スタミナが0以下になった時
-            // 0に固定する
+        {// スタミナが100以上になった時
+            // 100に固定する
             stamina = 100;
         }
 
@@ -213,5 +232,26 @@ public class Player : MonoBehaviour
 
         // 残りスタミナを表示(デバックのみ)
         Debug.Log("残りスタミナ" + stamina);
+    }
+
+    public void SetPost(int rnd)
+    {// タグを変更する
+        if (rnd <= 4)
+        {// 数値が4以下ならPioneerに設定
+            this.gameObject.tag = "Pioneer";
+
+            // カウントを増やす
+            pioneerCount++;
+        }
+        else if (rnd >= 5)
+        {// 数値が5以上ならSecrecyに設定
+            if (secrecyCount <= 1)
+            {// カウントが1以下なら
+                this.gameObject.tag = "Secrecy";
+
+                // カウントを増やす
+                secrecyCount++;
+            }
+        }
     }
 }

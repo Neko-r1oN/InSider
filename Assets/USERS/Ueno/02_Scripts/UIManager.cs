@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] GameObject road;
-    //[SerializeField] GameObject textUI;
     [SerializeField] List<GameObject> roadUIList;
 
+    // 情報を取得
     RoadManager roadManager;
     GameObject player;
 
@@ -20,31 +20,25 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // 情報を取得
         road = GameObject.Find("RoadUI");
         player = GameObject.Find("Player");
 
         GameObject roadManagerObject = GameObject.Find("RoadManager");
-
         roadManager = roadManagerObject.GetComponent<RoadManager>();
 
         // RoadUIを非表示にする
         road.SetActive(false);
-
-        //textUI = GameObject.Find("TextUI");
-
-        //textUI.SetActive(false);
     }
 
     public void ShowRoad(int selectNum)
-    {
+    {// RoadUIを表示する
         road.SetActive(true);
 
         if (selectNum >= 0)
         {
+            // 前回選んだ道UIを非表示にする
             roadUIList[selectNum].SetActive(false);
-
-            //roadUIList[selectNum].GetComponent<Image>().material.color 
-            //    = new Color32(0, 0, 0, 150);
         }
     }
 
@@ -52,14 +46,14 @@ public class UIManager : MonoBehaviour
     {
         if(selectNum >= 0)
         {
+            // 非表示にしていた道UIを表示
             roadUIList[selectNum].SetActive(true);
-
-            //roadUIList[selectNum].GetComponent<Image>().material.color 
-            //    = new Color32(0, 0, 0, 150);
         }
 
+        // 道UIを非表示
         road.SetActive(false);
 
+        // プレイヤーモードをMOVEに変更
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.MOVE;
     }
 
