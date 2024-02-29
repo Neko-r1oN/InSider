@@ -35,7 +35,7 @@ public class ButtonManager : MonoBehaviour
     private void Start()
     {
         // 情報を取得
-        player = GameObject.Find("Player");
+        player = GameObject.Find("Player1");
 
         GameObject roadManagerObject = GameObject.Find("RoadManager");
 

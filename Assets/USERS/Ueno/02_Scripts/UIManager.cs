@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
     {
         // î•ñ‚ğæ“¾
         road = GameObject.Find("RoadUI");
-        player = GameObject.Find("Player");
+        player = GameObject.Find("Player1");
 
         GameObject roadManagerObject = GameObject.Find("RoadManager");
         roadManager = roadManagerObject.GetComponent<RoadManager>();

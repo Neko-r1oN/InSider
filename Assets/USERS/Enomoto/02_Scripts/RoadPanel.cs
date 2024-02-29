@@ -24,7 +24,7 @@ public class RoadPanel : MonoBehaviour
     {
         // 取得する
         startPanel = GameObject.Find("StageManager");
-        player = GameObject.Find("Player");
+        player = GameObject.Find("Player1");
         defaultMaterial = gameObject.GetComponent<Renderer>().material.color;
     }
 
@@ -80,9 +80,6 @@ public class RoadPanel : MonoBehaviour
 
                         // ベイクを開始
                         startPanel.GetComponent<StageBake>().StartBake();
-
-                        //// 生成 → 破棄 → ベイク
-                        //Bake(blockPrefab, new Vector3(transform.position.x, 1.3f, transform.position.z), 0, this.gameObject);
                     }
                 }
                 else
@@ -100,24 +97,5 @@ public class RoadPanel : MonoBehaviour
                 gameObject.GetComponent<Renderer>().material.color = defaultMaterial;
             }
         }
-    }
-
-    /// <summary>
-    /// 生成、破棄、ベイクする
-    /// </summary>
-    /// <param name="prefab">生成するオブジェクト</param>
-    /// <param name="pos">生成する座標</param>
-    /// <param name="rotY">生成するときの回転</param>
-    /// <param name="desObject">破棄するオブジェクト</param>
-    private void Bake(GameObject prefab, Vector3 pos, int rotY, GameObject dieObject)
-    {
-        // オブジェクトを生成する
-        GameObject block = Instantiate(prefab, pos, Quaternion.identity);
-
-        // 破棄する
-        Destroy(dieObject);
-
-        // ベイクを開始
-        startPanel.GetComponent<StageBake>().StartBake();
     }
 }

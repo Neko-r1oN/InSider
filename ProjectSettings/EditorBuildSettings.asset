@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/USERS/Kawaguti/00_Scenes/TitleKawaguchi.unity
     guid: 7fdd4e02a742c354a96e2f1c3fc7d9df
   - enabled: 1
@@ -18,6 +18,6 @@ EditorBuildSettings:
     path: Assets/USERS/Ueno/00_Scenes/UenoUI.unity
     guid: a87ab4b633a45df40b3307a4fee47d01
   - enabled: 1
-    path: Assets/USERS/Enomoto/00_Scenes/gameUeno_copy.unity
-    guid: 3fffa9cc6fa7a5943b5885de8f849b4e
+    path: Assets/USERS/Enomoto/00_Scenes/gameUeno_Copy.unity
+    guid: 97adb84dc8cfd564288f4c08ba546dc7
   m_configObjects: {}

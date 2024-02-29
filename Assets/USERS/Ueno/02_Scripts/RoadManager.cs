@@ -38,7 +38,7 @@ public class RoadManager : MonoBehaviour
         uiMnager = GameObject.Find("UIManager");
 
         // Player
-        player = GameObject.Find("Player");
+        player = GameObject.Find("Player1");
 
         // Button
         GameObject buttonManagerObject = GameObject.Find("ButtonManager");

@@ -34,7 +34,7 @@ public class Block : MonoBehaviour
     {
         // 取得する
         startPanel = GameObject.Find("StageManager");
-        player = GameObject.Find("Player");
+        player = GameObject.Find("Player1");
 
         // UIManager
         uiMnager = GameObject.Find("UIManager");
@@ -83,9 +83,6 @@ public class Block : MonoBehaviour
 
                         // 任意のアニメーションをtrueに変更
                         animator.SetBool("Mining", true);
-
-                        // 生成 → 破棄 → ベイク
-                        //Bake(roadPrefab, new Vector3(transform.position.x, 0f, transform.position.z), 0, this.gameObject);
                     }
                 }
                 else
@@ -109,23 +106,4 @@ public class Block : MonoBehaviour
         }
 
     }
-
-    /// <summary>
-    /// 生成、破棄、ベイクする
-    /// </summary>
-    /// <param name="prefab">生成するオブジェクト</param>
-    /// <param name="pos">生成する座標</param>
-    /// <param name="rotY">生成するときの回転</param>
-    /// <param name="desObject">破棄するオブジェクト</param>
-    //private void Bake(GameObject prefab, Vector3 pos, int rotY, GameObject dieObject)
-    //{
-    //    // オブジェクトを生成する
-    //    GameObject block = Instantiate(prefab, pos, Quaternion.identity);
-
-    //    // 破棄する
-    //    Destroy(dieObject);
-
-    //    // ベイクを開始
-    //    startPanel.GetComponent<StageBake>().StartBake();
-    //}
 }
