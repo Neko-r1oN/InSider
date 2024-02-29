@@ -5,15 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 
 [Serializable]
-internal class ReadyData
+internal class JobAndTurnData
 {
     /// <summary>
-    /// プレイヤーの名前
+    /// 役職
     /// </summary>
-    public string name { get; set; }
+    public bool isInsider { get; set; }
 
     /// <summary>
-    /// 準備完了しているかどうか
+    /// 先行のプレイヤーID
     /// </summary>
-    public bool isReady { get; set; }
+    public int advancePlayerID { get; set; }
+
 }

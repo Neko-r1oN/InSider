@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 [Serializable]
-internal class ListenerData
+internal class PlayerIdData
 {
     /// <summary>
-    /// プレイヤーの名前
+    /// プレイヤーID (1P,2P・・・)
     /// </summary>
-    public string name { get; set; }
+    public int id { get; set; }
 }

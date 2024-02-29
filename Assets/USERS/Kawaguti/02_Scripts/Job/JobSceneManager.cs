@@ -1,7 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UI;           // UI
+using Newtonsoft.Json;          // JSONのデシリアライズなど
+using System.Net.Sockets;       // NetworkStreamなど
+using System.Threading.Tasks;   // スレッドなど
+using System.Threading;         // スレッドなど
+using System.Linq;              // Skipメソッドなど
+using UnityEngine.SceneManagement;  // シーン遷移
+using System.Text;
+using System;
 
 public class JobSceneManager : MonoBehaviour
 {
@@ -20,13 +28,14 @@ public class JobSceneManager : MonoBehaviour
     //初めの色
     [SerializeField] Color32 startColor = new Color32(255, 255, 255, 0);
 
-    //プレイヤー
-    [SerializeField] GameObject Player1;
-    [SerializeField] GameObject Player2;
-    [SerializeField] GameObject Player3;
-    [SerializeField] GameObject Player4;
-    [SerializeField] GameObject Player5;
-    [SerializeField] GameObject Player6;
+    //プレイヤーモデルのリスト
+    [SerializeField] List<GameObject> playerModelList = new List<GameObject>();
+
+    // 役職
+    static public string job;
+
+    // 先行のプレイヤーID
+    static public int advancePlayerID;
 
     private void Start()
     {
@@ -34,7 +43,11 @@ public class JobSceneManager : MonoBehaviour
         _repeatSpan = 0.5f;  
         _timeElapsed = 0;
 
+        // 役職判定
         JobJadge();
+
+        // 特定のプレイヤーモデルを表示する
+        playerModelList[ClientManager.Instance.playerID].SetActive(true);    // スクリプトからIDを取得
 
         //テキストカラーを透明にする
         YourText.color = startColor;
@@ -43,6 +56,7 @@ public class JobSceneManager : MonoBehaviour
 
         Invoke("SceneChange", 3.0f);
     }
+
     private void Update()
     {
         _timeElapsed += Time.deltaTime;     //時間をカウントする
@@ -62,17 +76,18 @@ public class JobSceneManager : MonoBehaviour
     //内通者判定関数(サーバー完成次第撤去)
     private void JobJadge()
     {
-        if (InSiderJodge == false)
-        {
+        if (ClientManager.Instance.isInsider == false)
+        {// 発掘家の場合
             InSider.SetActive(false);
             Excavator.SetActive(true);
         }
-        if (InSiderJodge == true)
-        {
+        else
+        {// 内密者の場合
             InSider.SetActive(true);
             Excavator.SetActive(false);
         }
     }
+
     //シーン切り替え
     public void SceneChange()
     {
