@@ -336,7 +336,7 @@ public class ClientManager : MonoBehaviour
 
                         // フェード＆シーン遷移
                         Initiate.DoneFading();
-                        SceneManager.LoadScene("JobScene_copy");
+                        SceneManager.LoadScene("gameUeno_copy");
 
                         break;
                 }
