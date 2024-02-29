@@ -115,30 +115,44 @@ public class Player : MonoBehaviour
 
                 if (hit.transform.tag == "RoadPanel")
                 {// 道パネルの場合
-                    // 取得する
-                    clickedTarget = hit.collider.transform.position;
 
-                    // 調整
-                    clickedTarget = new Vector3(clickedTarget.x, pos_Y, clickedTarget.z);
+                    Vector3 pos = Input.mousePosition;
+                    clickedTarget = hit.point;
 
-                    // NavMeshのパスを取得
+                    //目的地へ移動
+                    //agent.destination = clickedTarget;
+
+                    //// 取得する
+                    //clickedTarget = hit.collider.transform.position;
+
+                    //// 調整
+                    //clickedTarget = new Vector3(clickedTarget.x, pos_Y, clickedTarget.z);
+
+                    //// NavMeshのパスを取得
                     NavMesh.CalculatePath(transform.position, clickedTarget, NavMesh.AllAreas, path);
 
-                    var length = path.corners[path.corners.Length - 1] - clickedTarget;
-
-                    // 真
-                    isSetTarget = true;
-
-                    if (length.magnitude < 1.0f)
+                    if (path.corners.Length > 0)
                     {
-                        // 目的地へ移動
-                        agent.destination = clickedTarget;
+                        var length = path.corners[path.corners.Length - 1] - clickedTarget;
+
+                        // 真
+                        isSetTarget = true;
+
+                        if (length.magnitude < 1.0f)
+                        {
+                            // 目的地へ移動
+                            agent.destination = clickedTarget;
+                        }
+                        else
+                        {
+                            Debug.Log("パスを取得できませせん");
+                        }
                     }
                     else
                     {
-                        Debug.Log("パスを取得できませせん");
+                        Debug.Log("範囲外");
                     }
-                        
+
                     // エージェントのベロシティが0以下になったら判定
                 }
             }
