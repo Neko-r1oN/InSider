@@ -17,8 +17,6 @@ public class TitleManager : MonoBehaviour
     [SerializeField] AudioClip ClickSound;
     Color color;
 
-  
-
     public static bool isStart = false;
     // Start is called before the first frame update
     void Start()
@@ -73,7 +71,7 @@ public class TitleManager : MonoBehaviour
 
         UserName = nameField.text;
         Initiate.DoneFading();
-        //SceneManager.LoadScene("");
+        SceneManager.LoadScene("StandbyScene_copy");
 
     }
     public void BackButton()
