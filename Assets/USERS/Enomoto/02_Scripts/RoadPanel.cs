@@ -63,7 +63,7 @@ public class RoadPanel : MonoBehaviour
             //  「埋める」の対象になっている場合（埋めるモードの場合）
             //*************************************************************
             else if (isFill == true)
-            {// モード：MOVE
+            {// モード：FILL
 
                 if (hit.transform.gameObject == this.gameObject)
                 {// 自分にカーソルが当たった

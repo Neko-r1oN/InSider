@@ -7,6 +7,10 @@ TagManager:
   - RoadPanel
   - Block
   - RoadBlock
+  - Pioneer
+  - Treasure
+  - Mimic
+  - Insider
   layers:
   - Default
   - TransparentFX

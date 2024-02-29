@@ -5,7 +5,7 @@ using UnityEngine.UI;   // UI用
 using UnityEngine.AI;   // AI用
 using Unity.AI.Navigation;
 using DG.Tweening;
-
+using System;
 
 public class Player : MonoBehaviour
 {
@@ -23,7 +23,15 @@ public class Player : MonoBehaviour
 
     // スタミナゲージ内の値
     Text staminaNum;
-    
+
+    // ランダム関数
+    System.Random rnd = new System.Random();
+
+    NavMeshPath path = null;
+
+    // 連続選択ができないよう前回の選択した数値を保存
+    public int selectRoadNum = -1;
+
     // 目的地を設定したかどうか
     bool isSetTarget = false;
 
@@ -34,7 +42,12 @@ public class Player : MonoBehaviour
     public bool isEnd = false;
 
     // スタミナ
-    int stamina = 100;
+    public int stamina = 100;
+
+    // ランダムの数値を入れる変数
+    int rand;
+
+    int insiderCount = 0; // 内密者の人数をカウント
 
     public enum PLAYER_MODE
     {
@@ -46,6 +59,11 @@ public class Player : MonoBehaviour
 
     // プレイヤーのモード
     public PLAYER_MODE mode = PLAYER_MODE.MOVE;
+
+    private void Awake()
+    {
+        path = new NavMeshPath();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -67,6 +85,12 @@ public class Player : MonoBehaviour
 
         // アニメーター情報を取得
         animator = GetComponent<Animator>();
+
+        // 0～6までのランダムの数値が入る
+        rand = rnd.Next(0, 7);
+
+        // 引数にランダムの数値を入れる
+        SetPost(rand);
     }
 
     // Update is called once per frame
@@ -87,6 +111,8 @@ public class Player : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {// Rayが当たったオブジェクトの情報をhitに渡す
 
+                Debug.Log(hit.transform.name);
+
                 if (hit.transform.tag == "RoadPanel")
                 {// 道パネルの場合
                     // 取得する
@@ -95,16 +121,25 @@ public class Player : MonoBehaviour
                     // 調整
                     clickedTarget = new Vector3(clickedTarget.x, pos_Y, clickedTarget.z);
 
+                    // NavMeshのパスを取得
+                    NavMesh.CalculatePath(transform.position, clickedTarget, NavMesh.AllAreas, path);
+
+                    var length = path.corners[path.corners.Length - 1] - clickedTarget;
+
                     // 真
                     isSetTarget = true;
 
-                    // 目的地へ移動
-                    agent.destination = clickedTarget;
-
-                    
-
-                    // スタミナを減らす
-                    SubStamina(10);
+                    if (length.magnitude < 1.0f)
+                    {
+                        // 目的地へ移動
+                        agent.destination = clickedTarget;
+                    }
+                    else
+                    {
+                        Debug.Log("パスを取得できませせん");
+                    }
+                        
+                    // エージェントのベロシティが0以下になったら判定
                 }
             }
         }
@@ -177,12 +212,38 @@ public class Player : MonoBehaviour
 
     public void SubStamina(int num)
     {
-        // スタミナを減らす
-        stamina -= num;
+        if(this.gameObject.tag == "Secrecy")
+        {
+            // スタミナを減らす
+            stamina -= num - 10;
+        }
+        else
+        {
+            // スタミナを減らす
+            stamina -= num;
+        }
+       
         if (stamina <= 0)
         {// スタミナが0以下になった時
             // 0に固定する
             stamina = 0;
+        }
+
+        // スライダーを減らすアニメーション(DOTween)
+        staminaGauge.GetComponent<Slider>().DOValue(stamina, 1f);
+
+        // スタミナゲージ内の数値を減らす
+        staminaNum.text = "" + stamina;
+    }
+
+    public void AddStamina(int num)
+    {
+        // スタミナを増やす
+        stamina += num;
+        if (stamina >= 100)
+        {// スタミナが100以上になった時
+            // 100に固定する
+            stamina = 100;
         }
 
         // スライダーを減らすアニメーション(DOTween)
@@ -195,23 +256,21 @@ public class Player : MonoBehaviour
         Debug.Log("残りスタミナ" + stamina);
     }
 
-    public void AddStamina(int num)
-    {
-        // スタミナを減らす
-        stamina += num;
-        if (stamina >= 100)
-        {// スタミナが0以下になった時
-            // 0に固定する
-            stamina = 100;
+    public void SetPost(int rnd)
+    {// タグを変更する
+        if (rnd <= 4)
+        {// 数値が4以下ならPioneerに設定
+            this.gameObject.tag = "Pioneer";
         }
+        else if (rnd >= 5)
+        {// 数値が5以上ならSecrecyに設定
+            if (insiderCount <= 1)
+            {// カウントが1以下なら
+                this.gameObject.tag = "Insider";
 
-        // スライダーを減らすアニメーション(DOTween)
-        staminaGauge.GetComponent<Slider>().DOValue(stamina, 1f);
-
-        // スタミナゲージ内の数値を減らす
-        staminaNum.text = "" + stamina;
-
-        // 残りスタミナを表示(デバックのみ)
-        Debug.Log("残りスタミナ" + stamina);
+                // カウントを増やす
+                insiderCount++;
+            }
+        }
     }
 }
