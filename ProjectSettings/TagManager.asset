@@ -11,6 +11,7 @@ TagManager:
   - Treasure
   - Mimic
   - Insider
+  - StartPanel
   layers:
   - Default
   - TransparentFX

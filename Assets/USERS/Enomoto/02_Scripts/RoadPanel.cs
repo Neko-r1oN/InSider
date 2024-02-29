@@ -62,7 +62,7 @@ public class RoadPanel : MonoBehaviour
             //*************************************************************
             //  「埋める」の対象になっている場合（埋めるモードの場合）
             //*************************************************************
-            else if (isFill == true)
+            else if (isFill == true && this.gameObject.tag == "RoadPanel")
             {// モード：FILL
 
                 if (hit.transform.gameObject == this.gameObject)
@@ -73,7 +73,7 @@ public class RoadPanel : MonoBehaviour
                     if (Input.GetMouseButtonDown(0))
                     {
                         // オブジェクトを生成する
-                        GameObject block = Instantiate(blockPrefab, new Vector3(transform.position.x, 1.3f, transform.position.z), Quaternion.identity);
+                        GameObject block = Instantiate(blockPrefab, new Vector3(transform.position.x, 1.47f, transform.position.z), Quaternion.identity);
 
                         // 破棄する
                         Destroy(this.gameObject);

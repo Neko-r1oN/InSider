@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/USERS/Kawaguti/00_Scenes/TitleKawaguchi.unity
     guid: 7fdd4e02a742c354a96e2f1c3fc7d9df
   - enabled: 1
