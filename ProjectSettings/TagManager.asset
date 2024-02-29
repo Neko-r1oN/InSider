@@ -8,9 +8,9 @@ TagManager:
   - Block
   - RoadBlock
   - Pioneer
-  - Secrecy
   - Treasure
   - Mimic
+  - Insider
   layers:
   - Default
   - TransparentFX

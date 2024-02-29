@@ -47,9 +47,7 @@ public class Player : MonoBehaviour
     // ランダムの数値を入れる変数
     int rand;
 
-    int pioneerCount = 0; // 開拓者の人数をカウント
-
-    int secrecyCount = 0; // 内密者の人数をカウント
+    int insiderCount = 0; // 内密者の人数をカウント
 
     public enum PLAYER_MODE
     {
@@ -89,7 +87,7 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
 
         // 0～6までのランダムの数値が入る
-        rand = rnd.Next(0, 7); 
+        rand = rnd.Next(0, 7);
 
         // 引数にランダムの数値を入れる
         SetPost(rand);
@@ -100,8 +98,6 @@ public class Player : MonoBehaviour
     {
         // Y座標を固定 → 目的地に到達したかどうかの判定が難しくなるため
         transform.position = new Vector3(transform.position.x, pos_Y, transform.position.z);
-
-        
 
         // 現在のスタミナを表示
         staminaNum.GetComponent<Text>().text = "" + stamina;
@@ -115,6 +111,8 @@ public class Player : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {// Rayが当たったオブジェクトの情報をhitに渡す
 
+                Debug.Log(hit.transform.name);
+
                 if (hit.transform.tag == "RoadPanel")
                 {// 道パネルの場合
                     // 取得する
@@ -123,6 +121,7 @@ public class Player : MonoBehaviour
                     // 調整
                     clickedTarget = new Vector3(clickedTarget.x, pos_Y, clickedTarget.z);
 
+                    // NavMeshのパスを取得
                     NavMesh.CalculatePath(transform.position, clickedTarget, NavMesh.AllAreas, path);
 
                     var length = path.corners[path.corners.Length - 1] - clickedTarget;
@@ -262,18 +261,15 @@ public class Player : MonoBehaviour
         if (rnd <= 4)
         {// 数値が4以下ならPioneerに設定
             this.gameObject.tag = "Pioneer";
-
-            // カウントを増やす
-            pioneerCount++;
         }
         else if (rnd >= 5)
         {// 数値が5以上ならSecrecyに設定
-            if (secrecyCount <= 1)
+            if (insiderCount <= 1)
             {// カウントが1以下なら
-                this.gameObject.tag = "Secrecy";
+                this.gameObject.tag = "Insider";
 
                 // カウントを増やす
-                secrecyCount++;
+                insiderCount++;
             }
         }
     }
