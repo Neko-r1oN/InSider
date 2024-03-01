@@ -87,7 +87,7 @@ public class Block : MonoBehaviour
                 }
                 else
                 {
-                    gameObject.GetComponent<Renderer>().material.color = Color.yellow; // 黄色
+                    gameObject.GetComponent<Renderer>().material.color = Color.blue; // 青色
 
                     // 任意のアニメーションをfalseに変更
                     animator.SetBool("Mining", false);
