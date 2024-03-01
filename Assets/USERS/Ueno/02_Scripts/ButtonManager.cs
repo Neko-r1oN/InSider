@@ -13,12 +13,13 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] GameObject moveButton;     // moveボタンの取得
     [SerializeField] GameObject nothingButton;  // nothingボタンの取得
     [SerializeField] GameObject sabotageButton; // sabotageボタンの取得
+    [SerializeField] GameObject canselButton;   // canselボタンの取得
 
     // 情報を取得
     GameObject player;
     RoadManager roadManager;
     UIManager uIManager;
-    CameraManager cameraManager;
+    GameObject cameraManager;
 
     // ランダム関数
     System.Random rnd = new System.Random();
@@ -45,9 +46,7 @@ public class ButtonManager : MonoBehaviour
 
         uIManager = uiManagerObject.GetComponent<UIManager>();
 
-        GameObject cameraManagerObject = GameObject.Find("CameraManager");
-
-        cameraManager = cameraManagerObject.GetComponent<CameraManager>();
+        cameraManager = GameObject.Find("CameraManager");
 
         // プレイヤーのモードをNOTHINGに設定
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.NOTHING;
@@ -78,6 +77,8 @@ public class ButtonManager : MonoBehaviour
 
         // プレイヤーのモードをMININGに変更
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.MINING;
+
+        canselButton.SetActive(true);
 
         if (roadUI == true)
         {// RoadUIが表示されていたら
@@ -139,6 +140,10 @@ public class ButtonManager : MonoBehaviour
                 sabotageButton.SetActive(true);
             }
         }
+
+        canselButton.SetActive(false);
+
+        player.GetComponent<Player>().mode = Player.PLAYER_MODE.MOVE;
     }
 
     public void DisplayButton()
@@ -148,7 +153,9 @@ public class ButtonManager : MonoBehaviour
         fillButton.SetActive(true);
         nothingButton.SetActive(true);
         actionButton.SetActive(true);
-       
+
+        canselButton.SetActive(false);
+
         if (player.tag == "Secrecy")
         {// タグがSecrecyなら表示
             sabotageButton.SetActive(true);
@@ -163,6 +170,6 @@ public class ButtonManager : MonoBehaviour
 
     public void Camera()
     {// カメラ切り替え
-        cameraManager.SwitchCamera();
+        cameraManager.GetComponent<CameraManager>().SwitchCamera();
     }
 }

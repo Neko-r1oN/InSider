@@ -113,7 +113,7 @@ public class Player : MonoBehaviour
 
                 Debug.Log(hit.transform.name);
 
-                if (hit.transform.tag == "RoadPanel")
+                if (hit.transform.tag == "RoadPanel" || hit.transform.tag == "StartPanel")
                 {// 道パネルの場合
 
                     Vector3 pos = Input.mousePosition;
