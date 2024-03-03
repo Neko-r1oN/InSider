@@ -5,7 +5,7 @@ using UnityEngine;
 public class Block : MonoBehaviour
 {
     // ステージの管理
-    GameObject startPanel;
+    GameObject stageManager;
 
     // プレイヤー
     GameObject player;
@@ -30,11 +30,23 @@ public class Block : MonoBehaviour
     // 採掘の対象になっている場合
     public bool isMining = false;
 
+    // オブジェクトID
+    public int objeID;
+
     void Start()
     {
         // 取得する
-        startPanel = GameObject.Find("StageManager");
-        player = GameObject.Find("Player1");
+        stageManager = GameObject.Find("StageManager");
+
+        if (EditorManager.Instance.useServer == true)
+        {// サーバーを使用する場合
+            player = GameObject.Find("player-List");
+            player = player.GetComponent<PlayerManager>().players[ClientManager.Instance.playerID];
+        }
+        else
+        {// サーバーを使用しない
+            player = GameObject.Find("Player1");
+        }
 
         // UIManager
         uiMnager = GameObject.Find("UIManager");

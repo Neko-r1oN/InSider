@@ -10,7 +10,8 @@ public class ChaseCamera : MonoBehaviour
     private void Start()
     {
         // プレイヤー情報の取得
-        player = GameObject.Find("Player1");
+        player = GameObject.Find("player-List");
+        player = player.GetComponent<PlayerManager>().players[ClientManager.Instance.playerID];
 
         // サブカメラとプレイヤーとの相対距離を求める
         offset = transform.position - player.transform.position;

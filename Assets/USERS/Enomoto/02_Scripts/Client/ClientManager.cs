@@ -51,6 +51,18 @@ public class ClientManager : MonoBehaviour
     // クライアントの名前
     string clientName;
 
+    // プレイヤーのマネージャー(List)
+    GameObject playerManager;
+
+    // ブロック(道パネル)マネージャー
+    GameObject blockManager;
+
+    // 誰のターンか
+    GameObject text;
+
+    // 必要接続人数
+    int RequiredNum = 4;
+
     //===========================
     //  [公開]フィールド
     //===========================
@@ -76,6 +88,11 @@ public class ClientManager : MonoBehaviour
     public int advancePlayerID { get; set; }
 
     /// <summary>
+    /// プレイヤー人数
+    /// </summary>
+    public int playerNum { get; set; }
+
+    /// <summary>
     /// イベントID
     /// </summary>
     public enum EventID
@@ -84,7 +101,11 @@ public class ClientManager : MonoBehaviour
         ListenerList,         // リスナーデータ
         ReadyData,            // 準備完了
         JobAndTurn,           // 役職と先行のプレイヤーID
-        GameStart,            // ゲーム開始
+        ChatData,             // チャット
+        MoveData,             // 移動
+        Action_FillData,      // 行動：埋める
+        Action_MiningData,    // 行動：切り開く
+        Action_NothingData,   // 行動：何もしない
     }
 
     //===========================
@@ -162,12 +183,12 @@ public class ClientManager : MonoBehaviour
         readyData.isReady = isReadyButton;
 
         // 準備完了待ちを送信
-        await Send(readyData, tcpClient, 2);
+        await Send(readyData, 2);
         
         // フラグを切り替え
         isReadyButton = !isReadyButton;
 
-        if (listenerList.Count < 4)
+        if (listenerList.Count < RequiredNum)
         {// 接続人数が揃っていない場合
             // 表示・非表示切り替え
             buttonObjList[0].SetActive(false);
@@ -260,7 +281,7 @@ public class ClientManager : MonoBehaviour
                         }
 
                         // 接続人数が４人以上の場合
-                        if(listenerList.Count >= 4)
+                        if (listenerList.Count >= RequiredNum)
                         {
                             // 表示・非表示切り替え
                             buttonObjList[0].SetActive(isReadyButton);
@@ -292,7 +313,7 @@ public class ClientManager : MonoBehaviour
 
                         for (int i = 0; i < clientTextList.Count; i++)
                         {
-                            if(readyDataList.Count > i)
+                            if (readyDataList.Count > i)
                             {// インデックスが範囲内の場合
                                 if (readyDataList[i].isReady == true)
                                 {// 真
@@ -311,7 +332,14 @@ public class ClientManager : MonoBehaviour
                         }
 
                         break;
-                    case 3: // 自身の役職と先行のプレイヤーIDを取得
+                    case 3: // 自身の役職と先行のプレイヤーIDを取得 & プレイヤー人数を取得
+
+                        // プレイヤー人数を取得する
+                        playerNum = listenerList.Count;
+
+                        // マネージャーを初期化する
+                        playerManager = null;
+                        blockManager = null;
 
                         Debug.Log("役職と先行のプレイヤーIDを取得");
 
@@ -330,16 +358,102 @@ public class ClientManager : MonoBehaviour
                         SceneManager.LoadScene("JobScene_copy");
 
                         break;
-                    case 4: // ゲーム開始
+                    case 4: // チャット
+                        break;
+                    case 5: // 移動
 
-                        Debug.Log("ゲーム開始！！");
+                        // JSONデシリアライズで取得する
+                        MoveData moveData = JsonConvert.DeserializeObject<MoveData>(jsonString);
 
-                        // フェード＆シーン遷移
-                        Initiate.DoneFading();
-                        SceneManager.LoadScene("gameUeno_copy");
+                        // 目的地の座標を取得
+                        Vector3 targetPos = new Vector3(moveData.targetPosX, moveData.targetPosY, moveData.targetPosZ);
+
+                        Debug.Log("[" + moveData.playerID + "]" + " : 移動");
+
+                        if (playerManager == null)
+                        {// まだ取得していない場合
+                            // 取得する
+                            playerManager = GameObject.Find("player-List");
+                        }
+
+                        if (playerID != moveData.playerID)
+                        {// 受信したのが自分自身ではない場合
+                            // 移動処理
+                            GameObject movePlayer = playerManager.GetComponent<PlayerManager>().players[moveData.playerID];
+                            movePlayer.GetComponent<OtherPlayer>().MoveAgent(targetPos);
+                        }
 
                         break;
+                    case 6: // 埋める
+
+                        // JSONデシリアライズで取得する
+                        Action_FillData fillData = JsonConvert.DeserializeObject<Action_FillData>(jsonString);
+
+                        Debug.Log("[" + fillData.playerID + "]" + " : 埋める");
+
+                        if (blockManager == null)
+                        {// まだ取得していない場合
+                            // 取得する
+                            blockManager = GameObject.Find("BlockList");
+                        }
+
+                        //if (playerID != fillData.playerID)
+                        //{// 受信したのが自分自身ではない場合
+                        // 道を埋める処理
+                        blockManager.GetComponent<BlockManager>().FillObject(fillData.objeID);
+                        //}
+
+                        if(text == null)
+                        {
+                            text = GameObject.Find("PlayerName");
+                        }
+                        Invoke("UpdateText", 0.1f);
+
+                        break;
+                    case 7: // 切り開く
+
+                        // JSONデシリアライズで取得する
+                        Action_MiningData mineData = JsonConvert.DeserializeObject<Action_MiningData>(jsonString);
+
+                        Debug.Log("[" + mineData.playerID + "]" + " : [" + mineData.prefabID + "]切り開く");
+
+                        if (blockManager == null)
+                        {// まだ取得していない場合
+                            // 取得する
+                            blockManager = GameObject.Find("BlockList");
+                        }
+
+                        //if (playerID != mineData.playerID)
+                        //{// 受信したのが自分自身ではない場合
+                        // 切り開く処理
+                        blockManager.GetComponent<BlockManager>().MineObject(mineData.objeID, mineData.prefabID, mineData.rotY);
+                        //}
+
+                        if (text == null)
+                        {
+                            text = GameObject.Find("PlayerName");
+                        }
+                        Invoke("UpdateText", 0.1f);
+
+                        break;
+                    case 8: // やすむ(スタミナ回復)
+
+                        // JSONデシリアライズで取得する
+                        Action_NothingData restData = JsonConvert.DeserializeObject<Action_NothingData>(jsonString);
+
+                        Debug.Log("[" + restData.playerID + "]が休んだ→(回復量：" + restData.addStamina + ") 合計：" + restData.totalStamina);
+
+                        if (text == null)
+                        {
+                            text = GameObject.Find("PlayerName");
+                        }
+                        Invoke("UpdateText", 0.1f);
+
+                        break;
+                    case 9: // 誰のターンか
+                        break;
                 }
+
             }, null);
         }
 
@@ -351,6 +465,23 @@ public class ClientManager : MonoBehaviour
         // フェード＆シーン遷移
         Initiate.DoneFading();
         SceneManager.LoadScene("TitleKawaguchi");
+    }
+
+    private void UpdateText()
+    {
+        advancePlayerID++;
+
+        if (advancePlayerID >= playerNum)
+        {// リセット
+            advancePlayerID = 0;
+        }
+
+        Invoke("hideText", 1.5f);
+    }
+
+    private void hideText()
+    {
+        text.GetComponent<Text>().text = "";
     }
 
     /// <summary>
@@ -406,7 +537,7 @@ public class ClientManager : MonoBehaviour
             listener.id = playerID;
 
             // 送信する
-            await Send(listener, tcpClient, 1);
+            await Send(listener, 1);
 
             //**********************************
             //  準備完了データを送信する
@@ -434,10 +565,10 @@ public class ClientManager : MonoBehaviour
     /// </summary>
     /// <param name="param"></param>
     /// <param name="arg"></param>
-    public async Task Send(object data, object arg, int eventID)
+    public async Task Send(object data, /*object arg, */int eventID)
     {
-        // 引数からクライアントをキャストで取得する
-        TcpClient tcpClientList = (TcpClient)arg;
+        //// 引数からクライアントをキャストで取得する
+        //TcpClient tcpClientList = (TcpClient)arg;
 
         // JSONシリアライズ
         string json = JsonConvert.SerializeObject(data);  // クラス型の変数を指定
@@ -452,8 +583,22 @@ public class ClientManager : MonoBehaviour
         Array.Resize(ref sendData, 1024);   // サイズを固定して安定に送受信できるようにする
 
         // 送信処理
-        NetworkStream stream = tcpClientList.GetStream();
+        NetworkStream stream = tcpClient.GetStream();
         await stream.WriteAsync(sendData, 0, sendData.Length);  // 送信
+
+        Debug.Log("OKOKOK");
+    }
+
+    /// <summary>
+    /// 別のものスクリプトからデータを送信する
+    /// </summary>
+    /// <param name="data"></param>
+    /// <param name="eventID"></param>
+    public async void SendData(object data, int eventID)
+    {
+        await Send(data, eventID);
+
+        Debug.Log("OK");
     }
 
     /// <summary>
@@ -466,5 +611,7 @@ public class ClientManager : MonoBehaviour
             // 接続を切断
             tcpClient.Close();
         }
+
+        Instance = null;
     }
 }

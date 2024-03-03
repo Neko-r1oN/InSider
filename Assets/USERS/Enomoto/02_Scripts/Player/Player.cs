@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     // ランダム関数
     System.Random rnd = new System.Random();
 
+    // パス
     NavMeshPath path = null;
 
     // 連続選択ができないよう前回の選択した数値を保存
@@ -119,9 +120,6 @@ public class Player : MonoBehaviour
                     Vector3 pos = Input.mousePosition;
                     clickedTarget = hit.point;
 
-                    //目的地へ移動
-                    //agent.destination = clickedTarget;
-
                     //// 取得する
                     //clickedTarget = hit.collider.transform.position;
 
@@ -140,6 +138,21 @@ public class Player : MonoBehaviour
 
                         if (length.magnitude < 1.0f)
                         {
+                            if (EditorManager.Instance.useServer == true)
+                            {// サーバーを使用する場合
+                                // データ変数を設定
+                                MoveData moveData = new MoveData();
+                                moveData.playerID = ClientManager.Instance.playerID;
+                                moveData.targetPosX = clickedTarget.x;
+                                moveData.targetPosY = clickedTarget.y;
+                                moveData.targetPosZ = clickedTarget.z;
+
+                                Debug.Log(moveData.playerID);
+
+                                // 送信する
+                                ClientManager.Instance.SendData(moveData, 5);
+                            }
+
                             // 目的地へ移動
                             agent.destination = clickedTarget;
                         }
@@ -161,13 +174,13 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(agent.velocity.magnitude <= 0)
+        if(agent.remainingDistance <= 0)
         {// 移動量が0以下
             // 滑らかに回転
             transform.forward = Vector3.Slerp(transform.forward, Vector3.back, Time.deltaTime * 8f);    // 後ろを向く
         }
 
-        if (agent.velocity.magnitude > 0)
+        if (agent.remainingDistance > 0)
         {// 移動中は偽
             // 任意のアニメーションをtrueに変更
             animator.SetBool("Run", true);

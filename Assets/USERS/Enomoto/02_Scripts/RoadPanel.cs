@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class RoadPanel : MonoBehaviour
@@ -8,7 +9,7 @@ public class RoadPanel : MonoBehaviour
     [SerializeField] GameObject blockPrefab;
 
     // ステージの管理
-    GameObject startPanel;
+    GameObject stageManager;
 
     // プレイヤー
     GameObject player;
@@ -19,17 +20,34 @@ public class RoadPanel : MonoBehaviour
     // 「埋める」の対象になっているかどうか
     public bool isFill = false;
 
+    // オブジェクトID
+    public int objeID;
+
+    // マネージャーを取得する
+    GameObject manager;
+
     // Start is called before the first frame update
     void Start()
     {
         // 取得する
-        startPanel = GameObject.Find("StageManager");
-        player = GameObject.Find("Player1");
+        manager = GameObject.Find("BlockList");
+        stageManager = GameObject.Find("StageManager");
+
+        if (EditorManager.Instance.useServer == true)
+        {// サーバーを使用する場合
+            player = GameObject.Find("player-List");
+            player = player.GetComponent<PlayerManager>().players[ClientManager.Instance.playerID];
+        }
+        else
+        {// サーバーを使用しない
+            player = GameObject.Find("Player1");
+        }
+
         defaultMaterial = gameObject.GetComponent<Renderer>().material.color;
     }
 
     // Update is called once per frame
-    void Update()
+    async Task Update()
     {
         if (player.GetComponent<Player>().mode != Player.PLAYER_MODE.FILL)
         {// 埋めるモード以外の場合
@@ -72,14 +90,33 @@ public class RoadPanel : MonoBehaviour
                     // 左クリックした
                     if (Input.GetMouseButtonDown(0))
                     {
-                        // オブジェクトを生成する
-                        GameObject block = Instantiate(blockPrefab, new Vector3(transform.position.x, 1.47f, transform.position.z), Quaternion.identity);
+                        if (EditorManager.Instance.useServer == true)
+                        {// サーバーを使用する場合
+                            // データ変数を設定
+                            Action_FillData fillData = new Action_FillData();
+                            fillData.playerID = ClientManager.Instance.playerID;
+                            fillData.objeID = objeID;
 
-                        // 破棄する
-                        Destroy(this.gameObject);
+                            Debug.Log("埋めるオブジェクトID : " + fillData.objeID);
 
-                        // ベイクを開始
-                        startPanel.GetComponent<StageBake>().StartBake();
+                            // 送信処理
+                            await ClientManager.Instance.Send(fillData, 6);
+                        }
+                        else
+                        {// サーバーを使用しない
+                            // オブジェクトを生成する
+                            GameObject block = Instantiate(blockPrefab, new Vector3(transform.position.x, 1.47f, transform.position.z), Quaternion.identity);
+
+                            // 破棄する
+                            Destroy(this.gameObject);
+
+                            // ベイクを開始
+                            stageManager.GetComponent<StageBake>().StartBake();
+                        }
+
+                        // スタミナを減らす
+                        player.GetComponent<Player>().SubStamina(20);
+                        Debug.Log("残りスタミナ" + player.GetComponent<Player>().stamina);
                     }
                 }
                 else
