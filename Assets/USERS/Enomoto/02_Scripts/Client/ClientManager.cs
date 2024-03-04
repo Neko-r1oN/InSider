@@ -408,7 +408,7 @@ public class ClientManager : MonoBehaviour
                         {
                             advancePlayerID = 0;
                         }
-                        PlayerNumber.Instance.UpdateText(advancePlayerID);
+                        PlayerNamber.Instance.UpdateText(advancePlayerID);
 
                         break;
                     case 7: // 切り開く
@@ -435,7 +435,7 @@ public class ClientManager : MonoBehaviour
                         {
                             advancePlayerID = 0;
                         }
-                        PlayerNumber.Instance.UpdateText(advancePlayerID);
+                        PlayerNamber.Instance.UpdateText(advancePlayerID);
 
                         break;
                     case 8: // やすむ(スタミナ回復)
@@ -446,11 +446,11 @@ public class ClientManager : MonoBehaviour
                         Debug.Log("[" + restData.playerID + "]が休んだ→(回復量：" + restData.addStamina + ") 合計：" + restData.totalStamina);
 
                         advancePlayerID++;
-                        if (advancePlayerID >= listenerList.Count)
+                        if(advancePlayerID >= listenerList.Count)
                         {
                             advancePlayerID = 0;
                         }
-                        PlayerNumber.Instance.UpdateText(advancePlayerID);
+                        PlayerNamber.Instance.UpdateText(advancePlayerID);
 
                         break;
                     case 9: // 誰のターンか
@@ -489,7 +489,7 @@ public class ClientManager : MonoBehaviour
             tcpClient.SendTimeout = 1000;       // 送信
             tcpClient.ReceiveTimeout = 1000;    // 受信
 
-            // サーバーへ接続要求
+            // サーバーへ接続要求    (IP:"20.249.92.21"  "127.0.0.1")
             await tcpClient.ConnectAsync("127.0.0.1", 20000);
             Debug.Log("***サーバーと通信確立***");
 
