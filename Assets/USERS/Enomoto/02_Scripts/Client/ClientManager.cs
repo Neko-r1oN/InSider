@@ -61,7 +61,7 @@ public class ClientManager : MonoBehaviour
     GameObject text;
 
     // 必要接続人数
-    int RequiredNum = 4;
+    int RequiredNum = 2;
 
     //===========================
     //  [公開]フィールド
@@ -403,11 +403,12 @@ public class ClientManager : MonoBehaviour
                         blockManager.GetComponent<BlockManager>().FillObject(fillData.objeID);
                         //}
 
-                        if(text == null)
+                        advancePlayerID++;
+                        if(advancePlayerID >= listenerList.Count)
                         {
-                            text = GameObject.Find("PlayerName");
+                            advancePlayerID = 0;
                         }
-                        Invoke("UpdateText", 0.1f);
+                        PlayerNumber.Instance.UpdateText(advancePlayerID);
 
                         break;
                     case 7: // 切り開く
@@ -429,11 +430,12 @@ public class ClientManager : MonoBehaviour
                         blockManager.GetComponent<BlockManager>().MineObject(mineData.objeID, mineData.prefabID, mineData.rotY);
                         //}
 
-                        if (text == null)
+                        advancePlayerID++;
+                        if (advancePlayerID >= listenerList.Count)
                         {
-                            text = GameObject.Find("PlayerName");
+                            advancePlayerID = 0;
                         }
-                        Invoke("UpdateText", 0.1f);
+                        PlayerNumber.Instance.UpdateText(advancePlayerID);
 
                         break;
                     case 8: // やすむ(スタミナ回復)
@@ -443,11 +445,12 @@ public class ClientManager : MonoBehaviour
 
                         Debug.Log("[" + restData.playerID + "]が休んだ→(回復量：" + restData.addStamina + ") 合計：" + restData.totalStamina);
 
-                        if (text == null)
+                        advancePlayerID++;
+                        if (advancePlayerID >= listenerList.Count)
                         {
-                            text = GameObject.Find("PlayerName");
+                            advancePlayerID = 0;
                         }
-                        Invoke("UpdateText", 0.1f);
+                        PlayerNumber.Instance.UpdateText(advancePlayerID);
 
                         break;
                     case 9: // 誰のターンか
@@ -465,23 +468,6 @@ public class ClientManager : MonoBehaviour
         // フェード＆シーン遷移
         Initiate.DoneFading();
         SceneManager.LoadScene("TitleKawaguchi");
-    }
-
-    private void UpdateText()
-    {
-        advancePlayerID++;
-
-        if (advancePlayerID >= playerNum)
-        {// リセット
-            advancePlayerID = 0;
-        }
-
-        Invoke("hideText", 1.5f);
-    }
-
-    private void hideText()
-    {
-        text.GetComponent<Text>().text = "";
     }
 
     /// <summary>
