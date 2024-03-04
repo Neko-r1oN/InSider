@@ -36,7 +36,15 @@ public class ButtonManager : MonoBehaviour
     private void Start()
     {
         // 情報を取得
-        player = GameObject.Find("Player1");
+        if (EditorManager.Instance.useServer)
+        {// サーバーを使用する場合
+            player = GameObject.Find("player-List");
+            player = player.GetComponent<PlayerManager>().players[ClientManager.Instance.playerID];
+        }
+        else
+        {// サーバーを使用しない
+            player = GameObject.Find("Player1");
+        }
 
         GameObject roadManagerObject = GameObject.Find("RoadManager");
 
@@ -70,6 +78,14 @@ public class ButtonManager : MonoBehaviour
     public void CutOpen()
     {//切り開くを選んだ場合
 
+        if (EditorManager.Instance.useServer == true)
+        {// サーバーを使用する場合
+            if (ClientManager.Instance.advancePlayerID != ClientManager.Instance.playerID)
+            {// 自身のターンではない場合
+                return;
+            }
+        }
+
         if (player.GetComponent<Player>().isEnd == false)
         {// プレイヤーが移動中の場合
             return;
@@ -95,20 +111,35 @@ public class ButtonManager : MonoBehaviour
     public void fill()
     {//埋めるを選んだ場合
 
-        if (player.GetComponent<Player>().isEnd == false)
-        {// プレイヤーが移動中の場合
+        if (EditorManager.Instance.useServer == true)
+        {// サーバーを使用する場合
+            if (ClientManager.Instance.advancePlayerID != ClientManager.Instance.playerID)
+            {// 自身のターンではない場合
+                return;
+            }
+        }
+
+        if (player.GetComponent<Player>().isEnd == false
+            || player.GetComponent<Player>().stamina < 20)
+        {// プレイヤーが移動中の場合 || スタミナがない場合
             return;
         }
 
         // プレイヤーのモードをFILLに変更
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.FILL;
-        // スタミナを減らす
-        player.GetComponent<Player>().SubStamina(10);
-        Debug.Log("残りスタミナ" + stamina);
     }
 
-    public void Nothing()
+    public async void Nothing()
     {// 何もしないを選んだ場合
+
+        if (EditorManager.Instance.useServer == true)
+        {// サーバーを使用する場合
+            if (ClientManager.Instance.advancePlayerID != ClientManager.Instance.playerID)
+            {// 自身のターンではない場合
+                return;
+            }
+        }
+
         if (player.GetComponent<Player>().isEnd == false)
         {// プレイヤーが移動中の場合
             return;
@@ -121,6 +152,18 @@ public class ButtonManager : MonoBehaviour
 
         // スタミナを増やす
         player.GetComponent<Player>().AddStamina(rand);
+
+        if (EditorManager.Instance.useServer == true)
+        {// サーバーを使用する場合
+            // クラス変数を生成
+            Action_NothingData restData = new Action_NothingData();
+            restData.playerID = ClientManager.Instance.playerID;
+            restData.addStamina = rand;
+            restData.totalStamina = player.GetComponent<Player>().stamina;
+
+            // 送信する
+            await ClientManager.Instance.Send(restData, 8);
+        }
     }
 
     public void ButtonCancel()

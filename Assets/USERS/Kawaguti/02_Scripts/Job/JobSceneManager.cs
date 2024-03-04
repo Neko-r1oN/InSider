@@ -91,6 +91,8 @@ public class JobSceneManager : MonoBehaviour
     //シーン切り替え
     public void SceneChange()
     {
-        //SceneManager.LoadScene("");
+        // フェード＆シーン遷移
+        Initiate.DoneFading();
+        SceneManager.LoadScene("enoGame1");
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class RoadManager : MonoBehaviour
@@ -23,7 +24,7 @@ public class RoadManager : MonoBehaviour
     public int rotY;
 
 
-    public int roadNum; 
+    private int roadNum; 
 
     // Start is called before the first frame update
     void Start()
@@ -38,7 +39,15 @@ public class RoadManager : MonoBehaviour
         uiMnager = GameObject.Find("UIManager");
 
         // Player
-        player = GameObject.Find("Player1");
+        if (EditorManager.Instance.useServer)
+        {// サーバーを使用する場合
+            player = GameObject.Find("player-List");
+            player = player.GetComponent<PlayerManager>().players[ClientManager.Instance.playerID];
+        }
+        else
+        {// サーバーを使用しない
+            player = GameObject.Find("Player1");
+        }
 
         // Button
         GameObject buttonManagerObject = GameObject.Find("ButtonManager");
@@ -46,7 +55,7 @@ public class RoadManager : MonoBehaviour
         buttonManager = buttonManagerObject.GetComponent<ButtonManager>();
     }
 
-    public void Road(GameObject roadPrefab)
+    public async void Road(GameObject roadPrefab)
     {
         if (targetBlock == null)
         {// ターゲットのブロックが存在しない
@@ -56,14 +65,33 @@ public class RoadManager : MonoBehaviour
         // ロードプレハブの角度を変える
         roadPrefab.transform.Rotate(0f, rotY, 0f);
 
-        // 生成 → 破棄 → ベイク
-        Bake(roadPrefab, new Vector3(targetBlock.transform.position.x, 0f, targetBlock.transform.position.z), targetBlock);
+        if (EditorManager.Instance.useServer == true)
+        {// サーバーを使用する場合
+            // データ変数を設定
+            Action_MiningData mineData = new Action_MiningData();
+            mineData.playerID = ClientManager.Instance.playerID;
+            mineData.objeID = targetBlock.GetComponent<Block>().objeID;
+            mineData.prefabID = roadNum;
+            mineData.rotY = rotY;
+
+            // 送信する
+            await ClientManager.Instance.Send(mineData, 7);
+        }
+        else
+        {// サーバーを使用しない
+            // 生成 → 破棄 → ベイク
+            Bake(roadPrefab, new Vector3(targetBlock.transform.position.x, 0f, targetBlock.transform.position.z), targetBlock);
+        }
 
         // 道選択UIを閉じる
         uiMnager.GetComponent<UIManager>().HideRoad(player.GetComponent<Player>().selectRoadNum);
 
         // 消えているボタンを表示する
         buttonManager.DisplayButton();
+
+        // 初期化
+        targetBlock = null;
+        rotY = 0;
     }
 
    //====================
@@ -71,32 +99,40 @@ public class RoadManager : MonoBehaviour
    //====================
    public void Road(int num)
     {
-        Road(RoadPrefab[num]);
+        Player script = player.GetComponent<Player>();
 
-        if(num == 0)
-        {
+        if(num == 0 && script.stamina >= 20)
+        {// I字
             player.GetComponent<Player>().SubStamina(20);
         }
-        else if(num == 1)
-        {
+        else if(num == 1 && script.stamina >= 15)
+        {// L字
             player.GetComponent<Player>().SubStamina(15);
         }
-        else if (num == 2)
-        {
+        else if (num == 2 && script.stamina >= 30)
+        {// T字
             player.GetComponent<Player>().SubStamina(30);
         }
-        else if (num == 3)
-        {
+        else if (num == 3 && script.stamina >= 40)
+        {// 十字
             player.GetComponent<Player>().SubStamina(40);
         }
-        else if (num == 4)
-        {
+        else if (num == 4 && script.stamina >= 10)
+        {// ゴミみたいな道
             player.GetComponent<Player>().SubStamina(10);
         }
+        else
+        {
+            Debug.Log("スタミナ不足のため切り開けない");
+
+            return;
+        }
+
+        roadNum = num;
+
+        Road(RoadPrefab[num]);
 
         player.GetComponent<Player>().selectRoadNum = num;
-
-        //roadNum = num;
     }
    
     public void AddRotButton()
