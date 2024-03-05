@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using System;
 
 public class RoadManager : MonoBehaviour
 {
@@ -17,12 +18,20 @@ public class RoadManager : MonoBehaviour
     // プレイヤー
     GameObject player;
 
+    // 敵
+    GameObject enemy;
+
     // ボタンマネージャーを取得
     ButtonManager buttonManager;
+
+    // ランダム関数
+    System.Random rnd = new System.Random();
 
     public GameObject targetBlock;
     public int rotY;
 
+    // ランダムの数値を入れる変数
+    int rand;
 
     private int roadNum; 
 
@@ -49,10 +58,21 @@ public class RoadManager : MonoBehaviour
             player = GameObject.Find("Player1");
         }
 
+        enemy = GameObject.Find("enemy");
+
+        enemy.SetActive(false);
+
         // Button
         GameObject buttonManagerObject = GameObject.Find("ButtonManager");
 
         buttonManager = buttonManagerObject.GetComponent<ButtonManager>();
+
+        rand = rnd.Next(1, 20);
+    }
+
+    private void Update()
+    {
+        rand = rnd.Next(1, 20);
     }
 
     public async void Road(GameObject roadPrefab)
@@ -79,8 +99,22 @@ public class RoadManager : MonoBehaviour
         }
         else
         {// サーバーを使用しない
-            // 生成 → 破棄 → ベイク
-            Bake(roadPrefab, new Vector3(targetBlock.transform.position.x, 0f, targetBlock.transform.position.z), targetBlock);
+            if(rand <= 15)
+            {
+                roadPrefab.tag = "RoadPanel";
+
+                // 生成 → 破棄 → ベイク
+                Bake(roadPrefab, new Vector3(targetBlock.transform.position.x, 0f, targetBlock.transform.position.z), targetBlock);
+            }
+            else if(rand > 15)
+            {
+                roadPrefab.tag = "EventPanel";
+
+                // 生成 → 破棄 → ベイク
+                Bake(roadPrefab, new Vector3(targetBlock.transform.position.x, 0f, targetBlock.transform.position.z), targetBlock);
+
+                //enemy.GetComponent<EnemyManager>().CreateEnemy(targetBlock.transform.position.x, 0f, targetBlock.transform.position.z);
+            }
         }
 
         // 道選択UIを閉じる
