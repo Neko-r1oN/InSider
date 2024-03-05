@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.EventSystems;
 
 
 public class ButtonManager : MonoBehaviour
 {
+    //--------------------------------------
+    //ゲームオブジェクト
+    //--------------------------------------
     [SerializeField] GameObject roadUI;         // RoadUIオブジェクトの取得
     [SerializeField] GameObject actionButton;   // actionボタンの取得
     [SerializeField] GameObject fillButton;     // fillボタンの取得
@@ -19,6 +23,7 @@ public class ButtonManager : MonoBehaviour
     GameObject player;
     RoadManager roadManager;
     UIManager uIManager;
+    TextUIManager textUI;
     GameObject cameraManager;
 
     // ランダム関数
@@ -54,8 +59,12 @@ public class ButtonManager : MonoBehaviour
 
         uIManager = uiManagerObject.GetComponent<UIManager>();
 
-        cameraManager = GameObject.Find("CameraManager");
+        GameObject textUIObject = GameObject.Find("TextUIManager");
 
+        textUI = textUIObject.GetComponent<TextUIManager>();
+
+        cameraManager = GameObject.Find("CameraManager");
+        
         // プレイヤーのモードをNOTHINGに設定
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.NOTHING;
 
@@ -63,7 +72,7 @@ public class ButtonManager : MonoBehaviour
         {// タグがPioneerならサボタージュボタンを非表示
             sabotageButton.SetActive(false);
         }
-        else if (player.tag == "Secrecy")
+        else if (player.tag == "Insider")
         {// タグがSecrecyならサボタージュボタンを表示
             sabotageButton.SetActive(true);
         }
@@ -73,6 +82,8 @@ public class ButtonManager : MonoBehaviour
     {
         // プレイヤーのモードをMOVEに変更
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.MOVE;
+
+        textUI.HideText();
     }
 
     public void CutOpen()
@@ -86,6 +97,8 @@ public class ButtonManager : MonoBehaviour
             }
         }
 
+        textUI.HideText();
+
         if (player.GetComponent<Player>().isEnd == false)
         {// プレイヤーが移動中の場合
             return;
@@ -98,6 +111,8 @@ public class ButtonManager : MonoBehaviour
 
         if (roadUI == true)
         {// RoadUIが表示されていたら
+
+            uIManager.ResetRoadUI();
 
             // その他のボタンを非表示
             moveButton.SetActive(false);
@@ -119,6 +134,8 @@ public class ButtonManager : MonoBehaviour
             }
         }
 
+        textUI.HideText();
+
         if (player.GetComponent<Player>().isEnd == false
             || player.GetComponent<Player>().stamina < 20)
         {// プレイヤーが移動中の場合 || スタミナがない場合
@@ -139,6 +156,8 @@ public class ButtonManager : MonoBehaviour
                 return;
             }
         }
+
+        textUI.HideText();
 
         if (player.GetComponent<Player>().isEnd == false)
         {// プレイヤーが移動中の場合
@@ -178,7 +197,7 @@ public class ButtonManager : MonoBehaviour
             nothingButton.SetActive(true);
             actionButton.SetActive(true);
             
-            if (player.tag == "Secrecy")
+            if (player.tag == "Insider")
             {// タグがSecrecyなら表示
                 sabotageButton.SetActive(true);
             }
@@ -199,7 +218,7 @@ public class ButtonManager : MonoBehaviour
 
         canselButton.SetActive(false);
 
-        if (player.tag == "Secrecy")
+        if (player.tag == "Insider")
         {// タグがSecrecyなら表示
             sabotageButton.SetActive(true);
         }
@@ -211,7 +230,7 @@ public class ButtonManager : MonoBehaviour
         uIManager.RotRoadUI();
     }
 
-    public void Camera()
+    public void ChangeCamera()
     {// カメラ切り替え
         cameraManager.GetComponent<CameraManager>().SwitchCamera();
     }

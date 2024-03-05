@@ -11,11 +11,15 @@ public class EnemyManager : MonoBehaviour
 
     private NavMeshAgent navMeshAgent;
 
+    public bool touch;
+
     // Start is called before the first frame update
     void Start()
     {
         // NavMeshAgentÇï€éùÇµÇƒÇ®Ç≠
         navMeshAgent = GetComponent<NavMeshAgent>();
+
+        touch = false;
     }
 
     // Update is called once per frame
@@ -25,11 +29,26 @@ public class EnemyManager : MonoBehaviour
         navMeshAgent.destination = player.transform.position;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void CreateEnemy(float posX, float posY, float posZ)
     {
-        if(collision.gameObject.tag == "Pioneer")
+        this.gameObject.SetActive(true);
+
+        this.gameObject.transform.position = new Vector3(posX,posY,posZ);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Pioneer")
         {
             Debug.Log("É^ÉbÉ`Ç≥ÇÍÇΩ");
+
+            player.GetComponent<Player>().mode = Player.PLAYER_MODE.DOWN;
+
+            touch = true;
+
+            //player.GetComponent<Player>().TouchPlayer();
+
+            Debug.Log(player.GetComponent<Player>().mode);
         }
     }
 }

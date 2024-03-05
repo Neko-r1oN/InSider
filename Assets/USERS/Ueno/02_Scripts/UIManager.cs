@@ -8,6 +8,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject road;
     [SerializeField] List<GameObject> roadUIList;
 
+    private Quaternion _initialRotation; // 初期回転
+
     // 情報を取得
     RoadManager roadManager;
     GameObject player;
@@ -35,6 +37,9 @@ public class UIManager : MonoBehaviour
 
         GameObject roadManagerObject = GameObject.Find("RoadManager");
         roadManager = roadManagerObject.GetComponent<RoadManager>();
+
+        _initialRotation = gameObject.transform.rotation;
+
 
         // RoadUIを非表示にする
         road.SetActive(false);
@@ -79,6 +84,16 @@ public class UIManager : MonoBehaviour
 
             // リストの全てを回転する
             roadUIList[i].transform.Rotate(0f, 0f, -90f);
+        }
+    }
+
+    public void ResetRoadUI()
+    {
+        for (int i = 0; i < roadUIList.Count; i++)
+        {// リストの中身をカウントする
+
+            // リストの全てを回転する
+            roadUIList[i].transform.rotation = _initialRotation;
         }
     }
 }

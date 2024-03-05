@@ -1564,7 +1564,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!136 &69706944
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1625,7 +1625,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 4
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 180
@@ -1688,6 +1688,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1727096688}
+  touch: 0
 --- !u!1001 &75537412
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34261,6 +34262,7 @@ GameObject:
   - component: {fileID: 1727096692}
   - component: {fileID: 1727096691}
   - component: {fileID: 1727096690}
+  - component: {fileID: 1727096700}
   m_Layer: 3
   m_Name: Player1
   m_TagString: Untagged
@@ -34470,6 +34472,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   isEnd: 0
+--- !u!136 &1727096700
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727096688}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1730938398
 PrefabInstance:
   m_ObjectHideFlags: 0

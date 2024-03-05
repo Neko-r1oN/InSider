@@ -12,6 +12,7 @@ TagManager:
   - Mimic
   - Insider
   - StartPanel
+  - EventPanel
   layers:
   - Default
   - TransparentFX
