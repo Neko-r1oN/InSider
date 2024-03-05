@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
     // スタミナゲージ
     GameObject staminaGauge;
 
+    GameObject enemy;
+
     // スタミナゲージ内の値
     Text staminaNum;
 
@@ -29,6 +31,9 @@ public class Player : MonoBehaviour
 
     // パス
     NavMeshPath path = null;
+
+    // 初期位置保存用
+    Vector3 pos;
 
     // 連続選択ができないよう前回の選択した数値を保存
     public int selectRoadNum = -1;
@@ -52,10 +57,11 @@ public class Player : MonoBehaviour
 
     public enum PLAYER_MODE
     {
-        MOVE,   // 移動
-        MINING, // 採掘
-        FILL,   // 埋める
-        NOTHING // 何もしない
+        MOVE,    // 移動
+        MINING,  // 採掘
+        FILL,    // 埋める
+        NOTHING, // 何もしない
+        DOWN     // ダウン
     }
 
     // プレイヤーのモード
@@ -92,6 +98,9 @@ public class Player : MonoBehaviour
 
         // 引数にランダムの数値を入れる
         SetPost(rand);
+
+        // 初期位置を保存
+        pos = this.gameObject.transform.position;
     }
 
     // Update is called once per frame
@@ -114,7 +123,8 @@ public class Player : MonoBehaviour
 
                 Debug.Log(hit.transform.name);
 
-                if (hit.transform.tag == "RoadPanel" || hit.transform.tag == "StartPanel")
+                if (hit.transform.tag == "RoadPanel" || hit.transform.tag == "StartPanel" 
+                    || hit.transform.tag == "EventPanel")
                 {// 道パネルの場合
 
                     Vector3 pos = Input.mousePosition;
@@ -241,7 +251,7 @@ public class Player : MonoBehaviour
 
     public void SubStamina(int num)
     {
-        if(this.gameObject.tag == "Secrecy")
+        if(this.gameObject.tag == "Insider")
         {
             // スタミナを減らす
             stamina -= num - 10;
