@@ -13,6 +13,11 @@ internal class Action_FillData
     public int playerID { get; set; }
 
     /// <summary>
+    /// 次に行動できるプレイヤーID
+    /// </summary>
+    public int nextPlayerID { get; set; }
+
+    /// <summary>
     /// オブジェクトのID
     /// </summary>
     public int objeID { get; set; }

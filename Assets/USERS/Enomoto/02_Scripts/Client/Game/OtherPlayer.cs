@@ -13,9 +13,6 @@ public class OtherPlayer : MonoBehaviour
     // アニメーター
     Animator animator;
 
-    // 自身のプレイヤーID
-    public int id;
-
     // プレイヤーのY座標を固定
     const float pos_Y = 0.9f;
 
