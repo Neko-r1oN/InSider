@@ -15,9 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/JobScene_copy.unity
     guid: 04781150606b44e4e933c004a89ea71e
   - enabled: 1
-    path: Assets/USERS/Ueno/00_Scenes/UenoUI.unity
-    guid: a87ab4b633a45df40b3307a4fee47d01
-  - enabled: 1
     path: Assets/USERS/Enomoto/00_Scenes/enoGame1.unity
     guid: e766d7304eededf4aa026e3ff67befab
+  - enabled: 1
+    path: Assets/USERS/Ueno/00_Scenes/UenoUI.unity
+    guid: 5f09041b4627416459bdb5bd11803dae
   m_configObjects: {}

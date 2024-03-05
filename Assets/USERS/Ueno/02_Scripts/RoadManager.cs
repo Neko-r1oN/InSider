@@ -58,9 +58,9 @@ public class RoadManager : MonoBehaviour
             player = GameObject.Find("Player1");
         }
 
-        enemy = GameObject.Find("enemy");
+        //enemy = GameObject.Find("enemy");
 
-        enemy.SetActive(false);
+        //enemy.SetActive(false);
 
         // Button
         GameObject buttonManagerObject = GameObject.Find("ButtonManager");
