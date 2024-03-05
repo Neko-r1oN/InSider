@@ -130,12 +130,6 @@ public class Player : MonoBehaviour
                     Vector3 pos = Input.mousePosition;
                     clickedTarget = hit.point;
 
-                    //// 取得する
-                    //clickedTarget = hit.collider.transform.position;
-
-                    //// 調整
-                    //clickedTarget = new Vector3(clickedTarget.x, pos_Y, clickedTarget.z);
-
                     //// NavMeshのパスを取得
                     NavMesh.CalculatePath(transform.position, clickedTarget, NavMesh.AllAreas, path);
 
@@ -157,14 +151,14 @@ public class Player : MonoBehaviour
                                 moveData.targetPosY = clickedTarget.y;
                                 moveData.targetPosZ = clickedTarget.z;
 
-                                Debug.Log(moveData.playerID);
-
                                 // 送信する
                                 ClientManager.Instance.SendData(moveData, 5);
                             }
-
-                            // 目的地へ移動
-                            agent.destination = clickedTarget;
+                            else
+                            {// サーバーを使用しない場合
+                                // 目的地へ移動
+                                agent.destination = clickedTarget;
+                            }
                         }
                         else
                         {
@@ -175,8 +169,6 @@ public class Player : MonoBehaviour
                     {
                         Debug.Log("範囲外");
                     }
-
-                    // エージェントのベロシティが0以下になったら判定
                 }
             }
         }
@@ -245,6 +237,16 @@ public class Player : MonoBehaviour
                 other.GetComponent<RoadPanel>().isFill = false;
             }
         }
+    }
+
+    /// <summary>
+    /// 移動処理
+    /// </summary>
+    /// <param name="targetPos"></param>
+    public void MoveAgent(Vector3 targetPos)
+    {
+        // 目的地へ移動
+        agent.destination = targetPos;
     }
 
     public void SubStamina(int num)

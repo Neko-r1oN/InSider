@@ -91,7 +91,7 @@ public class ButtonManager : MonoBehaviour
 
         if (EditorManager.Instance.useServer == true)
         {// サーバーを使用する場合
-            if (ClientManager.Instance.advancePlayerID != ClientManager.Instance.playerID)
+            if (ClientManager.Instance.turnPlayerID != ClientManager.Instance.playerID)
             {// 自身のターンではない場合
                 return;
             }
@@ -128,7 +128,7 @@ public class ButtonManager : MonoBehaviour
 
         if (EditorManager.Instance.useServer == true)
         {// サーバーを使用する場合
-            if (ClientManager.Instance.advancePlayerID != ClientManager.Instance.playerID)
+            if (ClientManager.Instance.turnPlayerID != ClientManager.Instance.playerID)
             {// 自身のターンではない場合
                 return;
             }
@@ -151,7 +151,7 @@ public class ButtonManager : MonoBehaviour
 
         if (EditorManager.Instance.useServer == true)
         {// サーバーを使用する場合
-            if (ClientManager.Instance.advancePlayerID != ClientManager.Instance.playerID)
+            if (ClientManager.Instance.turnPlayerID != ClientManager.Instance.playerID)
             {// 自身のターンではない場合
                 return;
             }

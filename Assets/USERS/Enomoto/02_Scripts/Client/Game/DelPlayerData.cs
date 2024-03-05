@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 [Serializable]
-internal class Action_NothingData
+internal class DelPlayerData
 {
     /// <summary>
     /// プレイヤーID
@@ -18,12 +18,7 @@ internal class Action_NothingData
     public int nextPlayerID { get; set; }
 
     /// <summary>
-    /// スタミナの回復量
+    /// 更新後のリスナーリスト
     /// </summary>
-    public int addStamina { get; set; }
-
-    /// <summary>
-    /// 合計のスタミナ量
-    /// </summary>
-    public int totalStamina { get; set; }
+    public List<ListenerData> listeners { get; set; }
 }

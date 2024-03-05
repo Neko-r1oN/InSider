@@ -15,8 +15,15 @@ public class PlayerManager : MonoBehaviour
             return;
         }
 
-        for (int i = 0;i < ClientManager.Instance.playerNum;i++)
+        for (int i = 0;i < players.Count;i++)
         {
+            if(i >= ClientManager.Instance.playerNum)
+            {// 存在しないプレイヤーの場合
+                // 破棄する
+                Destroy(players[i]);
+                continue;
+            }
+
             if(i == ClientManager.Instance.playerID)
             {// 自身のプレイヤーIDと一致する
                 players[i].GetComponent<OtherPlayer>().enabled = false; // スクリプトを無効にする

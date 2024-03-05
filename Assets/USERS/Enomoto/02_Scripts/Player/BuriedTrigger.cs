@@ -21,8 +21,6 @@ public class BuriedTrigger : MonoBehaviour
 
         // 開始時の座標取得する
         startPos = player.transform.position;
-
-        Debug.Log("開始位置:"+startPos);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -31,11 +29,14 @@ public class BuriedTrigger : MonoBehaviour
         {// ブロックに埋まった
             Debug.Log("埋められた");
 
-            // 目的地を変更する
-            //agent.destination = startPos;
+            // コンポーネントを無効にする
+            agent.enabled = false;
 
-            // 開始時の位置へ戻す
-            //transform.parent.transform.position = new Vector3(startPos.x, startPos.y, startPos.y);
+            // 開始位置へ移動
+            player.transform.position = new Vector3(0f,0.9f,-5f);
+
+            // コンポーネントを有効にする
+            agent.enabled = true;
 
             // 復活パーティクルを出す
             //Instantiate();
