@@ -33,13 +33,16 @@ public class RoadManager : MonoBehaviour
     // ランダムの数値を入れる変数
     int rand;
 
-    private int roadNum; 
+    private int roadNum;
+
+    private bool isGold;
 
     // Start is called before the first frame update
     void Start()
     {
         rotY = 0;
         targetBlock = null;
+        isGold = false;
 
         // Bake
         Baker = GameObject.Find("StageManager");
@@ -195,6 +198,9 @@ public class RoadManager : MonoBehaviour
 
         // ベイクを開始
         Baker.GetComponent<StageManager>().StartBake();
+
+        //ゴールドを生成
+        //block.transform
 
         // 初期化
         targetBlock = null;

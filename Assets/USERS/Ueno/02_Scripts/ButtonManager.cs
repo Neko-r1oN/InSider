@@ -234,4 +234,5 @@ public class ButtonManager : MonoBehaviour
     {// カメラ切り替え
         cameraManager.GetComponent<CameraManager>().SwitchCamera();
     }
+
 }
