@@ -61,7 +61,7 @@ public class ClientManager : MonoBehaviour
     GameObject uiManager;
 
     // 必要接続人数
-    int RequiredNum = 4;
+    int RequiredNum = 3;
 
     //===========================
     //  [公開]フィールド
@@ -78,9 +78,9 @@ public class ClientManager : MonoBehaviour
     public int playerID { get; set; }
 
     /// <summary>
-    /// 元々のプレイヤーID
+    /// 元々のプレイヤーID 
     /// </summary>
-    public int originalID { get; set; }
+    public int originalID { get; set; } // 誰かが途中退出したときにプレイヤーIDがずれるため
 
     /// <summary>
     /// 自身の役職が内通者かどうか
@@ -96,6 +96,19 @@ public class ClientManager : MonoBehaviour
     /// プレイヤーの名前
     /// </summary>
     public List<string> playerNameList { get; set; }
+
+    /// <summary>
+    /// ゲームモード
+    /// </summary>
+    public enum GAMEMODE
+    {
+        Title,      // タイトル
+        Tutorial,   // チュートリアル
+        Standby,    // 待機
+        Job,        // 役職
+        Game,       // ゲーム
+        result      // リザルト
+    }
 
     /// <summary>
     /// イベントID
@@ -340,7 +353,7 @@ public class ClientManager : MonoBehaviour
                         }
 
                         break;
-                    case 3: // 自身の役職と先行のプレイヤーIDを取得 & プレイヤー人数を取得
+                    case 3: // 自身の役職と先行のプレイヤーIDを取得 & プレイヤーの名前リスト更新 & 元々のプレイヤーIDを更新 & マネージャー系の初期化
 
                         // プレイヤーの名前リストを初期化する
                         playerNameList = new List<string>();
@@ -352,6 +365,9 @@ public class ClientManager : MonoBehaviour
 
                             Debug.Log("一緒にやるプレイヤー名：" + nameData.name);
                         }
+
+                        // 元々のプレイヤーIDを更新
+                        originalID = playerID;
 
                         // マネージャーを初期化する
                         playerManager = null;
@@ -465,12 +481,24 @@ public class ClientManager : MonoBehaviour
 
                         Debug.Log("切断したプレイヤーID : " + delPlayerData.playerID);
 
+                        // プレイヤーの名前リストから要素を削除
+                        playerNameList.RemoveAt(delPlayerData.playerID);
+
                         // 途中退出したことを示唆するUIを表示する
                         uiManager.GetComponent<UIManager>().UdOutUI(delPlayerData.playerID);
 
-                        if(delPlayerData.nextPlayerID != turnPlayerID)
-                        {// 更新する場合
-                            turnPlayerID = delPlayerData.nextPlayerID;  // 行動できるプレイヤーIDを更新する
+                        // 途中退出したプレイヤーUIの位置を正す
+                        uiManager.GetComponent<UIManager>().ReturnPlayerUI(delPlayerData.playerID);
+
+                        // UIマネージャーが持つリストから要素を削除
+                        uiManager.GetComponent<UIManager>().RemoveElement(delPlayerData.playerID);
+
+                        // クライアント側の行動可能なプレイヤーIDを更新する
+                        turnPlayerID = delPlayerData.nextPlayerID;  // IDを更新する
+
+                        if (delPlayerData.isUdTurn == true)
+                        {// ターンが更新される場合
+                            Debug.Log("ターンを更新します。");
                             uiManager.GetComponent<UIManager>().UdTurnPlayerUI(playerNameList[turnPlayerID], turnPlayerID);   // UIを更新
                         }
 
@@ -482,8 +510,6 @@ public class ClientManager : MonoBehaviour
 
                         // プレイヤーリストから削除する
                         objeList.RemoveAt(delPlayerData.playerID);
-
-                        // 切断したプレイヤーのネームに×印
 
                         break;
                 }
