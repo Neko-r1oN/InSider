@@ -25,8 +25,11 @@ public class EnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // プレイヤーを目指して進む
-        navMeshAgent.destination = player.transform.position;
+        if(player.GetComponent<Player>().mode != Player.PLAYER_MODE.DOWN)
+        {
+            // プレイヤーを目指して進む
+            navMeshAgent.destination = player.transform.position;
+        }
     }
 
     public void CreateEnemy(float posX, float posY, float posZ)

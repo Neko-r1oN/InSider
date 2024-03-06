@@ -303,7 +303,7 @@ public class Player : MonoBehaviour
         }
         else if (rnd >= 5)
         {// 数値が5以上ならSecrecyに設定
-            if (insiderCount <= 1)
+            if (insiderCount < 1)
             {// カウントが1以下なら
                 this.gameObject.tag = "Insider";
 
