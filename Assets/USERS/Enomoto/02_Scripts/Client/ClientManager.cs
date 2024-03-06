@@ -57,8 +57,8 @@ public class ClientManager : MonoBehaviour
     // ブロック(道パネル)マネージャー
     GameObject blockManager;
 
-    // 誰のターンか
-    GameObject text;
+    // UIマネージャー
+    GameObject uiManager;
 
     // 必要接続人数
     int RequiredNum = 4;
@@ -78,7 +78,7 @@ public class ClientManager : MonoBehaviour
     public int playerID { get; set; }
 
     /// <summary>
-    /// 役職が内通者かどうか
+    /// 自身の役職が内通者かどうか
     /// </summary>
     public bool isInsider { get; set; }
 
@@ -88,9 +88,9 @@ public class ClientManager : MonoBehaviour
     public int turnPlayerID { get; set; }
 
     /// <summary>
-    /// プレイヤー人数
+    /// プレイヤーの名前
     /// </summary>
-    public int playerNum { get; set; }
+    public List<string> playerNameList { get; set; }
 
     /// <summary>
     /// イベントID
@@ -101,7 +101,7 @@ public class ClientManager : MonoBehaviour
         ListenerList,         // リスナーデータ
         ReadyData,            // 準備完了
         JobAndTurn,           // 役職と先行のプレイヤーID
-        ChatData,             // チャット
+        RoundEnd,             // ラウンド終了通知
         MoveData,             // 移動
         Action_FillData,      // 行動：埋める
         Action_MiningData,    // 行動：切り開く
@@ -168,7 +168,7 @@ public class ClientManager : MonoBehaviour
 
         // フェード＆シーン遷移
         Initiate.DoneFading();
-        SceneManager.LoadScene("TitleKawaguchi");
+        SceneManager.LoadScene("TitleKawaguchi_copy");
 
         Debug.Log("退出");
     }
@@ -335,8 +335,16 @@ public class ClientManager : MonoBehaviour
                         break;
                     case 3: // 自身の役職と先行のプレイヤーIDを取得 & プレイヤー人数を取得
 
-                        // プレイヤー人数を取得する
-                        playerNum = listenerList.Count;
+                        // プレイヤーの名前リストを初期化する
+                        playerNameList = new List<string>();
+
+                        // プレイヤーの名前を取得する
+                        foreach(ListenerData nameData in listenerList)
+                        {
+                            playerNameList.Add(nameData.name);
+
+                            Debug.Log("一緒にやるプレイヤー名：" + nameData.name);
+                        }
 
                         // マネージャーを初期化する
                         playerManager = null;
@@ -359,7 +367,17 @@ public class ClientManager : MonoBehaviour
                         SceneManager.LoadScene("JobScene_copy");
 
                         break;
-                    case 4: // チャット
+                    case 4: // ラウンド終了通知
+
+                        // マネージャー情報を初期化する
+                        playerManager = new GameObject();
+                        blockManager = new GameObject();
+                        uiManager = new GameObject();
+
+                        // フェード＆シーン遷移
+                        Initiate.DoneFading();
+                        SceneManager.LoadScene("JobScene_copy");
+
                         break;
                     case 5: // 移動
 
@@ -370,12 +388,6 @@ public class ClientManager : MonoBehaviour
                         Vector3 targetPos = new Vector3(moveData.targetPosX, moveData.targetPosY, moveData.targetPosZ);
 
                         Debug.Log("[" + moveData.playerID + "]" + " : 移動");
-
-                        if (playerManager == null)
-                        {// まだ取得していない場合
-                            // 取得する
-                            playerManager = GameObject.Find("player-List");
-                        }
 
                         if (playerID != moveData.playerID)
                         {// 受信したのが自分自身ではない場合
@@ -398,18 +410,13 @@ public class ClientManager : MonoBehaviour
 
                         Debug.Log("[" + fillData.playerID + "]" + " : 埋める");
 
-                        if (blockManager == null)
-                        {// まだ取得していない場合
-                            // 取得する
-                            blockManager = GameObject.Find("BlockList");
-                        }
-
                         // 道を埋める処理
                         blockManager.GetComponent<BlockManager>().FillObject(fillData.objeID);
 
                         // 次に行動できるプレイヤーのIDを更新する
                         Debug.Log("次に行動できるプレイヤーID：" + fillData.nextPlayerID);
                         turnPlayerID = fillData.nextPlayerID;
+                        uiManager.GetComponent<UIManager>().UdTurnPlayerUI(playerNameList[turnPlayerID], turnPlayerID);   // UIを更新
 
                         break;
                     case 7: // 切り開く
@@ -419,18 +426,13 @@ public class ClientManager : MonoBehaviour
 
                         Debug.Log("[" + mineData.playerID + "]" + " : [" + mineData.prefabID + "]切り開く");
 
-                        if (blockManager == null)
-                        {// まだ取得していない場合
-                            // 取得する
-                            blockManager = GameObject.Find("BlockList");
-                        }
-
                         // 切り開く処理
                         blockManager.GetComponent<BlockManager>().MineObject(mineData.objeID, mineData.prefabID, mineData.rotY);
 
                         // 次に行動できるプレイヤーのIDを更新する
                         Debug.Log("次に行動できるプレイヤーID：" + mineData.nextPlayerID);
                         turnPlayerID = mineData.nextPlayerID;
+                        uiManager.GetComponent<UIManager>().UdTurnPlayerUI(playerNameList[turnPlayerID], turnPlayerID);   // UIを更新
 
                         break;
                     case 8: // やすむ(スタミナ回復)
@@ -443,6 +445,7 @@ public class ClientManager : MonoBehaviour
                         // 次に行動できるプレイヤーのIDを更新する
                         Debug.Log("次に行動できるプレイヤーID：" + restData.nextPlayerID);
                         turnPlayerID = restData.nextPlayerID;
+                        uiManager.GetComponent<UIManager>().UdTurnPlayerUI(playerNameList[turnPlayerID], turnPlayerID);   // UIを更新
 
                         break;
                     case 9: // ゲーム中に切断したプレイヤーのIDを受信
@@ -455,15 +458,13 @@ public class ClientManager : MonoBehaviour
 
                         Debug.Log("切断したプレイヤーID : " + delPlayerData.playerID);
 
-                        if (playerManager == null)
-                        {// まだ取得していない場合
-                            // 取得する
-                            playerManager = GameObject.Find("player-List");
-                        }
+                        // 途中退出したことを示唆するUIを表示する
+                        uiManager.GetComponent<UIManager>().UdOutUI(delPlayerData.playerID);
 
-                        if(delPlayerData.nextPlayerID != 200)
+                        if (delPlayerData.nextPlayerID != 200)
                         {// 受信したIDが200以外の場合
                             turnPlayerID = delPlayerData.nextPlayerID;  // 行動できるプレイヤーIDを更新する
+                            uiManager.GetComponent<UIManager>().UdTurnPlayerUI(playerNameList[turnPlayerID], turnPlayerID);   // UIを更新
                         }
 
                         // プレイヤーのモデルリストを取得する
@@ -567,6 +568,21 @@ public class ClientManager : MonoBehaviour
             Debug.Log("接続できない。後でまた試して");
             Debug.Log(ex);
         }
+    }
+
+    /// <summary>
+    /// マネージャーを取得する
+    /// </summary>
+    public void GetManagers()
+    {
+        // 取得する
+        blockManager = GameObject.Find("BlockList");
+
+        // 取得する
+        playerManager = GameObject.Find("player-List");
+
+        // 取得する
+        uiManager = GameObject.Find("UIManager");
     }
 
     /// <summary>

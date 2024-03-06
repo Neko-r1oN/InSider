@@ -22,11 +22,11 @@ public class Player1UI : MonoBehaviour
         }
 
     }
-    private void NotTurn()
+    public void NotTurn()
     {
         this.transform.DOLocalMove(new Vector3(-26f, 38.79f, -170.3505f), 0.3f);
     }
-    private void MyTurn()
+    public void MyTurn()
     {
         this.transform.DOLocalMove(new Vector3(20f, 38.79f, -170.3505f), 0.3f);
     }

@@ -64,7 +64,7 @@ public class BlockManager : MonoBehaviour
         Debug.Log("ブロックID：" + blocks[objeID].GetComponent<Block>().objeID);
 
         // ベイクを開始
-        stageManager.GetComponent<StageBake>().StartBake();
+        stageManager.GetComponent<StageManager>().StartBake();
     }
 
     /// <summary>
@@ -93,6 +93,6 @@ public class BlockManager : MonoBehaviour
         Debug.Log("道ID：" + blocks[objeID].GetComponent<RoadPanel>().objeID);
 
         // ベイクを開始
-        stageManager.GetComponent<StageBake>().StartBake();
+        stageManager.GetComponent<StageManager>().StartBake();
     }
 }

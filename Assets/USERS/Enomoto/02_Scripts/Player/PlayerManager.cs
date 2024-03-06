@@ -17,7 +17,7 @@ public class PlayerManager : MonoBehaviour
 
         for (int i = 0;i < players.Count;i++)
         {
-            if(i >= ClientManager.Instance.playerNum)
+            if(i >= ClientManager.Instance.playerNameList.Count)
             {// ‘¶İ‚µ‚È‚¢ƒvƒŒƒCƒ„[‚Ìê‡
                 // ”jŠü‚·‚é
                 Destroy(players[i]);

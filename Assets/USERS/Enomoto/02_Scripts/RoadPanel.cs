@@ -111,7 +111,7 @@ public class RoadPanel : MonoBehaviour
                             Destroy(this.gameObject);
 
                             // ベイクを開始
-                            stageManager.GetComponent<StageBake>().StartBake();
+                            stageManager.GetComponent<StageManager>().StartBake();
                         }
 
                         // スタミナを減らす
