@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 2619263097113753170}
   m_Layer: 0
   m_Name: Road_03
-  m_TagString: RoadPanel
+  m_TagString: EventPanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647

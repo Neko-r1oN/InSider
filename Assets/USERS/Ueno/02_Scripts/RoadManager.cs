@@ -5,34 +5,40 @@ using UnityEngine;
 
 public class RoadManager : MonoBehaviour
 {
-    // ƒ[ƒhƒvƒŒƒnƒu‚ğŠi”[
+    // ãƒ­ãƒ¼ãƒ‰ãƒ—ãƒ¬ãƒãƒ–ã‚’æ ¼ç´
     [SerializeField] GameObject[] RoadPrefab = new GameObject[5];
 
-    // ƒxƒCƒNƒIƒuƒWƒFƒNƒg‚ğæ“¾
+    // ãƒ™ã‚¤ã‚¯ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å–å¾—
     GameObject Baker;
 
     // UIManager
     GameObject uiMnager;
 
-    // ƒvƒŒƒCƒ„[
+    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
     GameObject player;
 
-    // “G
+    // æ•µ
     GameObject enemy;
 
-    // ƒ{ƒ^ƒ“ƒ}ƒl[ƒWƒƒ[‚ğæ“¾
+    // ãƒœã‚¿ãƒ³ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã‚’å–å¾—
     ButtonManager buttonManager;
 
     public GameObject targetBlock;
     public int rotY;
 
-    private int roadNum; 
+    // ãƒ©ãƒ³ãƒ€ãƒ ã®æ•°å€¤ã‚’å…¥ã‚Œã‚‹å¤‰æ•°
+    int rand;
+
+    private int roadNum;
+
+    private bool isGold;
 
     // Start is called before the first frame update
     void Start()
     {
         rotY = 0;
         targetBlock = null;
+        isGold = false;
 
         // Bake
         Baker = GameObject.Find("StageManager");
@@ -42,12 +48,12 @@ public class RoadManager : MonoBehaviour
 
         // Player
         if (EditorManager.Instance.useServer)
-        {// ƒT[ƒo[‚ğg—p‚·‚éê‡
+        {// ã‚µãƒ¼ãƒãƒ¼ã‚’ä½¿ç”¨ã™ã‚‹å ´åˆ
             player = GameObject.Find("player-List");
             player = player.GetComponent<PlayerManager>().players[ClientManager.Instance.playerID];
         }
         else
-        {// ƒT[ƒo[‚ğg—p‚µ‚È‚¢
+        {// ã‚µãƒ¼ãƒãƒ¼ã‚’ä½¿ç”¨ã—ãªã„
             player = GameObject.Find("Player1");
         }
 
@@ -64,74 +70,74 @@ public class RoadManager : MonoBehaviour
     public async void Road(GameObject roadPrefab)
     {
         if (targetBlock == null)
-        {// ƒ^[ƒQƒbƒg‚ÌƒuƒƒbƒN‚ª‘¶İ‚µ‚È‚¢
+        {// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ãƒ–ãƒ­ãƒƒã‚¯ãŒå­˜åœ¨ã—ãªã„
             return;
         }
 
-        // ƒ[ƒhƒvƒŒƒnƒu‚ÌŠp“x‚ğ•Ï‚¦‚é
+        // ãƒ­ãƒ¼ãƒ‰ãƒ—ãƒ¬ãƒãƒ–ã®è§’åº¦ã‚’å¤‰ãˆã‚‹
         roadPrefab.transform.Rotate(0f, rotY, 0f);
 
         if (EditorManager.Instance.useServer == true)
-        {// ƒT[ƒo[‚ğg—p‚·‚éê‡
-            // ƒf[ƒ^•Ï”‚ğİ’è
+        {// ã‚µãƒ¼ãƒãƒ¼ã‚’ä½¿ç”¨ã™ã‚‹å ´åˆ
+            // ãƒ‡ãƒ¼ã‚¿å¤‰æ•°ã‚’è¨­å®š
             Action_MiningData mineData = new Action_MiningData();
             mineData.playerID = ClientManager.Instance.playerID;
             mineData.objeID = targetBlock.GetComponent<Block>().objeID;
             mineData.prefabID = roadNum;
             mineData.rotY = rotY;
 
-            // ‘—M‚·‚é
+            // é€ä¿¡ã™ã‚‹
             await ClientManager.Instance.Send(mineData, 7);
         }
         else
-        {// ƒT[ƒo[‚ğg—p‚µ‚È‚¢
+        {// ã‚µãƒ¼ãƒãƒ¼ã‚’ä½¿ç”¨ã—ãªã„
 
-            // ¶¬ ¨ ”jŠü ¨ ƒxƒCƒN
+            // ç”Ÿæˆ â†’ ç ´æ£„ â†’ ãƒ™ã‚¤ã‚¯
             Bake(roadPrefab, new Vector3(targetBlock.transform.position.x, 0f, targetBlock.transform.position.z), targetBlock);
 
         }
 
-        // “¹‘I‘ğUI‚ğ•Â‚¶‚é
+        // é“é¸æŠUIã‚’é–‰ã˜ã‚‹
         uiMnager.GetComponent<UIManager>().HideRoad(player.GetComponent<Player>().selectRoadNum);
 
-        // Á‚¦‚Ä‚¢‚éƒ{ƒ^ƒ“‚ğ•\¦‚·‚é
+        // æ¶ˆãˆã¦ã„ã‚‹ãƒœã‚¿ãƒ³ã‚’è¡¨ç¤ºã™ã‚‹
         buttonManager.DisplayButton();
 
-        // ‰Šú‰»
+        // åˆæœŸåŒ–
         targetBlock = null;
         rotY = 0;
     }
 
    //====================
-   // “¹‚ğ‘I‘ğ
+   // é“ã‚’é¸æŠ
    //====================
    public void Road(int num)
     {
         Player script = player.GetComponent<Player>();
 
         if(num == 0 && script.stamina >= 20)
-        {// Iš
+        {// Iå­—
             player.GetComponent<Player>().SubStamina(20);
         }
         else if(num == 1 && script.stamina >= 15)
-        {// Lš
+        {// Lå­—
             player.GetComponent<Player>().SubStamina(15);
         }
         else if (num == 2 && script.stamina >= 30)
-        {// Tš
+        {// Tå­—
             player.GetComponent<Player>().SubStamina(30);
         }
         else if (num == 3 && script.stamina >= 40)
-        {// \š
+        {// åå­—
             player.GetComponent<Player>().SubStamina(40);
         }
         else if (num == 4 && script.stamina >= 10)
-        {// ƒSƒ~‚İ‚½‚¢‚È“¹
+        {// ã‚´ãƒŸã¿ãŸã„ãªé“
             player.GetComponent<Player>().SubStamina(10);
         }
         else
         {
-            Debug.Log("ƒXƒ^ƒ~ƒi•s‘«‚Ì‚½‚ßØ‚èŠJ‚¯‚È‚¢");
+            Debug.Log("ã‚¹ã‚¿ãƒŸãƒŠä¸è¶³ã®ãŸã‚åˆ‡ã‚Šé–‹ã‘ãªã„");
 
             return;
         }
@@ -144,7 +150,7 @@ public class RoadManager : MonoBehaviour
     }
    
     public void AddRotButton()
-    { //“¹‚Ì‰ñ“]
+    { //é“ã®å›è»¢
         rotY += 90;
 
         if (rotY >= 360)
@@ -154,23 +160,26 @@ public class RoadManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ¶¬A”jŠüAƒxƒCƒN‚·‚é
+    /// ç”Ÿæˆã€ç ´æ£„ã€ãƒ™ã‚¤ã‚¯ã™ã‚‹
     /// </summary>
-    /// <param name="prefab">¶¬‚·‚éƒIƒuƒWƒFƒNƒg</param>
-    /// <param name="pos">¶¬‚·‚éÀ•W</param>
-    /// <param name="desObject">”jŠü‚·‚éƒIƒuƒWƒFƒNƒg</param>
+    /// <param name="prefab">ç”Ÿæˆã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
+    /// <param name="pos">ç”Ÿæˆã™ã‚‹åº§æ¨™</param>
+    /// <param name="desObject">ç ´æ£„ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
     public void Bake(GameObject prefab, Vector3 pos, GameObject dieObject)
     {
-        // ƒIƒuƒWƒFƒNƒg‚ğ¶¬‚·‚é
+        // ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã™ã‚‹
         GameObject block = Instantiate(prefab, pos, Quaternion.Euler(0, rotY, 0));
 
-        // ”jŠü‚·‚é
+        // ç ´æ£„ã™ã‚‹
         Destroy(dieObject);
 
-        // ƒxƒCƒN‚ğŠJn
+        // ãƒ™ã‚¤ã‚¯ã‚’é–‹å§‹
         Baker.GetComponent<StageManager>().StartBake();
 
-        // ‰Šú‰»
+        //ã‚´ãƒ¼ãƒ«ãƒ‰ã‚’ç”Ÿæˆ
+        //block.transform
+
+        // åˆæœŸåŒ–
         targetBlock = null;
         rotY = 0;
     }
