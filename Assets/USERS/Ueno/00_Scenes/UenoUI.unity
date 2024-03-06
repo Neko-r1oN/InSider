@@ -7993,12 +7993,12 @@ MonoBehaviour:
   - {fileID: 5005023397398241099}
   - {fileID: 7517217990353027603}
   playerName:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2494291957074140958}
+  - {fileID: 6621145338610582008}
+  - {fileID: 6151746498243317519}
+  - {fileID: 5681083921081843081}
+  - {fileID: 3308309483494063347}
+  - {fileID: 8440573516919322553}
   outImageUI:
   - {fileID: 4983503879306136963}
   - {fileID: 1439864387}
