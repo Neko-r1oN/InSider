@@ -9,7 +9,7 @@ public class MovePlayerUI : MonoBehaviour
 
     private void Start()
     {
-        Canvas.ForceUpdateCanvases();
+        
         startPos = this.transform.position;
 
         Debug.Log(startPos);
@@ -45,17 +45,23 @@ public class MovePlayerUI : MonoBehaviour
         //else if (indexNum == 5)
         //{
         //    pos = new Vector3(-26f, -342.9f, -170.3505f);
-        //}
 
+        //}
+        
+        //Žô•¶
+        Canvas.ForceUpdateCanvases();
+
+        Debug.Log(transform.localPosition);
         if (isMove == true)
         {// “®‚­
-            //this.transform.DOLocalMove(new Vector3(-26f, pos.y, pos.z), 0.3f);
-            this.transform.DOMove(new Vector3(-26f, startPos.y, startPos.z), 0.3f);
+            //this.transform.DOLocalMove(new Vector3(-26f, pos.y, pos.z), 0.3f);    
+            this.transform.DOLocalMove(new Vector3(transform.localPosition.x + 35.0f, transform.localPosition.y, transform.localPosition.z), 0.3f);
         }
-        else
+        else if(isMove !=true)
         {// Œ³‚ÌˆÊ’u‚Ö–ß‚é
             //this.transform.DOLocalMove(new Vector3(20f, pos.y, pos.z), 0.3f);
-            this.transform.DOMove(new Vector3(20f, startPos.y, startPos.z), 0.3f);
+
+            this.transform.DOLocalMove(new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z), 0.3f);
         }
     }
 }
