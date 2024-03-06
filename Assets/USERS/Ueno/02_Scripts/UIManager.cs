@@ -166,8 +166,9 @@ public class UIManager : MonoBehaviour
         {
             if (i >= ClientManager.Instance.playerNameList.Count)
             {// 存在しない場合
+
                 // 破棄する
-                Destroy(playerName[i]);
+                Destroy(playerUIList[i]);
 
                 Debug.Log("破棄する" + i);
 
@@ -176,6 +177,20 @@ public class UIManager : MonoBehaviour
 
             playerName[i].GetComponent<Text>().text = nameList[i];
         }
+    }
+
+    /// <summary>
+    /// プレイヤーUIの位置を戻す
+    /// </summary>
+    /// <param name="indexNum"></param>
+    public void ReturnPlayerUI(int indexNum)
+    {
+        //呪文 [座標を正規化するため]
+        Canvas.ForceUpdateCanvases();
+
+        // 元の位置へ戻す
+        Vector3 pos = playerUIList[indexNum].transform.localPosition;
+        playerUIList[indexNum].transform.localPosition = new Vector3(-34.3f, pos.y, pos.z);
     }
 
     /// <summary>
@@ -233,5 +248,16 @@ public class UIManager : MonoBehaviour
 
         // アクティブ化する
         doubtImageUiList[targetNum, indexNum].SetActive(true);
+    }
+
+    /// <summary>
+    /// UIリストから要素を削除する
+    /// </summary>
+    /// <param name="indexNum"></param>
+    public void RemoveElement(int indexNum)
+    {
+        playerUIList.RemoveAt(indexNum);
+        playerName.RemoveAt(indexNum);
+        outImageUI.RemoveAt(indexNum);
     }
 }

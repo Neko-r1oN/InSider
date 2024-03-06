@@ -13,6 +13,11 @@ internal class DelPlayerData
     public int playerID { get; set; }
 
     /// <summary>
+    /// ターンUIを更新するかどうか
+    /// </summary>
+    public bool isUdTurn { get; set; }
+
+    /// <summary>
     /// 次に行動できるプレイヤーID
     /// </summary>
     public int nextPlayerID { get; set; }
