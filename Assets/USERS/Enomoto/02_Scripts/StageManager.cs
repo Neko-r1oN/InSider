@@ -10,8 +10,11 @@ public class StageManager : MonoBehaviour
         // 取得する
         GetComponent<NavMeshSurface>().BuildNavMesh();
 
-        // ClientManagerに他のマネージャーを取得させる
-        ClientManager.Instance.GetManagers();
+        if (EditorManager.Instance.useServer == true)
+        {        
+            // ClientManagerに他のマネージャーを取得させる
+            ClientManager.Instance.GetManagers();
+        }
     }
 
     public void StartBake()
