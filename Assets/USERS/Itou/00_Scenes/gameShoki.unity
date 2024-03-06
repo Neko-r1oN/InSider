@@ -4548,7 +4548,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.6580326, y: 0, z: 0, w: 0.75298953}
-  m_LocalPosition: {x: 960, y: 28.57, z: 6.5}
+  m_LocalPosition: {x: 0, y: 28.57, z: 6.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -25439,6 +25439,74 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3855077315048255044}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &3464421719792847407
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2185324314599363317, guid: 23f2fea20fb8cbe49b2b85d7c75646bc,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2185324314599363317, guid: 23f2fea20fb8cbe49b2b85d7c75646bc,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2185324314599363317, guid: 23f2fea20fb8cbe49b2b85d7c75646bc,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2185324314599363317, guid: 23f2fea20fb8cbe49b2b85d7c75646bc,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2185324314599363317, guid: 23f2fea20fb8cbe49b2b85d7c75646bc,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2185324314599363317, guid: 23f2fea20fb8cbe49b2b85d7c75646bc,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2185324314599363317, guid: 23f2fea20fb8cbe49b2b85d7c75646bc,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2185324314599363317, guid: 23f2fea20fb8cbe49b2b85d7c75646bc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2185324314599363317, guid: 23f2fea20fb8cbe49b2b85d7c75646bc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2185324314599363317, guid: 23f2fea20fb8cbe49b2b85d7c75646bc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230289016671605146, guid: 23f2fea20fb8cbe49b2b85d7c75646bc,
+        type: 3}
+      propertyPath: m_Name
+      value: Falling Rock
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 23f2fea20fb8cbe49b2b85d7c75646bc, type: 3}
 --- !u!1 &3492884506131648693
 GameObject:
   m_ObjectHideFlags: 0
@@ -27009,3 +27077,4 @@ SceneRoots:
   - {fileID: 535450748463796281}
   - {fileID: 687156828}
   - {fileID: 1438346856341074624}
+  - {fileID: 3464421719792847407}
