@@ -78,6 +78,11 @@ public class ClientManager : MonoBehaviour
     public int playerID { get; set; }
 
     /// <summary>
+    /// 元々のプレイヤーID
+    /// </summary>
+    public int originalID { get; set; }
+
+    /// <summary>
     /// 自身の役職が内通者かどうか
     /// </summary>
     public bool isInsider { get; set; }
@@ -251,6 +256,8 @@ public class ClientManager : MonoBehaviour
                         Debug.Log("新しく受信したID : " + receiveData.id);
 
                         playerID = receiveData.id;   // 代入
+
+                        
 
                         break;
                     case 1: // イベントIDが１の処理実行
@@ -461,8 +468,8 @@ public class ClientManager : MonoBehaviour
                         // 途中退出したことを示唆するUIを表示する
                         uiManager.GetComponent<UIManager>().UdOutUI(delPlayerData.playerID);
 
-                        if (delPlayerData.nextPlayerID != 200)
-                        {// 受信したIDが200以外の場合
+                        if(delPlayerData.nextPlayerID != turnPlayerID)
+                        {// 更新する場合
                             turnPlayerID = delPlayerData.nextPlayerID;  // 行動できるプレイヤーIDを更新する
                             uiManager.GetComponent<UIManager>().UdTurnPlayerUI(playerNameList[turnPlayerID], turnPlayerID);   // UIを更新
                         }

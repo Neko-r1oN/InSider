@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] List<GameObject> playerUIList;
 
     // プレイヤーの名前
-    [SerializeField] List<Text> playerName;
+    [SerializeField] List<GameObject> playerName;
 
     // プレイヤーが途中退出したときのUI
     [SerializeField] List<GameObject> outImageUI;
@@ -85,16 +85,24 @@ public class UIManager : MonoBehaviour
             }
         }
 
-        //------------------------------
-        // プレイヤーの名前を更新
-        //------------------------------
-        //UdPlayerName(ClientManager.Instance.playerNameList);
+        if (EditorManager.Instance.useServer == true)
+        {
+            //------------------------------
+            // プレイヤーの名前を更新
+            //------------------------------
+            UdPlayerName(ClientManager.Instance.playerNameList);
 
-        //-----------------------------
-        // 先行のプレイヤーを表示する
-        //-----------------------------
-        //int indexNum = ClientManager.Instance.turnPlayerID;
-        //UdTurnPlayerUI(ClientManager.Instance.playerNameList[indexNum], indexNum);
+            //-----------------------------
+            // 先行のプレイヤーを表示する
+            //-----------------------------
+            int indexNum = ClientManager.Instance.turnPlayerID;
+            UdTurnPlayerUI(ClientManager.Instance.playerNameList[indexNum], indexNum);
+
+            //-----------------------------
+            // プレイヤーUIを動かす
+            //-----------------------------
+            playerUIList[ClientManager.Instance.turnPlayerID].GetComponent<MovePlayerUI>().MoveOrReturn(true);
+        }
     }
 
     public void ShowRoad(int selectNum)
@@ -160,10 +168,13 @@ public class UIManager : MonoBehaviour
             {// 存在しない場合
                 // 破棄する
                 Destroy(playerName[i]);
+
+                Debug.Log("破棄する" + i);
+
                 continue;
             }
 
-            playerName[i].text = nameList[i];
+            playerName[i].GetComponent<Text>().text = nameList[i];
         }
     }
 
@@ -185,11 +196,19 @@ public class UIManager : MonoBehaviour
         turnText.GetComponent<TurnUI>().StartCoroutine("PanelAnim");
 
         // プレイヤーUIを動かす
-        playerUIList[indexNum].GetComponent<MovePlayerUI>().MoveOrReturn(true,indexNum);     // 動かす
+        playerUIList[indexNum].GetComponent<MovePlayerUI>().MoveOrReturn(true);     // 動かす
 
-        // プレイヤーUIを元の位置へ戻す
-        indexNum = (indexNum + 1 >= playerUIList.Count) ? 0 : indexNum++;   // インデックス番号を調整
-        playerUIList[indexNum].GetComponent<MovePlayerUI>().MoveOrReturn(false, indexNum);    // 元の位置へ戻す
+        // 前回動かしたプレイヤーUIを元の位置へ戻す
+        if (indexNum == 0)
+        {
+            // 元の位置へ戻す
+            playerUIList[ClientManager.Instance.playerNameList.Count - 1].GetComponent<MovePlayerUI>().MoveOrReturn(false);
+        }
+        else
+        {
+            // 元の位置へ戻す
+            playerUIList[indexNum - 1].GetComponent<MovePlayerUI>().MoveOrReturn(false);
+        }
     }
 
     /// <summary>

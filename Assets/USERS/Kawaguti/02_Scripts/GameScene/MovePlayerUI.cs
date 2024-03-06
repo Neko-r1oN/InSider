@@ -5,63 +5,23 @@ using DG.Tweening;  //DOTweenÇégÇ§Ç∆Ç´ÇÕÇ±ÇÃusingÇì¸ÇÍÇÈ
 
 public class MovePlayerUI : MonoBehaviour
 {
-    Vector3 startPos;
-
-    private void Start()
-    {
-        
-        startPos = this.transform.position;
-
-        Debug.Log(startPos);
-    }
-
     /// <summary>
     /// ìÆÇ©Ç∑
     /// </summary>
-    public void MoveOrReturn(bool isMove,int indexNum)
+    public void MoveOrReturn(bool isMove)
     {
-        //Vector3 pos = new Vector3();
-
-        //if(indexNum == 0)
-        //{
-        //    pos = new Vector3(-26f, 38.79f, -170.3505f);
-        //}
-        //else if(indexNum == 1)
-        //{
-        //    pos = new Vector3(-26f, -35.3f, -170.3505f);
-        //}
-        //else if (indexNum == 2)
-        //{
-        //    pos = new Vector3(-26f, -111.4199f, -170.3505f);
-        //}
-        //else if (indexNum == 3)
-        //{
-        //    pos = new Vector3(-26f, -189.3f, -170.3505f);
-        //}
-        //else if (indexNum == 4)
-        //{
-        //    pos = new Vector3(-26f, -267.5f, -170.3505f);
-        //}
-        //else if (indexNum == 5)
-        //{
-        //    pos = new Vector3(-26f, -342.9f, -170.3505f);
-
-        //}
-        
-        //éÙï∂
+        //éÙï∂ [ç¿ïWÇê≥ãKâªÇ∑ÇÈÇΩÇﬂ]
         Canvas.ForceUpdateCanvases();
 
-        Debug.Log(transform.localPosition);
+        Debug.Log(transform.localPosition.x);
         if (isMove == true)
         {// ìÆÇ≠
             //this.transform.DOLocalMove(new Vector3(-26f, pos.y, pos.z), 0.3f);    
-            this.transform.DOLocalMove(new Vector3(transform.localPosition.x + 35.0f, transform.localPosition.y, transform.localPosition.z), 0.3f);
+            this.transform.DOLocalMove(new Vector3(-34.3f + 35.0f, transform.localPosition.y, transform.localPosition.z), 0.3f);
         }
-        else if(isMove !=true)
+        else if(isMove != true)
         {// å≥ÇÃà íuÇ÷ñﬂÇÈ
-            //this.transform.DOLocalMove(new Vector3(20f, pos.y, pos.z), 0.3f);
-
-            this.transform.DOLocalMove(new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z), 0.3f);
+            this.transform.DOLocalMove(new Vector3(-34.3f, transform.localPosition.y, transform.localPosition.z), 0.3f);
         }
     }
 }
