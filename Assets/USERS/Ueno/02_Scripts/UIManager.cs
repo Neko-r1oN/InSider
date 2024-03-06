@@ -40,28 +40,26 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //// 情報を取得
-        //road = GameObject.Find("RoadUI");
+        // 情報を取得
+        road = GameObject.Find("RoadUI");
 
-        //if (EditorManager.Instance.useServer == true)
-        //{// サーバーを使用する場合
-        //    player = GameObject.Find("player-List");
-        //    player = player.GetComponent<PlayerManager>().players[ClientManager.Instance.playerID];
-        //}
-        //else
-        //{// サーバーを使用しない
-        //    player = GameObject.Find("Player1");
-        //}
+        if (EditorManager.Instance.useServer == true)
+        {// サーバーを使用する場合
+            player = GameObject.Find("player-List");
+            player = player.GetComponent<PlayerManager>().players[ClientManager.Instance.playerID];
+        }
+        else
+        {// サーバーを使用しない
+            player = GameObject.Find("Player1");
+        }
 
-        //GameObject roadManagerObject = GameObject.Find("RoadManager");
-        //roadManager = roadManagerObject.GetComponent<RoadManager>();
+        GameObject roadManagerObject = GameObject.Find("RoadManager");
+        roadManager = roadManagerObject.GetComponent<RoadManager>();
 
-        //_initialRotation = gameObject.transform.rotation;
+        _initialRotation = gameObject.transform.rotation;
 
         // RoadUIを非表示にする
         road.SetActive(false);
-
-        UdTurnPlayerUI("川口", 2);
 
         //---------------------
         // ダウトUIを格納する
