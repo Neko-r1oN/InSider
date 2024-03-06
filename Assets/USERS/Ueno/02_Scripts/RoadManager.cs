@@ -194,7 +194,7 @@ public class RoadManager : MonoBehaviour
         Destroy(dieObject);
 
         // ベイクを開始
-        Baker.GetComponent<StageBake>().StartBake();
+        Baker.GetComponent<StageManager>().StartBake();
 
         // 初期化
         targetBlock = null;

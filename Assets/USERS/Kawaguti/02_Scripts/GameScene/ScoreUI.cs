@@ -24,18 +24,5 @@ public class ScoreUI : MonoBehaviour
         {
             scoreUI.SetActive(false);
         }
-
-
-
-        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Return))
-        {
-            turnnum++;
-        }
-        if(turnnum>=7)
-        {
-            turnnum = 1;
-        }
     }
-
-
 }
