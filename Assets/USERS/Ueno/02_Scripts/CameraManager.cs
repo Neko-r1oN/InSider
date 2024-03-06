@@ -23,6 +23,25 @@ public class CameraManager : MonoBehaviour
         //subCamera.SetActive(false);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {// スペースを押したらカメラが揺れる
+            if (vcam1.Priority == 1)
+            {// vcam1の優先度が1なら
+                var impulseSource = vcam1.GetComponent<CinemachineImpulseSource>();
+
+                impulseSource.GenerateImpulse();
+            }
+            else if (vcam2.Priority == 1)
+            {// vcam2の優先度が1なら
+                var impulseSource2 = vcam2.GetComponent<CinemachineImpulseSource>();
+
+                impulseSource2.GenerateImpulse();
+            }
+        }
+    }
+
     public void SwitchCamera()
     {// カメラの表示・非表示を切り替える
         if (vcam1.Priority == 0)

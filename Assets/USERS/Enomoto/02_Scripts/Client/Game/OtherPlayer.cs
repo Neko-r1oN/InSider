@@ -38,13 +38,13 @@ public class OtherPlayer : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (agent.remainingDistance <= 0)
+        if (agent.remainingDistance <= 0.1f)
         {// 移動量が0以下
             // 滑らかに回転
             transform.forward = Vector3.Slerp(transform.forward, Vector3.back, Time.deltaTime * 8f);    // 後ろを向く
         }
 
-        if (agent.remainingDistance > 0)
+        if (agent.remainingDistance > 0.1f)
         {// 移動中は偽
             // 任意のアニメーションをtrueに変更
             animator.SetBool("Run", true);
