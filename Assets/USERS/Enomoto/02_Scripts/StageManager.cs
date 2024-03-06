@@ -7,11 +7,15 @@ public class StageManager : MonoBehaviour
 {
     void Start()
     {
-        // æ“¾‚·‚é
+        // å–å¾—ã™ã‚‹
         GetComponent<NavMeshSurface>().BuildNavMesh();
 
-        // ClientManager‚É‘¼‚Ìƒ}ƒl[ƒWƒƒ[‚ğæ“¾‚³‚¹‚é
-        //ClientManager.Instance.GetManagers();
+
+        if (EditorManager.Instance.useServer == true)
+        {        
+            // ClientManagerã«ä»–ã®ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã‚’å–å¾—ã•ã›ã‚‹
+            ClientManager.Instance.GetManagers();
+        }
     }
 
     public void StartBake()
