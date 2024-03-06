@@ -9,14 +9,10 @@ public class TextUIManager : MonoBehaviour
     [SerializeField] GameObject textBack;       // テキスト背景のオブジェクト
     [SerializeField] List<GameObject> textList; // 行動テキストリスト
 
-    public int textNum;
-
     public void OnMouseEnter(int num)
     {
         textBack.SetActive(true);
         textList[num].SetActive(true);
-
-        textNum = num;
     }
 
     public void OnMouseExit(int num)

@@ -68,13 +68,20 @@ public class ButtonManager : MonoBehaviour
         // プレイヤーのモードをNOTHINGに設定
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.NOTHING;
 
-        if (player.tag == "Pioneer")
-        {// タグがPioneerならサボタージュボタンを非表示
+        if (EditorManager.Instance.useServer == false)
+        {// サーバーを使用しない場合
             sabotageButton.SetActive(false);
         }
-        else if (player.tag == "Insider")
-        {// タグがSecrecyならサボタージュボタンを表示
-            sabotageButton.SetActive(true);
+        else
+        {
+            if (ClientManager.Instance.isInsider == false)
+            {// 自分自身が発掘者の場合
+                sabotageButton.SetActive(false);
+            }
+            else
+            {// 自分自身が内通者の場合
+                sabotageButton.SetActive(true);
+            }
         }
     }
 

@@ -5265,7 +5265,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10d1a056b62a49a43840d6d50095b2bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doubtNum: 0
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -7994,12 +7993,12 @@ MonoBehaviour:
   - {fileID: 5005023397398241099}
   - {fileID: 7517217990353027603}
   playerName:
-  - {fileID: 5556362524889427614}
-  - {fileID: 4924997191117158918}
-  - {fileID: 6328610061339722969}
-  - {fileID: 4321172530990908151}
-  - {fileID: 8102166680512238310}
-  - {fileID: 3156244350085640736}
+  - {fileID: 2494291957074140958}
+  - {fileID: 6621145338610582008}
+  - {fileID: 6151746498243317519}
+  - {fileID: 5681083921081843081}
+  - {fileID: 3308309483494063347}
+  - {fileID: 8440573516919322553}
   outImageUI:
   - {fileID: 4983503879306136963}
   - {fileID: 1439864387}
@@ -8394,7 +8393,6 @@ MonoBehaviour:
   - {fileID: 1830230681}
   - {fileID: 508055256}
   - {fileID: 1582153433}
-  textNum: 0
 --- !u!1 &1337676140
 GameObject:
   m_ObjectHideFlags: 0
@@ -16552,7 +16550,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7266032998919269778}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Doubt, Assembly-CSharp
+        m_MethodName: DisplayDoubt
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5474383485000096196
 MonoBehaviour:
   m_ObjectHideFlags: 0

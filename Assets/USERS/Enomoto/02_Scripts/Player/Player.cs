@@ -6,6 +6,7 @@ using UnityEngine.AI;   // AI用
 using Unity.AI.Navigation;
 using DG.Tweening;
 using System;
+using Cinemachine;
 
 public class Player : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class Player : MonoBehaviour
     // スタミナゲージ
     GameObject staminaGauge;
 
+    // 敵
     GameObject enemy;
 
     // スタミナゲージ内の値
@@ -96,9 +98,6 @@ public class Player : MonoBehaviour
         // 0～6までのランダムの数値が入る
         rand = rnd.Next(0, 7);
 
-        // 引数にランダムの数値を入れる
-        SetPost(rand);
-
         // 初期位置を保存
         pos = this.gameObject.transform.position;
     }
@@ -123,7 +122,7 @@ public class Player : MonoBehaviour
 
                 Debug.Log(hit.transform.name);
 
-                if (hit.transform.tag == "RoadPanel" || hit.transform.tag == "StartPanel" 
+                if (hit.transform.tag == "RoadPanel" || hit.transform.tag == "StartPanel"
                     || hit.transform.tag == "EventPanel")
                 {// 道パネルの場合
 
@@ -176,21 +175,24 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(agent.remainingDistance <= 0)
+        if(agent.remainingDistance <= 0.1f)
         {// 移動量が0以下
             // 滑らかに回転
             transform.forward = Vector3.Slerp(transform.forward, Vector3.back, Time.deltaTime * 8f);    // 後ろを向く
         }
 
-        if (agent.remainingDistance > 0)
+        if (agent.remainingDistance > 0.1f)
         {// 移動中は偽
             // 任意のアニメーションをtrueに変更
             animator.SetBool("Run", true);
+
+            Debug.Log("Run true");
 
             isEnd = false;
         }
         else if (Mathf.Abs(transform.localEulerAngles.y) >= 179f && isEnd == false) // 条件を絶対値にする
         {// 回転が終了すると
+            Debug.Log("Run false");
 
             // 回転を調整
             transform.localEulerAngles = new Vector3(0, 180, 0);
@@ -293,23 +295,5 @@ public class Player : MonoBehaviour
 
         // 残りスタミナを表示(デバックのみ)
         Debug.Log("残りスタミナ" + stamina);
-    }
-
-    public void SetPost(int rnd)
-    {// タグを変更する
-        if (rnd <= 4)
-        {// 数値が4以下ならPioneerに設定
-            this.gameObject.tag = "Pioneer";
-        }
-        else if (rnd >= 5)
-        {// 数値が5以上ならSecrecyに設定
-            if (insiderCount < 1)
-            {// カウントが1以下なら
-                this.gameObject.tag = "Insider";
-
-                // カウントを増やす
-                insiderCount++;
-            }
-        }
     }
 }
