@@ -2406,6 +2406,7 @@ MonoBehaviour:
   - {fileID: 3036307251059524648, guid: 19c7700b8943c1f438076fce2f79c9ba, type: 3}
   - {fileID: 21087384949852408, guid: 7a58a7e8624d62d4da822a4c41ee4b0f, type: 3}
   - {fileID: 3720628406363261294, guid: fcedcdba8d80e6545b3cfe7a378abe9a, type: 3}
+  gold: {fileID: 4295556386234032078, guid: d6040d4c28ee53840ba8686f5f62dd62, type: 3}
   targetBlock: {fileID: 0}
   rotY: 0
 --- !u!1 &350550013

@@ -17,6 +17,9 @@ public class RoadManager : MonoBehaviour
     // プレイヤー
     GameObject player;
 
+    // ゴールド
+    [SerializeField] GameObject gold;
+
     // 敵
     GameObject enemy;
 
@@ -45,6 +48,7 @@ public class RoadManager : MonoBehaviour
 
         // UIManager
         uiMnager = GameObject.Find("UIManager");
+
 
         // Player
         if (EditorManager.Instance.useServer)
@@ -115,6 +119,8 @@ public class RoadManager : MonoBehaviour
     {
         Player script = player.GetComponent<Player>();
 
+        isGold = true;
+
         if(num == 0 && script.stamina >= 20)
         {// I字
             player.GetComponent<Player>().SubStamina(20);
@@ -177,7 +183,7 @@ public class RoadManager : MonoBehaviour
         Baker.GetComponent<StageManager>().StartBake();
 
         //ゴールドを生成
-        //block.transform
+        Instantiate(gold, block.transform.position, Quaternion.identity);
 
         // 初期化
         targetBlock = null;
