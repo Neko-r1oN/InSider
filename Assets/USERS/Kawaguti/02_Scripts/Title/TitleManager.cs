@@ -23,7 +23,7 @@ public class TitleManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        fade.FadeOut(1f);
+        fade.FadeOut(0.1f);
         audio = GetComponent<AudioSource>();
         isStart = false;
         nameField.Select();
