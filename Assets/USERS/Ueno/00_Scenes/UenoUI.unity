@@ -2411,6 +2411,7 @@ MonoBehaviour:
   blockObj: {fileID: 1691180745474395491, guid: 31734e6361752504c9dda7ca5f342164,
     type: 3}
   blokObjList: []
+  gold: {fileID: 4295556386234032078, guid: d6040d4c28ee53840ba8686f5f62dd62, type: 3
   targetBlock: {fileID: 0}
   rotY: 0
   fillCount: 0

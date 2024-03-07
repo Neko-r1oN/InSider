@@ -370,6 +370,7 @@ MonoBehaviour:
   isFill: 0
   objeID: 0
   isSelect: 0
+  smoke: {fileID: 5408633052442516991, guid: 1d6651dd79e115c4fb7cb9604b460ad1, type: 3}
 --- !u!1 &7135566534464839634
 GameObject:
   m_ObjectHideFlags: 0

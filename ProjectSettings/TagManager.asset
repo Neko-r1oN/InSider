@@ -13,6 +13,7 @@ TagManager:
   - Insider
   - StartPanel
   - EventPanel
+  - yuka
   layers:
   - Default
   - TransparentFX
