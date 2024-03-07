@@ -23,7 +23,7 @@ public class TitleManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        fade.FadeOut(1f);
         audio = GetComponent<AudioSource>();
         isStart = false;
         nameField.Select();
@@ -74,12 +74,12 @@ public class TitleManager : MonoBehaviour
         UserName = nameField.text;
         Initiate.DoneFading();
 
-        OnNextScene();
+        //OnNextScene();
 
 
 
 
-        //SceneManager.LoadScene("StandbyScene_copy");
+        fade.FadeIn(1f, () => SceneManager.LoadScene("StandbyScene_copy"));
 
     }
     public void BackButton()

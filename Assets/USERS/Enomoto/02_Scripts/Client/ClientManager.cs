@@ -121,6 +121,9 @@ public class ClientManager : MonoBehaviour
     // シングルトン用
     public static ClientManager Instance;
 
+    // フェード用シリアライズフィールド
+    [SerializeField] Fade fade;
+
     private void Awake()
     {
         if(Instance == null)
@@ -145,6 +148,9 @@ public class ClientManager : MonoBehaviour
     /// </summary>
     void Start()
     {
+        //フェードアウト
+        fade.FadeOut(1f);
+
         // 初期化
         tcpClient = new TcpClient();
         context = SynchronizationContext.Current;
