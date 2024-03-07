@@ -61,7 +61,7 @@ public class ClientManager : MonoBehaviour
     GameObject uiManager;
 
     // 必要接続人数
-    int RequiredNum = 4;
+    int RequiredNum = 2;
 
     //===========================
     //  [公開]フィールド
@@ -78,9 +78,9 @@ public class ClientManager : MonoBehaviour
     public int playerID { get; set; }
 
     /// <summary>
-    /// 元々のプレイヤーID
+    /// 元々のプレイヤーID 
     /// </summary>
-    public int originalID { get; set; }
+    public int originalID { get; set; } // 誰かが途中退出したときにプレイヤーIDがずれるため
 
     /// <summary>
     /// 自身の役職が内通者かどうか
@@ -93,9 +93,32 @@ public class ClientManager : MonoBehaviour
     public int turnPlayerID { get; set; }
 
     /// <summary>
+    /// 最大ターン数
+    /// </summary>
+    public int turnMaxNum { get; set; }
+
+    /// <summary>
+    /// 現在のラウンド数
+    /// </summary>
+    public int roundNum { get; set; }
+
+    /// <summary>
     /// プレイヤーの名前
     /// </summary>
     public List<string> playerNameList { get; set; }
+
+    /// <summary>
+    /// ゲームモード
+    /// </summary>
+    public enum GAMEMODE
+    {
+        Title,      // タイトル
+        Tutorial,   // チュートリアル
+        Standby,    // 待機
+        Job,        // 役職
+        Game,       // ゲーム
+        result      // リザルト
+    }
 
     /// <summary>
     /// イベントID
@@ -111,7 +134,8 @@ public class ClientManager : MonoBehaviour
         Action_FillData,      // 行動：埋める
         Action_MiningData,    // 行動：切り開く
         Action_NothingData,   // 行動：何もしない
-        DelPlayerID,          // ゲーム中に切断したプレイヤーのID
+        DelPlayerID,          // 切断したプレイヤーのID
+        UdTurns,              // ターンを更新
     }
 
     //===========================
@@ -120,6 +144,9 @@ public class ClientManager : MonoBehaviour
 
     // シングルトン用
     public static ClientManager Instance;
+
+    // フェード用シリアライズフィールド
+    [SerializeField] Fade fade;
 
     private void Awake()
     {
@@ -145,6 +172,9 @@ public class ClientManager : MonoBehaviour
     /// </summary>
     void Start()
     {
+        //フェードアウト
+        fade.FadeOut(1f);
+
         // 初期化
         tcpClient = new TcpClient();
         context = SynchronizationContext.Current;
@@ -340,7 +370,7 @@ public class ClientManager : MonoBehaviour
                         }
 
                         break;
-                    case 3: // 自身の役職と先行のプレイヤーIDを取得 & プレイヤー人数を取得
+                    case 3: // 自身の役職と先行のプレイヤーIDを取得 & プレイヤーの名前リスト更新 & 元々のプレイヤーIDを更新 & マネージャー系の初期化
 
                         // プレイヤーの名前リストを初期化する
                         playerNameList = new List<string>();
@@ -352,6 +382,9 @@ public class ClientManager : MonoBehaviour
 
                             Debug.Log("一緒にやるプレイヤー名：" + nameData.name);
                         }
+
+                        // 元々のプレイヤーIDを更新
+                        originalID = playerID;
 
                         // マネージャーを初期化する
                         playerManager = null;
@@ -365,6 +398,8 @@ public class ClientManager : MonoBehaviour
                         // 代入する
                         isInsider = data.isInsider;
                         turnPlayerID = data.advancePlayerID;
+                        turnMaxNum = data.turnMaxNum;
+                        roundNum = data.roundNum;
 
                         Debug.Log("内通者：" + data.isInsider);
                         Debug.Log("先行となるプレイヤーID：" + data.advancePlayerID);
@@ -376,14 +411,18 @@ public class ClientManager : MonoBehaviour
                         break;
                     case 4: // ラウンド終了通知
 
+                        Debug.Log("ラウンド終了通知を受信");
+
+                        // JSONデシリアライズで取得する
+                        RoundEndData roundEndData = JsonConvert.DeserializeObject<RoundEndData>(jsonString);
+
+                        // 現在接続中のプレイヤー情報を更新
+                        listenerList = roundEndData.listeners;
+
                         // マネージャー情報を初期化する
                         playerManager = new GameObject();
                         blockManager = new GameObject();
                         uiManager = new GameObject();
-
-                        // フェード＆シーン遷移
-                        Initiate.DoneFading();
-                        SceneManager.LoadScene("JobScene_copy");
 
                         break;
                     case 5: // 移動
@@ -420,11 +459,6 @@ public class ClientManager : MonoBehaviour
                         // 道を埋める処理
                         blockManager.GetComponent<BlockManager>().FillObject(fillData.objeID);
 
-                        // 次に行動できるプレイヤーのIDを更新する
-                        Debug.Log("次に行動できるプレイヤーID：" + fillData.nextPlayerID);
-                        turnPlayerID = fillData.nextPlayerID;
-                        uiManager.GetComponent<UIManager>().UdTurnPlayerUI(playerNameList[turnPlayerID], turnPlayerID);   // UIを更新
-
                         break;
                     case 7: // 切り開く
 
@@ -436,10 +470,10 @@ public class ClientManager : MonoBehaviour
                         // 切り開く処理
                         blockManager.GetComponent<BlockManager>().MineObject(mineData.objeID, mineData.prefabID, mineData.rotY);
 
-                        // 次に行動できるプレイヤーのIDを更新する
-                        Debug.Log("次に行動できるプレイヤーID：" + mineData.nextPlayerID);
-                        turnPlayerID = mineData.nextPlayerID;
-                        uiManager.GetComponent<UIManager>().UdTurnPlayerUI(playerNameList[turnPlayerID], turnPlayerID);   // UIを更新
+                        //// 次に行動できるプレイヤーのIDを更新する
+                        //Debug.Log("次に行動できるプレイヤーID：" + mineData.nextPlayerID);
+                        //turnPlayerID = mineData.nextPlayerID;
+                        //uiManager.GetComponent<UIManager>().UdTurnPlayerUI(playerNameList[turnPlayerID], turnPlayerID);   // UIを更新
 
                         break;
                     case 8: // やすむ(スタミナ回復)
@@ -449,10 +483,10 @@ public class ClientManager : MonoBehaviour
 
                         Debug.Log("[" + restData.playerID + "]が休んだ→(回復量：" + restData.addStamina + ") 合計：" + restData.totalStamina);
 
-                        // 次に行動できるプレイヤーのIDを更新する
-                        Debug.Log("次に行動できるプレイヤーID：" + restData.nextPlayerID);
-                        turnPlayerID = restData.nextPlayerID;
-                        uiManager.GetComponent<UIManager>().UdTurnPlayerUI(playerNameList[turnPlayerID], turnPlayerID);   // UIを更新
+                        //// 次に行動できるプレイヤーのIDを更新する
+                        //Debug.Log("次に行動できるプレイヤーID：" + restData.nextPlayerID);
+                        //turnPlayerID = restData.nextPlayerID;
+                        //uiManager.GetComponent<UIManager>().UdTurnPlayerUI(playerNameList[turnPlayerID], turnPlayerID);   // UIを更新
 
                         break;
                     case 9: // ゲーム中に切断したプレイヤーのIDを受信
@@ -465,14 +499,26 @@ public class ClientManager : MonoBehaviour
 
                         Debug.Log("切断したプレイヤーID : " + delPlayerData.playerID);
 
+                        // プレイヤーの名前リストから要素を削除
+                        playerNameList.RemoveAt(delPlayerData.playerID);
+
                         // 途中退出したことを示唆するUIを表示する
                         uiManager.GetComponent<UIManager>().UdOutUI(delPlayerData.playerID);
 
-                        if(delPlayerData.nextPlayerID != turnPlayerID)
-                        {// 更新する場合
-                            turnPlayerID = delPlayerData.nextPlayerID;  // 行動できるプレイヤーIDを更新する
-                            uiManager.GetComponent<UIManager>().UdTurnPlayerUI(playerNameList[turnPlayerID], turnPlayerID);   // UIを更新
-                        }
+                        // 途中退出したプレイヤーUIの位置を正す
+                        uiManager.GetComponent<UIManager>().ReturnPlayerUI(delPlayerData.playerID);
+
+                        // UIマネージャーが持つリストから要素を削除
+                        uiManager.GetComponent<UIManager>().RemoveElement(delPlayerData.playerID);
+
+                        //// クライアント側の行動可能なプレイヤーIDを更新する
+                        //turnPlayerID = delPlayerData.nextPlayerID;  // IDを更新する
+
+                        //if (delPlayerData.isUdTurn == true)
+                        //{// ターンが更新される場合
+                        //    Debug.Log("ターンを更新します。");
+                        //    uiManager.GetComponent<UIManager>().UdTurnPlayerUI(playerNameList[turnPlayerID], turnPlayerID);   // UIを更新
+                        //}
 
                         // プレイヤーのモデルリストを取得する
                         List<GameObject> objeList = playerManager.GetComponent<PlayerManager>().players;
@@ -483,7 +529,21 @@ public class ClientManager : MonoBehaviour
                         // プレイヤーリストから削除する
                         objeList.RemoveAt(delPlayerData.playerID);
 
-                        // 切断したプレイヤーのネームに×印
+                        break;
+                    case 10:    // ターン数の更新＆次に行動できるプレイヤーIDの更新
+
+                        Debug.Log("ターンを更新します。");
+
+                        // JSONデシリアライズで取得する
+                        UpdateTurnsData udTurnsData = JsonConvert.DeserializeObject<UpdateTurnsData>(jsonString);
+
+                        // 次に行動できるプレイヤーのIDを更新する
+                        Debug.Log("次に行動できるプレイヤーID：" + udTurnsData.nextPlayerID);
+                        turnPlayerID = udTurnsData.nextPlayerID;
+                        uiManager.GetComponent<UIManager>().UdTurnPlayerUI(playerNameList[turnPlayerID], turnPlayerID);   // UIを更新
+
+                        // 残りターン数を更新する
+                        uiManager.GetComponent<UIManager>().UdRemainingTurns(udTurnsData.turnNum);
 
                         break;
                 }

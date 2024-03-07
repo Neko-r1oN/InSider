@@ -13,9 +13,9 @@ internal class DelPlayerData
     public int playerID { get; set; }
 
     /// <summary>
-    /// 次に行動できるプレイヤーID
+    /// ターンUIを更新するかどうか
     /// </summary>
-    public int nextPlayerID { get; set; }
+    public bool isUdTurn { get; set; }
 
     /// <summary>
     /// 更新後のリスナーリスト

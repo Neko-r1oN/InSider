@@ -13,11 +13,6 @@ internal class Action_NothingData
     public int playerID { get; set; }
 
     /// <summary>
-    /// 次に行動できるプレイヤーID
-    /// </summary>
-    public int nextPlayerID { get; set; }
-
-    /// <summary>
     /// スタミナの回復量
     /// </summary>
     public int addStamina { get; set; }

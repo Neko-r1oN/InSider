@@ -5,13 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TitleKawaguchi_copy.unity
     guid: ce52bb6533576fa4480f349dba812462
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/StandbyScene_copy.unity
     guid: 84357c46c70c96749a85d1cac2cc7d82
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/JobScene_copy.unity
     guid: 04781150606b44e4e933c004a89ea71e
   - enabled: 1

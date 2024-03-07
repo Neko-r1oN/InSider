@@ -17,4 +17,13 @@ internal class JobAndTurnData
     /// </summary>
     public int advancePlayerID { get; set; }
 
+    /// <summary>
+    /// 最大ターン数
+    /// </summary>
+    public int turnMaxNum { get; set; }
+
+    /// <summary>
+    /// 現在のラウンド数
+    /// </summary>
+    public int roundNum { get; set; }
 }
