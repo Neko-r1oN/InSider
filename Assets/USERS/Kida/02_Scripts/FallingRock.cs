@@ -8,7 +8,7 @@ public class FallingRock : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Invoke("DestroyStone",5.0f);
     }
 
     // Update is called once per frame
@@ -29,5 +29,9 @@ public class FallingRock : MonoBehaviour
             Instantiate(smok); //スモーク発動
             Destroy(gameObject); //ブロックを破壊
         }
+    }
+    private void DestroyStone()
+    {
+        Destroy(gameObject); //ブロックを破壊
     }
 }
