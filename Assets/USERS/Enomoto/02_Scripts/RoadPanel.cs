@@ -14,6 +14,8 @@ public class RoadPanel : MonoBehaviour
     // プレイヤー
     GameObject player;
 
+    RoadManager roadManager;
+
     // デフォルトカラー
     Color defaultMaterial;
 
@@ -22,6 +24,8 @@ public class RoadPanel : MonoBehaviour
 
     // オブジェクトID
     public int objeID;
+
+    public bool isSelect;
 
     // マネージャーを取得する
     GameObject manager;
@@ -33,6 +37,9 @@ public class RoadPanel : MonoBehaviour
         manager = GameObject.Find("BlockList");
         stageManager = GameObject.Find("StageManager");
 
+        GameObject roadManagerobj = GameObject.Find("RoadManager");
+        roadManager = roadManagerobj.GetComponent<RoadManager>();
+        
         if (EditorManager.Instance.useServer == true)
         {// サーバーを使用する場合
             player = GameObject.Find("player-List");
@@ -44,6 +51,8 @@ public class RoadPanel : MonoBehaviour
         }
 
         defaultMaterial = gameObject.GetComponent<Renderer>().material.color;
+
+        isSelect = false;
     }
 
     // Update is called once per frame
@@ -69,6 +78,43 @@ public class RoadPanel : MonoBehaviour
                 if (hit.transform.gameObject == this.gameObject)
                 {// 自分にカーソルが当たった
                     gameObject.GetComponent<Renderer>().material.color = Color.blue; // 青色
+                }
+                else
+                {
+                    // デフォルトカラーに戻す
+                    gameObject.GetComponent<Renderer>().material.color = defaultMaterial;
+                }
+            }
+
+            //**********************
+            //  埋める(サボタージュ)モードの場合
+            //**********************
+            else if (player.GetComponent<Player>().mode == Player.PLAYER_MODE.SABOTAGEFILL)
+            {// モード：MOVE
+
+                if (hit.transform.gameObject == this.gameObject)
+                {// 自分にカーソルが当たった
+
+                    if(hit.transform.gameObject.tag != "StartPanel")
+                    {
+                        gameObject.GetComponent<Renderer>().material.color = Color.yellow; // 青色
+                    }
+                    
+                    // 左クリックした
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        if (isSelect == false)
+                        {
+                            // 埋める場所選択数をカウント
+                            roadManager.fillCount++;
+
+                            // リストにオブジェクト情報を格納
+                            roadManager.blokObjList.Add(this.gameObject);
+                            Debug.Log("追加しました。");
+
+                            isSelect = true;
+                        }
+                    }
                 }
                 else
                 {
@@ -106,6 +152,8 @@ public class RoadPanel : MonoBehaviour
                         {// サーバーを使用しない
                             // オブジェクトを生成する
                             GameObject block = Instantiate(blockPrefab, new Vector3(transform.position.x, 1.47f, transform.position.z), Quaternion.identity);
+
+
 
                             // 破棄する
                             Destroy(this.gameObject);
