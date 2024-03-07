@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using DG.Tweening;  //DOTween‚ðŽg‚¤‚Æ‚«‚Í‚±‚Ìusing‚ð“ü‚ê‚é
 
 
-public class Fade : MonoBehaviour
+public class StartFade : MonoBehaviour
 {
     [SerializeField] Renderer logo;
 

@@ -12,6 +12,8 @@ public class TitleManager : MonoBehaviour
     [SerializeField] GameObject InputUI;
     [SerializeField] GameObject StartText;
 
+    [SerializeField] Fade fade;
+
     static public string UserName { get; set; }
     AudioSource audio;
     [SerializeField] AudioClip ClickSound;
@@ -21,7 +23,7 @@ public class TitleManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        fade.FadeOut(0.1f);
         audio = GetComponent<AudioSource>();
         isStart = false;
         nameField.Select();
@@ -71,7 +73,13 @@ public class TitleManager : MonoBehaviour
 
         UserName = nameField.text;
         Initiate.DoneFading();
-        SceneManager.LoadScene("StandbyScene_copy");
+
+        //OnNextScene();
+
+
+
+
+        fade.FadeIn(1f, () => SceneManager.LoadScene("StandbyScene_copy"));
 
     }
     public void BackButton()
@@ -83,5 +91,11 @@ public class TitleManager : MonoBehaviour
     void StartTrue()
     {
         isStart = true;
+    }
+    public void OnNextScene()
+    {
+        //fade.FadeIn(ŽžŠÔ,() => Š®—¹‚µ‚½‚Æ‚«‚É‚â‚è‚½‚¢‚±‚Æ);
+        fade.FadeIn(1f, () => SceneManager.LoadScene("StandbyScene_copy"));
+
     }
 }
