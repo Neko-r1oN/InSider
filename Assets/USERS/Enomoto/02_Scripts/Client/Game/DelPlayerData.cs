@@ -18,11 +18,6 @@ internal class DelPlayerData
     public bool isUdTurn { get; set; }
 
     /// <summary>
-    /// 次に行動できるプレイヤーID
-    /// </summary>
-    public int nextPlayerID { get; set; }
-
-    /// <summary>
     /// 更新後のリスナーリスト
     /// </summary>
     public List<ListenerData> listeners { get; set; }
