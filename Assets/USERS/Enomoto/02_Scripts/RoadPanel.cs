@@ -26,6 +26,9 @@ public class RoadPanel : MonoBehaviour
     // マネージャーを取得する
     GameObject manager;
 
+    //モクモクアニメーションのプレハブを取得
+    [SerializeField] GameObject smoke;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -106,6 +109,9 @@ public class RoadPanel : MonoBehaviour
                         {// サーバーを使用しない
                             // オブジェクトを生成する
                             GameObject block = Instantiate(blockPrefab, new Vector3(transform.position.x, 1.47f, transform.position.z), Quaternion.identity);
+
+                            //モクモクするアニメーションの再生
+                            Instantiate(smoke, new Vector3(transform.position.x, 1.47f, transform.position.z), Quaternion.identity);
 
                             // 破棄する
                             Destroy(this.gameObject);

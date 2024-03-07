@@ -159,7 +159,7 @@ Transform:
   - {fileID: 7947970168592040957}
   - {fileID: 7411642425430341952}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!33 &7475771639923926953
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -247,6 +247,7 @@ MonoBehaviour:
     type: 3}
   isFill: 0
   objeID: 0
+  smoke: {fileID: 839660796216691157, guid: 1f54bcff7f641f64b8c3adceb060c18c, type: 3}
 --- !u!1 &4181179818797949992
 GameObject:
   m_ObjectHideFlags: 0
