@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class StandBy : MonoBehaviour
 {
@@ -12,12 +13,17 @@ public class StandBy : MonoBehaviour
     [SerializeField] GameObject OKbutton;
     [SerializeField] GameObject Cancelbutton;
     [SerializeField] GameObject OKIcon;
+
+    [SerializeField] Fade fade;
+
     AudioSource audio;
     [SerializeField] AudioClip ClickSound;
 
     private void Start()
     {
-      
+
+        fade.FadeOut(1f);
+
         audio = GetComponent<AudioSource>();
         OKIcon.SetActive(false);
         OKbutton.SetActive(true);
