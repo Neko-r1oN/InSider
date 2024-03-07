@@ -40,7 +40,7 @@ public class TitleManager : MonoBehaviour
         if (Input.GetKey(KeyCode.Escape))
         {//ESC押した際の処理
 #if UNITY_EDITOR
-            //エディター実行時
+           
             //エディター実行時
             UnityEditor.EditorApplication.isPlaying = false;
 #else
