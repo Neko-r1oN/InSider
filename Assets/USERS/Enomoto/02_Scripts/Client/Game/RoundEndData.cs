@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 [Serializable]
-internal class Action_MiningData
+internal class Action_FillData
 {
     /// <summary>
     /// プレイヤーID
@@ -16,14 +16,4 @@ internal class Action_MiningData
     /// オブジェクトのID
     /// </summary>
     public int objeID { get; set; }
-
-    /// <summary>
-    /// プレファブID
-    /// </summary>
-    public int prefabID { get; set; }
-
-    /// <summary>
-    /// 回転度
-    /// </summary>
-    public int rotY { get; set; }
 }

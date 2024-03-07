@@ -15,9 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/JobScene_copy.unity
     guid: 04781150606b44e4e933c004a89ea71e
   - enabled: 1
-    path: Assets/USERS/Fujisaki/00_Scenes/gameFuji.unity
-    guid: c199f47dbe7c0804789c899bbb55da82
+    path: Assets/USERS/Ueno/00_Scenes/UenoUI.unity
+    guid: 5f09041b4627416459bdb5bd11803dae
   - enabled: 1
-    path: Assets/USERS/Fujisaki/00_Scenes/fujiUI.unity
-    guid: 4ec1a1ca667d23747ba61356f3b8e134
+    path: Assets/USERS/Enomoto/00_Scenes/gameEno.unity
+    guid: 59f5e5084c2f6f64895d0cb4465bd18c
   m_configObjects: {}

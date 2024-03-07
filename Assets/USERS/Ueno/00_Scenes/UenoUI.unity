@@ -7984,6 +7984,8 @@ MonoBehaviour:
   - {fileID: 1226799062}
   - {fileID: 991642136}
   - {fileID: 1024087860}
+  remainingTurnsText: {fileID: 1470617872}
+  roundCounterText: {fileID: 6908178380997227441}
   turnText: {fileID: 1281383265}
   playerUIList:
   - {fileID: 257770469964657027}

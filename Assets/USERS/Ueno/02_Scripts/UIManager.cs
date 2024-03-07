@@ -8,6 +8,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject road;
     [SerializeField] List<GameObject> roadUIList;
 
+    // 残りターン表示のテキスト
+    [SerializeField] GameObject remainingTurnsText;
+
+    // 現在のラウンド数を表示
+    [SerializeField] GameObject roundCounterText;
+
     // "○○のターン"のテキスト
     [SerializeField] GameObject turnText;
 
@@ -87,6 +93,12 @@ public class UIManager : MonoBehaviour
 
         if (EditorManager.Instance.useServer == true)
         {
+            //-------------------------------------------
+            // 現在のラウンド数と残りのターン数を更新
+            //-------------------------------------------
+            roundCounterText.GetComponent<Text>().text = "" + ClientManager.Instance.roundNum;
+            remainingTurnsText.GetComponent<Text>().text = "" + ClientManager.Instance.turnMaxNum;
+
             //------------------------------
             // プレイヤーの名前を更新
             //------------------------------
@@ -177,6 +189,15 @@ public class UIManager : MonoBehaviour
 
             playerName[i].GetComponent<Text>().text = nameList[i];
         }
+    }
+
+    /// <summary>
+    /// 残りターンテキスト更新する
+    /// </summary>
+    /// <param name="turnNum"></param>
+    public void UdRemainingTurns(int turnNum)
+    {
+        remainingTurnsText.GetComponent<Text>().text = "" + turnNum;
     }
 
     /// <summary>
