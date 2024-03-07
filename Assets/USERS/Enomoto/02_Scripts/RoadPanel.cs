@@ -5,138 +5,185 @@ using UnityEngine;
 
 public class RoadPanel : MonoBehaviour
 {
-    // ƒuƒƒbƒN‚ÌƒvƒŒƒtƒ@ƒu
+    // ãƒ–ãƒ­ãƒƒã‚¯ã®ãƒ—ãƒ¬ãƒ•ã‚¡ãƒ–
     [SerializeField] GameObject blockPrefab;
 
-    // ƒXƒe[ƒW‚ÌŠÇ—
+    // ã‚¹ãƒ†ãƒ¼ã‚¸ã®ç®¡ç†
     GameObject stageManager;
 
-    // ƒvƒŒƒCƒ„[
+    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
     GameObject player;
 
-    // ƒfƒtƒHƒ‹ƒgƒJƒ‰[
+    RoadManager roadManager;
+
+    // ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚«ãƒ©ãƒ¼
     Color defaultMaterial;
 
-    // u–„‚ß‚év‚Ì‘ÎÛ‚É‚È‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©
+    // ã€ŒåŸ‹ã‚ã‚‹ã€ã®å¯¾è±¡ã«ãªã£ã¦ã„ã‚‹ã‹ã©ã†ã‹
     public bool isFill = false;
 
-    // ƒIƒuƒWƒFƒNƒgID
+    // ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆID
     public int objeID;
 
-    // ƒ}ƒl[ƒWƒƒ[‚ğæ“¾‚·‚é
+    public bool isSelect;
+
+    // ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã‚’å–å¾—ã™ã‚‹
     GameObject manager;
 
-    //ƒ‚ƒNƒ‚ƒNƒAƒjƒ[ƒVƒ‡ƒ“‚ÌƒvƒŒƒnƒu‚ğæ“¾
+    //ãƒ¢ã‚¯ãƒ¢ã‚¯ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®ãƒ—ãƒ¬ãƒãƒ–ã‚’å–å¾—
     [SerializeField] GameObject smoke;
 
     // Start is called before the first frame update
     void Start()
     {
-        // æ“¾‚·‚é
+        // å–å¾—ã™ã‚‹
         manager = GameObject.Find("BlockList");
         stageManager = GameObject.Find("StageManager");
 
+        GameObject roadManagerobj = GameObject.Find("RoadManager");
+        roadManager = roadManagerobj.GetComponent<RoadManager>();
+        
         if (EditorManager.Instance.useServer == true)
-        {// ƒT[ƒo[‚ğg—p‚·‚éê‡
+        {// ã‚µãƒ¼ãƒãƒ¼ã‚’ä½¿ç”¨ã™ã‚‹å ´åˆ
             player = GameObject.Find("player-List");
             player = player.GetComponent<PlayerManager>().players[ClientManager.Instance.playerID];
         }
         else
-        {// ƒT[ƒo[‚ğg—p‚µ‚È‚¢
+        {// ã‚µãƒ¼ãƒãƒ¼ã‚’ä½¿ç”¨ã—ãªã„
             player = GameObject.Find("Player1");
         }
 
         defaultMaterial = gameObject.GetComponent<Renderer>().material.color;
+
+        isSelect = false;
     }
 
     // Update is called once per frame
     async Task Update()
     {
         if (player.GetComponent<Player>().mode != Player.PLAYER_MODE.FILL)
-        {// –„‚ß‚éƒ‚[ƒhˆÈŠO‚Ìê‡
-            isFill = false;    // ‹U
+        {// åŸ‹ã‚ã‚‹ãƒ¢ãƒ¼ãƒ‰ä»¥å¤–ã®å ´åˆ
+            isFill = false;    // å½
         }
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit = new RaycastHit();
 
         if (Physics.Raycast(ray, out hit))
-        {// Ray‚ª“–‚½‚Á‚½ƒIƒuƒWƒFƒNƒg‚Ìî•ñ‚ğhit‚É“n‚·
+        {// RayãŒå½“ãŸã£ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æƒ…å ±ã‚’hitã«æ¸¡ã™
 
             //**********************
-            //  ˆÚ“®ƒ‚[ƒh‚Ìê‡
+            //  ç§»å‹•ãƒ¢ãƒ¼ãƒ‰ã®å ´åˆ
             //**********************
             if (player.GetComponent<Player>().mode == Player.PLAYER_MODE.MOVE)
-            {// ƒ‚[ƒhFMOVE
+            {// ãƒ¢ãƒ¼ãƒ‰ï¼šMOVE
 
                 if (hit.transform.gameObject == this.gameObject)
-                {// ©•ª‚ÉƒJ[ƒ\ƒ‹‚ª“–‚½‚Á‚½
-                    gameObject.GetComponent<Renderer>().material.color = Color.blue; // ÂF
+                {// è‡ªåˆ†ã«ã‚«ãƒ¼ã‚½ãƒ«ãŒå½“ãŸã£ãŸ
+                    gameObject.GetComponent<Renderer>().material.color = Color.blue; // é’è‰²
                 }
                 else
                 {
-                    // ƒfƒtƒHƒ‹ƒgƒJƒ‰[‚É–ß‚·
+                    // ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚«ãƒ©ãƒ¼ã«æˆ»ã™
+                    gameObject.GetComponent<Renderer>().material.color = defaultMaterial;
+                }
+            }
+
+            //**********************
+            //  åŸ‹ã‚ã‚‹(ã‚µãƒœã‚¿ãƒ¼ã‚¸ãƒ¥)ãƒ¢ãƒ¼ãƒ‰ã®å ´åˆ
+            //**********************
+            else if (player.GetComponent<Player>().mode == Player.PLAYER_MODE.SABOTAGEFILL)
+            {// ãƒ¢ãƒ¼ãƒ‰ï¼šMOVE
+
+                if (hit.transform.gameObject == this.gameObject)
+                {// è‡ªåˆ†ã«ã‚«ãƒ¼ã‚½ãƒ«ãŒå½“ãŸã£ãŸ
+
+                    if(hit.transform.gameObject.tag != "StartPanel")
+                    {
+                        gameObject.GetComponent<Renderer>().material.color = Color.yellow; // é’è‰²
+                    }
+                    
+                    // å·¦ã‚¯ãƒªãƒƒã‚¯ã—ãŸ
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        if (isSelect == false)
+                        {
+                            // åŸ‹ã‚ã‚‹å ´æ‰€é¸æŠæ•°ã‚’ã‚«ã‚¦ãƒ³ãƒˆ
+                            roadManager.fillCount++;
+
+                            // ãƒªã‚¹ãƒˆã«ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆæƒ…å ±ã‚’æ ¼ç´
+                            roadManager.blokObjList.Add(this.gameObject);
+                            Debug.Log("è¿½åŠ ã—ã¾ã—ãŸã€‚");
+
+                            isSelect = true;
+                        }
+                    }
+                }
+                else
+                {
+                    // ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚«ãƒ©ãƒ¼ã«æˆ»ã™
                     gameObject.GetComponent<Renderer>().material.color = defaultMaterial;
                 }
             }
 
             //*************************************************************
-            //  u–„‚ß‚év‚Ì‘ÎÛ‚É‚È‚Á‚Ä‚¢‚éê‡i–„‚ß‚éƒ‚[ƒh‚Ìê‡j
+            //  ã€ŒåŸ‹ã‚ã‚‹ã€ã®å¯¾è±¡ã«ãªã£ã¦ã„ã‚‹å ´åˆï¼ˆåŸ‹ã‚ã‚‹ãƒ¢ãƒ¼ãƒ‰ã®å ´åˆï¼‰
             //*************************************************************
             else if (isFill == true && this.gameObject.tag == "RoadPanel")
-            {// ƒ‚[ƒhFFILL
+            {// ãƒ¢ãƒ¼ãƒ‰ï¼šFILL
 
                 if (hit.transform.gameObject == this.gameObject)
-                {// ©•ª‚ÉƒJ[ƒ\ƒ‹‚ª“–‚½‚Á‚½
-                    gameObject.GetComponent<Renderer>().material.color = Color.green; // —ÎF
+                {// è‡ªåˆ†ã«ã‚«ãƒ¼ã‚½ãƒ«ãŒå½“ãŸã£ãŸ
+                    gameObject.GetComponent<Renderer>().material.color = Color.green; // ç·‘è‰²
 
-                    // ¶ƒNƒŠƒbƒN‚µ‚½
+                    // å·¦ã‚¯ãƒªãƒƒã‚¯ã—ãŸ
                     if (Input.GetMouseButtonDown(0))
                     {
                         if (EditorManager.Instance.useServer == true)
-                        {// ƒT[ƒo[‚ğg—p‚·‚éê‡
-                            // ƒf[ƒ^•Ï”‚ğİ’è
+                        {// ã‚µãƒ¼ãƒãƒ¼ã‚’ä½¿ç”¨ã™ã‚‹å ´åˆ
+                            // ãƒ‡ãƒ¼ã‚¿å¤‰æ•°ã‚’è¨­å®š
                             Action_FillData fillData = new Action_FillData();
                             fillData.playerID = ClientManager.Instance.playerID;
                             fillData.objeID = objeID;
 
-                            Debug.Log("–„‚ß‚éƒIƒuƒWƒFƒNƒgID : " + fillData.objeID);
+                            Debug.Log("åŸ‹ã‚ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆID : " + fillData.objeID);
 
-                            // ‘—Mˆ—
+                            // é€ä¿¡å‡¦ç†
                             await ClientManager.Instance.Send(fillData, 6);
                         }
                         else
-                        {// ƒT[ƒo[‚ğg—p‚µ‚È‚¢
-                            // ƒIƒuƒWƒFƒNƒg‚ğ¶¬‚·‚é
+                        {// ã‚µãƒ¼ãƒãƒ¼ã‚’ä½¿ç”¨ã—ãªã„
+                            // ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã™ã‚‹
                             GameObject block = Instantiate(blockPrefab, new Vector3(transform.position.x, 1.47f, transform.position.z), Quaternion.identity);
-
-                            //ƒ‚ƒNƒ‚ƒN‚·‚éƒAƒjƒ[ƒVƒ‡ƒ“‚ÌÄ¶
+                            
+                            //ãƒ¢ã‚¯ãƒ¢ã‚¯ã™ã‚‹ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®å†ç”Ÿ
                             Instantiate(smoke, new Vector3(transform.position.x, 1.47f, transform.position.z), Quaternion.identity);
 
-                            // ”jŠü‚·‚é
+
+                            // ç ´æ£„ã™ã‚‹
                             Destroy(this.gameObject);
 
-                            // ƒxƒCƒN‚ğŠJn
+                            // ãƒ™ã‚¤ã‚¯ã‚’é–‹å§‹
                             stageManager.GetComponent<StageManager>().StartBake();
                         }
 
-                        // ƒXƒ^ƒ~ƒi‚ğŒ¸‚ç‚·
+                        // ã‚¹ã‚¿ãƒŸãƒŠã‚’æ¸›ã‚‰ã™
                         player.GetComponent<Player>().SubStamina(20);
-                        Debug.Log("c‚èƒXƒ^ƒ~ƒi" + player.GetComponent<Player>().stamina);
+                        Debug.Log("æ®‹ã‚Šã‚¹ã‚¿ãƒŸãƒŠ" + player.GetComponent<Player>().stamina);
                     }
                 }
                 else
                 {
-                    gameObject.GetComponent<Renderer>().material.color = Color.yellow; // ‰©F
+                    gameObject.GetComponent<Renderer>().material.color = Color.yellow; // é»„è‰²
                 }
             }
 
             //************************************
-            //  ‚»‚Ì‘¼
+            //  ãã®ä»–
             //************************************
             else
             {
-                // ƒfƒtƒHƒ‹ƒgƒJƒ‰[‚É–ß‚·
+                // ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚«ãƒ©ãƒ¼ã«æˆ»ã™
                 gameObject.GetComponent<Renderer>().material.color = defaultMaterial;
             }
         }

@@ -17,14 +17,15 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] GameObject moveButton;     // moveボタンの取得
     [SerializeField] GameObject nothingButton;  // nothingボタンの取得
     [SerializeField] GameObject sabotageButton; // sabotageボタンの取得
-    [SerializeField] GameObject canselButton;   // canselボタンの取得
+    [SerializeField] public GameObject canselButton;   // canselボタンの取得
 
     // 情報を取得
     GameObject player;
-    RoadManager roadManager;
+    GameObject roadManager;
     UIManager uIManager;
     TextUIManager textUI;
     GameObject cameraManager;
+    public GameObject sabotage;
 
     // ランダム関数
     System.Random rnd = new System.Random();
@@ -34,6 +35,8 @@ public class ButtonManager : MonoBehaviour
 
     // ランダムの数値を入れるための変数
     int rand;
+
+    public bool isCancel;
 
     // スタミナ消費分の数値を決める変数
     public int subStamina;
@@ -51,26 +54,32 @@ public class ButtonManager : MonoBehaviour
             player = GameObject.Find("Player1");
         }
 
-        GameObject roadManagerObject = GameObject.Find("RoadManager");
-
-        roadManager = roadManagerObject.GetComponent<RoadManager>();
-
+        // ロードマネージャーを取得
+        roadManager = GameObject.Find("RoadManager");
+        
+        // UIマネージャーを取得
         GameObject uiManagerObject = GameObject.Find("UIManager");
-
         uIManager = uiManagerObject.GetComponent<UIManager>();
 
+        // テキストUIマネージャーを取得
         GameObject textUIObject = GameObject.Find("TextUIManager");
-
         textUI = textUIObject.GetComponent<TextUIManager>();
 
+        // カメラマネージャーを取得
         cameraManager = GameObject.Find("CameraManager");
+
+        // サボタージュUIを取得
+        sabotage = GameObject.Find("SabotageUI");
+
+        // サボタージュUIを非表示にする
+        sabotage.SetActive(false);
         
         // プレイヤーのモードをNOTHINGに設定
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.NOTHING;
 
         if (EditorManager.Instance.useServer == false)
         {// サーバーを使用しない場合
-            sabotageButton.SetActive(false);
+            sabotageButton.SetActive(true); // true : サボタージュUI表示
         }
         else
         {
@@ -83,6 +92,8 @@ public class ButtonManager : MonoBehaviour
                 sabotageButton.SetActive(true);
             }
         }
+
+        isCancel = false;
     }
 
     public void PlayerMove()
@@ -125,8 +136,19 @@ public class ButtonManager : MonoBehaviour
             moveButton.SetActive(false);
             fillButton.SetActive(false);
             nothingButton.SetActive(false);
-            sabotageButton.SetActive(false);
             actionButton.SetActive(false);
+
+            if (EditorManager.Instance.useServer == false)
+            {// サーバーを使用しない場合
+                sabotageButton.SetActive(false); // true : サボタージュUI表示
+            }
+            else
+            {
+                if (ClientManager.Instance.isInsider == true)
+                {// 自分自身が内通者の場合
+                    sabotageButton.SetActive(false);
+                }
+            }
         }
     }
 
@@ -192,6 +214,11 @@ public class ButtonManager : MonoBehaviour
         }
     }
 
+    public void Sabotage()
+    {
+        sabotage.SetActive(true);
+    }
+
     public void ButtonCancel()
     {// キャンセルボタンを選んだ場合
         if (roadUI == true)
@@ -203,11 +230,29 @@ public class ButtonManager : MonoBehaviour
             fillButton.SetActive(true);
             nothingButton.SetActive(true);
             actionButton.SetActive(true);
-            
-            if (player.tag == "Insider")
-            {// タグがSecrecyなら表示
-                sabotageButton.SetActive(true);
+
+            sabotage.SetActive(false);
+
+            if (EditorManager.Instance.useServer == false)
+            {// サーバーを使用しない場合
+                sabotageButton.SetActive(true); // true : サボタージュUI表示
             }
+            else
+            {
+                if (ClientManager.Instance.isInsider == true)
+                {// 自分自身が内通者の場合
+                    sabotageButton.SetActive(true);
+                }
+            }
+
+            for(int i = 0;i< roadManager.GetComponent<RoadManager>().blokObjList.Count; i++)
+            {
+                roadManager.GetComponent<RoadManager>().blokObjList[i].GetComponent<RoadPanel>().isSelect = false;
+            }
+
+            // リストの中身・カウントを初期化
+            roadManager.GetComponent<RoadManager>().blokObjList = new List<GameObject>();
+            roadManager.GetComponent<RoadManager>().fillCount = 0;
         }
 
         canselButton.SetActive(false);
@@ -225,15 +270,22 @@ public class ButtonManager : MonoBehaviour
 
         canselButton.SetActive(false);
 
-        if (player.tag == "Insider")
-        {// タグがSecrecyなら表示
-            sabotageButton.SetActive(true);
+        if (EditorManager.Instance.useServer == false)
+        {// サーバーを使用しない場合
+            sabotageButton.SetActive(true); // true : サボタージュUI表示
+        }
+        else
+        {
+            if (ClientManager.Instance.isInsider == true)
+            {// 自分自身が内通者の場合
+                sabotageButton.SetActive(true);
+            }
         }
     }
 
     public void RotRoad()
     {// 道・道UIを回転
-        roadManager.AddRotButton();
+        roadManager.GetComponent<RoadManager>().AddRotButton();
         uIManager.RotRoadUI();
     }
 
