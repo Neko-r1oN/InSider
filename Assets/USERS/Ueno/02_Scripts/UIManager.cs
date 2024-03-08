@@ -58,10 +58,12 @@ public class UIManager : MonoBehaviour
         {// サーバーを使用しない
             player = GameObject.Find("Player1");
         }
-
+        
+        // ロードマネージャーの情報を格納
         GameObject roadManagerObject = GameObject.Find("RoadManager");
         roadManager = roadManagerObject.GetComponent<RoadManager>();
 
+        // 回転の初期値を格納
         _initialRotation = gameObject.transform.rotation;
 
         // RoadUIを非表示にする
@@ -117,10 +119,16 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 前回選択された道UIの非表示処理
+    /// </summary>
+    /// <param name="selectNum"></param>
     public void ShowRoad(int selectNum)
-    {// RoadUIを表示する
+    {
+        // RoadUIを表示する
         road.SetActive(true);
 
+        // 引数で来た値が0以上なら
         if (selectNum >= 0)
         {
             // 前回選んだ道UIを非表示にする
@@ -128,8 +136,13 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 前回選択した道UIの表示処理
+    /// </summary>
+    /// <param name="selectNum"></param>
     public void HideRoad(int selectNum)
     {
+        // 引数で来た値が0以上なら
         if(selectNum >= 0)
         {
             // 非表示にしていた道UIを表示
@@ -143,12 +156,19 @@ public class UIManager : MonoBehaviour
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.MOVE;
     }
 
+    /// <summary>
+    /// 道UIがtrue・falseかを返す処理
+    /// </summary>
+    /// <returns></returns>
     public bool ActiveRoad()
     {
         // true・falseを返す
         return road.activeSelf;
     }
 
+    /// <summary>
+    /// 道UIの回転処理
+    /// </summary>
     public void RotRoadUI()
     {
         for(int i = 0; i < roadUIList.Count; i++)
@@ -159,12 +179,15 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 道UIの回転を元に戻す処理
+    /// </summary>
     public void ResetRoadUI()
     {
         for (int i = 0; i < roadUIList.Count; i++)
         {// リストの中身をカウントする
 
-            // リストの全てを回転する
+            // リストの全てを回転を元に戻す
             roadUIList[i].transform.rotation = _initialRotation;
         }
     }

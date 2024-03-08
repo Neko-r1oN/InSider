@@ -47,4 +47,24 @@ public class PlayerManager : MonoBehaviour
             players[i].SetActive(true);
         }
     }
+
+    private void Update()
+    {
+        for(int i = 0;i < players.Count; i++)
+        {
+            Player player = players[i].GetComponent<Player>();
+
+            if (player.mode == Player.PLAYER_MODE.DOWN)
+            {
+                player.BlinkPlayer();
+
+                if (player.cnt >= 200)
+                {
+                    player.RecoverPlayer();
+                }
+            }
+        }
+
+        
+    }
 }

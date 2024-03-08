@@ -7,7 +7,7 @@ AnimationClip:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: MinerIdle
-  serializedVersion: 6
+  serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
   m_UseHighQualityCurve: 1
@@ -961,6 +961,8 @@ AnimationClip:
       typeID: 4
       customType: 0
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 303751078
       attribute: 4
@@ -968,6 +970,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 2709546490
       attribute: 4
@@ -975,6 +979,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 1611806256
       attribute: 4
@@ -982,6 +988,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 3588021033
       attribute: 4
@@ -989,6 +997,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 1405096134
       attribute: 4
@@ -996,6 +1006,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 3107693015
       attribute: 4
@@ -1003,6 +1015,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 4158959251
       attribute: 4
@@ -1010,6 +1024,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 2876090260
       attribute: 4
@@ -1017,6 +1033,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 2568354110
       attribute: 4
@@ -1024,6 +1042,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 1224808644
       attribute: 4
@@ -1031,6 +1051,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 1946085595
       attribute: 4
@@ -1038,6 +1060,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 3519497968
       attribute: 4
@@ -1045,6 +1069,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 2582604535
       attribute: 4
@@ -1052,6 +1078,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 1131522310
       attribute: 4
@@ -1059,6 +1087,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 2901506882
       attribute: 4
@@ -1066,6 +1096,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 2547193539
       attribute: 4
@@ -1073,6 +1105,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 4034690808
       attribute: 4
@@ -1080,6 +1114,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 1953471769
       attribute: 4
@@ -1087,6 +1123,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 884322189
       attribute: 4
@@ -1094,6 +1132,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 34437982
       attribute: 4
@@ -1101,6 +1141,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 3383437171
       attribute: 4
@@ -1108,6 +1150,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 2644243904
       attribute: 4
@@ -1115,6 +1159,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 772999796
       attribute: 4
@@ -1122,6 +1168,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 1693116532
       attribute: 4
@@ -1129,6 +1177,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 2831906575
       attribute: 4
@@ -1136,6 +1186,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 2095243539
       attribute: 4
@@ -1143,6 +1195,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 3185717236
       attribute: 4
@@ -1150,6 +1204,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 556428116
       attribute: 4
@@ -1157,6 +1213,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 210245020
       attribute: 4
@@ -1164,6 +1222,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 3316609299
       attribute: 4
@@ -1171,6 +1231,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 2367031576
       attribute: 4
@@ -1178,6 +1240,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 1344911021
       attribute: 4
@@ -1185,6 +1249,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 1258363280
       attribute: 4
@@ -1192,6 +1258,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 1373695179
       attribute: 4
@@ -1199,6 +1267,8 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     pptrCurveMapping: []
   m_AnimationClipSettings:
     serializedVersion: 2
@@ -1221,7 +1291,8 @@ AnimationClip:
     m_HeightFromFeet: 0
     m_Mirror: 0
   m_EditorCurves:
-  - curve:
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -1249,7 +1320,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.034
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -1277,7 +1350,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.034
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -1305,7 +1380,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.034
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -1333,7 +1410,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.034/Bone.035
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -1361,7 +1440,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.034/Bone.035
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -1389,7 +1470,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.034/Bone.035
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -1417,7 +1500,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.036/Bone.037
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -1445,7 +1530,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.036/Bone.037
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -1473,7 +1560,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.036/Bone.037
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -1501,7 +1590,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.036/Bone.037/Bone.038
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -1529,7 +1620,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.036/Bone.037/Bone.038
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -1557,7 +1650,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.036/Bone.037/Bone.038
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -1585,7 +1680,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.039
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -1613,7 +1710,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.039
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -1641,7 +1740,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.039
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -1669,7 +1770,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.039/Bone.040
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -1697,7 +1800,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.039/Bone.040
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -1725,7 +1830,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.039/Bone.040
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -1753,7 +1860,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.039/Bone.040/Bone.041
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -1781,7 +1890,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.039/Bone.040/Bone.041
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -1809,7 +1920,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.039/Bone.040/Bone.041
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -1837,7 +1950,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.042
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -1865,7 +1980,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.042
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -1893,7 +2010,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.042
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -1921,7 +2040,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.042/Bone.043
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -1949,7 +2070,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.042/Bone.043
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -1977,7 +2100,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.042/Bone.043
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2005,7 +2130,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.042/Bone.043/Bone.044
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2033,7 +2160,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.042/Bone.043/Bone.044
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2061,7 +2190,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.042/Bone.043/Bone.044
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2089,7 +2220,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.045/Bone.046
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2117,7 +2250,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.045/Bone.046
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2145,7 +2280,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.045/Bone.046
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2173,7 +2310,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.045/Bone.046/Bone.047
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2201,7 +2340,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.045/Bone.046/Bone.047
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2229,7 +2370,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.045/Bone.046/Bone.047
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2266,7 +2409,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2303,7 +2448,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2340,7 +2487,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2368,7 +2517,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2396,7 +2547,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2424,7 +2577,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2452,7 +2607,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2480,7 +2637,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2508,7 +2667,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2536,7 +2697,9 @@ AnimationClip:
     path: Miner/Spine/LeftUpleg
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2564,7 +2727,9 @@ AnimationClip:
     path: Miner/Spine/LeftUpleg
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2592,7 +2757,9 @@ AnimationClip:
     path: Miner/Spine/LeftUpleg
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2620,7 +2787,9 @@ AnimationClip:
     path: Miner/Spine/RightUpleg
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2648,7 +2817,9 @@ AnimationClip:
     path: Miner/Spine/RightUpleg
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2676,7 +2847,9 @@ AnimationClip:
     path: Miner/Spine/RightUpleg
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2704,7 +2877,9 @@ AnimationClip:
     path: Miner/Spine/RightUpleg/Rightlowerleg
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2732,7 +2907,9 @@ AnimationClip:
     path: Miner/Spine/RightUpleg/Rightlowerleg
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2760,7 +2937,9 @@ AnimationClip:
     path: Miner/Spine/RightUpleg/Rightlowerleg
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2788,7 +2967,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.016
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2816,7 +2997,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.016
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2844,7 +3027,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.016
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2872,7 +3057,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.016/Bone.017
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2900,7 +3087,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.016/Bone.017
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2928,7 +3117,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.016/Bone.017
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2956,7 +3147,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.018
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -2984,7 +3177,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.018
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3012,7 +3207,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.018
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3040,7 +3237,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.018/Bone.019
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3068,7 +3267,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.018/Bone.019
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3096,7 +3297,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.018/Bone.019
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3124,7 +3327,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.018/Bone.019/Bone.020
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3152,7 +3357,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.018/Bone.019/Bone.020
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3180,7 +3387,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.018/Bone.019/Bone.020
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3208,7 +3417,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.021
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3236,7 +3447,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.021
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3264,7 +3477,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.021
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3292,7 +3507,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.021/Bone.022
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3320,7 +3537,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.021/Bone.022
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3348,7 +3567,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.021/Bone.022
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3376,7 +3597,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.021/Bone.022/Bone.023
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3404,7 +3627,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.021/Bone.022/Bone.023
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3432,7 +3657,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.021/Bone.022/Bone.023
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3460,7 +3687,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.024
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3488,7 +3717,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.024
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3516,7 +3747,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.024
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3544,7 +3777,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.024/Bone.025
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3572,7 +3807,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.024/Bone.025
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3600,7 +3837,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.024/Bone.025
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3628,7 +3867,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.024/Bone.025/Bone.026
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3656,7 +3897,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.024/Bone.025/Bone.026
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3684,7 +3927,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.024/Bone.025/Bone.026
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3712,7 +3957,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.027/Bone.028
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3740,7 +3987,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.027/Bone.028
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3768,7 +4017,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.027/Bone.028
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3796,7 +4047,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.027/Bone.028/Bone.029
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3824,7 +4077,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.027/Bone.028/Bone.029
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3852,7 +4107,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.027/Bone.028/Bone.029
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3898,7 +4155,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3944,7 +4203,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -3990,7 +4251,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -4018,7 +4281,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -4046,7 +4311,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -4074,7 +4341,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -4111,7 +4380,9 @@ AnimationClip:
     path: Miner/Spine/Spine1
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -4148,7 +4419,9 @@ AnimationClip:
     path: Miner/Spine/Spine1
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -4185,7 +4458,9 @@ AnimationClip:
     path: Miner/Spine/Spine1
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -4231,7 +4506,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/Head
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -4277,7 +4554,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/Head
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -4323,8 +4602,10 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/Head
     classID: 4
     script: {fileID: 0}
+    flags: 16
   m_EulerEditorCurves:
-  - curve:
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4334,7 +4615,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4344,7 +4627,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4354,7 +4639,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4364,7 +4651,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.034
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4374,7 +4663,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.034
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4384,7 +4675,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.034
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4394,7 +4687,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.034/Bone.035
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4404,7 +4699,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.034/Bone.035
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4414,7 +4711,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.034/Bone.035
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4424,7 +4723,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.036/Bone.037
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4434,7 +4735,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.036/Bone.037
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4444,7 +4747,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.036/Bone.037
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4454,7 +4759,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.036/Bone.037/Bone.038
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4464,7 +4771,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.036/Bone.037/Bone.038
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4474,7 +4783,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.036/Bone.037/Bone.038
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4484,7 +4795,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.039
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4494,7 +4807,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.039
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4504,7 +4819,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.039
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4514,7 +4831,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.039/Bone.040
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4524,7 +4843,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.039/Bone.040
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4534,7 +4855,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.039/Bone.040
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4544,7 +4867,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.039/Bone.040/Bone.041
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4554,7 +4879,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.039/Bone.040/Bone.041
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4564,7 +4891,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.039/Bone.040/Bone.041
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4574,7 +4903,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.042
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4584,7 +4915,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.042
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4594,7 +4927,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.042
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4604,7 +4939,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.042/Bone.043
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4614,7 +4951,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.042/Bone.043
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4624,7 +4963,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.042/Bone.043
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4634,7 +4975,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.042/Bone.043/Bone.044
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4644,7 +4987,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.042/Bone.043/Bone.044
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4654,7 +4999,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.042/Bone.043/Bone.044
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4664,7 +5011,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.045/Bone.046
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4674,7 +5023,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.045/Bone.046
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4684,7 +5035,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.045/Bone.046
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4694,7 +5047,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4704,7 +5059,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4714,7 +5071,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4724,7 +5083,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.027/Bone.028/Bone.029
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4734,7 +5095,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.027/Bone.028/Bone.029
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4744,7 +5107,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.027/Bone.028/Bone.029
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4754,7 +5119,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4764,7 +5131,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4774,7 +5143,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4784,7 +5155,9 @@ AnimationClip:
     path: Miner/Spine/RightUpleg/Rightlowerleg
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4794,7 +5167,9 @@ AnimationClip:
     path: Miner/Spine/RightUpleg/Rightlowerleg
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4804,7 +5179,9 @@ AnimationClip:
     path: Miner/Spine/RightUpleg/Rightlowerleg
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4814,7 +5191,9 @@ AnimationClip:
     path: Miner/Spine/LeftUpleg
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4824,7 +5203,9 @@ AnimationClip:
     path: Miner/Spine/LeftUpleg
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4834,7 +5215,9 @@ AnimationClip:
     path: Miner/Spine/LeftUpleg
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4844,7 +5227,9 @@ AnimationClip:
     path: Miner/Spine/RightUpleg
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4854,7 +5239,9 @@ AnimationClip:
     path: Miner/Spine/RightUpleg
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4864,7 +5251,9 @@ AnimationClip:
     path: Miner/Spine/RightUpleg
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4874,7 +5263,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.027/Bone.028
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4884,7 +5275,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.027/Bone.028
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4894,7 +5287,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.027/Bone.028
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4904,7 +5299,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4914,7 +5311,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4924,7 +5323,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4934,7 +5335,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.018
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4944,7 +5347,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.018
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4954,7 +5359,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.018
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4964,7 +5371,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.018/Bone.019
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4974,7 +5383,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.018/Bone.019
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4984,7 +5395,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.018/Bone.019
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -4994,7 +5407,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.016/Bone.017
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5004,7 +5419,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.016/Bone.017
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5014,7 +5431,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.016/Bone.017
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5024,7 +5443,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.021/Bone.022
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5034,7 +5455,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.021/Bone.022
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5044,7 +5467,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.021/Bone.022
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5054,7 +5479,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.016
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5064,7 +5491,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.016
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5074,7 +5503,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.016
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5084,7 +5515,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.018/Bone.019/Bone.020
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5094,7 +5527,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.018/Bone.019/Bone.020
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5104,7 +5539,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.018/Bone.019/Bone.020
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5114,7 +5551,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.021/Bone.022/Bone.023
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5124,7 +5563,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.021/Bone.022/Bone.023
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5134,7 +5575,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.021/Bone.022/Bone.023
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5144,7 +5587,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.024
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5154,7 +5599,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.024
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5164,7 +5611,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.024
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5174,7 +5623,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.024/Bone.025
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5184,7 +5635,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.024/Bone.025
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5194,7 +5647,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.024/Bone.025
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5204,7 +5659,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.024/Bone.025/Bone.026
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5214,7 +5671,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.024/Bone.025/Bone.026
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5224,7 +5683,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.024/Bone.025/Bone.026
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5234,7 +5695,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.021
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5244,7 +5707,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.021
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5254,7 +5719,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForearm/Hand/Bone.021
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5264,7 +5731,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5274,7 +5743,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5284,7 +5755,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/LeftShoulder/LeftArm
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5294,7 +5767,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/Head
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5304,7 +5779,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/Head
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5314,7 +5791,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/Head
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5324,7 +5803,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.045/Bone.046/Bone.047
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5334,7 +5815,9 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.045/Bone.046/Bone.047
     classID: 4
     script: {fileID: 0}
-  - curve:
+    flags: 16
+  - serializedVersion: 2
+    curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -5344,6 +5827,7 @@ AnimationClip:
     path: Miner/Spine/Spine1/Spine2/RightShoulder/RightArm/Rightforearm/Handright/Bone.045/Bone.046/Bone.047
     classID: 4
     script: {fileID: 0}
+    flags: 16
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events: []

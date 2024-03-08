@@ -57,6 +57,17 @@ public class Player : MonoBehaviour
 
     int insiderCount = 0; // 内密者の人数をカウント
 
+    private Material _material;
+    private double _time;
+
+    public int cnt;
+
+    // 点滅周期[s]
+    [SerializeField] private float _cycle = 1;
+
+    // 点滅させる対象（ここがBehaviourに変更されている）
+    [SerializeField] private Renderer _target;
+
     public enum PLAYER_MODE
     {
         MOVE,         // 移動
@@ -75,6 +86,9 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         path = new NavMeshPath();
+
+        // レンダラーのマテリアルを保持しておく
+        _material = _target.material;
     }
 
     // Start is called before the first frame update
@@ -178,7 +192,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(agent.remainingDistance <= 0.1f)
+        if (agent.remainingDistance <= 0.1f)
         {// 移動量が0以下
             // 滑らかに回転
             transform.forward = Vector3.Slerp(transform.forward, Vector3.back, Time.deltaTime * 8f);    // 後ろを向く
@@ -212,7 +226,7 @@ public class Player : MonoBehaviour
         //******************************
         //  採掘モード
         //******************************
-        if(other.gameObject.tag == "Block")
+        if (other.gameObject.tag == "Block")
         {// 採掘可能なブロック
             if (mode == PLAYER_MODE.MINING)
             {// 採掘モードの場合
@@ -229,7 +243,7 @@ public class Player : MonoBehaviour
         //******************************
         //  埋めるモード
         //******************************
-        if(other.gameObject.tag == "RoadPanel")
+        if (other.gameObject.tag == "RoadPanel")
         {// 埋めることが可能な道パネル
             if (mode == PLAYER_MODE.FILL)
             {// 埋めるモードの場合
@@ -254,9 +268,13 @@ public class Player : MonoBehaviour
         agent.destination = targetPos;
     }
 
+    /// <summary>
+    /// スタミナ減少処理
+    /// </summary>
+    /// <param name="num"></param>
     public void SubStamina(int num)
     {
-        if(this.gameObject.tag == "Insider")
+        if (this.gameObject.tag == "Insider")
         {
             // スタミナを減らす
             stamina -= num - 10;
@@ -266,7 +284,7 @@ public class Player : MonoBehaviour
             // スタミナを減らす
             stamina -= num;
         }
-       
+
         if (stamina <= 0)
         {// スタミナが0以下になった時
             // 0に固定する
@@ -280,6 +298,10 @@ public class Player : MonoBehaviour
         staminaNum.text = "" + stamina;
     }
 
+    /// <summary>
+    /// スタミナ回復処理
+    /// </summary>
+    /// <param name="num"></param>
     public void AddStamina(int num)
     {
         // スタミナを増やす
@@ -298,5 +320,48 @@ public class Player : MonoBehaviour
 
         // 残りスタミナを表示(デバックのみ)
         Debug.Log("残りスタミナ" + stamina);
+    }
+
+    /// <summary>
+    /// ダウン処理
+    /// </summary>
+    public void DownPlayer()
+    {
+        // ダウンモードに変更
+        mode = PLAYER_MODE.DOWN;
+
+        animator.SetBool("Down", true);
+
+        cnt = 0;
+    }
+
+    public void BlinkPlayer() 
+    {
+        Debug.Log(animator.GetBool("Down"));
+
+        // 内部時刻を経過させる
+        _time += Time.deltaTime;
+
+        // 周期cycleで繰り返す値の取得
+        // 0～cycleの範囲の値が得られる
+        var repeatValue = Mathf.Repeat((float)_time, 0.5f);
+
+        bool isShowPlayer = repeatValue >= 0.25f;
+
+        this.gameObject.SetActive(isShowPlayer);
+
+        cnt++;
+    }
+
+    /// <summary>
+    /// ダウンから元に戻す処理
+    /// </summary>
+    public void RecoverPlayer()
+    {
+        mode = PLAYER_MODE.MOVE;
+
+        animator.SetBool("Down", false);
+
+        this.gameObject.SetActive(true);
     }
 }

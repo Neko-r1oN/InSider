@@ -189,6 +189,10 @@ public class RoadManager : MonoBehaviour
         player.GetComponent<Player>().selectRoadNum = num;
     }
    
+
+    /// <summary>
+    /// 道の回転処理
+    /// </summary>
     public void AddRotButton()
     { //道の回転
         rotY += 90;
