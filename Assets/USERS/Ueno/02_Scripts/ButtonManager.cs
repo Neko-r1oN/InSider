@@ -104,6 +104,8 @@ public class ButtonManager : MonoBehaviour
         }
 
         isCancel = false;
+
+        canselButton.SetActive(false);
     }
 
     public void PlayerMove()
@@ -173,6 +175,10 @@ public class ButtonManager : MonoBehaviour
             }
         }
 
+        HideButton();
+
+        canselButton.SetActive(true);
+
         textUI.HideText();
 
         if (player.GetComponent<Player>().isEnd == false
@@ -227,6 +233,8 @@ public class ButtonManager : MonoBehaviour
     public void Sabotage()
     {
         sabotage.SetActive(true);
+
+        HideButton();
     }
 
     public void ButtonCancel()
@@ -289,6 +297,27 @@ public class ButtonManager : MonoBehaviour
             if (ClientManager.Instance.isInsider == true)
             {// 自分自身が内通者の場合
                 sabotageButton.SetActive(true);
+            }
+        }
+    }
+
+    public void HideButton()
+    {
+        // その他のボタンを非表示
+        moveButton.SetActive(false);
+        fillButton.SetActive(false);
+        nothingButton.SetActive(false);
+        actionButton.SetActive(false);
+
+        if (EditorManager.Instance.useServer == false)
+        {// サーバーを使用しない場合
+            sabotageButton.SetActive(false); // true : サボタージュUI表示
+        }
+        else
+        {
+            if (ClientManager.Instance.isInsider == true)
+            {// 自分自身が内通者の場合
+                sabotageButton.SetActive(false);
             }
         }
     }

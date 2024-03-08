@@ -37,6 +37,9 @@ public class UIManager : MonoBehaviour
 
     private Quaternion _initialRotation; // 初期回転
 
+    // 連続選択ができないよう前回の選択した数値を保存
+    public int selectRoadNum;
+
     // 情報を取得
     RoadManager roadManager;
     GameObject player;
@@ -120,6 +123,8 @@ public class UIManager : MonoBehaviour
             //-----------------------------
             playerUIList[ClientManager.Instance.turnPlayerID].GetComponent<MovePlayerUI>().MoveOrReturn(true);
         }
+
+        selectRoadNum = -1;
     }
 
     /// <summary>

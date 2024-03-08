@@ -1272,7 +1272,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!136 &69706944
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4295,7 +4295,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8479ec9ee856a5b45b777bc33c5fe3b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectRoadNum: -1
   isEnd: 0
   stamina: 100
   cnt: 0
@@ -4358,6 +4357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnd: 0
+  playerObjID: 0
 --- !u!136 &210333116
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -11390,6 +11390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnd: 0
+  playerObjID: 0
 --- !u!114 &630176434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11402,7 +11403,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8479ec9ee856a5b45b777bc33c5fe3b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectRoadNum: -1
   isEnd: 0
   stamina: 100
   cnt: 0
@@ -15504,6 +15504,7 @@ MonoBehaviour:
   - {fileID: 1286726695}
   - {fileID: 630176426}
   - {fileID: 1213451747}
+  triggerList: []
 --- !u!4 &840676510
 Transform:
   m_ObjectHideFlags: 0
@@ -22525,7 +22526,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8479ec9ee856a5b45b777bc33c5fe3b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectRoadNum: -1
   isEnd: 0
   stamina: 100
   cnt: 0
@@ -22588,6 +22588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnd: 0
+  playerObjID: 0
 --- !u!136 &1213451759
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -23913,6 +23914,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnd: 0
+  playerObjID: 0
 --- !u!114 &1286726703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23925,7 +23927,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8479ec9ee856a5b45b777bc33c5fe3b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectRoadNum: -1
   isEnd: 0
   stamina: 100
   cnt: 0
@@ -27266,7 +27267,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8479ec9ee856a5b45b777bc33c5fe3b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectRoadNum: -1
   isEnd: 0
   stamina: 100
   cnt: 0
@@ -27329,6 +27329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnd: 0
+  playerObjID: 0
 --- !u!136 &1483753237
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -31522,7 +31523,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8479ec9ee856a5b45b777bc33c5fe3b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectRoadNum: -1
   isEnd: 0
   stamina: 100
   cnt: 0
@@ -31612,6 +31612,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnd: 0
+  playerObjID: 0
 --- !u!136 &1727096700
 CapsuleCollider:
   m_ObjectHideFlags: 0
