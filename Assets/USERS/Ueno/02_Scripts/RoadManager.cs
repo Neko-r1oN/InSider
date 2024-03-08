@@ -8,6 +8,10 @@ public class RoadManager : MonoBehaviour
     // ロードプレハブを格納
     [SerializeField] GameObject[] RoadPrefab = new GameObject[5];
 
+    [SerializeField] GameObject blockObj;
+
+    public List<GameObject> blokObjList;
+
     // ベイクオブジェクトを取得
     GameObject Baker;
 
@@ -17,11 +21,20 @@ public class RoadManager : MonoBehaviour
     // プレイヤー
     GameObject player;
 
+    // ゴールド
+    [SerializeField] GameObject gold;
+
     // 敵
     GameObject enemy;
 
+    // ステージの管理
+    GameObject stageManager;
+
     // ボタンマネージャーを取得
     ButtonManager buttonManager;
+
+    // ロードパネルを取得
+    RoadPanel roadPanel;
 
     public GameObject targetBlock;
     public int rotY;
@@ -32,6 +45,8 @@ public class RoadManager : MonoBehaviour
     private int roadNum;
 
     private bool isGold;
+
+    public int fillCount;
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +60,8 @@ public class RoadManager : MonoBehaviour
 
         // UIManager
         uiMnager = GameObject.Find("UIManager");
+        
+        stageManager = GameObject.Find("StageManager");
 
         // Player
         if (EditorManager.Instance.useServer)
@@ -63,8 +80,29 @@ public class RoadManager : MonoBehaviour
 
         // Button
         GameObject buttonManagerObject = GameObject.Find("ButtonManager");
+        buttonManager = buttonManagerObject.GetComponent<ButtonManager>();
+    }
 
-        buttonManager = buttonManagerObject.GetComponent<ButtonManager>(); 
+    private void Update()
+    {
+        if (fillCount >= 4)
+        {
+            for (int i = 0; i < blokObjList.Count; i++)
+            {
+                // オブジェクトを生成する
+                GameObject block = Instantiate(blockObj, new Vector3(blokObjList[i].transform.position.x, 1.47f, blokObjList[i].transform.position.z), Quaternion.identity);
+
+                // オブジェクトを破棄
+                Destroy(blokObjList[i]);
+            }
+
+            //リストの中身・カウントを初期化
+            blokObjList = new List<GameObject>();
+            fillCount = 0;
+
+            // ベイクを開始
+            stageManager.GetComponent<StageManager>().StartBake();
+        }
     }
 
     public async void Road(GameObject roadPrefab)
@@ -114,6 +152,8 @@ public class RoadManager : MonoBehaviour
    public void Road(int num)
     {
         Player script = player.GetComponent<Player>();
+
+        isGold = true;
 
         if(num == 0 && script.stamina >= 20)
         {// I字
@@ -177,7 +217,7 @@ public class RoadManager : MonoBehaviour
         Baker.GetComponent<StageManager>().StartBake();
 
         //ゴールドを生成
-        //block.transform
+        Instantiate(gold, block.transform.position, Quaternion.identity);
 
         // 初期化
         targetBlock = null;

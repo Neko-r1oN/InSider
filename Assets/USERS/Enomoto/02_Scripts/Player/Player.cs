@@ -56,11 +56,14 @@ public class Player : MonoBehaviour
 
     public enum PLAYER_MODE
     {
-        MOVE,    // 移動
-        MINING,  // 採掘
-        FILL,    // 埋める
-        NOTHING, // 何もしない
-        DOWN     // ダウン
+        MOVE,         // 移動
+        MINING,       // 採掘
+        FILL,         // 埋める
+        NOTHING,      // 何もしない
+        DOWN,         // ダウン
+        SABOTAGEFILL, // 埋める(サボタージュ)
+        SABOTAGEBOMB, // 爆弾(サボタージュ)
+        SABOTAGETRAP  // トラップ(サボタージュ)
     }
 
     // プレイヤーのモード

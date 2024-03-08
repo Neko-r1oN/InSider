@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using DG.Tweening;  //DOTween‚ðŽg‚¤‚Æ‚«‚Í‚±‚Ìusing‚ð“ü‚ê‚é
+using DG.Tweening;  //DOTweenã‚’ä½¿ã†ã¨ãã¯ã“ã®usingã‚’å…¥ã‚Œã‚‹
 
 public class TitleManager : MonoBehaviour
 {
@@ -38,13 +38,13 @@ public class TitleManager : MonoBehaviour
         
 
         if (Input.GetKey(KeyCode.Escape))
-        {//ESC‰Ÿ‚µ‚½Û‚Ìˆ—
+        {//ESCæŠ¼ã—ãŸéš›ã®å‡¦ç†
 #if UNITY_EDITOR
-            //ƒGƒfƒBƒ^[ŽÀsŽž
-            //ƒGƒfƒBƒ^[ŽÀsŽž
+           
+            //ã‚¨ãƒ‡ã‚£ã‚¿ãƒ¼å®Ÿè¡Œæ™‚
             UnityEditor.EditorApplication.isPlaying = false;
 #else
-            //ƒrƒ‹ƒhŽž
+            //ãƒ“ãƒ«ãƒ‰æ™‚
             Application.Quit();
 #endif
         }
@@ -91,13 +91,5 @@ public class TitleManager : MonoBehaviour
     void StartTrue()
     {
         isStart = true;
-    }
-
-    public void OnNextScene()
-    {
-        //fade.FadeIn(ŽžŠÔ,() => Š®—¹‚µ‚½‚Æ‚«‚É‚â‚è‚½‚¢‚±‚Æ);
-        //fade.FadeIn(1f, () => SceneManager.LoadScene("StandbyScene_copy"));
-
-        SceneManager.LoadScene("StandbyScene_copy");
     }
 }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3114671257519957098}
   m_Layer: 0
   m_Name: Road_04
-  m_TagString: RoadPanel
+  m_TagString: EventPanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -126,6 +126,7 @@ MonoBehaviour:
     type: 3}
   isFill: 0
   objeID: 0
+  smoke: {fileID: 5408633052442516991, guid: 1d6651dd79e115c4fb7cb9604b460ad1, type: 3}
 --- !u!1 &1575043426890587533
 GameObject:
   m_ObjectHideFlags: 0
