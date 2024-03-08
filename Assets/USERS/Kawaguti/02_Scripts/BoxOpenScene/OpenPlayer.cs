@@ -5,7 +5,8 @@ using UnityEngine;
 public class OpenPlayer : MonoBehaviour
 {
     Animator animator;
-
+    private OpenBox openBox;
+    
     private float _repeatSpan;    //ŒJ‚è•Ô‚·ŠÔŠu
     private float _timeElapsed;   //Œo‰ßŠÔ
 
@@ -16,7 +17,7 @@ public class OpenPlayer : MonoBehaviour
     void Start()
     {
         //•\¦Ø‚è‘Ö‚¦ŠÔ‚ğw’è
-        _repeatSpan = 2.0f;
+        _repeatSpan = 3.0f;
         _timeElapsed = 0;
 
         Mimic = false;
