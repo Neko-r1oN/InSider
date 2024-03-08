@@ -5220,7 +5220,6 @@ GameObject:
   - component: {fileID: 6654311738083795204}
   - component: {fileID: 1637286505590348083}
   - component: {fileID: 8548110612503002280}
-  - component: {fileID: 2533169283763083370}
   m_Layer: 0
   m_Name: Road_02 (1)
   m_TagString: RoadPanel
@@ -8035,24 +8034,6 @@ Transform:
   - {fileID: 6829085759564737634}
   m_Father: {fileID: 2172913054998856470}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2533169283763083370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1022313360830551738}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d73ce0faa8dd34f49a0a269067e97298, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blockPrefab: {fileID: 1691180745474395491, guid: 31734e6361752504c9dda7ca5f342164,
-    type: 3}
-  isFill: 0
-  objeID: 0
-  isSelect: 0
-  smoke: {fileID: 0}
 --- !u!33 &2549073451201829243
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -11179,7 +11160,7 @@ Transform:
   m_GameObject: {fileID: 7841857844702447391}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.54566324, z: -0, w: 0.8380046}
-  m_LocalPosition: {x: -7.5362725, y: 5.645061, z: -3.0348034}
+  m_LocalPosition: {x: -7.44, y: 5.645061, z: -3.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
