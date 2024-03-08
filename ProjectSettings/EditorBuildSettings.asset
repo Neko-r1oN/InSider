@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/USERS/Ueno/00_Scenes/gameUeno.unity
+    guid: 88bca88a65feecb4cb8fb55e990498d2
+  - enabled: 1
+    path: Assets/USERS/Ueno/00_Scenes/UenoUI.unity
+    guid: 5f09041b4627416459bdb5bd11803dae
+  - enabled: 1
     path: Assets/Scenes/TitleKawaguchi_copy.unity
     guid: ce52bb6533576fa4480f349dba812462
   - enabled: 1
@@ -14,10 +20,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/JobScene_copy.unity
     guid: 04781150606b44e4e933c004a89ea71e
-  - enabled: 0
-    path: Assets/USERS/Ueno/00_Scenes/UenoUI.unity
-    guid: 5f09041b4627416459bdb5bd11803dae
-  - enabled: 1
-    path: Assets/USERS/Enomoto/00_Scenes/gameEno.unity
-    guid: b8a3a78b556b71847b079d3cdfbbce51
   m_configObjects: {}

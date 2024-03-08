@@ -136,7 +136,7 @@ public class RoadManager : MonoBehaviour
         }
 
         // 道選択UIを閉じる
-        uiMnager.GetComponent<UIManager>().HideRoad(player.GetComponent<Player>().selectRoadNum);
+        uiMnager.GetComponent<UIManager>().HideRoad(uiMnager.GetComponent<UIManager>().selectRoadNum);
 
         // 消えているボタンを表示する
         buttonManager.DisplayButton();
@@ -186,7 +186,7 @@ public class RoadManager : MonoBehaviour
 
         Road(RoadPrefab[num]);
 
-        player.GetComponent<Player>().selectRoadNum = num;
+        uiMnager.GetComponent<UIManager>().selectRoadNum = num;
     }
    
 

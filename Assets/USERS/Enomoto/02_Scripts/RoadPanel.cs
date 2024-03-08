@@ -16,6 +16,8 @@ public class RoadPanel : MonoBehaviour
 
     RoadManager roadManager;
 
+    GameObject buttonManager;
+
     // デフォルトカラー
     Color defaultMaterial;
 
@@ -42,7 +44,9 @@ public class RoadPanel : MonoBehaviour
 
         GameObject roadManagerobj = GameObject.Find("RoadManager");
         roadManager = roadManagerobj.GetComponent<RoadManager>();
-        
+
+        buttonManager = GameObject.Find("ButtonManager");
+
         if (EditorManager.Instance.useServer == true)
         {// サーバーを使用する場合
             player = GameObject.Find("player-List");
@@ -162,7 +166,6 @@ public class RoadPanel : MonoBehaviour
                             
                             //モクモクするアニメーションの再生
                             Instantiate(smoke, new Vector3(transform.position.x, 1.47f, transform.position.z), Quaternion.identity);
-
 
                             // 破棄する
                             Destroy(this.gameObject);

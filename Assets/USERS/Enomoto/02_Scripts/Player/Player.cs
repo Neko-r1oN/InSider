@@ -34,9 +34,6 @@ public class Player : MonoBehaviour
     // パス
     NavMeshPath path = null;
 
-    // 連続選択ができないよう前回の選択した数値を保存
-    public int selectRoadNum = -1;
-
     // 目的地を設定したかどうか
     bool isSetTarget = false;
 
