@@ -43,7 +43,7 @@ public class FadeImage : UnityEngine.UI.Graphic , IFade
 	}
 
 	protected override void Start ()
-	{
+	{ 
 		base.Start ();
 		UpdateMaskTexture (maskTexture);
 	}
