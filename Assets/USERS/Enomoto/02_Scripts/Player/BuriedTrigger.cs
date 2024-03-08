@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.AI;
+using System.Threading.Tasks;
 
 public class BuriedTrigger : MonoBehaviour
 {
     GameObject player;  // プレイヤー
     NavMeshAgent agent; // エージェント
     Vector3 startPos;   // 開始時の座標
+
+    // トリガーの判定が入ったかどうか
+    bool isBuried;
 
     // Start is called before the first frame update
     void Start()
@@ -23,23 +27,29 @@ public class BuriedTrigger : MonoBehaviour
         startPos = player.transform.position;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private async Task OnTriggerEnter(Collider other)
     {
-        if(other.transform.tag == "Block")
+        if(other.transform.tag == "Block" && isBuried == false) // 処理が何度も入るのを阻止
         {// ブロックに埋まった
             Debug.Log("埋められた");
 
-            // コンポーネントを無効にする
-            agent.enabled = false;
+            // クラス変数を作成
+            RevisionPosData revisionPosData = new RevisionPosData();
+            revisionPosData.playerID = ClientManager.Instance.playerID;
+            revisionPosData.targetID = ClientManager.Instance.playerID;
+            revisionPosData.isBuried = true;
+            revisionPosData.targetPosX = 0f;
+            revisionPosData.targetPosY = 0.9f;
+            revisionPosData.targetPosZ = -5f;
 
-            // 開始位置へ移動
-            player.transform.position = new Vector3(0f,0.9f,-5f);
-
-            // コンポーネントを有効にする
-            agent.enabled = true;
-
-            // 復活パーティクルを出す
-            //Instantiate();
+            // [revisionPosData]サーバーに送信
+            await ClientManager.Instance.Send(revisionPosData, 12);
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        // 偽にする
+        isBuried = false;
     }
 }

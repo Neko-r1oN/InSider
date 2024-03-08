@@ -20,7 +20,7 @@ public class OpenPlayer : MonoBehaviour
         _repeatSpan = 3.0f;
         _timeElapsed = 0;
 
-        Mimic = false;
+        Mimic = true;
         Once = false;
         animator = GetComponent<Animator>();
     }

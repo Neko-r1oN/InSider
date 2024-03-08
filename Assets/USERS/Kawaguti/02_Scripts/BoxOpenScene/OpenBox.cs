@@ -23,7 +23,7 @@ public class OpenBox : MonoBehaviour
         _repeatSpan = 2.0f;
         _timeElapsed = 0;
 
-        isMimic = false;
+        isMimic = true;
         Once = false;
         Gold.SetActive(false);
         animator = GetComponent<Animator>();

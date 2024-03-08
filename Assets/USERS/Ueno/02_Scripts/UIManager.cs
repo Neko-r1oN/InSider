@@ -32,6 +32,9 @@ public class UIManager : MonoBehaviour
     // ダウトのUI
     GameObject[,] doubtImageUiList = new GameObject[6,6];
 
+    // ダウトのボタンのリスト
+    [SerializeField] List<GameObject> doubtButtonList;
+
     private Quaternion _initialRotation; // 初期回転
 
     // 情報を取得
@@ -181,6 +184,7 @@ public class UIManager : MonoBehaviour
 
                 // 破棄する
                 Destroy(playerUIList[i]);
+                Destroy(doubtButtonList[i]);
 
                 Debug.Log("破棄する" + i);
 
@@ -189,6 +193,8 @@ public class UIManager : MonoBehaviour
 
             playerName[i].GetComponent<Text>().text = nameList[i];
         }
+
+        Destroy(doubtButtonList[ClientManager.Instance.playerID]);
     }
 
     /// <summary>
@@ -262,13 +268,13 @@ public class UIManager : MonoBehaviour
     /// </summary>
     /// <param name="targetNum"></param>
     /// <param name="indexNum"></param>
-    public void UdDoubt(int targetNum,int indexNum)
+    public void UdDoubt(int targetID,int playerID)
     {
         // インデックス番号を調整
-        indexNum = (indexNum - 1 <= 0) ? 0 : indexNum--;    // 自分自身をダウとすることはできないので画像の種類は５種類
+        playerID = (playerID - 1 <= 0) ? 0 : playerID--;    // 画像の種類は５種類のため調整
 
         // アクティブ化する
-        doubtImageUiList[targetNum, indexNum].SetActive(true);
+        doubtImageUiList[targetID, playerID].SetActive(true);
     }
 
     /// <summary>
@@ -280,5 +286,6 @@ public class UIManager : MonoBehaviour
         playerUIList.RemoveAt(indexNum);
         playerName.RemoveAt(indexNum);
         outImageUI.RemoveAt(indexNum);
+        doubtButtonList.RemoveAt(indexNum);
     }
 }

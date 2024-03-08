@@ -7,6 +7,9 @@ public class PlayerManager : MonoBehaviour
     // プレイヤーオブジェクトのリスト
     public List<GameObject> players;
 
+    // トリガーのリスト (今だけ)
+    public List<GameObject> triggerList;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,10 +29,13 @@ public class PlayerManager : MonoBehaviour
 
             if(i == ClientManager.Instance.playerID)
             {// 自身のプレイヤーIDと一致する
-                players[i].GetComponent<OtherPlayer>().enabled = false; // スクリプトを無効にする
+                Destroy(players[i].GetComponent<OtherPlayer>());    // 破棄する
             }
             else
             {
+                // トリガー用のオブジェクトを破棄する
+                Destroy(triggerList[i]);
+
                 // コンポーネントを削除する
                 Destroy(players[i].GetComponent<Player>());
 
@@ -41,6 +47,9 @@ public class PlayerManager : MonoBehaviour
                     // コライダーを破棄する
                     Destroy(collider);
                 }
+
+                // IDを設定する
+                players[i].GetComponent<OtherPlayer>().playerObjID = i;
             }
 
             // アクティブ化

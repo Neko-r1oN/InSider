@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using DG.Tweening;  //DOTween‚ðŽg‚¤‚Æ‚«‚Í‚±‚Ìusing‚ð“ü‚ê‚é
+using DG.Tweening;  //DOTweenã‚’ä½¿ã†ã¨ãã¯ã“ã®usingã‚’å…¥ã‚Œã‚‹
 
 public class TitleManager : MonoBehaviour
 {
@@ -12,7 +12,7 @@ public class TitleManager : MonoBehaviour
     [SerializeField] GameObject InputUI;
     [SerializeField] GameObject StartText;
 
-    [SerializeField] Fade fade;
+    //[SerializeField] Fade fade;
 
     static public string UserName { get; set; }
     AudioSource audio;
@@ -23,7 +23,7 @@ public class TitleManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        fade.FadeOut(0.1f);
+        //fade.FadeOut(0.1f);
         audio = GetComponent<AudioSource>();
         isStart = false;
         nameField.Select();
@@ -38,13 +38,13 @@ public class TitleManager : MonoBehaviour
         
 
         if (Input.GetKey(KeyCode.Escape))
-        {//ESC‰Ÿ‚µ‚½Û‚Ìˆ—
+        {//ESCæŠ¼ã—ãŸéš›ã®å‡¦ç†
 #if UNITY_EDITOR
            
-            //ƒGƒfƒBƒ^[ŽÀsŽž
+            //ã‚¨ãƒ‡ã‚£ã‚¿ãƒ¼å®Ÿè¡Œæ™‚
             UnityEditor.EditorApplication.isPlaying = false;
 #else
-            //ƒrƒ‹ƒhŽž
+            //ãƒ“ãƒ«ãƒ‰æ™‚
             Application.Quit();
 #endif
         }
@@ -76,10 +76,10 @@ public class TitleManager : MonoBehaviour
 
         //OnNextScene();
 
+        SceneManager.LoadScene("StandbyScene_copy");
 
 
-
-        fade.FadeIn(1f, () => SceneManager.LoadScene("StandbyScene_copy"));
+        //fade.FadeIn(1f, () => SceneManager.LoadScene("StandbyScene_copy"));
 
     }
     public void BackButton()
@@ -92,6 +92,4 @@ public class TitleManager : MonoBehaviour
     {
         isStart = true;
     }
-    
-    
 }
