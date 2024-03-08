@@ -62,7 +62,7 @@ public class Fade : MonoBehaviour
 	//強制的にFadeImageを塗潰す
 	void ImageFill()
 	{
-		cutoutRange = 1f;
+		cutoutRange = 0.0f;
 		fade.Range = cutoutRange;
 	}
 
