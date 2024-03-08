@@ -28,18 +28,21 @@ public class Fade : MonoBehaviour
 {
 	IFade fade;
 	[SerializeField] bool startFade;
+
+	int StartTime;
 	void Start ()
 	{
 		Init ();
-		if(startFade)
-        {
+		StartTime = 0;
+		if (startFade)
+		{ 
 			cutoutRange=1;
 		}
 		fade.Range = cutoutRange;
 	}
 
 	float cutoutRange;
-
+	public float endTime;
 	void Init ()
 	{
 		fade = GetComponent<IFade> ();
@@ -65,9 +68,9 @@ public class Fade : MonoBehaviour
 
 	IEnumerator FadeoutCoroutine(float time, System.Action action)
 	{
-		ImageFill();
+		//ImageFill();
 
-		float endTime = Time.timeSinceLevelLoad + time * (cutoutRange);
+		 endTime = Time.timeSinceLevelLoad + time * (cutoutRange);
 
 		var endFrame = new WaitForEndOfFrame();
 
@@ -113,6 +116,7 @@ public class Fade : MonoBehaviour
 
 	public Coroutine FadeOut (float time)
 	{
+		StartTime = System.DateTime.Now.Millisecond;
 		return FadeOut (time, null);
 	}
 
