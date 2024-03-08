@@ -136,6 +136,8 @@ public class ClientManager : MonoBehaviour
         Action_NothingData,   // 行動：何もしない
         DelPlayerID,          // 切断したプレイヤーのID
         UdTurns,              // ターンを更新
+        DoubtData,            // ダウトのデータ
+        RevisionPos,          // 座標の修正
     }
 
     //===========================
@@ -146,7 +148,7 @@ public class ClientManager : MonoBehaviour
     public static ClientManager Instance;
 
     // フェード用シリアライズフィールド
-    [SerializeField] Fade fade;
+    //[SerializeField] Fade fade;
 
     private void Awake()
     {
@@ -173,7 +175,7 @@ public class ClientManager : MonoBehaviour
     void Start()
     {
         //フェードアウト
-        fade.FadeOut(1f);
+        //fade.FadeOut(1f);
 
         // 初期化
         tcpClient = new TcpClient();
@@ -250,6 +252,9 @@ public class ClientManager : MonoBehaviour
 
         // NetworkStreamを使用
         stream = tcpClient.GetStream();
+
+        // 自分自身が疑われた回数
+        int doubtNum = 0;
 
         while (true)
         {
@@ -372,6 +377,9 @@ public class ClientManager : MonoBehaviour
                         break;
                     case 3: // 自身の役職と先行のプレイヤーIDを取得 & プレイヤーの名前リスト更新 & 元々のプレイヤーIDを更新 & マネージャー系の初期化
 
+                        // 疑われた回数を初期化
+                        doubtNum = 0;
+
                         // プレイヤーの名前リストを初期化する
                         playerNameList = new List<string>();
 
@@ -483,11 +491,6 @@ public class ClientManager : MonoBehaviour
 
                         Debug.Log("[" + restData.playerID + "]が休んだ→(回復量：" + restData.addStamina + ") 合計：" + restData.totalStamina);
 
-                        //// 次に行動できるプレイヤーのIDを更新する
-                        //Debug.Log("次に行動できるプレイヤーID：" + restData.nextPlayerID);
-                        //turnPlayerID = restData.nextPlayerID;
-                        //uiManager.GetComponent<UIManager>().UdTurnPlayerUI(playerNameList[turnPlayerID], turnPlayerID);   // UIを更新
-
                         break;
                     case 9: // ゲーム中に切断したプレイヤーのIDを受信
 
@@ -511,15 +514,6 @@ public class ClientManager : MonoBehaviour
                         // UIマネージャーが持つリストから要素を削除
                         uiManager.GetComponent<UIManager>().RemoveElement(delPlayerData.playerID);
 
-                        //// クライアント側の行動可能なプレイヤーIDを更新する
-                        //turnPlayerID = delPlayerData.nextPlayerID;  // IDを更新する
-
-                        //if (delPlayerData.isUdTurn == true)
-                        //{// ターンが更新される場合
-                        //    Debug.Log("ターンを更新します。");
-                        //    uiManager.GetComponent<UIManager>().UdTurnPlayerUI(playerNameList[turnPlayerID], turnPlayerID);   // UIを更新
-                        //}
-
                         // プレイヤーのモデルリストを取得する
                         List<GameObject> objeList = playerManager.GetComponent<PlayerManager>().players;
 
@@ -528,6 +522,17 @@ public class ClientManager : MonoBehaviour
 
                         // プレイヤーリストから削除する
                         objeList.RemoveAt(delPlayerData.playerID);
+
+                        // 各プレイヤーオブジェクトのIDを再設定する
+                        for (int i = 0; i < objeList.Count; i++)
+                        {
+                            if (i != ClientManager.Instance.playerID)
+                            {// 自身のプレイヤーIDと一致しない場合
+                                // IDを設定する
+                                objeList[i].GetComponent<OtherPlayer>().playerObjID = i;
+                            }
+                        }
+
 
                         break;
                     case 10:    // ターン数の更新＆次に行動できるプレイヤーIDの更新
@@ -544,6 +549,53 @@ public class ClientManager : MonoBehaviour
 
                         // 残りターン数を更新する
                         uiManager.GetComponent<UIManager>().UdRemainingTurns(udTurnsData.turnNum);
+
+                        // 制限時間を0にする
+                        TimeUI.Instance.FinishTimer();
+
+                        if(turnPlayerID == playerID)
+                        {// 自身のターンの場合
+                            TimeUI.Instance.GenerateTimer(doubtNum);    // 制限時間を設定する
+                        }
+
+                        break;
+                    case 11:    // ダウトのデータを受信
+
+                        // JSONデシリアライズで取得する
+                        DoubtData doubtData = JsonConvert.DeserializeObject<DoubtData>(jsonString);
+
+                        Debug.Log("[元のID]" + doubtData.playerID + "が" + doubtData.targetID + "を疑う");
+
+                        if(doubtData.targetID == originalID)
+                        {// 自身が疑われた場合
+                            doubtNum++;
+                        }
+
+                        // ダウトUIを更新する
+                        uiManager.GetComponent<UIManager>().UdDoubt(doubtData.targetID, doubtData.playerID);
+
+                        break;
+                    case 12: // 対象のプレイヤーオブジェクトの座標を修正する
+
+                        // JSONデシリアライズで取得する
+                        RevisionPosData revisionPos = JsonConvert.DeserializeObject<RevisionPosData>(jsonString);
+
+                        // プレイヤーのモデルリストを取得する
+                        List<GameObject> objeList1 = playerManager.GetComponent<PlayerManager>().players;
+
+                        // 座標を取得する
+                        Vector3 targetPos1 = new Vector3(revisionPos.targetPosX, revisionPos.targetPosY, revisionPos.targetPosZ);
+
+                        Debug.Log("座標を修正する [オブジェクトID：" + revisionPos.targetID + "] **送信元のプレイヤーID："+ revisionPos.playerID);
+
+                        if (revisionPos.playerID == playerID && revisionPos.targetID == playerID)
+                        {// 自身の場合
+                            objeList1[revisionPos.targetID].GetComponent<Player>().RevisionPos(targetPos1);
+                        }
+                        else
+                        {// 他のプレイヤーオブジェクトの場合
+                            objeList1[revisionPos.targetID].GetComponent<OtherPlayer>().RevisionPos(targetPos1,revisionPos.isBuried);
+                        }
 
                         break;
                 }
@@ -581,7 +633,7 @@ public class ClientManager : MonoBehaviour
             tcpClient.ReceiveTimeout = 1000;    // 受信
 
             // サーバーへ接続要求    (IP:"20.249.92.21"  "127.0.0.1")
-            await tcpClient.ConnectAsync("127.0.0.1", 20000);
+            await tcpClient.ConnectAsync("20.249.92.21", 20000);
             Debug.Log("***サーバーと通信確立***");
 
             //**********************************

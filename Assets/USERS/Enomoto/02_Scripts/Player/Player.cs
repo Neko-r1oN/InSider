@@ -34,9 +34,6 @@ public class Player : MonoBehaviour
     // パス
     NavMeshPath path = null;
 
-    // 初期位置保存用
-    Vector3 pos;
-
     // 連続選択ができないよう前回の選択した数値を保存
     public int selectRoadNum = -1;
 
@@ -100,9 +97,6 @@ public class Player : MonoBehaviour
 
         // 0～6までのランダムの数値が入る
         rand = rnd.Next(0, 7);
-
-        // 初期位置を保存
-        pos = this.gameObject.transform.position;
     }
 
     // Update is called once per frame
@@ -136,14 +130,14 @@ public class Player : MonoBehaviour
                     NavMesh.CalculatePath(transform.position, clickedTarget, NavMesh.AllAreas, path);
 
                     if (path.corners.Length > 0)
-                    {
+                    {// パスを取得できる場合
                         var length = path.corners[path.corners.Length - 1] - clickedTarget;
 
                         // 真
                         isSetTarget = true;
 
                         if (length.magnitude < 1.0f)
-                        {
+                        {// 目的地にたどり着くことができる場合
                             if (EditorManager.Instance.useServer == true)
                             {// サーバーを使用する場合
                                 // データ変数を設定
@@ -178,6 +172,11 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(agent.enabled == false)
+        {// Agentのコンポーネントが無効になっている場合
+            return;
+        }
+
         if(agent.remainingDistance <= 0.1f)
         {// 移動量が0以下
             // 滑らかに回転
@@ -189,13 +188,10 @@ public class Player : MonoBehaviour
             // 任意のアニメーションをtrueに変更
             animator.SetBool("Run", true);
 
-            Debug.Log("Run true");
-
             isEnd = false;
         }
         else if (Mathf.Abs(transform.localEulerAngles.y) >= 179f && isEnd == false) // 条件を絶対値にする
         {// 回転が終了すると
-            Debug.Log("Run false");
 
             // 回転を調整
             transform.localEulerAngles = new Vector3(0, 180, 0);
@@ -252,6 +248,30 @@ public class Player : MonoBehaviour
     {
         // 目的地へ移動
         agent.destination = targetPos;
+    }
+
+    /// <summary>
+    /// 座標を修正する
+    /// </summary>
+    /// <param name="pos"></param>
+    public void RevisionPos(Vector3 pos)
+    {
+        Debug.Log(pos);
+
+        // Agentの目的地を設定
+        agent.destination = pos;
+
+        // コンポーネントを無効にする
+        agent.enabled = false;
+
+        // 開始位置へ移動
+        transform.position = pos;
+
+        // コンポーネントを有効にする
+        agent.enabled = true;
+
+        // 復活パーティクルを出す
+        //Instantiate();
     }
 
     public void SubStamina(int num)

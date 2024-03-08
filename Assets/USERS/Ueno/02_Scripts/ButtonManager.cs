@@ -19,6 +19,12 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] GameObject sabotageButton; // sabotageボタンの取得
     [SerializeField] public GameObject canselButton;   // canselボタンの取得
 
+    // ダウトボタンのリスト
+    [SerializeField] List<GameObject> doubtButton;
+
+    // ダウトの補足テキスト
+    [SerializeField] Text supplementText;
+
     // 情報を取得
     GameObject player;
     GameObject roadManager;
@@ -40,6 +46,9 @@ public class ButtonManager : MonoBehaviour
 
     // スタミナ消費分の数値を決める変数
     public int subStamina;
+
+    // ダウトを使用したかどうか
+    bool isDoubt;
     
     private void Start()
     {
@@ -68,12 +77,13 @@ public class ButtonManager : MonoBehaviour
         // カメラマネージャーを取得
         cameraManager = GameObject.Find("CameraManager");
 
+        // 偽
+        isDoubt = false;
         // サボタージュUIを取得
         sabotage = GameObject.Find("SabotageUI");
 
         // サボタージュUIを非表示にする
         sabotage.SetActive(false);
-        
         // プレイヤーのモードをNOTHINGに設定
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.NOTHING;
 
@@ -117,8 +127,8 @@ public class ButtonManager : MonoBehaviour
 
         textUI.HideText();
 
-        if (player.GetComponent<Player>().isEnd == false)
-        {// プレイヤーが移動中の場合
+        if (player.GetComponent<Player>().isEnd == false || TimeUI.Instance.nowTime <= 0)
+        {// プレイヤーが移動中 || 制限時間が0以下の場合
             return;
         }
 
@@ -166,8 +176,8 @@ public class ButtonManager : MonoBehaviour
         textUI.HideText();
 
         if (player.GetComponent<Player>().isEnd == false
-            || player.GetComponent<Player>().stamina < 20)
-        {// プレイヤーが移動中の場合 || スタミナがない場合
+            || player.GetComponent<Player>().stamina < 20 || TimeUI.Instance.nowTime <= 0)
+        {// プレイヤーが移動中の場合 || スタミナがない場合 || 制限時間が0以下の場合
             return;
         }
 
@@ -188,8 +198,8 @@ public class ButtonManager : MonoBehaviour
 
         textUI.HideText();
 
-        if (player.GetComponent<Player>().isEnd == false)
-        {// プレイヤーが移動中の場合
+        if (player.GetComponent<Player>().isEnd == false || TimeUI.Instance.nowTime <= 0)
+        {// プレイヤーが移動中の場合 || 制限時間が0以下の場合
             return;
         }
 
@@ -294,4 +304,25 @@ public class ButtonManager : MonoBehaviour
         cameraManager.GetComponent<CameraManager>().SwitchCamera();
     }
 
+    /// <summary>
+    /// ダウトボタン
+    /// </summary>
+    /// <param name="indexNumber"></param>
+    public async void DoubtButton(int indexNumber)
+    {
+        if (isDoubt == false)
+        {
+            isDoubt = true;
+
+            // テキストを更新する
+            supplementText.text = "※ 使用済み";
+
+            DoubtData doubtData = new DoubtData();
+            doubtData.playerID = ClientManager.Instance.originalID;
+            doubtData.targetID = indexNumber;
+
+            // サーバーに送信する
+            await ClientManager.Instance.Send(doubtData, 11);
+        }
+    }
 }
