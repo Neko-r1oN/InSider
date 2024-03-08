@@ -98,14 +98,17 @@ public class RoadPanel : MonoBehaviour
                 if (hit.transform.gameObject == this.gameObject)
                 {// 自分にカーソルが当たった
 
+                    // スタートパネル以外だったら
                     if(hit.transform.gameObject.tag != "StartPanel")
                     {
-                        gameObject.GetComponent<Renderer>().material.color = Color.yellow; // 青色
+                        // 色を黄色に変更
+                        gameObject.GetComponent<Renderer>().material.color = Color.yellow; // 黄色
                     }
                     
                     // 左クリックした
                     if (Input.GetMouseButtonDown(0))
                     {
+                        // falseだったら
                         if (isSelect == false)
                         {
                             // 埋める場所選択数をカウント
@@ -115,6 +118,7 @@ public class RoadPanel : MonoBehaviour
                             roadManager.blokObjList.Add(this.gameObject);
                             Debug.Log("追加しました。");
 
+                            // trueに変更
                             isSelect = true;
                         }
                     }

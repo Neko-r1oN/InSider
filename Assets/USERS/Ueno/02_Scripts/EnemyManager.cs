@@ -11,8 +11,6 @@ public class EnemyManager : MonoBehaviour
 
     NavMeshAgent navMeshAgent;
 
-    public bool touch;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -20,8 +18,6 @@ public class EnemyManager : MonoBehaviour
 
         // NavMeshAgentÇï€éùÇµÇƒÇ®Ç≠
         navMeshAgent = GetComponent<NavMeshAgent>();
-
-        touch = false;
     }
 
     // Update is called once per frame
@@ -55,12 +51,12 @@ public class EnemyManager : MonoBehaviour
         navMeshAgent.destination = targetList[indexNum].transform.position;
     }
 
-    public void CreateEnemy(float posX, float posY, float posZ)
-    {
-        this.gameObject.SetActive(true);
+    //public void CreateEnemy(float posX, float posY, float posZ)
+    //{
+    //    this.gameObject.SetActive(true);
 
-        this.gameObject.transform.position = new Vector3(posX,posY,posZ);
-    }
+    //    this.gameObject.transform.position = new Vector3(posX,posY,posZ);
+    //}
 
     private void OnTriggerEnter(Collider other)
     {
@@ -68,11 +64,7 @@ public class EnemyManager : MonoBehaviour
         {
             Debug.Log("É^ÉbÉ`Ç≥ÇÍÇΩ");
 
-            other.GetComponent<Player>().mode = Player.PLAYER_MODE.DOWN;
-
-            touch = true;
-
-            //player.GetComponent<Player>().TouchPlayer();
+            other.GetComponent<Player>().DownPlayer();
 
             Debug.Log(other.GetComponent<Player>().mode);
         }
