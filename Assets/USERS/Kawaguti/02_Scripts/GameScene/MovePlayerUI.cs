@@ -13,7 +13,6 @@ public class MovePlayerUI : MonoBehaviour
         //ô•¶ [À•W‚ğ³‹K‰»‚·‚é‚½‚ß]
         Canvas.ForceUpdateCanvases();
 
-        Debug.Log(transform.localPosition.x);
         if (isMove == true)
         {// “®‚­
             //this.transform.DOLocalMove(new Vector3(-26f, pos.y, pos.z), 0.3f);    
