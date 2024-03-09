@@ -12,7 +12,7 @@ public class TitleManager : MonoBehaviour
     [SerializeField] GameObject InputUI;
     [SerializeField] GameObject StartText;
 
-    [SerializeField] Fade fade;
+    //[SerializeField] Fade fade;
 
     static public string UserName { get; set; }
     AudioSource audio;
@@ -23,7 +23,7 @@ public class TitleManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        fade.FadeOut(1.0f);
+        //fade.FadeOut(1.0f);
         audio = GetComponent<AudioSource>();
         isStart = false;
         nameField.Select();
@@ -78,8 +78,8 @@ public class TitleManager : MonoBehaviour
 
         //SceneManager.LoadScene("StandbyScene_copy");
 
-
-        fade.FadeIn(1f, () => SceneManager.LoadScene("StandbyScene_copy"));
+        Initiate.Fade("StandbyScene_copy", Color.black, 1.0f);
+        //fade.FadeIn(1f, () => SceneManager.LoadScene("StandbyScene_copy"));
 
     }
     public void BackButton()
