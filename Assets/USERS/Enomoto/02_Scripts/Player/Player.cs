@@ -80,9 +80,6 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         path = new NavMeshPath();
-
-        // レンダラーのマテリアルを保持しておく
-        //_material = _target.material;
     }
 
     // Start is called before the first frame update
