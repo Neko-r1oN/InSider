@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class EventManager : MonoBehaviour
 {
-    public enum EVENTID // ただのメモ
+    /// <summary>
+    /// 発生するイベントのID (ただのメモ)
+    /// </summary>
+    public enum EventOccurrenceID
     {
         RndFallStones = 0,  // ランダムに空から石が降ってくる
         Confusion,          // 混乱状態になる

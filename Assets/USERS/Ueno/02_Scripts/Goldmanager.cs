@@ -37,6 +37,9 @@ public class Goldmanager : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
+        // 加算するスコアをサーバーに送信する関数
+        ScoreMethodList.Instance.SendAddScore();
+
         Destroy(parentObj);
         Debug.Log("当たった");
     }

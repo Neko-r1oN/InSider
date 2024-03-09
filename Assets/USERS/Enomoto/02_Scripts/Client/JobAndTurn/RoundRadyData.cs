@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 [Serializable]
-internal class JobAndTurnData
+internal class RoundRadyData
 {
     /// <summary>
     /// 役職
@@ -26,4 +26,9 @@ internal class JobAndTurnData
     /// 現在のラウンド数
     /// </summary>
     public int roundNum { get; set; }
+
+    /// <summary>
+    /// 全てのプレイヤーのスコアリスト
+    /// </summary>
+    public List<int> scoreList { get; set; }
 }
