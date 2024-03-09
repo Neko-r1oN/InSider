@@ -476,12 +476,7 @@ public class ClientManager : MonoBehaviour
                         Debug.Log("[" + mineData.playerID + "]" + " : [" + mineData.prefabID + "]切り開く");
 
                         // 切り開く処理
-                        blockManager.GetComponent<BlockManager>().MineObject(mineData.objeID, mineData.prefabID, mineData.rotY);
-
-                        //// 次に行動できるプレイヤーのIDを更新する
-                        //Debug.Log("次に行動できるプレイヤーID：" + mineData.nextPlayerID);
-                        //turnPlayerID = mineData.nextPlayerID;
-                        //uiManager.GetComponent<UIManager>().UdTurnPlayerUI(playerNameList[turnPlayerID], turnPlayerID);   // UIを更新
+                        blockManager.GetComponent<BlockManager>().MineObject(mineData.objeID, mineData.prefabID, mineData.rotY,mineData.isGetGold);
 
                         break;
                     case 8: // やすむ(スタミナ回復)

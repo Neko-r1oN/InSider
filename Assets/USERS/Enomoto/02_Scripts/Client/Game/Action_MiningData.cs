@@ -26,4 +26,9 @@ internal class Action_MiningData
     /// ‰ñ“]“x
     /// </summary>
     public int rotY { get; set; }
+
+    /// <summary>
+    /// ‹à‚ð”­Œ@‚Å‚«‚é‚©‚Ç‚¤‚©
+    /// </summary>
+    public bool isGetGold { get; set; }
 }

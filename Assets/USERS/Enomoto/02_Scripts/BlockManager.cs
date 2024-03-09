@@ -1,3 +1,9 @@
+//************************************************************
+//
+//  サーバー使用時にブロックの生成、道パネルの生成をする
+//
+//************************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +18,9 @@ public class BlockManager : MonoBehaviour
 
     // ブロックのプレファブ
     [SerializeField] GameObject blockPrefab;
+
+    // ゴールドのプレファブ
+    [SerializeField] GameObject goldPrefab;
 
     // 格納用
     GameObject stageManager;
@@ -73,7 +82,7 @@ public class BlockManager : MonoBehaviour
     /// <param name="objeID">破棄するオブジェクトID</param>
     /// <param name="prefabID">プレファブのナンバー</param>
     /// <param name="rotY">回転度</param>
-    public void MineObject(int objeID,int prefabID,int rotY)
+    public void MineObject(int objeID,int prefabID,int rotY,bool isGetGold)
     {
         // 座標を設定
         Vector3 minePos = blocks[objeID].gameObject.transform.position;
@@ -94,5 +103,11 @@ public class BlockManager : MonoBehaviour
 
         // ベイクを開始
         stageManager.GetComponent<StageManager>().StartBake();
+
+        if(isGetGold == true)
+        {// フラグが真の場合
+            //ゴールドを生成
+            Instantiate(goldPrefab, minePos, Quaternion.identity);
+        }
     }
 }
