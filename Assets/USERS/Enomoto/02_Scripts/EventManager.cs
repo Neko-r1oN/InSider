@@ -17,8 +17,18 @@ public class EventManager : MonoBehaviour
         Decoy,              // デコイ
     }
 
+    // 混乱のエフェクトプレファブ
+    public GameObject chaosPrefab;
+
     // 起こしたいイベントのID
     public int eventNum;
+
+    GameObject player;
+
+    private void Start()
+    {
+        player = GameObject.Find("Player1");
+    }
 
     private void Update()
     {
@@ -33,7 +43,12 @@ public class EventManager : MonoBehaviour
                     break;
                 case 1: // Confusion
 
-                    // 処理内容
+                    GameObject childObject = Instantiate(chaosPrefab, player.transform);
+
+                    //// childObject の位置、回転、スケールを設定する
+                    //childObject.transform.localPosition = new Vector3(player.transform.position.x, 0.235f, 6.46f);
+                    //childObject.transform.localRotation = Quaternion.identity;
+                    //childObject.transform.localScale = new Vector3(1, 1, 1);
 
                     break;
                 case 2: // SpownEnemys

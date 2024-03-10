@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] GameObject road;
+    [SerializeField] public GameObject road;
     [SerializeField] List<GameObject> roadUIList;
 
     // 残りターン表示のテキスト

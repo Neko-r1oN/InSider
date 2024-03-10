@@ -2728,10 +2728,13 @@ MonoBehaviour:
   blockObj: {fileID: 1691180745474395491, guid: 31734e6361752504c9dda7ca5f342164,
     type: 3}
   blokObjList: []
+  bombOgjList: []
+  bomb: {fileID: 9162082388947968464, guid: c5496b9cd97dbd046a507cc27349409c, type: 3}
   gold: {fileID: 4295556386234032078, guid: d6040d4c28ee53840ba8686f5f62dd62, type: 3}
   targetBlock: {fileID: 0}
   rotY: 0
   fillCount: 0
+  bombCount: 0
 --- !u!1 &350550013
 GameObject:
   m_ObjectHideFlags: 0
@@ -4342,6 +4345,7 @@ GameObject:
   - component: {fileID: 617920435}
   - component: {fileID: 617920434}
   - component: {fileID: 617920433}
+  - component: {fileID: 617920436}
   m_Layer: 5
   m_Name: Sabotage1
   m_TagString: Untagged
@@ -4411,7 +4415,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 617920434}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1642309404}
+        m_TargetAssemblyTypeName: Sabotage, Assembly-CSharp
+        m_MethodName: SabotageBomb
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &617920434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4450,6 +4466,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 617920431}
   m_CullTransparentMesh: 1
+--- !u!114 &617920436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 617920431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1642309404}
+          m_TargetAssemblyTypeName: Sabotage, Assembly-CSharp
+          m_MethodName: SabotageText
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1642309404}
+          m_TargetAssemblyTypeName: Sabotage, Assembly-CSharp
+          m_MethodName: SabotageText
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &642794877
 GameObject:
   m_ObjectHideFlags: 0
@@ -6565,7 +6626,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &895394949
 Transform:
   m_ObjectHideFlags: 0
@@ -10971,6 +11032,7 @@ GameObject:
   - component: {fileID: 1486385387}
   - component: {fileID: 1486385386}
   - component: {fileID: 1486385385}
+  - component: {fileID: 1486385388}
   m_Layer: 5
   m_Name: Sabotage2
   m_TagString: Untagged
@@ -11091,6 +11153,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1486385383}
   m_CullTransparentMesh: 1
+--- !u!114 &1486385388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486385383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1642309404}
+          m_TargetAssemblyTypeName: Sabotage, Assembly-CSharp
+          m_MethodName: SabotageText
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1642309404}
+          m_TargetAssemblyTypeName: Sabotage, Assembly-CSharp
+          m_MethodName: SabotageText
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1520390993
 GameObject:
   m_ObjectHideFlags: 0
@@ -14217,7 +14324,7 @@ GameObject:
   - component: {fileID: 1917319383}
   - component: {fileID: 1917319382}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: SabotageText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14580,6 +14687,7 @@ GameObject:
   - component: {fileID: 2049312765}
   - component: {fileID: 2049312764}
   - component: {fileID: 2049312763}
+  - component: {fileID: 2049312766}
   m_Layer: 5
   m_Name: Sabotage3
   m_TagString: Untagged
@@ -14688,6 +14796,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2049312761}
   m_CullTransparentMesh: 1
+--- !u!114 &2049312766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049312761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1642309404}
+          m_TargetAssemblyTypeName: Sabotage, Assembly-CSharp
+          m_MethodName: SabotageText
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1642309404}
+          m_TargetAssemblyTypeName: Sabotage, Assembly-CSharp
+          m_MethodName: SabotageText
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2068156901
 GameObject:
   m_ObjectHideFlags: 0

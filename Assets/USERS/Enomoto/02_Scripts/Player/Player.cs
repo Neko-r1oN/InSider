@@ -102,6 +102,14 @@ public class Player : MonoBehaviour
 
         // スタミナゲージのオブジェクト情報を取得
         staminaGauge = GameObject.Find("staminaGauge");
+
+        // アニメーター情報を取得
+        animator = GetComponent<Animator>();
+
+        // 0～6までのランダムの数値が入る
+        rand = rnd.Next(0, 7);
+
+        animator.keepAnimatorStateOnDisable = true;
     }
 
     // Update is called once per frame
@@ -420,6 +428,7 @@ public class Player : MonoBehaviour
         // ダウンモードに変更
         mode = PLAYER_MODE.DOWN;
 
+        // ダウンのアニメーションに変更
         animator.SetBool("Down", true);
 
         cnt = 0;
