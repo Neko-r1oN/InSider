@@ -82,8 +82,6 @@ public class ButtonManager : MonoBehaviour
         // サボタージュUIを取得
         sabotage = GameObject.Find("SabotageUI");
 
-        // サボタージュUIを非表示にする
-        sabotage.SetActive(false);
         // プレイヤーのモードをNOTHINGに設定
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.NOTHING;
 
@@ -102,6 +100,9 @@ public class ButtonManager : MonoBehaviour
                 sabotageButton.SetActive(true);
             }
         }
+
+        // サボタージュUIを非表示にする
+        sabotage.SetActive(false);
 
         isCancel = false;
 
@@ -230,10 +231,17 @@ public class ButtonManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// サボタージュのボタン表示
+    /// </summary>
     public void Sabotage()
     {
+        // サボタージュの行動ボタン表示
         sabotage.SetActive(true);
 
+        textUI.HideText();
+
+        // その他ボタン削除
         HideButton();
     }
 
@@ -265,7 +273,7 @@ public class ButtonManager : MonoBehaviour
 
             for(int i = 0;i< roadManager.GetComponent<RoadManager>().blokObjList.Count; i++)
             {
-                roadManager.GetComponent<RoadManager>().blokObjList[i].GetComponent<RoadPanel>().isSelect = false;
+                roadManager.GetComponent<RoadManager>().blokObjList[i].GetComponent<RoadPanel>().isFillSelect = false;
             }
 
             // リストの中身・カウントを初期化
