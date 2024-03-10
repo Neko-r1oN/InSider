@@ -627,7 +627,12 @@ public class ClientManager : MonoBehaviour
 
                         Debug.Log("イベント：落石");
 
+                        // 座標を設定
+                        Vector3 stonePos = blockManager.GetComponent<BlockManager>().blocks[event_stoneData.panelID].transform.position;
+                        stonePos = new Vector3(stonePos.x + event_stoneData.addPosX, 0.5f, stonePos.z + event_stoneData.addPosZ);
+
                         // 落石オブジェクトの生成処理
+                        EventManager.Instance.GenerateEventStone(stonePos);
 
                         break;
                     case 102:   // 混乱
@@ -640,6 +645,13 @@ public class ClientManager : MonoBehaviour
 
                         // JSONデシリアライズで取得する
                         Event_RndFallData event_goldData = JsonConvert.DeserializeObject<Event_RndFallData>(jsonString);
+
+                        // 座標を設定
+                        Vector3 goldPos = blockManager.GetComponent<BlockManager>().blocks[event_goldData.panelID].transform.position;
+                        goldPos = new Vector3(goldPos.x + event_goldData.addPosX, 10f, goldPos.z + event_goldData.addPosZ);
+
+                        // 金のオブジェクトの生成処理
+                        EventManager.Instance.GenerateEventStone(goldPos);
 
                         Debug.Log("イベント：金");
 
