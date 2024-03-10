@@ -26,4 +26,14 @@ internal class Action_MiningData
     /// 回転度
     /// </summary>
     public int rotY { get; set; }
+
+    /// <summary>
+    /// 金を発掘できるかどうか
+    /// </summary>
+    public bool isGetGold { get; set; }
+
+    /// <summary>
+    /// 対象のブロックがイベントブロックかどうか
+    /// </summary>
+    public bool isEventBlock { get; set; }
 }

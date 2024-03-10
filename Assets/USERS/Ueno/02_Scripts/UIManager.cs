@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] GameObject road;
+    [SerializeField] public GameObject road;
     [SerializeField] List<GameObject> roadUIList;
 
     // 残りターン表示のテキスト
@@ -22,6 +22,13 @@ public class UIManager : MonoBehaviour
 
     // プレイヤーの名前
     [SerializeField] List<GameObject> playerName;
+    [SerializeField] List<GameObject> scorePlayerName;  // スコア表示の方のプレイヤーName
+
+    // スコア表示の方のプレイヤーUI
+    [SerializeField] List<GameObject> scorePlayerUIList;
+
+    // スコアのテキスト
+    [SerializeField] List<Text> scoreText;
 
     // プレイヤーが途中退出したときのUI
     [SerializeField] List<GameObject> outImageUI;
@@ -36,6 +43,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] List<GameObject> doubtButtonList;
 
     private Quaternion _initialRotation; // 初期回転
+
+    // 連続選択ができないよう前回の選択した数値を保存
+    public int selectRoadNum;
 
     // 情報を取得
     RoadManager roadManager;
@@ -104,6 +114,15 @@ public class UIManager : MonoBehaviour
             roundCounterText.GetComponent<Text>().text = "" + ClientManager.Instance.roundNum;
             remainingTurnsText.GetComponent<Text>().text = "" + ClientManager.Instance.turnMaxNum;
 
+            //-----------------------------
+            // スコアのテキストを更新する
+            //-----------------------------
+            for (int i = 0; i < ClientManager.Instance.scoreList.Count; i++)
+            {
+                // 各スコアのテキスト内容を更新する
+                UdScoreText(i, ClientManager.Instance.scoreList[i]);
+            }
+
             //------------------------------
             // プレイヤーの名前を更新
             //------------------------------
@@ -120,6 +139,8 @@ public class UIManager : MonoBehaviour
             //-----------------------------
             playerUIList[ClientManager.Instance.turnPlayerID].GetComponent<MovePlayerUI>().MoveOrReturn(true);
         }
+
+        selectRoadNum = -1;
     }
 
     /// <summary>
@@ -207,6 +228,7 @@ public class UIManager : MonoBehaviour
 
                 // 破棄する
                 Destroy(playerUIList[i]);
+                Destroy(scorePlayerUIList[i]);
                 Destroy(doubtButtonList[i]);
 
                 Debug.Log("破棄する" + i);
@@ -214,7 +236,11 @@ public class UIManager : MonoBehaviour
                 continue;
             }
 
+            // 常に表示される方
             playerName[i].GetComponent<Text>().text = nameList[i];
+
+            // スコア表示の方
+            scorePlayerName[i].GetComponent<Text>().text = nameList[i];
         }
 
         Destroy(doubtButtonList[ClientManager.Instance.playerID]);
@@ -227,6 +253,16 @@ public class UIManager : MonoBehaviour
     public void UdRemainingTurns(int turnNum)
     {
         remainingTurnsText.GetComponent<Text>().text = "" + turnNum;
+    }
+
+    /// <summary>
+    /// スコアのテキストを更新する
+    /// </summary>
+    /// <param name="indexNum"></param>
+    /// <param name="score"></param>
+    public void UdScoreText(int indexNum,int score)
+    {
+        scoreText[indexNum].text = "" + score;
     }
 
     /// <summary>

@@ -82,8 +82,6 @@ public class ButtonManager : MonoBehaviour
         // サボタージュUIを取得
         sabotage = GameObject.Find("SabotageUI");
 
-        // サボタージュUIを非表示にする
-        sabotage.SetActive(false);
         // プレイヤーのモードをNOTHINGに設定
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.NOTHING;
 
@@ -103,7 +101,12 @@ public class ButtonManager : MonoBehaviour
             }
         }
 
+        // サボタージュUIを非表示にする
+        sabotage.SetActive(false);
+
         isCancel = false;
+
+        canselButton.SetActive(false);
     }
 
     public void PlayerMove()
@@ -173,6 +176,10 @@ public class ButtonManager : MonoBehaviour
             }
         }
 
+        HideButton();
+
+        canselButton.SetActive(true);
+
         textUI.HideText();
 
         if (player.GetComponent<Player>().isEnd == false
@@ -224,9 +231,18 @@ public class ButtonManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// サボタージュのボタン表示
+    /// </summary>
     public void Sabotage()
     {
+        // サボタージュの行動ボタン表示
         sabotage.SetActive(true);
+
+        textUI.HideText();
+
+        // その他ボタン削除
+        HideButton();
     }
 
     public void ButtonCancel()
@@ -257,7 +273,7 @@ public class ButtonManager : MonoBehaviour
 
             for(int i = 0;i< roadManager.GetComponent<RoadManager>().blokObjList.Count; i++)
             {
-                roadManager.GetComponent<RoadManager>().blokObjList[i].GetComponent<RoadPanel>().isSelect = false;
+                roadManager.GetComponent<RoadManager>().blokObjList[i].GetComponent<RoadPanel>().isFillSelect = false;
             }
 
             // リストの中身・カウントを初期化
@@ -289,6 +305,27 @@ public class ButtonManager : MonoBehaviour
             if (ClientManager.Instance.isInsider == true)
             {// 自分自身が内通者の場合
                 sabotageButton.SetActive(true);
+            }
+        }
+    }
+
+    public void HideButton()
+    {
+        // その他のボタンを非表示
+        moveButton.SetActive(false);
+        fillButton.SetActive(false);
+        nothingButton.SetActive(false);
+        actionButton.SetActive(false);
+
+        if (EditorManager.Instance.useServer == false)
+        {// サーバーを使用しない場合
+            sabotageButton.SetActive(false); // true : サボタージュUI表示
+        }
+        else
+        {
+            if (ClientManager.Instance.isInsider == true)
+            {// 自分自身が内通者の場合
+                sabotageButton.SetActive(false);
             }
         }
     }

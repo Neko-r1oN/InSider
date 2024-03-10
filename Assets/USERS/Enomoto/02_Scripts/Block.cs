@@ -19,6 +19,8 @@ public class Block : MonoBehaviour
     // RoadManager
     GameObject RoadManager;
 
+    GameObject buttonManager;
+
     //MeshRenderer mr;
 
     // デフォルトカラー
@@ -59,6 +61,8 @@ public class Block : MonoBehaviour
         // アニメーター情報取得
         animator = player.GetComponent<Animator>();
 
+        buttonManager = GameObject.Find("ButtonManager");
+
         defaultMaterial = gameObject.GetComponent<Renderer>().material.color;
     }
 
@@ -88,10 +92,12 @@ public class Block : MonoBehaviour
                     // 左クリックした && 選択肢のUIが非表示の場合
                     if(Input.GetMouseButtonDown(0) && uiMnager.GetComponent<UIManager>().ActiveRoad() == false)
                     {
-                        uiMnager.GetComponent<UIManager>().ShowRoad(player.GetComponent<Player>().selectRoadNum);
+                        uiMnager.GetComponent<UIManager>().ShowRoad(uiMnager.GetComponent<UIManager>().selectRoadNum);
 
                         // ブロックの情報を渡す
                         RoadManager.GetComponent<RoadManager>().targetBlock = this.gameObject;
+
+                        buttonManager.GetComponent<ButtonManager>().canselButton.SetActive(false);
 
                         // 任意のアニメーションをtrueに変更
                         animator.SetBool("Mining", true);
