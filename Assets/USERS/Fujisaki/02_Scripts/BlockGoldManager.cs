@@ -39,8 +39,11 @@ public class BlockGoldManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // 加算するスコアをサーバーに送信する関数
-        ScoreMethodList.Instance.SendAddScore();
+        if (EditorManager.Instance.useServer == true)
+        {// サーバーを使用する場合
+            // 加算するスコアをサーバーに送信する関数
+            ScoreMethodList.Instance.SendAddScore();
+        }
 
         // 破棄する
         Destroy(parentObj);
