@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EventManager : MonoBehaviour
 {
+    [SerializeField] GameObject stonePrefab;
+    [SerializeField] GameObject goldPrefab;
+
     /// <summary>
     /// 発生するイベントのID (ただのメモ)
     /// </summary>
@@ -25,6 +28,24 @@ public class EventManager : MonoBehaviour
 
     GameObject player;
 
+    // シングルトン用
+    public static EventManager Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+
+            // シーン遷移しても破棄しないようにする
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void Start()
     {
         player = GameObject.Find("Player1");
@@ -44,11 +65,6 @@ public class EventManager : MonoBehaviour
                 case 1: // Confusion
 
                     GameObject childObject = Instantiate(chaosPrefab, player.transform);
-
-                    //// childObject の位置、回転、スケールを設定する
-                    //childObject.transform.localPosition = new Vector3(player.transform.position.x, 0.235f, 6.46f);
-                    //childObject.transform.localRotation = Quaternion.identity;
-                    //childObject.transform.localScale = new Vector3(1, 1, 1);
 
                     break;
                 case 2: // SpownEnemys
@@ -73,5 +89,25 @@ public class EventManager : MonoBehaviour
                     break;
             }
         }
+    }
+
+    /// <summary>
+    /// 石の生成
+    /// </summary>
+    /// <param name="pos"></param>
+    public void GenerateEventStone(Vector3 pos)
+    {
+        // 生成する
+        Instantiate(stonePrefab, pos,Quaternion.identity);
+    }
+
+    /// <summary>
+    /// 金の生成
+    /// </summary>
+    /// <param name="pos"></param>
+    public void GenerateEventGold(Vector3 pos)
+    {
+        // 生成する
+        Instantiate(goldPrefab, pos, Quaternion.identity);
     }
 }

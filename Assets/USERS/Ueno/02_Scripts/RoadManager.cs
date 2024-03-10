@@ -151,6 +151,8 @@ public class RoadManager : MonoBehaviour
             mineData.prefabID = roadNum;
             mineData.rotY = rotY;
 
+            mineData.isEventBlock = true;
+
             // 送信する
             await ClientManager.Instance.Send(mineData, 7);
         }
