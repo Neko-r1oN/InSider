@@ -32,15 +32,18 @@ public class Goldmanager : MonoBehaviour
     }
 
     /// <summary>
-    /// プレイヤーと金が当たったら消す処理
+    /// プレイヤーと金が当たったら消す処理 [インスペクター上でレイヤーを指定済み]
     /// </summary>
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
         if (EditorManager.Instance.useServer == true)
         {// サーバーを使用する場合
-            // 加算するスコアをサーバーに送信する関数
-            ScoreMethodList.Instance.SendAddScore();
+            if (other.GetComponent<Player>().playerObjID == ClientManager.Instance.playerID)
+            {// プレイヤーオブジェクトのIDが自身のIDの場合
+                // 加算するスコアをサーバーに送信する関数
+                ScoreMethodList.Instance.SendAddScore();
+            }
         }
 
         Destroy(parentObj);

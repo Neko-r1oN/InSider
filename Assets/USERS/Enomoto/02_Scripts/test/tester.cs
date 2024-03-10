@@ -4,22 +4,14 @@ using UnityEngine;
 
 public class tester : MonoBehaviour
 {
-    public List<GameObject> aaas;
+    [SerializeField] GameObject parent;
+    [SerializeField] GameObject child;
 
     // Start is called before the first frame update
     void Start()
     {
-        int cnt = 0;
-
-        foreach(GameObject gameObject in aaas)
-        {
-            if(gameObject.activeSelf == true)
-            {
-                cnt++;
-            }
-        }
-
-        Debug.Log(cnt);
+        child.SetActive(true);
+        parent.SetActive(true);
     }
 
     // Update is called once per frame

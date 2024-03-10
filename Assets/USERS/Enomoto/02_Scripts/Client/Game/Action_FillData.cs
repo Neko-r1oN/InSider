@@ -5,10 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 
 [Serializable]
-internal class RoundEndData
+internal class Action_FillData
 {
     /// <summary>
-    /// リスナーのリスト
+    /// プレイヤーID
     /// </summary>
-    public List<ListenerData> listeners { get; set; }
+    public int playerID { get; set; }
+
+    /// <summary>
+    /// オブジェクトのID
+    /// </summary>
+    public int objeID { get; set; }
 }

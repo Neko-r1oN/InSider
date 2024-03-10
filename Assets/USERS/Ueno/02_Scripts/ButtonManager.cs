@@ -48,7 +48,7 @@ public class ButtonManager : MonoBehaviour
     public int subStamina;
 
     // ダウトを使用したかどうか
-    bool isDoubt;
+    bool isUseDoubt;
     
     private void Start()
     {
@@ -78,7 +78,7 @@ public class ButtonManager : MonoBehaviour
         cameraManager = GameObject.Find("CameraManager");
 
         // 偽
-        isDoubt = false;
+        isUseDoubt = false;
         // サボタージュUIを取得
         sabotage = GameObject.Find("SabotageUI");
 
@@ -339,19 +339,30 @@ public class ButtonManager : MonoBehaviour
     /// <param name="indexNumber"></param>
     public async void DoubtButton(int indexNumber)
     {
-        if (isDoubt == false)
+        if (EditorManager.Instance.useServer == true)
         {
-            isDoubt = true;
+            foreach (int num in uIManager.disabledIndexNumList)
+            {
+                if (num == indexNumber)
+                {// 使用できないダウトのボタンが押されている場合
+                    return;
+                }
+            }
 
-            // テキストを更新する
-            supplementText.text = "※ 使用済み";
+            if (isUseDoubt == false)
+            {
+                isUseDoubt = true;
 
-            DoubtData doubtData = new DoubtData();
-            doubtData.playerID = ClientManager.Instance.originalID;
-            doubtData.targetID = indexNumber;
+                // テキストを更新する
+                supplementText.text = "※ 使用済み";
 
-            // サーバーに送信する
-            await ClientManager.Instance.Send(doubtData, 11);
+                DoubtData doubtData = new DoubtData();
+                doubtData.playerID = ClientManager.Instance.originalID;
+                doubtData.targetID = indexNumber;
+
+                // サーバーに送信する
+                await ClientManager.Instance.Send(doubtData, 11);
+            }
         }
     }
 }

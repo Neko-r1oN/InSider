@@ -42,6 +42,12 @@ public class UIManager : MonoBehaviour
     // ダウトのボタンのリスト
     [SerializeField] List<GameObject> doubtButtonList;
 
+    // ダウトのボタン用の途中退出したときのUI
+    [SerializeField] List<GameObject> outImageList_DoubtUI;
+
+    // 使用不可にするダウトのボタンのインデックス番号
+    public List<int> disabledIndexNumList;
+
     private Quaternion _initialRotation; // 初期回転
 
     // 連続選択ができないよう前回の選択した数値を保存
@@ -61,6 +67,9 @@ public class UIManager : MonoBehaviour
     {
         // 情報を取得
         road = GameObject.Find("RoadUI");
+
+        // newする
+        disabledIndexNumList = new List<int>();
 
         if (EditorManager.Instance.useServer == true)
         {// サーバーを使用する場合
@@ -217,7 +226,7 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// プレイヤーの名前を更新
+    /// プレイヤーの名前を更新 && 存在しない分のUIを削除
     /// </summary>
     private void UdPlayerName(List<string> nameList)
     {
@@ -230,16 +239,17 @@ public class UIManager : MonoBehaviour
                 Destroy(playerUIList[i]);
                 Destroy(scorePlayerUIList[i]);
                 Destroy(doubtButtonList[i]);
+                Destroy(outImageList_DoubtUI[i]);
 
                 Debug.Log("破棄する" + i);
 
                 continue;
             }
 
-            // 常に表示される方
+            // 常に表示される方の名前UI
             playerName[i].GetComponent<Text>().text = nameList[i];
 
-            // スコア表示の方
+            // スコア表示の方の名前UI
             scorePlayerName[i].GetComponent<Text>().text = nameList[i];
         }
 
@@ -320,6 +330,7 @@ public class UIManager : MonoBehaviour
     {
         // アクティブ化
         outImageUI[indexNum].SetActive(true);
+        outImageList_DoubtUI[indexNum].SetActive(true);
     }
 
     /// <summary>
@@ -346,5 +357,8 @@ public class UIManager : MonoBehaviour
         playerName.RemoveAt(indexNum);
         outImageUI.RemoveAt(indexNum);
         doubtButtonList.RemoveAt(indexNum);
+
+        // 使用できないインデックス番号を追加
+        disabledIndexNumList.Add(indexNum);
     }
 }
