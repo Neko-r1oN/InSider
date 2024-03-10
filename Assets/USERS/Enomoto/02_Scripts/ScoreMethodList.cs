@@ -27,6 +27,10 @@ public class ScoreMethodList : MonoBehaviour
 
     private void Start()
     {
+        if(EditorManager.Instance.useServer == false)
+        {// サーバーを使用しない場合
+            return;
+        }
         scoreData.originalID = ClientManager.Instance.originalID;
     }
 
@@ -35,6 +39,11 @@ public class ScoreMethodList : MonoBehaviour
     /// </summary>
     public async void SendAddScore()
     {
+        if (EditorManager.Instance.useServer == false)
+        {// サーバーを使用しない場合
+            return;
+        }
+
         // サーバーに送信する変数の値を設定
         scoreData.playerID = ClientManager.Instance.playerID;   // playerIDは変動する可能性があるためここで代入する
         scoreData.allieScore = scoreNum;
@@ -49,6 +58,11 @@ public class ScoreMethodList : MonoBehaviour
     /// <param name="loseGoldNum">ゴールドを失う数</param>
     public async void SendSubScore(int loseGoldNum)
     {
+        if (EditorManager.Instance.useServer == false)
+        {// サーバーを使用しない場合
+            return;
+        }
+
         // サーバーに送信する変数の値を設定
         scoreData.playerID = ClientManager.Instance.playerID;   // playerIDは変動する可能性があるためここで代入する
         scoreData.allieScore = loseGoldNum * scoreNum * -1;

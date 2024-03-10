@@ -4295,11 +4295,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8479ec9ee856a5b45b777bc33c5fe3b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerObjID: 0
   isEnd: 0
   stamina: 100
   cnt: 0
   _cycle: 1
-  _target: {fileID: 0}
   mode: 0
 --- !u!195 &210333113
 NavMeshAgent:
@@ -4351,7 +4351,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 210333104}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0126c239c1b25784d8d4f878ac8a2f3c, type: 3}
   m_Name: 
@@ -11384,7 +11384,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 630176426}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0126c239c1b25784d8d4f878ac8a2f3c, type: 3}
   m_Name: 
@@ -11403,11 +11403,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8479ec9ee856a5b45b777bc33c5fe3b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerObjID: 0
   isEnd: 0
   stamina: 100
   cnt: 0
   _cycle: 1
-  _target: {fileID: 0}
   mode: 0
 --- !u!195 &630176435
 NavMeshAgent:
@@ -15504,7 +15504,13 @@ MonoBehaviour:
   - {fileID: 1286726695}
   - {fileID: 630176426}
   - {fileID: 1213451747}
-  triggerList: []
+  triggerList:
+  - {fileID: 1069421762}
+  - {fileID: 151664233}
+  - {fileID: 446294859}
+  - {fileID: 612881610}
+  - {fileID: 1760192110}
+  - {fileID: 447817263}
 --- !u!4 &840676510
 Transform:
   m_ObjectHideFlags: 0
@@ -22571,11 +22577,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8479ec9ee856a5b45b777bc33c5fe3b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerObjID: 0
   isEnd: 0
   stamina: 100
   cnt: 0
   _cycle: 1
-  _target: {fileID: 0}
   mode: 0
 --- !u!195 &1213451756
 NavMeshAgent:
@@ -22627,7 +22633,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1213451747}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0126c239c1b25784d8d4f878ac8a2f3c, type: 3}
   m_Name: 
@@ -23953,7 +23959,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1286726695}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0126c239c1b25784d8d4f878ac8a2f3c, type: 3}
   m_Name: 
@@ -23972,11 +23978,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8479ec9ee856a5b45b777bc33c5fe3b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerObjID: 0
   isEnd: 0
   stamina: 100
   cnt: 0
   _cycle: 1
-  _target: {fileID: 0}
   mode: 0
 --- !u!195 &1286726704
 NavMeshAgent:
@@ -27246,11 +27252,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8479ec9ee856a5b45b777bc33c5fe3b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerObjID: 0
   isEnd: 0
   stamina: 100
   cnt: 0
   _cycle: 1
-  _target: {fileID: 0}
   mode: 0
 --- !u!195 &1483753234
 NavMeshAgent:
@@ -27302,7 +27308,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1483753225}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0126c239c1b25784d8d4f878ac8a2f3c, type: 3}
   m_Name: 
@@ -31546,11 +31552,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8479ec9ee856a5b45b777bc33c5fe3b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerObjID: 0
   isEnd: 0
   stamina: 100
   cnt: 0
   _cycle: 1
-  _target: {fileID: 158016081}
   mode: 0
 --- !u!54 &1727096695
 Rigidbody:

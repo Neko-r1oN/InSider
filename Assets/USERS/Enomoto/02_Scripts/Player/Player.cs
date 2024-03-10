@@ -10,6 +10,9 @@ using Cinemachine;
 
 public class Player : MonoBehaviour
 {
+    // このスクリプトを装備しているオブジェクトのID
+    public int playerObjID;
+
     // 自分自身
     NavMeshAgent agent;
 
@@ -46,21 +49,12 @@ public class Player : MonoBehaviour
     // スタミナ
     public int stamina = 100;
 
-    // ランダムの数値を入れる変数
-    int rand;
-
-    int insiderCount = 0; // 内密者の人数をカウント
-
-    private Material _material;
     private double _time;
 
     public int cnt;
 
     // 点滅周期[s]
     [SerializeField] private float _cycle = 1;
-
-    // 点滅させる対象（ここがBehaviourに変更されている）
-    [SerializeField] private Renderer _target;
 
     public enum PLAYER_MODE
     {
@@ -77,16 +71,25 @@ public class Player : MonoBehaviour
     // プレイヤーのモード
     public PLAYER_MODE mode = PLAYER_MODE.MOVE;
 
-    private void Awake()
-    {
-        path = new NavMeshPath();
-    }
-
     // Start is called before the first frame update
     void Start()
     {
         // NavMeshAgentを取得する
         agent = GetComponent<NavMeshAgent>();
+
+        // アニメーター情報を取得
+        animator = GetComponent<Animator>();
+
+        // パスのクラス変数をnewする
+        path = new NavMeshPath();
+
+        if (EditorManager.Instance.useServer == true)
+        {// サーバーを使用する場合
+            if (playerObjID != ClientManager.Instance.playerID)
+            {// 自身のIDと一致しない場合
+                return;
+            }
+        }
 
         // staminaGaugeを取得する
         staminaGauge = GameObject.Find("staminaGauge");
@@ -99,12 +102,6 @@ public class Player : MonoBehaviour
 
         // スタミナゲージのオブジェクト情報を取得
         staminaGauge = GameObject.Find("staminaGauge");
-
-        // アニメーター情報を取得
-        animator = GetComponent<Animator>();
-
-        // 0～6までのランダムの数値が入る
-        rand = rnd.Next(0, 7);
     }
 
     // Update is called once per frame
@@ -112,6 +109,14 @@ public class Player : MonoBehaviour
     {
         // Y座標を固定 → 目的地に到達したかどうかの判定が難しくなるため
         transform.position = new Vector3(transform.position.x, pos_Y, transform.position.z);
+
+        if (EditorManager.Instance.useServer == true)
+        {// サーバーを使用する場合
+            if (playerObjID != ClientManager.Instance.playerID)
+            {// 自身のIDと一致しない場合
+                return;
+            }
+        }
 
         // 現在のスタミナを表示
         staminaNum.GetComponent<Text>().text = "" + stamina;
@@ -208,6 +213,14 @@ public class Player : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        if (EditorManager.Instance.useServer == true)
+        {// サーバーを使用する場合
+            if (playerObjID != ClientManager.Instance.playerID)
+            {// 自身のIDと一致しない場合
+                return;
+            }
+        }
+
         //******************************
         //  採掘モード
         //******************************
@@ -247,10 +260,58 @@ public class Player : MonoBehaviour
     /// 移動処理
     /// </summary>
     /// <param name="targetPos"></param>
-    public void MoveAgent(Vector3 targetPos)
+    public async void MoveAgent(Vector3 targetPos)
     {
-        // 目的地へ移動
-        agent.destination = targetPos;
+        if(playerObjID == ClientManager.Instance.playerID)
+        {// 自身のIDと一致する場合
+            // 目的地へ移動
+            agent.destination = targetPos;
+        }
+        else
+        {// 自身のIDと一致しない場合
+            // NavMeshのパスを取得
+            NavMesh.CalculatePath(transform.position, targetPos, NavMesh.AllAreas, path);
+
+            // クラス変数を作成
+            RevisionPosData revisionPosData = new RevisionPosData();
+
+            if (path.corners.Length > 0)
+            {// パスが取れた場合
+                var length = path.corners[path.corners.Length - 1] - targetPos;
+
+                if (length.magnitude < 1.0f)
+                {// 目的地にたどり着くことができる場合
+
+                    // 目的地へ移動
+                    agent.destination = targetPos;
+                }
+                else
+                {
+                    Debug.Log("他のプレイヤーオブジェクトが座標を修正する");
+
+                    // 本来の座標に修正する通知を送信
+                    revisionPosData.playerID = ClientManager.Instance.playerID;
+                    revisionPosData.targetID = playerObjID;
+                    revisionPosData.isBuried = false;
+
+                    // [revisionPosData]サーバーに送信
+                    await ClientManager.Instance.Send(revisionPosData, 12);
+                }
+            }
+            else
+            {
+                Debug.Log("他のプレイヤーオブジェクトが座標を修正する");
+
+                // 本来の座標に修正する通知を送信
+                revisionPosData.playerID = ClientManager.Instance.playerID;
+                revisionPosData.targetID = playerObjID;
+                revisionPosData.isBuried = false;
+
+                // [revisionPosData]サーバーに送信
+                await ClientManager.Instance.Send(revisionPosData, 12);
+            }
+
+        }
     }
 
     /// <summary>
@@ -260,6 +321,14 @@ public class Player : MonoBehaviour
     public void RevisionPos(Vector3 pos)
     {
         Debug.Log(pos);
+
+        if(playerObjID != ClientManager.Instance.playerID)
+        {
+            // 座標を書き換える
+            pos = new Vector3(0f, 0.9f, -5f);
+
+            Debug.Log("他のプレイヤーオブジェクトがposを修正");
+        }
 
         // Agentの目的地を設定
         agent.destination = pos;
@@ -279,6 +348,14 @@ public class Player : MonoBehaviour
 
     public void SubStamina(int num)
     {
+        if (EditorManager.Instance.useServer == true)
+        {// サーバーを使用する場合
+            if (playerObjID != ClientManager.Instance.playerID)
+            {// 自身のIDと一致しない場合
+                return;
+            }
+        }
+
         if (this.gameObject.tag == "Insider")
         {
             // スタミナを減らす
@@ -309,6 +386,14 @@ public class Player : MonoBehaviour
     /// <param name="num"></param>
     public void AddStamina(int num)
     {
+        if (EditorManager.Instance.useServer == true)
+        {// サーバーを使用する場合
+            if (playerObjID != ClientManager.Instance.playerID)
+            {// 自身のIDと一致しない場合
+                return;
+            }
+        }
+
         // スタミナを増やす
         stamina += num;
         if (stamina >= 100)

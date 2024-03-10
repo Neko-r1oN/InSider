@@ -449,18 +449,9 @@ public class ClientManager : MonoBehaviour
 
                         Debug.Log("[" + moveData.playerID + "]" + " : 移動");
 
-                        if (playerID != moveData.playerID)
-                        {// 受信したのが自分自身ではない場合
-                            // 移動処理
-                            GameObject movePlayer = playerManager.GetComponent<PlayerManager>().players[moveData.playerID];
-                            movePlayer.GetComponent<OtherPlayer>().MoveAgent(targetPos);
-                        }
-                        else
-                        {// 受信したのが自分自身のものの場合
-                            // 移動処理
-                            GameObject movePlayer = playerManager.GetComponent<PlayerManager>().players[moveData.playerID];
-                            movePlayer.GetComponent<Player>().MoveAgent(targetPos);
-                        }
+                        // 移動処理
+                        GameObject movePlayer = playerManager.GetComponent<PlayerManager>().players[moveData.playerID];
+                        movePlayer.GetComponent<Player>().MoveAgent(targetPos);
 
                         break;
                     case 6: // 埋める
@@ -527,13 +518,9 @@ public class ClientManager : MonoBehaviour
                         // 各プレイヤーオブジェクトのIDを再設定する
                         for (int i = 0; i < objeList.Count; i++)
                         {
-                            if (i != ClientManager.Instance.playerID)
-                            {// 自身のプレイヤーIDと一致しない場合
-                                // IDを設定する
-                                objeList[i].GetComponent<OtherPlayer>().playerObjID = i;
-                            }
+                            // オブジェクトIDを更新する
+                            objeList[i].GetComponent<Player>().playerObjID = i;
                         }
-
 
                         break;
                     case 10:    // ターン数の更新＆次に行動できるプレイヤーIDの更新
@@ -589,14 +576,8 @@ public class ClientManager : MonoBehaviour
 
                         Debug.Log("座標を修正する [オブジェクトID：" + revisionPos.targetID + "] **送信元のプレイヤーID："+ revisionPos.playerID);
 
-                        if (revisionPos.playerID == playerID && revisionPos.targetID == playerID)
-                        {// 自身の場合
-                            objeList1[revisionPos.targetID].GetComponent<Player>().RevisionPos(targetPos1);
-                        }
-                        else
-                        {// 他のプレイヤーオブジェクトの場合
-                            objeList1[revisionPos.targetID].GetComponent<OtherPlayer>().RevisionPos(targetPos1,revisionPos.isBuried);
-                        }
+                        // 座標を修正する
+                        objeList1[revisionPos.targetID].GetComponent<Player>().RevisionPos(targetPos1);
 
                         break;
                     case 13: // イベント発生処理
