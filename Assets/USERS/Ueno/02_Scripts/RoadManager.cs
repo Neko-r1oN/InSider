@@ -10,7 +10,11 @@ public class RoadManager : MonoBehaviour
 
     [SerializeField] GameObject blockObj;
 
+    [SerializeField] GameObject bomb;
+
     public List<GameObject> blokObjList;
+
+    public List<GameObject> bombOgjList;
 
     // ベイクオブジェクトを取得
     GameObject Baker;
@@ -46,7 +50,11 @@ public class RoadManager : MonoBehaviour
 
     private bool isGold;
 
+    // サボタージュでの埋める場所をクリックした数
     public int fillCount;
+
+    // サボタージュでの爆弾を設置する場所をクリックした数
+    public int bombCount;
 
     // Start is called before the first frame update
     void Start()
@@ -103,6 +111,25 @@ public class RoadManager : MonoBehaviour
             // ベイクを開始
             stageManager.GetComponent<StageManager>().StartBake();
         }
+
+        if (bombCount >= 3)
+        {
+            for (int n = 0; n < bombOgjList.Count; n++)
+            {
+                // オブジェクトを生成する
+                GameObject block = Instantiate(bomb, new Vector3(bombOgjList[n].transform.position.x, 1.47f, bombOgjList[n].transform.position.z), Quaternion.identity);
+
+                // オブジェクトを破棄
+                Destroy(bombOgjList[n]);
+            }
+
+            //リストの中身・カウントを初期化
+            bombOgjList = new List<GameObject>();
+            bombCount = 0;
+
+            // ベイクを開始
+            stageManager.GetComponent<StageManager>().StartBake();
+        }
     }
 
     public async void Road(GameObject roadPrefab)
@@ -123,6 +150,8 @@ public class RoadManager : MonoBehaviour
             mineData.objeID = targetBlock.GetComponent<Block>().objeID;
             mineData.prefabID = roadNum;
             mineData.rotY = rotY;
+
+            mineData.isEventBlock = true;
 
             // 送信する
             await ClientManager.Instance.Send(mineData, 7);
@@ -221,7 +250,7 @@ public class RoadManager : MonoBehaviour
         Baker.GetComponent<StageManager>().StartBake();
 
         //ゴールドを生成
-        Instantiate(gold, block.transform.position, Quaternion.identity);
+        //Instantiate(gold, block.transform.position, Quaternion.identity);
 
         // 初期化
         targetBlock = null;

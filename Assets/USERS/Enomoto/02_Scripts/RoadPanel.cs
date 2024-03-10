@@ -27,7 +27,11 @@ public class RoadPanel : MonoBehaviour
     // オブジェクトID
     public int objeID;
 
-    public bool isSelect;
+    // 埋める場所を選択したかどうか
+    public bool isFillSelect;
+
+    // ボムを設置する場所を選択したかどうか
+    public bool isBombSelect;
 
     // マネージャーを取得する
     GameObject manager;
@@ -59,7 +63,9 @@ public class RoadPanel : MonoBehaviour
 
         defaultMaterial = gameObject.GetComponent<Renderer>().material.color;
 
-        isSelect = false;
+        isFillSelect = false;
+
+        isBombSelect = false;
     }
 
     // Update is called once per frame
@@ -113,7 +119,7 @@ public class RoadPanel : MonoBehaviour
                     if (Input.GetMouseButtonDown(0))
                     {
                         // falseだったら
-                        if (isSelect == false)
+                        if (isFillSelect == false)
                         {
                             // 埋める場所選択数をカウント
                             roadManager.fillCount++;
@@ -123,7 +129,7 @@ public class RoadPanel : MonoBehaviour
                             Debug.Log("追加しました。");
 
                             // trueに変更
-                            isSelect = true;
+                            isFillSelect = true;
                         }
                     }
                 }
@@ -139,7 +145,6 @@ public class RoadPanel : MonoBehaviour
             //*************************************************************
             else if (isFill == true && this.gameObject.tag == "RoadPanel")
             {// モード：FILL
-
                 if (hit.transform.gameObject == this.gameObject)
                 {// 自分にカーソルが当たった
                     gameObject.GetComponent<Renderer>().material.color = Color.green; // 緑色
@@ -182,6 +187,47 @@ public class RoadPanel : MonoBehaviour
                 else
                 {
                     gameObject.GetComponent<Renderer>().material.color = Color.yellow; // 黄色
+                }
+            }
+
+            //**********************
+            //  埋める(サボタージュ)モードの場合
+            //**********************
+            else if (player.GetComponent<Player>().mode == Player.PLAYER_MODE.SABOTAGEBOMB)
+            {// モード：MOVE
+
+                if (hit.transform.gameObject == this.gameObject)
+                {// 自分にカーソルが当たった
+
+                    // スタートパネル以外だったら
+                    if (hit.transform.gameObject.tag != "StartPanel")
+                    {
+                        // 色を黄色に変更
+                        gameObject.GetComponent<Renderer>().material.color = Color.yellow; // 黄色
+                    }
+
+                    // 左クリックした
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        // falseだったら
+                        if (isBombSelect == false)
+                        {
+                            // 埋める場所選択数をカウント
+                            roadManager.bombCount++;
+
+                            // リストにオブジェクト情報を格納
+                            roadManager.bombOgjList.Add(this.gameObject);
+                            Debug.Log("追加しました。");
+
+                            // trueに変更
+                            isBombSelect = true;
+                        }
+                    }
+                }
+                else
+                {
+                    // デフォルトカラーに戻す
+                    gameObject.GetComponent<Renderer>().material.color = defaultMaterial;
                 }
             }
 

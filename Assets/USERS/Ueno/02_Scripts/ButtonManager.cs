@@ -48,7 +48,7 @@ public class ButtonManager : MonoBehaviour
     public int subStamina;
 
     // ダウトを使用したかどうか
-    bool isDoubt;
+    bool isUseDoubt;
     
     private void Start()
     {
@@ -78,12 +78,10 @@ public class ButtonManager : MonoBehaviour
         cameraManager = GameObject.Find("CameraManager");
 
         // 偽
-        isDoubt = false;
+        isUseDoubt = false;
         // サボタージュUIを取得
         sabotage = GameObject.Find("SabotageUI");
 
-        // サボタージュUIを非表示にする
-        sabotage.SetActive(false);
         // プレイヤーのモードをNOTHINGに設定
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.NOTHING;
 
@@ -102,6 +100,9 @@ public class ButtonManager : MonoBehaviour
                 sabotageButton.SetActive(true);
             }
         }
+
+        // サボタージュUIを非表示にする
+        sabotage.SetActive(false);
 
         isCancel = false;
 
@@ -230,10 +231,17 @@ public class ButtonManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// サボタージュのボタン表示
+    /// </summary>
     public void Sabotage()
     {
+        // サボタージュの行動ボタン表示
         sabotage.SetActive(true);
 
+        textUI.HideText();
+
+        // その他ボタン削除
         HideButton();
     }
 
@@ -265,7 +273,7 @@ public class ButtonManager : MonoBehaviour
 
             for(int i = 0;i< roadManager.GetComponent<RoadManager>().blokObjList.Count; i++)
             {
-                roadManager.GetComponent<RoadManager>().blokObjList[i].GetComponent<RoadPanel>().isSelect = false;
+                roadManager.GetComponent<RoadManager>().blokObjList[i].GetComponent<RoadPanel>().isFillSelect = false;
             }
 
             // リストの中身・カウントを初期化
@@ -339,19 +347,30 @@ public class ButtonManager : MonoBehaviour
     /// <param name="indexNumber"></param>
     public async void DoubtButton(int indexNumber)
     {
-        if (isDoubt == false)
+        if (EditorManager.Instance.useServer == true)
         {
-            isDoubt = true;
+            foreach (int num in uIManager.disabledIndexNumList)
+            {
+                if (num == indexNumber)
+                {// 使用できないダウトのボタンが押されている場合
+                    return;
+                }
+            }
 
-            // テキストを更新する
-            supplementText.text = "※ 使用済み";
+            if (isUseDoubt == false)
+            {
+                isUseDoubt = true;
 
-            DoubtData doubtData = new DoubtData();
-            doubtData.playerID = ClientManager.Instance.originalID;
-            doubtData.targetID = indexNumber;
+                // テキストを更新する
+                supplementText.text = "※ 使用済み";
 
-            // サーバーに送信する
-            await ClientManager.Instance.Send(doubtData, 11);
+                DoubtData doubtData = new DoubtData();
+                doubtData.playerID = ClientManager.Instance.originalID;
+                doubtData.targetID = indexNumber;
+
+                // サーバーに送信する
+                await ClientManager.Instance.Send(doubtData, 11);
+            }
         }
     }
 }
