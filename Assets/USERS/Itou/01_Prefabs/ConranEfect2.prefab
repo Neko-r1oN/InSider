@@ -9733,7 +9733,7 @@ GameObject:
   - component: {fileID: 2544426582028677892}
   - component: {fileID: 7388825868927270087}
   m_Layer: 0
-  m_Name: Conran2
+  m_Name: ConranEfect2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
