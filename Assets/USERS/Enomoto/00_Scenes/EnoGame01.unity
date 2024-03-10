@@ -15928,6 +15928,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3533882a525343847bdb69e9ec48b89c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chaosPrefab: {fileID: 0}
   eventNum: 0
 --- !u!4 &847601769
 Transform:
@@ -52411,7 +52412,8 @@ MonoBehaviour:
     type: 3}
   isFill: 0
   objeID: 0
-  isSelect: 0
+  isFillSelect: 0
+  isBombSelect: 0
   smoke: {fileID: 0}
 --- !u!114 &6708300812891672817
 MonoBehaviour:
@@ -52429,7 +52431,8 @@ MonoBehaviour:
     type: 3}
   isFill: 0
   objeID: 0
-  isSelect: 0
+  isFillSelect: 0
+  isBombSelect: 0
   smoke: {fileID: 0}
 --- !u!114 &6708300813727519728
 MonoBehaviour:
@@ -52447,7 +52450,8 @@ MonoBehaviour:
     type: 3}
   isFill: 0
   objeID: 0
-  isSelect: 0
+  isFillSelect: 0
+  isBombSelect: 0
   smoke: {fileID: 0}
 --- !u!23 &6722989447443447707
 MeshRenderer:
@@ -56069,7 +56073,8 @@ MonoBehaviour:
     type: 3}
   isFill: 0
   objeID: 0
-  isSelect: 0
+  isFillSelect: 0
+  isBombSelect: 0
   smoke: {fileID: 0}
 --- !u!23 &8623606252122486537
 MeshRenderer:

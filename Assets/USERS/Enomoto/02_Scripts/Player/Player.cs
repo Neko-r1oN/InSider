@@ -106,9 +106,6 @@ public class Player : MonoBehaviour
         // アニメーター情報を取得
         animator = GetComponent<Animator>();
 
-        // 0～6までのランダムの数値が入る
-        rand = rnd.Next(0, 7);
-
         animator.keepAnimatorStateOnDisable = true;
     }
 
