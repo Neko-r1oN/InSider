@@ -4295,11 +4295,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8479ec9ee856a5b45b777bc33c5fe3b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerObjID: 0
   isEnd: 0
   stamina: 100
   cnt: 0
   _cycle: 1
-  _target: {fileID: 0}
   mode: 0
 --- !u!195 &210333113
 NavMeshAgent:
@@ -4351,7 +4351,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 210333104}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0126c239c1b25784d8d4f878ac8a2f3c, type: 3}
   m_Name: 
@@ -5006,7 +5006,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb7cbb749471d4f41b356a75e241722e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useServer: 0
+  useServer: 1
 --- !u!4 &260213651
 Transform:
   m_ObjectHideFlags: 0
@@ -11384,7 +11384,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 630176426}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0126c239c1b25784d8d4f878ac8a2f3c, type: 3}
   m_Name: 
@@ -11403,11 +11403,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8479ec9ee856a5b45b777bc33c5fe3b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerObjID: 0
   isEnd: 0
   stamina: 100
   cnt: 0
   _cycle: 1
-  _target: {fileID: 0}
   mode: 0
 --- !u!195 &630176435
 NavMeshAgent:
@@ -15504,7 +15504,13 @@ MonoBehaviour:
   - {fileID: 1286726695}
   - {fileID: 630176426}
   - {fileID: 1213451747}
-  triggerList: []
+  triggerList:
+  - {fileID: 1069421762}
+  - {fileID: 151664233}
+  - {fileID: 446294859}
+  - {fileID: 612881610}
+  - {fileID: 1760192110}
+  - {fileID: 447817263}
 --- !u!4 &840676510
 Transform:
   m_ObjectHideFlags: 0
@@ -22571,11 +22577,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8479ec9ee856a5b45b777bc33c5fe3b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerObjID: 0
   isEnd: 0
   stamina: 100
   cnt: 0
   _cycle: 1
-  _target: {fileID: 0}
   mode: 0
 --- !u!195 &1213451756
 NavMeshAgent:
@@ -22627,7 +22633,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1213451747}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0126c239c1b25784d8d4f878ac8a2f3c, type: 3}
   m_Name: 
@@ -23953,7 +23959,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1286726695}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0126c239c1b25784d8d4f878ac8a2f3c, type: 3}
   m_Name: 
@@ -23972,11 +23978,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8479ec9ee856a5b45b777bc33c5fe3b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerObjID: 0
   isEnd: 0
   stamina: 100
   cnt: 0
   _cycle: 1
-  _target: {fileID: 0}
   mode: 0
 --- !u!195 &1286726704
 NavMeshAgent:
@@ -27246,11 +27252,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8479ec9ee856a5b45b777bc33c5fe3b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerObjID: 0
   isEnd: 0
   stamina: 100
   cnt: 0
   _cycle: 1
-  _target: {fileID: 0}
   mode: 0
 --- !u!195 &1483753234
 NavMeshAgent:
@@ -27302,7 +27308,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1483753225}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0126c239c1b25784d8d4f878ac8a2f3c, type: 3}
   m_Name: 
@@ -30179,6 +30185,50 @@ Transform:
   - {fileID: 1707801182}
   m_Father: {fileID: 2033860483}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1661286154
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1661286156}
+  - component: {fileID: 1661286155}
+  m_Layer: 0
+  m_Name: Scoremethod
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1661286155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1661286154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69d704f2d537b0545b2b7a7b590f820a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1661286156
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1661286154}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1101.2427, y: 76.65761, z: 375.75635}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1667574648
 GameObject:
   m_ObjectHideFlags: 0
@@ -31387,7 +31437,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1727096689
 Transform:
   m_ObjectHideFlags: 0
@@ -31502,11 +31552,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8479ec9ee856a5b45b777bc33c5fe3b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerObjID: 0
   isEnd: 0
   stamina: 100
   cnt: 0
   _cycle: 1
-  _target: {fileID: 158016081}
   mode: 0
 --- !u!54 &1727096695
 Rigidbody:
@@ -57272,3 +57322,4 @@ SceneRoots:
   - {fileID: 260213651}
   - {fileID: 8266088140920416105}
   - {fileID: 847601769}
+  - {fileID: 1661286156}

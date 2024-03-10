@@ -22,6 +22,13 @@ public class UIManager : MonoBehaviour
 
     // プレイヤーの名前
     [SerializeField] List<GameObject> playerName;
+    [SerializeField] List<GameObject> scorePlayerName;  // スコア表示の方のプレイヤーName
+
+    // スコア表示の方のプレイヤーUI
+    [SerializeField] List<GameObject> scorePlayerUIList;
+
+    // スコアのテキスト
+    [SerializeField] List<Text> scoreText;
 
     // プレイヤーが途中退出したときのUI
     [SerializeField] List<GameObject> outImageUI;
@@ -106,6 +113,15 @@ public class UIManager : MonoBehaviour
             //-------------------------------------------
             roundCounterText.GetComponent<Text>().text = "" + ClientManager.Instance.roundNum;
             remainingTurnsText.GetComponent<Text>().text = "" + ClientManager.Instance.turnMaxNum;
+
+            //-----------------------------
+            // スコアのテキストを更新する
+            //-----------------------------
+            for (int i = 0; i < ClientManager.Instance.scoreList.Count; i++)
+            {
+                // 各スコアのテキスト内容を更新する
+                UdScoreText(i, ClientManager.Instance.scoreList[i]);
+            }
 
             //------------------------------
             // プレイヤーの名前を更新
@@ -212,6 +228,7 @@ public class UIManager : MonoBehaviour
 
                 // 破棄する
                 Destroy(playerUIList[i]);
+                Destroy(scorePlayerUIList[i]);
                 Destroy(doubtButtonList[i]);
 
                 Debug.Log("破棄する" + i);
@@ -219,7 +236,11 @@ public class UIManager : MonoBehaviour
                 continue;
             }
 
+            // 常に表示される方
             playerName[i].GetComponent<Text>().text = nameList[i];
+
+            // スコア表示の方
+            scorePlayerName[i].GetComponent<Text>().text = nameList[i];
         }
 
         Destroy(doubtButtonList[ClientManager.Instance.playerID]);
@@ -232,6 +253,16 @@ public class UIManager : MonoBehaviour
     public void UdRemainingTurns(int turnNum)
     {
         remainingTurnsText.GetComponent<Text>().text = "" + turnNum;
+    }
+
+    /// <summary>
+    /// スコアのテキストを更新する
+    /// </summary>
+    /// <param name="indexNum"></param>
+    /// <param name="score"></param>
+    public void UdScoreText(int indexNum,int score)
+    {
+        scoreText[indexNum].text = "" + score;
     }
 
     /// <summary>

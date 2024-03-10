@@ -32,6 +32,9 @@ public class ClientManager : MonoBehaviour
     // ボタンリスト
     [SerializeField] List<GameObject> buttonObjList;
 
+    // フェード用シリアライズフィールド
+    //[SerializeField] Fade fade;
+
     //===========================
     //  [非公開]フィールド
     //===========================
@@ -108,6 +111,11 @@ public class ClientManager : MonoBehaviour
     public List<string> playerNameList { get; set; }
 
     /// <summary>
+    /// ラウンド開始時の表示するスコアのリスト
+    /// </summary>
+    public List<int> scoreList { get; set; }
+
+    /// <summary>
     /// ゲームモード
     /// </summary>
     public enum GAMEMODE
@@ -121,7 +129,7 @@ public class ClientManager : MonoBehaviour
     }
 
     /// <summary>
-    /// イベントID
+    /// イベントID (送受信のID)
     /// </summary>
     public enum EventID
     {
@@ -138,6 +146,8 @@ public class ClientManager : MonoBehaviour
         UdTurns,              // ターンを更新
         DoubtData,            // ダウトのデータ
         RevisionPos,          // 座標の修正
+        EventOccurrence,      // イベント発生
+        AllieScore,           // スコアの加算
     }
 
     //===========================
@@ -147,9 +157,6 @@ public class ClientManager : MonoBehaviour
     // シングルトン用
     public static ClientManager Instance;
 
-    // フェード用シリアライズフィールド
-    //[SerializeField] Fade fade;
-
     private void Awake()
     {
         if(Instance == null)
@@ -158,14 +165,10 @@ public class ClientManager : MonoBehaviour
 
             // シーン遷移しても破棄しないようにする
             DontDestroyOnLoad(gameObject);
-
-            Debug.Log("OK");
         }
         else
         {
             Destroy(gameObject);
-
-            Debug.Log("NO");
         }
     }
 
@@ -375,7 +378,7 @@ public class ClientManager : MonoBehaviour
                         }
 
                         break;
-                    case 3: // 自身の役職と先行のプレイヤーIDを取得 & プレイヤーの名前リスト更新 & 元々のプレイヤーIDを更新 & マネージャー系の初期化
+                    case 3: // ラウンドの開始準備 [JobSceneに入る時に受信]
 
                         // 疑われた回数を初期化
                         doubtNum = 0;
@@ -401,7 +404,10 @@ public class ClientManager : MonoBehaviour
                         Debug.Log("役職と先行のプレイヤーIDを取得");
 
                         // JSONデシリアライズで取得する
-                        JobAndTurnData data = JsonConvert.DeserializeObject<JobAndTurnData>(jsonString);
+                        RoundRadyData data = JsonConvert.DeserializeObject<RoundRadyData>(jsonString);
+
+                        // 全てのプレイヤーのスコアを取得する
+                        scoreList = data.scoreList;
 
                         // 代入する
                         isInsider = data.isInsider;
@@ -443,18 +449,9 @@ public class ClientManager : MonoBehaviour
 
                         Debug.Log("[" + moveData.playerID + "]" + " : 移動");
 
-                        if (playerID != moveData.playerID)
-                        {// 受信したのが自分自身ではない場合
-                            // 移動処理
-                            GameObject movePlayer = playerManager.GetComponent<PlayerManager>().players[moveData.playerID];
-                            movePlayer.GetComponent<OtherPlayer>().MoveAgent(targetPos);
-                        }
-                        else
-                        {// 受信したのが自分自身のものの場合
-                            // 移動処理
-                            GameObject movePlayer = playerManager.GetComponent<PlayerManager>().players[moveData.playerID];
-                            movePlayer.GetComponent<Player>().MoveAgent(targetPos);
-                        }
+                        // 移動処理
+                        GameObject movePlayer = playerManager.GetComponent<PlayerManager>().players[moveData.playerID];
+                        movePlayer.GetComponent<Player>().MoveAgent(targetPos);
 
                         break;
                     case 6: // 埋める
@@ -521,13 +518,9 @@ public class ClientManager : MonoBehaviour
                         // 各プレイヤーオブジェクトのIDを再設定する
                         for (int i = 0; i < objeList.Count; i++)
                         {
-                            if (i != ClientManager.Instance.playerID)
-                            {// 自身のプレイヤーIDと一致しない場合
-                                // IDを設定する
-                                objeList[i].GetComponent<OtherPlayer>().playerObjID = i;
-                            }
+                            // オブジェクトIDを更新する
+                            objeList[i].GetComponent<Player>().playerObjID = i;
                         }
-
 
                         break;
                     case 10:    // ターン数の更新＆次に行動できるプレイヤーIDの更新
@@ -583,14 +576,25 @@ public class ClientManager : MonoBehaviour
 
                         Debug.Log("座標を修正する [オブジェクトID：" + revisionPos.targetID + "] **送信元のプレイヤーID："+ revisionPos.playerID);
 
-                        if (revisionPos.playerID == playerID && revisionPos.targetID == playerID)
-                        {// 自身の場合
-                            objeList1[revisionPos.targetID].GetComponent<Player>().RevisionPos(targetPos1);
-                        }
-                        else
-                        {// 他のプレイヤーオブジェクトの場合
-                            objeList1[revisionPos.targetID].GetComponent<OtherPlayer>().RevisionPos(targetPos1,revisionPos.isBuried);
-                        }
+                        // 座標を修正する
+                        objeList1[revisionPos.targetID].GetComponent<Player>().RevisionPos(targetPos1);
+
+                        break;
+                    case 13: // イベント発生処理
+
+                        // JSONデシリアライズで取得する
+                        EventData eventData = JsonConvert.DeserializeObject<EventData>(jsonString);
+
+                        Debug.Log("イベント発生 : " + eventData.eventID);
+
+                        break;
+                    case 14:
+
+                        // JSONデシリアライズで取得する
+                        AllieScoreData allieScoreData = JsonConvert.DeserializeObject<AllieScoreData>(jsonString);
+
+                        // スコアテキストを更新する
+                        uiManager.GetComponent<UIManager>().UdScoreText(allieScoreData.originalID, allieScoreData.allieScore);
 
                         break;
                 }
@@ -628,7 +632,7 @@ public class ClientManager : MonoBehaviour
             tcpClient.ReceiveTimeout = 1000;    // 受信
 
             // サーバーへ接続要求    (IP:"20.249.92.21"  "127.0.0.1")
-            await tcpClient.ConnectAsync("20.249.92.21", 20000);
+            await tcpClient.ConnectAsync("127.0.0.1", 20000);
             Debug.Log("***サーバーと通信確立***");
 
             //**********************************

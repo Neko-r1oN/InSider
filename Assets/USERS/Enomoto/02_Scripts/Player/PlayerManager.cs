@@ -24,32 +24,31 @@ public class PlayerManager : MonoBehaviour
             {// 存在しないプレイヤーの場合
                 // 破棄する
                 Destroy(players[i]);
-                continue;
-            }
 
-            if(i == ClientManager.Instance.playerID)
-            {// 自身のプレイヤーIDと一致する
-                Destroy(players[i].GetComponent<OtherPlayer>());    // 破棄する
+                // リストから要素を削除
+                players.RemoveAt(i);
+
+                continue;
             }
             else
             {
+                // IDを設定する
+                players[i].GetComponent<Player>().playerObjID = i;
+            }
+
+            if (i != ClientManager.Instance.playerID)
+            {// 自身のプレイヤーIDと一致しない場合
                 // トリガー用のオブジェクトを破棄する
                 Destroy(triggerList[i]);
-
-                // コンポーネントを削除する
-                Destroy(players[i].GetComponent<Player>());
 
                 // 装備しているすべてのコライダーを取得する
                 Collider[] CollArray = players[i].GetComponents<BoxCollider>();
 
-                foreach(Collider collider in CollArray)
+                foreach (Collider collider in CollArray)
                 {
                     // コライダーを破棄する
                     Destroy(collider);
                 }
-
-                // IDを設定する
-                players[i].GetComponent<OtherPlayer>().playerObjID = i;
             }
 
             // アクティブ化
@@ -73,7 +72,5 @@ public class PlayerManager : MonoBehaviour
                 }
             }
         }
-
-        
     }
 }
