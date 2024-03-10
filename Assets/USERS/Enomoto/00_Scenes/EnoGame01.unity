@@ -4140,7 +4140,6 @@ GameObject:
   - component: {fileID: 210333114}
   - component: {fileID: 210333113}
   - component: {fileID: 210333112}
-  - component: {fileID: 210333115}
   - component: {fileID: 210333111}
   - component: {fileID: 210333110}
   - component: {fileID: 210333109}
@@ -4344,20 +4343,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &210333115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 210333104}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0126c239c1b25784d8d4f878ac8a2f3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isEnd: 0
-  playerObjID: 0
 --- !u!136 &210333116
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5006,7 +4991,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb7cbb749471d4f41b356a75e241722e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useServer: 1
+  useServer: 0
 --- !u!4 &260213651
 Transform:
   m_ObjectHideFlags: 0
@@ -11234,7 +11219,6 @@ GameObject:
   - component: {fileID: 630176436}
   - component: {fileID: 630176435}
   - component: {fileID: 630176434}
-  - component: {fileID: 630176433}
   - component: {fileID: 630176432}
   - component: {fileID: 630176431}
   - component: {fileID: 630176430}
@@ -11377,20 +11361,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &630176433
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 630176426}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0126c239c1b25784d8d4f878ac8a2f3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isEnd: 0
-  playerObjID: 0
 --- !u!114 &630176434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22422,7 +22392,6 @@ GameObject:
   - component: {fileID: 1213451757}
   - component: {fileID: 1213451756}
   - component: {fileID: 1213451755}
-  - component: {fileID: 1213451758}
   - component: {fileID: 1213451754}
   - component: {fileID: 1213451753}
   - component: {fileID: 1213451752}
@@ -22626,20 +22595,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1213451758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1213451747}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0126c239c1b25784d8d4f878ac8a2f3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isEnd: 0
-  playerObjID: 0
 --- !u!136 &1213451759
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -23809,7 +23764,6 @@ GameObject:
   - component: {fileID: 1286726705}
   - component: {fileID: 1286726704}
   - component: {fileID: 1286726703}
-  - component: {fileID: 1286726702}
   - component: {fileID: 1286726701}
   - component: {fileID: 1286726700}
   - component: {fileID: 1286726699}
@@ -23952,20 +23906,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1286726702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1286726695}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0126c239c1b25784d8d4f878ac8a2f3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isEnd: 0
-  playerObjID: 0
 --- !u!114 &1286726703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27097,7 +27037,6 @@ GameObject:
   - component: {fileID: 1483753235}
   - component: {fileID: 1483753234}
   - component: {fileID: 1483753233}
-  - component: {fileID: 1483753236}
   - component: {fileID: 1483753232}
   - component: {fileID: 1483753231}
   - component: {fileID: 1483753230}
@@ -27301,20 +27240,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1483753236
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1483753225}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0126c239c1b25784d8d4f878ac8a2f3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isEnd: 0
-  playerObjID: 0
 --- !u!136 &1483753237
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -31425,7 +31350,6 @@ GameObject:
   - component: {fileID: 1727096696}
   - component: {fileID: 1727096695}
   - component: {fileID: 1727096694}
-  - component: {fileID: 1727096699}
   - component: {fileID: 1727096693}
   - component: {fileID: 1727096692}
   - component: {fileID: 1727096691}
@@ -31437,7 +31361,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1727096689
 Transform:
   m_ObjectHideFlags: 0
@@ -31628,20 +31552,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1727096699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1727096688}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0126c239c1b25784d8d4f878ac8a2f3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isEnd: 0
-  playerObjID: 0
 --- !u!136 &1727096700
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -32613,7 +32523,7 @@ MonoBehaviour:
   - {fileID: 3720628406363261294, guid: fcedcdba8d80e6545b3cfe7a378abe9a, type: 3}
   blockPrefab: {fileID: 1691180745474395491, guid: 31734e6361752504c9dda7ca5f342164,
     type: 3}
-  goldPrefab: {fileID: 4295556386234032078, guid: d6040d4c28ee53840ba8686f5f62dd62,
+  goldPrefab: {fileID: 4295556386234032078, guid: 84bc2875d2fe5c142ad8b1a80944d881,
     type: 3}
 --- !u!1 &1764112307
 GameObject:
@@ -55338,7 +55248,7 @@ Transform:
   m_GameObject: {fileID: 5437655097771090893}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 18.68, z: -2.05}
+  m_LocalPosition: {x: 0, y: 5.1, z: -2.05}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:

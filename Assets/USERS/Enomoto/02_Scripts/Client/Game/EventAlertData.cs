@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 [Serializable]
-internal class EventData
+internal class EventAlertData
 {
     /// <summary>
     /// ”­¶‚·‚éƒCƒxƒ“ƒgID

@@ -129,7 +129,7 @@ public class ClientManager : MonoBehaviour
     }
 
     /// <summary>
-    /// イベントID (送受信のID)
+    /// 送受信用のID
     /// </summary>
     public enum EventID
     {
@@ -146,8 +146,23 @@ public class ClientManager : MonoBehaviour
         UdTurns,              // ターンを更新
         DoubtData,            // ダウトのデータ
         RevisionPos,          // 座標の修正
-        EventOccurrence,      // イベント発生
+        EventAlertData,       // イベント通知
         AllieScore,           // スコアの加算
+
+        //+++++++++++++++++++++++++
+        //  発生するイベントのID
+        //++++++++++++++++++++++++++
+        RndFallStones = 101,        // ランダムに空から石が降ってくる
+        Confusion,                  // 混乱状態になる
+        SpownEnemys,                // 敵が出現
+        RiStaminaCn,                // スタミナの消費量を減らす
+        RndSpawnGold,               // ランダムにゴールドが空から降ってくる
+                                    //Decoy,                      // デコイ
+
+        //++++++++++++++++++++++++++
+        //  サボタージュのID
+        //++++++++++++++++++++++++++
+
     }
 
     //===========================
@@ -580,21 +595,55 @@ public class ClientManager : MonoBehaviour
                         objeList1[revisionPos.targetID].GetComponent<Player>().RevisionPos(targetPos1);
 
                         break;
-                    case 13: // イベント発生処理
+                    case 13: // イベント発生通知を受信
 
                         // JSONデシリアライズで取得する
-                        EventData eventData = JsonConvert.DeserializeObject<EventData>(jsonString);
+                        EventAlertData eventData = JsonConvert.DeserializeObject<EventAlertData>(jsonString);
 
                         Debug.Log("イベント発生 : " + eventData.eventID);
 
                         break;
-                    case 14:
+                    case 14: // スコアのテキストを更新する
 
                         // JSONデシリアライズで取得する
                         AllieScoreData allieScoreData = JsonConvert.DeserializeObject<AllieScoreData>(jsonString);
 
+                        // スコアリストの要素を更新する
+                        scoreList[allieScoreData.playerID] = allieScoreData.allieScore;
+
                         // スコアテキストを更新する
                         uiManager.GetComponent<UIManager>().UdScoreText(allieScoreData.originalID, allieScoreData.allieScore);
+
+                        break;
+
+                    //*****************************
+                    //  イベントのDataを受信
+                    //*****************************
+
+                    case 101:   // ランダム落石
+
+                        // JSONデシリアライズで取得する
+                        Event_RndFallData event_stoneData = JsonConvert.DeserializeObject<Event_RndFallData>(jsonString);
+
+                        Debug.Log("イベント：落石");
+
+                        // 落石オブジェクトの生成処理
+
+                        break;
+                    case 102:   // 混乱
+                        break;
+                    case 103:   // 敵出現
+                        break;
+                    case 104:   // スタミナバフ
+                        break;
+                    case 105:   // ランダムに金が降ってくる
+
+                        // JSONデシリアライズで取得する
+                        Event_RndFallData event_goldData = JsonConvert.DeserializeObject<Event_RndFallData>(jsonString);
+
+                        Debug.Log("イベント：金");
+
+                        // 金の生成
 
                         break;
                 }
