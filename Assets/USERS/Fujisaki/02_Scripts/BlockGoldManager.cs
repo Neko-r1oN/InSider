@@ -18,7 +18,9 @@ public class BlockGoldManager : MonoBehaviour
         if (EditorManager.Instance.useServer)
         {// サーバーを使用する場合
             player = GameObject.Find("player-List");
-            player = player.GetComponent<PlayerManager>().players[ClientManager.Instance.playerID];
+            player = player.GetComponent<PlayerManager>().players[ClientManager.Instance.turnPlayerID];
+
+            // ↑↑後で修正するかも
         }
         else
         {// サーバーを使用しない
