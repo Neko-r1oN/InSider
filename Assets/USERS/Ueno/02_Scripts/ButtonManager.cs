@@ -271,14 +271,14 @@ public class ButtonManager : MonoBehaviour
                 }
             }
 
-            for(int i = 0;i< roadManager.GetComponent<RoadManager>().blokObjList.Count; i++)
+            for(int i = 0;i< roadManager.GetComponent<RoadManager>().selectPanelList.Count; i++)
             {
-                roadManager.GetComponent<RoadManager>().blokObjList[i].GetComponent<RoadPanel>().isFillSelect = false;
+                roadManager.GetComponent<RoadManager>().selectPanelList[i].GetComponent<RoadPanel>().isFillSelect = false;
             }
 
             // リストの中身・カウントを初期化
-            roadManager.GetComponent<RoadManager>().blokObjList = new List<GameObject>();
-            roadManager.GetComponent<RoadManager>().fillCount = 0;
+            roadManager.GetComponent<RoadManager>().selectPanelList = new List<GameObject>();
+            roadManager.GetComponent<RoadManager>().selectPanelCount = 0;
         }
 
         canselButton.SetActive(false);

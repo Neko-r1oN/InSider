@@ -11,9 +11,10 @@ TagManager:
   - Treasure
   - Mimic
   - Insider
-  - StartPanel
   - EventPanel
-  - yuka
+  - AbnormalPanel
+  - Bomb
+  - StartPanel
   layers:
   - Default
   - TransparentFX

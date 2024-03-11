@@ -10,11 +10,10 @@ public class RoadManager : MonoBehaviour
 
     [SerializeField] GameObject blockObj;
 
-    [SerializeField] GameObject bomb;
+    [SerializeField] GameObject bombPrefab;
 
-    public List<GameObject> blokObjList;
-
-    public List<GameObject> bombOgjList;
+    // sabotageの時に使うどこを選択したかのリスト
+    public List<GameObject> selectPanelList;
 
     // ベイクオブジェクトを取得
     GameObject Baker;
@@ -50,11 +49,7 @@ public class RoadManager : MonoBehaviour
 
     private bool isGold;
 
-    // サボタージュでの埋める場所をクリックした数
-    public int fillCount;
-
-    // サボタージュでの爆弾を設置する場所をクリックした数
-    public int bombCount;
+    public int selectPanelCount;
 
     // Start is called before the first frame update
     void Start()
@@ -68,7 +63,7 @@ public class RoadManager : MonoBehaviour
 
         // UIManager
         uiMnager = GameObject.Find("UIManager");
-        
+
         stageManager = GameObject.Find("StageManager");
 
         // Player
@@ -93,39 +88,44 @@ public class RoadManager : MonoBehaviour
 
     private void Update()
     {
-        if (fillCount >= 4)
+        // 埋める場所を選択した数が4回以上なら
+        if (selectPanelCount >= 4)
         {
-            for (int i = 0; i < blokObjList.Count; i++)
+            for (int i = 0; i < selectPanelList.Count; i++)
             {
                 // オブジェクトを生成する
-                GameObject block = Instantiate(blockObj, new Vector3(blokObjList[i].transform.position.x, 1.47f, blokObjList[i].transform.position.z), Quaternion.identity);
+                GameObject block = Instantiate(blockObj, new Vector3(selectPanelList[i].transform.position.x, 
+                    1.47f, selectPanelList[i].transform.position.z), Quaternion.identity);
 
                 // オブジェクトを破棄
-                Destroy(blokObjList[i]);
+                Destroy(selectPanelList[i]);
             }
 
             //リストの中身・カウントを初期化
-            blokObjList = new List<GameObject>();
-            fillCount = 0;
+            selectPanelList = new List<GameObject>();
+            selectPanelCount = 0;
 
             // ベイクを開始
             stageManager.GetComponent<StageManager>().StartBake();
         }
 
-        if (bombCount >= 2)
+        // ボムを設置する場所を2回以上選択されたら
+        if (selectPanelCount >= 2)
         {
-            for (int n = 0; n < bombOgjList.Count; n++)
+            for (int n = 0; n < selectPanelList.Count; n++)
             {
                 // オブジェクトを生成する
-                GameObject block = Instantiate(bomb, new Vector3(bombOgjList[n].transform.position.x, 1.47f, bombOgjList[n].transform.position.z), Quaternion.identity);
+                GameObject bomb = Instantiate(bombPrefab, new Vector3(selectPanelList[n].transform.position.x,
+                                   0.5f, selectPanelList[n].transform.position.z), Quaternion.identity);
 
-                // オブジェクトを破棄
-                Destroy(bombOgjList[n]);
+                bomb.GetComponent<Bomb>().roadPanel = selectPanelList[n];
+
+                selectPanelList[n].tag = "AbnormalPanel";
             }
 
             //リストの中身・カウントを初期化
-            bombOgjList = new List<GameObject>();
-            bombCount = 0;
+            selectPanelList = new List<GameObject>();
+            selectPanelCount = 0;
 
             // ベイクを開始
             stageManager.GetComponent<StageManager>().StartBake();
@@ -164,7 +164,7 @@ public class RoadManager : MonoBehaviour
 
         }
 
-        // 道選択UIを閉じる
+        // 前回選択した道UIを表示 & 道選択UI(Parent)を閉じる
         uiMnager.GetComponent<UIManager>().HideRoad(uiMnager.GetComponent<UIManager>().selectRoadNum);
 
         // 消えているボタンを表示する
@@ -184,21 +184,21 @@ public class RoadManager : MonoBehaviour
 
         isGold = true;
 
-        if(num == 0 && script.stamina >= 20)
+        if(num == 0 && script.stamina >= 30)
         {// I字
-            player.GetComponent<Player>().SubStamina(20);
-        }
-        else if(num == 1 && script.stamina >= 15)
-        {// L字
-            player.GetComponent<Player>().SubStamina(15);
-        }
-        else if (num == 2 && script.stamina >= 30)
-        {// T字
             player.GetComponent<Player>().SubStamina(30);
         }
-        else if (num == 3 && script.stamina >= 40)
-        {// 十字
+        else if(num == 1 && script.stamina >= 40)
+        {// L字
             player.GetComponent<Player>().SubStamina(40);
+        }
+        else if (num == 2 && script.stamina >= 60)
+        {// T字
+            player.GetComponent<Player>().SubStamina(60);
+        }
+        else if (num == 3 && script.stamina >= 80)
+        {// 十字
+            player.GetComponent<Player>().SubStamina(80);
         }
         else if (num == 4 && script.stamina >= 10)
         {// ゴミみたいな道

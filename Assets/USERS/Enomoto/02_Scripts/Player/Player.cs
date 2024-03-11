@@ -134,7 +134,7 @@ public class Player : MonoBehaviour
 
                 Debug.Log(hit.transform.name);
 
-                if (hit.transform.tag == "RoadPanel" || hit.transform.tag == "StartPanel"
+                if (hit.transform.tag == "RoadPanel" || hit.transform.tag == "AbnormalPanel"
                     || hit.transform.tag == "EventPanel")
                 {// 道パネルの場合
 
