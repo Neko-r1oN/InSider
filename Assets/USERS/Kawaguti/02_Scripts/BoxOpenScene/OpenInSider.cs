@@ -2,19 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OpenBox : MonoBehaviour
+public class OpenInSider : MonoBehaviour
 {
     Animator animator;
-
-    [SerializeField] GameObject Mimic;
-    [SerializeField] GameObject Chest;
-    [SerializeField] GameObject Gold;
+   
 
     private float _repeatSpan;    //繰り返す間隔
     private float _timeElapsed;   //経過時間
 
     bool Once;
-    public bool isMimic;
+    bool Mimic;
 
     // Start is called before the first frame update
     void Start()
@@ -23,12 +20,9 @@ public class OpenBox : MonoBehaviour
         _repeatSpan = 2.0f;
         _timeElapsed = 0;
 
-        isMimic = true;
+        Mimic = true;
         Once = false;
-        Gold.SetActive(false);
         animator = GetComponent<Animator>();
-
-       
     }
 
     // Update is called once per frame
@@ -37,18 +31,8 @@ public class OpenBox : MonoBehaviour
 
         _timeElapsed += Time.deltaTime;     //時間をカウントする
 
-        if (!isMimic)
-        {
-            Mimic.SetActive(false);
-            Chest.SetActive(true);
-        }
-        else if (isMimic)
-        {
-            Mimic.SetActive(true);
-            Chest.SetActive(false);
-        }
 
-        if (_timeElapsed  >= _repeatSpan +4.0f && !Once)
+        if (_timeElapsed >= _repeatSpan + 4.5f && !Once)
         {//時間経過でアニメーション
             Anim();
             Once = true;
@@ -58,16 +42,13 @@ public class OpenBox : MonoBehaviour
     }
     private void Anim()
     {
-        if (!isMimic)
+        if (Mimic)
         {
-            animator.SetTrigger("isOpen");
-            Gold.SetActive(true);
+            animator.SetTrigger("isYorokobu");
         }
-        else if (isMimic)
+        else if (!Mimic)
         {
-            animator.SetTrigger("isAttack");
+            animator.SetTrigger("isStand");
         }
     }
 }
-
-

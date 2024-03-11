@@ -17,7 +17,7 @@ public class OpenPlayer : MonoBehaviour
     void Start()
     {
         //表示切り替え時間を指定
-        _repeatSpan = 3.0f;
+        _repeatSpan = 2.0f;
         _timeElapsed = 0;
 
         Mimic = true;
@@ -32,7 +32,7 @@ public class OpenPlayer : MonoBehaviour
         _timeElapsed += Time.deltaTime;     //時間をカウントする
 
       
-        if (_timeElapsed+1.0f >= _repeatSpan && !Once)
+        if (_timeElapsed >= _repeatSpan + 4.0f && !Once)
         {//時間経過でテキスト表示
             Anim();
             Once = true;
