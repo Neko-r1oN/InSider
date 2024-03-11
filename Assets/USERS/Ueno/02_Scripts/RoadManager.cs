@@ -151,7 +151,15 @@ public class RoadManager : MonoBehaviour
             mineData.prefabID = roadNum;
             mineData.rotY = rotY;
 
-            mineData.isEventBlock = true;
+            if (targetBlock.tag == "EventBlock")
+            {// 対象のブロックがイベントブロックの場合
+                mineData.isEventBlock = true;   // 真
+            }
+            else
+            {
+                mineData.isEventBlock = true;   // 偽
+            }
+            
 
             // 送信する
             await ClientManager.Instance.Send(mineData, 7);

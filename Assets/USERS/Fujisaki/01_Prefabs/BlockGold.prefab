@@ -12,8 +12,7 @@ GameObject:
   - component: {fileID: 8181110496381389046}
   - component: {fileID: 6674847051494204592}
   - component: {fileID: 8247380980362656782}
-  - component: {fileID: 5744310920716815547}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BlockGold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,27 +112,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!65 &5744310920716815547
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4295556386234032078}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.07532547, y: 0.043836083, z: 0.14735016}
-  m_Center: {x: -5.182079e-17, y: 0.029172512, z: 0}
 --- !u!1 &5922576041934144899
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,8 +123,8 @@ GameObject:
   - component: {fileID: 2223899851400997525}
   - component: {fileID: 691991129895975849}
   - component: {fileID: 6054952003978281619}
-  m_Layer: 0
-  m_Name: GameObject
+  m_Layer: 6
+  m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
