@@ -150,7 +150,7 @@ public class RoadPanel : MonoBehaviour
                     gameObject.GetComponent<Renderer>().material.color = Color.green; // 緑色
 
                     // 左クリックした
-                    if (Input.GetMouseButtonDown(0))
+                    if (Input.GetMouseButtonDown(0) && hit.transform.gameObject.tag != "StartPanel")
                     {
                         if (EditorManager.Instance.useServer == true)
                         {// サーバーを使用する場合
@@ -191,10 +191,10 @@ public class RoadPanel : MonoBehaviour
             }
 
             //**********************
-            //  埋める(サボタージュ)モードの場合
+            //  サボタージュ(爆弾)モードの場合
             //**********************
             else if (player.GetComponent<Player>().mode == Player.PLAYER_MODE.SABOTAGEBOMB)
-            {// モード：MOVE
+            {// モード：SABOTAGEBOMB
 
                 if (hit.transform.gameObject == this.gameObject)
                 {// 自分にカーソルが当たった
@@ -207,7 +207,7 @@ public class RoadPanel : MonoBehaviour
                     }
 
                     // 左クリックした
-                    if (Input.GetMouseButtonDown(0))
+                    if (Input.GetMouseButtonDown(0) && hit.transform.gameObject.tag != "StartPanel")
                     {
                         // falseだったら
                         if (isBombSelect == false)

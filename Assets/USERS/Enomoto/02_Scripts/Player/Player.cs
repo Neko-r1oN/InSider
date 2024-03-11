@@ -31,9 +31,6 @@ public class Player : MonoBehaviour
     // スタミナゲージ内の値
     Text staminaNum;
 
-    // ランダム関数
-    System.Random rnd = new System.Random();
-
     // パス
     NavMeshPath path = null;
 

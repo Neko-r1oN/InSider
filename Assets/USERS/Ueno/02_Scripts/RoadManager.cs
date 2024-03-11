@@ -112,7 +112,7 @@ public class RoadManager : MonoBehaviour
             stageManager.GetComponent<StageManager>().StartBake();
         }
 
-        if (bombCount >= 3)
+        if (bombCount >= 2)
         {
             for (int n = 0; n < bombOgjList.Count; n++)
             {
