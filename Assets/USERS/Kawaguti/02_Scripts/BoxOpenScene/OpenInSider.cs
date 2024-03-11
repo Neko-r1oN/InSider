@@ -32,7 +32,7 @@ public class OpenInSider : MonoBehaviour
         _timeElapsed += Time.deltaTime;     //時間をカウントする
 
 
-        if (_timeElapsed >= _repeatSpan + 4.5f && !Once)
+        if (_timeElapsed >= _repeatSpan + 3.0f && !Once)
         {//時間経過でアニメーション
             Anim();
             Once = true;

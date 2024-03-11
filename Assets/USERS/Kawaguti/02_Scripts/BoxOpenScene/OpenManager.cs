@@ -58,13 +58,13 @@ public class OpenManager : MonoBehaviour
             //Camera1.SetActive(!Camera1.activeSelf);
            
         }
-        if (_timeElapsed  >= _repeatSpan + 2.0f)
+        if (_timeElapsed  >= _repeatSpan + 1.0f)
         {
             Camera2.SetActive(false);
             //Camera2.SetActive(!Camera2.activeSelf);
         }
 
-        if (_timeElapsed  >= _repeatSpan + 3.5f  && !Once)
+        if (_timeElapsed  >= _repeatSpan + 2.5f  && !Once)
         {
             if(!Mimic)
             {
