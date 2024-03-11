@@ -176,7 +176,7 @@ public class UIManager : MonoBehaviour
     public void HideRoad(int selectNum)
     {
         // ˆø”‚Å—ˆ‚½’l‚ª0ˆÈã‚È‚ç
-        if(selectNum >= 0)
+        if (selectNum >= 0)
         {
             // ”ñ•\Ž¦‚É‚µ‚Ä‚¢‚½“¹UI‚ð•\Ž¦
             roadUIList[selectNum].SetActive(true);

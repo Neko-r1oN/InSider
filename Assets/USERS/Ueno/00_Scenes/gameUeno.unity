@@ -4251,7 +4251,7 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
       m_AttackTime: 0.5
-      m_SustainTime: 1.5
+      m_SustainTime: 0.5
       m_DecayTime: 1
       m_ScaleWithImpact: 1
       m_HoldForever: 0
@@ -15180,6 +15180,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3533882a525343847bdb69e9ec48b89c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stonePrefab: {fileID: 0}
+  goldPrefab: {fileID: 0}
   chaosPrefab: {fileID: 4727419194395133498, guid: 637093d00aee74b418b918c2ec99bdb4,
     type: 3}
   eventNum: 1
@@ -23754,8 +23756,8 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      m_AttackTime: 0.5
-      m_SustainTime: 1.5
+      m_AttackTime: 0.25
+      m_SustainTime: 0.5
       m_DecayTime: 1
       m_ScaleWithImpact: 1
       m_HoldForever: 0
@@ -44200,7 +44202,7 @@ GameObject:
   - component: {fileID: 8616917445924130638}
   m_Layer: 0
   m_Name: Road_00
-  m_TagString: StartPanel
+  m_TagString: AbnormalPanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -48299,7 +48301,7 @@ GameObject:
   - component: {fileID: 6708300813727519728}
   m_Layer: 0
   m_Name: Road_00 (2)
-  m_TagString: StartPanel
+  m_TagString: AbnormalPanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -48319,7 +48321,7 @@ GameObject:
   - component: {fileID: 6708300812891672817}
   m_Layer: 0
   m_Name: Road_00 (1)
-  m_TagString: StartPanel
+  m_TagString: AbnormalPanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -48339,7 +48341,7 @@ GameObject:
   - component: {fileID: 6708300812643408686}
   m_Layer: 0
   m_Name: Road_00 (3)
-  m_TagString: StartPanel
+  m_TagString: AbnormalPanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -50000,7 +50002,7 @@ MonoBehaviour:
   isFill: 0
   objeID: 0
   isFillSelect: 0
-  isBombSelect: 0
+  isbombPrefabSelect: 0
   smoke: {fileID: 0}
 --- !u!114 &6708300812891672817
 MonoBehaviour:
@@ -50019,7 +50021,7 @@ MonoBehaviour:
   isFill: 0
   objeID: 0
   isFillSelect: 0
-  isBombSelect: 0
+  isbombPrefabSelect: 0
   smoke: {fileID: 0}
 --- !u!114 &6708300813727519728
 MonoBehaviour:
@@ -50038,7 +50040,7 @@ MonoBehaviour:
   isFill: 0
   objeID: 0
   isFillSelect: 0
-  isBombSelect: 0
+  isbombPrefabSelect: 0
   smoke: {fileID: 0}
 --- !u!23 &6722989447443447707
 MeshRenderer:
@@ -54615,7 +54617,7 @@ MonoBehaviour:
   isFill: 0
   objeID: 0
   isFillSelect: 0
-  isBombSelect: 0
+  isbombPrefabSelect: 0
   smoke: {fileID: 0}
 --- !u!23 &8623606252122486537
 MeshRenderer:
