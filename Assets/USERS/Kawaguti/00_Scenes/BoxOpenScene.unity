@@ -27264,7 +27264,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1355805082
 Transform:
   m_ObjectHideFlags: 0
@@ -47544,6 +47544,9 @@ MonoBehaviour:
     type: 3}
   isFill: 0
   objeID: 0
+  isFillSelect: 0
+  isBombSelect: 0
+  smoke: {fileID: 0}
 --- !u!114 &1374155698234389706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47560,6 +47563,9 @@ MonoBehaviour:
     type: 3}
   isFill: 0
   objeID: 0
+  isFillSelect: 0
+  isBombSelect: 0
+  smoke: {fileID: 0}
 --- !u!114 &1374155698496123499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47576,6 +47582,9 @@ MonoBehaviour:
     type: 3}
   isFill: 0
   objeID: 0
+  isFillSelect: 0
+  isBombSelect: 0
+  smoke: {fileID: 0}
 --- !u!114 &1374155699435584763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47592,6 +47601,9 @@ MonoBehaviour:
     type: 3}
   isFill: 0
   objeID: 0
+  isFillSelect: 0
+  isBombSelect: 0
+  smoke: {fileID: 0}
 --- !u!1 &1384417404349569397
 GameObject:
   m_ObjectHideFlags: 0
@@ -50557,6 +50569,9 @@ MonoBehaviour:
     type: 3}
   isFill: 0
   objeID: 0
+  isFillSelect: 0
+  isBombSelect: 0
+  smoke: {fileID: 0}
 --- !u!1 &3126118387000040193
 GameObject:
   m_ObjectHideFlags: 0
@@ -61520,6 +61535,9 @@ MonoBehaviour:
     type: 3}
   isFill: 0
   objeID: 0
+  isFillSelect: 0
+  isBombSelect: 0
+  smoke: {fileID: 0}
 --- !u!4 &9112703444496630245
 Transform:
   m_ObjectHideFlags: 0
