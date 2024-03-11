@@ -16,7 +16,7 @@ public class OpenResultUI : MonoBehaviour
         logo = GetComponent<GameObject>();
 
         //this.transform.DOLocalMove(new Vector3(-387.8f, 286.15f, 0f),5.0f);
-        Invoke("move", 15f);
+        Invoke("move", 17f);
     }
 
     // Update is called once per frame
@@ -27,7 +27,7 @@ public class OpenResultUI : MonoBehaviour
     private void move()
     {
         this.transform.DOLocalMove(new Vector3(0f, 0f, 0f), 3.0f);
-        Invoke("ChangeScene", 7f);
+        Invoke("ChangeScene", 9f);
     }
     private void ChangeScene()
     {
