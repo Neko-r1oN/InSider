@@ -7,13 +7,10 @@ TagManager:
   - RoadPanel
   - Block
   - RoadBlock
-  - Pioneer
   - Treasure
   - Mimic
-  - Insider
   - StartPanel
-  - EventPanel
-  - yuka
+  - EventBlock
   layers:
   - Default
   - TransparentFX

@@ -229,7 +229,7 @@ public class Player : MonoBehaviour
         //******************************
         //  採掘モード
         //******************************
-        if (other.gameObject.tag == "Block")
+        if (other.gameObject.tag == "Block" || other.gameObject.tag == "EventBlock")
         {// 採掘可能なブロック
             if (mode == PLAYER_MODE.MINING)
             {// 採掘モードの場合
