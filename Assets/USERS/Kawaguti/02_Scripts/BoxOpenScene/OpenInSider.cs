@@ -2,26 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OpenPlayer : MonoBehaviour
+public class OpenInSider : MonoBehaviour
 {
     Animator animator;
-    private OpenBox openBox;
-
-    //[SerializeField] AudioClip Oh;
+   
 
     private float _repeatSpan;    //繰り返す間隔
     private float _timeElapsed;   //経過時間
 
     bool Once;
     bool Mimic;
-    public AudioSource damage;
 
     // Start is called before the first frame update
     void Start()
     {
-        damage = GetComponent<AudioSource>();
         //表示切り替え時間を指定
-        _repeatSpan = 4.5f;
+        _repeatSpan = 2.0f;
         _timeElapsed = 0;
 
         Mimic = true;
@@ -35,12 +31,10 @@ public class OpenPlayer : MonoBehaviour
 
         _timeElapsed += Time.deltaTime;     //時間をカウントする
 
-      
-        if (_timeElapsed >= _repeatSpan + 0.5f && !Once)
-        {//時間経過でテキスト表示
-            _repeatSpan = 0;
+
+        if (_timeElapsed >= _repeatSpan + 3.0f && !Once)
+        {//時間経過でアニメーション
             Anim();
-            damage.Play();
             Once = true;
         }
 
@@ -48,13 +42,13 @@ public class OpenPlayer : MonoBehaviour
     }
     private void Anim()
     {
-        if (!Mimic)
+        if (Mimic)
         {
             animator.SetTrigger("isYorokobu");
         }
-        else if (Mimic)
+        else if (!Mimic)
         {
-            animator.SetTrigger("isDamage");
+            animator.SetTrigger("isStand");
         }
     }
 }
