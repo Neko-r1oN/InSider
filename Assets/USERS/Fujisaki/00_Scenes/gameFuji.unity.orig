@@ -1395,6 +1395,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af8bedbff057c15479b7e3648c23b701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
+  playerManager: {fileID: 840676508}
+=======
+>>>>>>> feature/fujisaki
 --- !u!1001 &75537412
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4295,11 +4299,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerObjID: 0
+<<<<<<< HEAD
+  isEnd: 0
+  stamina: 100
+  cnt: 0
+=======
   spawnEffectPrefab: {fileID: 0}
   gold: {fileID: 1194406521208508902, guid: 95dd1c8f833063f48bd9de35b7511a6a, type: 3}
   isEnd: 0
   stamina: 100
   isInvincible: 0
+>>>>>>> feature/fujisaki
   _cycle: 1
   mode: 0
 --- !u!195 &210333113
@@ -11323,11 +11333,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerObjID: 0
+<<<<<<< HEAD
+  isEnd: 0
+  stamina: 100
+  cnt: 0
+=======
   spawnEffectPrefab: {fileID: 0}
   gold: {fileID: 1194406521208508902, guid: 95dd1c8f833063f48bd9de35b7511a6a, type: 3}
   isEnd: 0
   stamina: 100
   isInvincible: 0
+>>>>>>> feature/fujisaki
   _cycle: 1
   mode: 0
 --- !u!195 &630176435
@@ -22448,11 +22464,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerObjID: 0
+<<<<<<< HEAD
+  isEnd: 0
+  stamina: 100
+  cnt: 0
+=======
   spawnEffectPrefab: {fileID: 0}
   gold: {fileID: 1194406521208508902, guid: 95dd1c8f833063f48bd9de35b7511a6a, type: 3}
   isEnd: 0
   stamina: 100
   isInvincible: 0
+>>>>>>> feature/fujisaki
   _cycle: 1
   mode: 0
 --- !u!195 &1213451756
@@ -23847,11 +23869,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerObjID: 0
+<<<<<<< HEAD
+  isEnd: 0
+  stamina: 100
+  cnt: 0
+=======
   spawnEffectPrefab: {fileID: 0}
   gold: {fileID: 1194406521208508902, guid: 95dd1c8f833063f48bd9de35b7511a6a, type: 3}
   isEnd: 0
   stamina: 100
   isInvincible: 0
+>>>>>>> feature/fujisaki
   _cycle: 1
   mode: 0
 --- !u!195 &1286726704
@@ -27045,11 +27073,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerObjID: 0
+<<<<<<< HEAD
+  isEnd: 0
+  stamina: 100
+  cnt: 0
+=======
   spawnEffectPrefab: {fileID: 0}
   gold: {fileID: 1194406521208508902, guid: 95dd1c8f833063f48bd9de35b7511a6a, type: 3}
   isEnd: 0
   stamina: 100
   isInvincible: 0
+>>>>>>> feature/fujisaki
   _cycle: 1
   mode: 0
 --- !u!195 &1483753234
@@ -31301,11 +31335,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerObjID: 0
+<<<<<<< HEAD
+  isEnd: 0
+  stamina: 100
+  cnt: 0
+=======
   spawnEffectPrefab: {fileID: 0}
   gold: {fileID: 1194406521208508902, guid: 95dd1c8f833063f48bd9de35b7511a6a, type: 3}
   isEnd: 0
   stamina: 100
   isInvincible: 0
+>>>>>>> feature/fujisaki
   _cycle: 1
   mode: 0
 --- !u!54 &1727096695

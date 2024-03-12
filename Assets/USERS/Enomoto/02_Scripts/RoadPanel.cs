@@ -205,7 +205,7 @@ public class RoadPanel : MonoBehaviour
                             GameObject block = Instantiate(blockPrefab, new Vector3(transform.position.x, 1.47f, transform.position.z), Quaternion.identity);
 
                             //モクモクするアニメーションの再生
-                            Instantiate(smoke, new Vector3(transform.position.x, 1.47f, transform.position.z), Quaternion.identity);
+                            Instantiate(smoke, new Vector3(transform.position.x, 1.0f, transform.position.z), Quaternion.identity);
 
                             // 破棄する
                             Destroy(this.gameObject);

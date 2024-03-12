@@ -2927,9 +2927,15 @@ MonoBehaviour:
   selectRoad: 0000000000000000000000000000000000000000
   selectPanelList: []
   gold: {fileID: 8750506531741430590, guid: 61519c250e03a8e40a21ac3a3b618672, type: 3}
+<<<<<<< HEAD
   smoke: {fileID: 9144859535183980866, guid: c4b26b5dad7ee244382e0e4424fdcf27, type: 3}
   targetBlock: {fileID: 9144859535183980866, guid: c4b26b5dad7ee244382e0e4424fdcf27,
     type: 3}
+=======
+  smoke: {fileID: 1714296003195134422, guid: 22a9905e32edbab45ab2c71274ab9d12, type: 3}
+  staminaUI: {fileID: 688306345}
+  targetBlock: {fileID: 0}
+>>>>>>> feature/fujisaki
   rotY: 0
   selectPanelCount: 0
 --- !u!1 &350550013

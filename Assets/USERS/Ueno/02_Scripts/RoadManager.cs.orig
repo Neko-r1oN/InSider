@@ -320,13 +320,17 @@ public class RoadManager : MonoBehaviour
         // ベイクを開始
         Baker.GetComponent<StageManager>().StartBake();
 
+<<<<<<< HEAD
+        // ゴールドを生成
+        Instantiate(gold, new Vector3(block.transform.position.x,1.0f, block.transform.position.z), Quaternion.identity);
+
+        // ゴールドを生成
+=======
         //ゴールドを生成
         Instantiate(gold, block.transform.position, Quaternion.identity);
         
         //煙アニメーションを生成
-        Instantiate(smoke, block.transform.position, Quaternion.identity);
-
-        // ゴールドを生成
+>>>>>>> feature/fujisaki
         Instantiate(smoke, block.transform.position, Quaternion.identity);
 
         // 初期化
