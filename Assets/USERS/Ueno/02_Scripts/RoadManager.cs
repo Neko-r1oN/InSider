@@ -29,6 +29,9 @@ public class RoadManager : MonoBehaviour
     // ゴールド
     [SerializeField] GameObject gold;
 
+    // 煙のアニメーション
+    [SerializeField] GameObject smoke;
+
     // 敵
     GameObject enemy;
 
@@ -302,8 +305,11 @@ public class RoadManager : MonoBehaviour
         // ベイクを開始
         Baker.GetComponent<StageManager>().StartBake();
 
-        //ゴールドを生成
-        //Instantiate(gold, block.transform.position, Quaternion.identity);
+        // ゴールドを生成
+        Instantiate(gold, new Vector3(block.transform.position.x,1.0f, block.transform.position.z), Quaternion.identity);
+
+        // ゴールドを生成
+        Instantiate(smoke, block.transform.position, Quaternion.identity);
 
         // 初期化
         targetBlock = null;

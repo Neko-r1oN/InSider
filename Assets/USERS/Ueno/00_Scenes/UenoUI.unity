@@ -2846,8 +2846,10 @@ MonoBehaviour:
     type: 3}
   selectRoad: 0000000000000000000000000000000000000000
   selectPanelList: []
-  gold: {fileID: 4295556386234032078, guid: d6040d4c28ee53840ba8686f5f62dd62, type: 3}
-  targetBlock: {fileID: 0}
+  gold: {fileID: 8750506531741430590, guid: 61519c250e03a8e40a21ac3a3b618672, type: 3}
+  smoke: {fileID: 9144859535183980866, guid: c4b26b5dad7ee244382e0e4424fdcf27, type: 3}
+  targetBlock: {fileID: 9144859535183980866, guid: c4b26b5dad7ee244382e0e4424fdcf27,
+    type: 3}
   rotY: 0
   selectPanelCount: 0
 --- !u!1 &350550013
