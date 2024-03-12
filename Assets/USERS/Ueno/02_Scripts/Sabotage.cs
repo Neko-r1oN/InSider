@@ -11,6 +11,20 @@ public class Sabotage : MonoBehaviour
 
     [SerializeField] Text sabotageText;
 
+    // サボタージュ(スロートラップ)のボタン
+    [SerializeField] GameObject sabotage3;
+
+    TextUIManager textUI;
+
+    // サボタージュ(埋める)を何回選択したか
+    public int fillCount;
+
+    // サボタージュ(爆弾)を何回選択したか
+    public int bombCount;
+
+    // サボタージュ(スロートラップ)を何回選択したか
+    public int trapCount;
+
     private void Start()
     {
         // Player
@@ -24,6 +38,9 @@ public class Sabotage : MonoBehaviour
             player = GameObject.Find("Player1");
         }
 
+        GameObject textUIObj = GameObject.Find("TextUIManager");
+        textUI = textUIObj.GetComponent<TextUIManager>();
+
         GameObject buttonManager = GameObject.Find("ButtonManager");
         button = buttonManager.GetComponent<ButtonManager>();
     }
@@ -33,12 +50,20 @@ public class Sabotage : MonoBehaviour
     /// </summary>
     public void SabotageFill()
     {
-        // モード変更
-        player.GetComponent<Player>().mode = Player.PLAYER_MODE.SABOTAGEFILL;
-        // サボタージュボタンを非表示
-        button.sabotage.SetActive(false);
-        // キャンセルボタンを表示
-        button.canselButton.SetActive(true);
+        if(fillCount <= 0)
+        {
+            // モード変更
+            player.GetComponent<Player>().mode = Player.PLAYER_MODE.SABOTAGEFILL;
+
+            textUI.saboText.SetActive(true);
+
+            // サボタージュボタンを非表示
+            button.sabotageUI.SetActive(false);
+            // キャンセルボタンを表示
+            button.canselButton.SetActive(true);
+
+            fillCount++;
+        }
     }
 
     /// <summary>
@@ -46,12 +71,20 @@ public class Sabotage : MonoBehaviour
     /// </summary>
     public void SabotageBomb()
     {
-        // モード変更
-        player.GetComponent<Player>().mode = Player.PLAYER_MODE.SABOTAGEBOMB;
-        // サボタージュボタンを非表示
-        button.sabotage.SetActive(false);
-        // キャンセルボタンを表示
-        button.canselButton.SetActive(true);
+        if(bombCount <= 0)
+        {
+            // モード変更
+            player.GetComponent<Player>().mode = Player.PLAYER_MODE.SABOTAGEBOMB;
+
+            textUI.saboText.SetActive(true);
+
+            // サボタージュボタンを非表示
+            button.sabotageUI.SetActive(false);
+            // キャンセルボタンを表示
+            button.canselButton.SetActive(true);
+
+            bombCount++;
+        }
     }
 
     public void SabotageText(int num)

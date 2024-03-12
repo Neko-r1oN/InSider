@@ -31,11 +31,16 @@ public class ButtonManager : MonoBehaviour
     // テキスト背景
     [SerializeField] GameObject textBack;
 
+<<<<<<< HEAD
+    // スタミナ不足UI
+    [SerializeField] GameObject noStaminaUI;
+=======
     // サボタージュ(爆弾)のボタン
     [SerializeField] GameObject sabotage1;
 
     // サボタージュ(埋める)のボタン
     [SerializeField] GameObject sabotage2;
+>>>>>>> dcd06d5453d0d7b2d9809a8913fe69c825136451
 
     // 情報を取得
     GameObject player;
@@ -92,7 +97,11 @@ public class ButtonManager : MonoBehaviour
         // カメラマネージャーを取得
         cameraManager = GameObject.Find("CameraManager");
 
+<<<<<<< HEAD
+        
+=======
         eventManager = GameObject.Find("EventManager");
+>>>>>>> dcd06d5453d0d7b2d9809a8913fe69c825136451
 
         // 偽
         isUseDoubt = false;
