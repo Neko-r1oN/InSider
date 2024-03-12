@@ -1663,6 +1663,7 @@ MonoBehaviour:
   - {fileID: 2078977938}
   supplementText: {fileID: 114692122}
   textBack: {fileID: 1556263908}
+  noStaminaUI: {fileID: 688306345}
   sabotage: {fileID: 860535216}
   isCancel: 0
   subStamina: 0
@@ -5085,7 +5086,7 @@ GameObject:
   - component: {fileID: 688306347}
   - component: {fileID: 688306346}
   m_Layer: 5
-  m_Name: TextBack
+  m_Name: NoStaminaUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5142,11 +5143,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 173993932}
-  m_Father: {fileID: 1379852948}
+  m_Father: {fileID: 760347211}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 345}
+  m_AnchoredPosition: {x: 0, y: 455}
   m_SizeDelta: {x: 579.6, y: 131.96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &700385763
@@ -5884,6 +5885,7 @@ RectTransform:
   - {fileID: 980437019}
   - {fileID: 2983148333685572977}
   - {fileID: 5015768163936565075}
+  - {fileID: 688306348}
   - {fileID: 333426360}
   - {fileID: 820876599}
   - {fileID: 1281383266}
@@ -10594,7 +10596,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 688306348}
   - {fileID: 1088604123}
   - {fileID: 1840864167}
   - {fileID: 215204775}

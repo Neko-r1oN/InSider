@@ -44,6 +44,12 @@ public class Goldmanager : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
+        // ダウン状態だったらreturn
+        if(other.GetComponent<Player>().mode == Player.PLAYER_MODE.DOWN)
+        {
+            return;
+        }
+
         if (EditorManager.Instance.useServer == true)
         {// サーバーを使用する場合
             if (other.GetComponent<Player>().playerObjID == ClientManager.Instance.playerID)
