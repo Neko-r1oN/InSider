@@ -9,16 +9,20 @@ public class Sabotage : MonoBehaviour
 
     ButtonManager button;
 
-    Text sabotageText;
-
-    private void Awake()
-    {
-        sabotageText = GameObject.Find("SabotageText").GetComponent<Text>();
-    }
+    [SerializeField] Text sabotageText;
 
     private void Start()
     {
-        player = GameObject.Find("Player1");
+        // Player
+        if (EditorManager.Instance.useServer)
+        {// サーバーを使用する場合
+            player = GameObject.Find("player-List");
+            player = player.GetComponent<PlayerManager>().players[ClientManager.Instance.playerID];
+        }
+        else
+        {// サーバーを使用しない
+            player = GameObject.Find("Player1");
+        }
 
         GameObject buttonManager = GameObject.Find("ButtonManager");
         button = buttonManager.GetComponent<ButtonManager>();

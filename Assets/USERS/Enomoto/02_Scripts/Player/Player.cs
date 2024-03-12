@@ -13,6 +13,9 @@ public class Player : MonoBehaviour
     // このスクリプトを装備しているオブジェクトのID
     public int playerObjID;
 
+    // スタート地点に復活するときのエフェクト
+    [SerializeField] GameObject spawnEffectPrefab; 
+
     // 自分自身
     NavMeshAgent agent;
 
@@ -25,14 +28,14 @@ public class Player : MonoBehaviour
     // スタミナゲージ
     GameObject staminaGauge;
 
-    // 敵
-    GameObject enemy;
-
     // スタミナゲージ内の値
     Text staminaNum;
 
     // パス
     NavMeshPath path = null;
+
+    // PlayerManager
+    GameObject manager;
 
     // 目的地を設定したかどうか
     bool isSetTarget = false;
@@ -46,9 +49,10 @@ public class Player : MonoBehaviour
     // スタミナ
     public int stamina = 100;
 
-    private double _time;
+    // 無敵状態かどうか
+    public bool isInvincible;
 
-    public int cnt;
+    private double _time;
 
     // 点滅周期[s]
     [SerializeField] private float _cycle = 1;
@@ -103,7 +107,12 @@ public class Player : MonoBehaviour
         // アニメーター情報を取得
         animator = GetComponent<Animator>();
 
+        // PLayerManagerを取得
+        manager = this.transform.parent.gameObject;
+
         animator.keepAnimatorStateOnDisable = true;
+
+        isInvincible = false;
     }
 
     // Update is called once per frame
@@ -324,12 +333,13 @@ public class Player : MonoBehaviour
     {
         Debug.Log(pos);
 
-        if(playerObjID != ClientManager.Instance.playerID)
-        {
-            // 座標を書き換える
-            pos = new Vector3(0f, 0.9f, -5f);
+        if(pos == new Vector3(0f, 0.9f, -5f))
+        {// 引数の座標がスタート地点の場合
 
-            Debug.Log("他のプレイヤーオブジェクトがposを修正");
+            Debug.Log("スタート地点に戻る");
+
+            // 復活パーティクルを出す
+            Instantiate(spawnEffectPrefab, pos,Quaternion.identity);
         }
 
         // Agentの目的地を設定
@@ -344,8 +354,8 @@ public class Player : MonoBehaviour
         // コンポーネントを有効にする
         agent.enabled = true;
 
-        // 復活パーティクルを出す
-        //Instantiate();
+        // 数秒後にboolをfalseにする
+        Invoke("IsHitFalse", 2f);
     }
 
     public void SubStamina(int num)
@@ -419,42 +429,58 @@ public class Player : MonoBehaviour
     /// </summary>
     public void DownPlayer()
     {
+        if(isInvincible == true)
+        {// ダウンしている場合
+            return;
+        }
+
+        // フラグを真
+        isInvincible = true;
+
         // ダウンモードに変更
         mode = PLAYER_MODE.DOWN;
 
-        // ダウンのアニメーションに変更
-        animator.SetBool("Down", true);
+        // Restアニメを再生する
+        animator.Play("Rest");
 
-        cnt = 0;
-    }
+        // 点滅のコルーチンを開始する
+        manager.GetComponent<PlayerManager>().StartCoroutine
+            (manager.GetComponent<PlayerManager>().StartBlink(playerObjID));
 
-    public void BlinkPlayer() 
-    {
-        Debug.Log(animator.GetBool("Down"));
-
-        // 内部時刻を経過させる
-        _time += Time.deltaTime;
-
-        // 周期cycleで繰り返す値の取得
-        // 0～cycleの範囲の値が得られる
-        var repeatValue = Mathf.Repeat((float)_time, 0.5f);
-
-        bool isShowPlayer = repeatValue >= 0.25f;
-
-        this.gameObject.SetActive(isShowPlayer);
-
-        cnt++;
+        Debug.Log("ダウンした");
     }
 
     /// <summary>
     /// ダウンから元に戻す処理
     /// </summary>
-    public void RecoverPlayer()
+    public async void RecoverPlayer()
     {
         mode = PLAYER_MODE.MOVE;
 
-        animator.SetBool("Down", false);
+        // Idleアニメを再生する
+        animator.Play("MinerIdle");
 
-        this.gameObject.SetActive(true);
+        //----------------
+        //  座標を修正
+        //----------------
+        if (EditorManager.Instance.useServer == true)
+        {// サーバーを使用している場合
+            // クラス変数を作成
+            RevisionPosData revisionPosData = new RevisionPosData();
+            revisionPosData.playerID = ClientManager.Instance.playerID;
+            revisionPosData.targetID = ClientManager.Instance.playerID;
+            revisionPosData.isBuried = true;
+            revisionPosData.targetPosX = 0f;
+            revisionPosData.targetPosY = 0.9f;
+            revisionPosData.targetPosZ = -5f;
+
+            // [revisionPosData]サーバーに送信
+            await ClientManager.Instance.Send(revisionPosData, 12);
+        }
+        else
+        {
+            // 座標を設定
+            RevisionPos(new Vector3(0f, 0.9f, -5f));
+        }
     }
 }

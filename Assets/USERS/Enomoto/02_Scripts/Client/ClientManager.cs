@@ -63,8 +63,14 @@ public class ClientManager : MonoBehaviour
     // UIマネージャー
     GameObject uiManager;
 
+    // イベントマネージャー
+    GameObject eventManager;
+
+    // EnemyManager
+    GameObject enemyManager;
+
     // 必要接続人数
-    int RequiredNum = 2;
+    int RequiredNum = 1;
 
     //===========================
     //  [公開]フィールド
@@ -152,17 +158,20 @@ public class ClientManager : MonoBehaviour
         //+++++++++++++++++++++++++
         //  発生するイベントのID
         //++++++++++++++++++++++++++
-        RndFallStones = 101,        // ランダムに空から石が降ってくる
+        EvendAlert = 100,           // イベント開始通知
+        RndFallStones,              // ランダムに空から石が降ってくる
         Confusion,                  // 混乱状態になる
         SpownEnemys,                // 敵が出現
         RiStaminaCn,                // スタミナの消費量を減らす
         RndSpawnGold,               // ランダムにゴールドが空から降ってくる
-                                    //Decoy,                      // デコイ
+                                    //Decoy,                    // デコイ
+        EvendFinish = 110,          // イベント終了通知
+
+
 
         //++++++++++++++++++++++++++
         //  サボタージュのID
         //++++++++++++++++++++++++++
-
     }
 
     //===========================
@@ -270,6 +279,9 @@ public class ClientManager : MonoBehaviour
 
         // NetworkStreamを使用
         stream = tcpClient.GetStream();
+
+        // Enemyのリスト
+        List<GameObject> enemyObjList = new List<GameObject>();
 
         // 自分自身が疑われた回数
         int doubtNum = 0;
@@ -415,6 +427,9 @@ public class ClientManager : MonoBehaviour
                         // マネージャーを初期化する
                         playerManager = null;
                         blockManager = null;
+                        uiManager = null;
+                        enemyManager = null;
+                        eventManager = null;
 
                         Debug.Log("役職と先行のプレイヤーIDを取得");
 
@@ -485,10 +500,10 @@ public class ClientManager : MonoBehaviour
                         // JSONデシリアライズで取得する
                         Action_MiningData mineData = JsonConvert.DeserializeObject<Action_MiningData>(jsonString);
 
-                        Debug.Log("[" + mineData.playerID + "]" + " : [" + mineData.prefabID + "]切り開く");
+                        Debug.Log("[" + mineData.playerID + "]" + " : [" + mineData.prefabID + "]切り開く  *"+ mineData.isGetGold+"*");
 
                         // 切り開く処理
-                        blockManager.GetComponent<BlockManager>().MineObject(mineData.objeID, mineData.prefabID, mineData.rotY,mineData.isGetGold);
+                        blockManager.GetComponent<BlockManager>().MineObject(mineData.playerID, mineData.objeID, mineData.prefabID, mineData.rotY,mineData.isGetGold);
 
                         break;
                     case 8: // やすむ(スタミナ回復)
@@ -586,21 +601,28 @@ public class ClientManager : MonoBehaviour
                         // プレイヤーのモデルリストを取得する
                         List<GameObject> objeList1 = playerManager.GetComponent<PlayerManager>().players;
 
-                        // 座標を取得する
-                        Vector3 targetPos1 = new Vector3(revisionPos.targetPosX, revisionPos.targetPosY, revisionPos.targetPosZ);
+                        if (revisionPos.isEnemy == true)
+                        {// 敵による座標修正
 
-                        Debug.Log("座標を修正する [オブジェクトID：" + revisionPos.targetID + "] **送信元のプレイヤーID："+ revisionPos.playerID);
+                            Debug.Log(revisionPos.targetID + "がダウンした");
 
-                        // 座標を修正する
-                        objeList1[revisionPos.targetID].GetComponent<Player>().RevisionPos(targetPos1);
+                            objeList1[revisionPos.targetID].GetComponent<Player>().DownPlayer();
+                        }
+                        else
+                        {
+                            // 座標を取得する
+                            Vector3 targetPos1 = new Vector3(revisionPos.targetPosX, revisionPos.targetPosY, revisionPos.targetPosZ);
+
+                            Debug.Log("座標を修正する [オブジェクトID：" + revisionPos.targetID + "] **送信元のプレイヤーID：" + revisionPos.playerID);
+
+                            // 座標を修正する
+                            objeList1[revisionPos.targetID].GetComponent<Player>().RevisionPos(targetPos1);
+                        }
 
                         break;
-                    case 13: // イベント発生通知を受信
+                    case 13:
 
-                        // JSONデシリアライズで取得する
-                        EventAlertData eventData = JsonConvert.DeserializeObject<EventAlertData>(jsonString);
-
-                        Debug.Log("イベント発生 : " + eventData.eventID);
+                        // 募集中
 
                         break;
                     case 14: // スコアのテキストを更新する
@@ -620,6 +642,18 @@ public class ClientManager : MonoBehaviour
                     //  イベントのDataを受信
                     //*****************************
 
+                    case 100:   // イベント発生通知
+
+                        // JSONデシリアライズで取得する
+                        EventAlertData eventData = JsonConvert.DeserializeObject<EventAlertData>(jsonString);
+
+                        Debug.Log("イベント発生 : " + eventData.eventID);
+
+                        // イベント用テキストを更新する
+                        uiManager.GetComponent<UIManager>().UdEventText(eventData.eventID);
+
+                        break;
+
                     case 101:   // ランダム落石
 
                         // JSONデシリアライズで取得する
@@ -632,12 +666,25 @@ public class ClientManager : MonoBehaviour
                         stonePos = new Vector3(stonePos.x + event_stoneData.addPosX, 0.5f, stonePos.z + event_stoneData.addPosZ);
 
                         // 落石オブジェクトの生成処理
-                        EventManager.Instance.GenerateEventStone(stonePos);
+                        eventManager.GetComponent<EventManager>().GenerateEventStone(stonePos);
 
                         break;
                     case 102:   // 混乱
                         break;
                     case 103:   // 敵出現
+
+                        // JSONデシリアライズで取得する
+                        Event_SpawnEnemyData event_enemyData = JsonConvert.DeserializeObject<Event_SpawnEnemyData>(jsonString);
+
+                        Debug.Log("イベント：敵出現");
+
+                        // 座標を設定する
+                        Vector3 enemyPos = blockManager.GetComponent<BlockManager>().blocks[event_enemyData.panelID].transform.position;
+                        enemyPos = new Vector3(enemyPos.x, 0.55f, enemyPos.z);
+
+                        // 敵を生成したらリストに追加する
+                        enemyObjList.Add(eventManager.GetComponent<EventManager>().SpawnEnemy(enemyPos));
+
                         break;
                     case 104:   // スタミナバフ
                         break;
@@ -651,11 +698,28 @@ public class ClientManager : MonoBehaviour
                         goldPos = new Vector3(goldPos.x + event_goldData.addPosX, 10f, goldPos.z + event_goldData.addPosZ);
 
                         // 金のオブジェクトの生成処理
-                        EventManager.Instance.GenerateEventStone(goldPos);
+                        eventManager.GetComponent<EventManager>().GenerateEventStone(goldPos);
 
                         Debug.Log("イベント：金");
 
                         // 金の生成
+
+                        break;
+
+                    case 110:   // イベント終了通知
+
+                        // JSONデシリアライズで取得する
+                        EventAlertData eventFinishData = JsonConvert.DeserializeObject<EventAlertData>(jsonString);
+
+                        Debug.Log("終了するイベント : " + eventFinishData.eventID);
+
+                        if(eventFinishData.eventID == 103)
+                        {// 敵の場合
+                            // 点滅のコルーチンを開始
+                            enemyManager.GetComponent<EnemyManager>().StartCoroutine
+                            (enemyManager.GetComponent<EnemyManager>().StartBlink(enemyObjList));
+                            enemyObjList = new List<GameObject>();  // 初期化する
+                        }
 
                         break;
                 }
@@ -670,7 +734,7 @@ public class ClientManager : MonoBehaviour
 
         // フェード＆シーン遷移
         Initiate.DoneFading();
-        SceneManager.LoadScene("TitleKawaguchi");
+        SceneManager.LoadScene("TitleKawaguchi_copy");
     }
 
     /// <summary>
@@ -756,12 +820,10 @@ public class ClientManager : MonoBehaviour
     {
         // 取得する
         blockManager = GameObject.Find("BlockList");
-
-        // 取得する
         playerManager = GameObject.Find("player-List");
-
-        // 取得する
         uiManager = GameObject.Find("UIManager");
+        eventManager = GameObject.Find("EventManager");
+        enemyManager = GameObject.Find("EnemyManager");
     }
 
     /// <summary>

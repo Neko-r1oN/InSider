@@ -8,35 +8,59 @@ public class BlockGoldManager : MonoBehaviour
     /// <summary>
     /// 金が掘ったプレイヤーを追いかける処理
     /// </summary>
-    GameObject player;
-    GameObject parentObj;
+    GameObject playerManager;
+    GameObject targetObj;
     public float speed = 5.0f;
+    bool isStart;
+
+    // 追尾するプレイヤーのID
+    public int targetID;
 
     private void Start()
     {
+        isStart = false;
+
         // Player
-        if (EditorManager.Instance.useServer)
-        {// サーバーを使用する場合
-            player = GameObject.Find("player-List");
-            player = player.GetComponent<PlayerManager>().players[ClientManager.Instance.turnPlayerID];
-
-            // ↑↑後で修正するかも
-        }
-        else
+        if (EditorManager.Instance.useServer == false)
         {// サーバーを使用しない
-            player = GameObject.Find("Player1");
+
+            // IDを代入する
+            targetID = 0;
+
+            playerManager = GameObject.Find("player-List");
+
+            StartMove(0);
         }
 
-        parentObj = transform.parent.gameObject;
+        Debug.Log("あたいは金だよ");
     }
 
     void Update()
     {
+        if(isStart == false)
+        {
+            return;
+        }
+
         //スタート位置、ターゲットの座標、速度
-        parentObj.transform.position = Vector3.MoveTowards(
-          parentObj.transform.position,
-          player.transform.position,
+        transform.position = Vector3.MoveTowards(
+          transform.position,
+          targetObj.transform.position,
           speed * Time.deltaTime);
+
+        // Y座標を固定する
+        transform.position = new Vector3(transform.position.x, 1f,transform.position.z);
+    }
+
+    /// <summary>
+    /// Update処理を開始
+    /// </summary>
+    public void StartMove(int id)
+    {
+        targetID = id;
+        playerManager = GameObject.Find("player-List");
+        targetObj = playerManager.GetComponent<PlayerManager>().players[targetID];
+        isStart = true;
     }
 
     /// <summary>
@@ -47,15 +71,15 @@ public class BlockGoldManager : MonoBehaviour
     {
         if (EditorManager.Instance.useServer == true)
         {// サーバーを使用する場合
-            if(other.GetComponent<Player>().playerObjID == ClientManager.Instance.playerID)
-            {// プレイヤーオブジェクトのIDが自身のIDの場合
+            if(other.GetComponent<Player>().playerObjID == targetID)
+            {// プレイヤーオブジェクトのIDがターゲットのIDと一致する
                 // 加算するスコアをサーバーに送信する関数
                 ScoreMethodList.Instance.SendAddScore();
             }
         }
 
         // 破棄する
-        Destroy(parentObj);
+        Destroy(this.gameObject);
         Debug.Log("あたりめ");
     }
 }

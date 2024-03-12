@@ -45,6 +45,9 @@ public class UIManager : MonoBehaviour
     // ダウトのボタン用の途中退出したときのUI
     [SerializeField] List<GameObject> outImageList_DoubtUI;
 
+    // イベントテキストの親オブジェクト
+    [SerializeField] GameObject eventTextsParent;
+
     // 使用不可にするダウトのボタンのインデックス番号
     public List<int> disabledIndexNumList;
 
@@ -320,6 +323,20 @@ public class UIManager : MonoBehaviour
             // 元の位置へ戻す
             playerUIList[indexNum - 1].GetComponent<MovePlayerUI>().MoveOrReturn(false);
         }
+    }
+
+    /// <summary>
+    /// イベント発生テキストを表示
+    /// </summary>
+    /// <param name="eventID"></param>
+    public void UdEventText(int eventID)
+    {
+        // アクティブ化
+        eventTextsParent.SetActive(true);
+
+        // アニメーション(コルーチン)
+        eventTextsParent.GetComponent<EventTextUI>().StartCoroutine
+            (eventTextsParent.GetComponent<EventTextUI>().PanelAnim(eventID));
     }
 
     /// <summary>

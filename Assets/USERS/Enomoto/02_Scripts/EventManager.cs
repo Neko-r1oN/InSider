@@ -5,6 +5,7 @@ using UnityEngine;
 public class EventManager : MonoBehaviour
 {
     [SerializeField] GameObject stonePrefab;
+    [SerializeField] GameObject enemyPrefab;
     [SerializeField] GameObject goldPrefab;
 
     /// <summary>
@@ -27,24 +28,6 @@ public class EventManager : MonoBehaviour
     public int eventNum;
 
     GameObject player;
-
-    // シングルトン用
-    public static EventManager Instance;
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-
-            // シーン遷移しても破棄しないようにする
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     private void Start()
     {
@@ -89,6 +72,17 @@ public class EventManager : MonoBehaviour
                     break;
             }
         }
+    }
+
+    /// <summary>
+    /// 敵を生成する
+    /// </summary>
+    /// <returns></returns>
+    public GameObject SpawnEnemy(Vector3 pos)
+    {
+        GameObject enemy = Instantiate(enemyPrefab,pos,Quaternion.identity);
+
+        return enemy;
     }
 
     /// <summary>

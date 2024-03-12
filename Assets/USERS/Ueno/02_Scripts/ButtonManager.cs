@@ -31,7 +31,7 @@ public class ButtonManager : MonoBehaviour
     UIManager uIManager;
     TextUIManager textUI;
     GameObject cameraManager;
-    public GameObject sabotage;
+    [SerializeField] public GameObject sabotage;
 
     // ランダム関数
     System.Random rnd = new System.Random();
@@ -79,8 +79,6 @@ public class ButtonManager : MonoBehaviour
 
         // 偽
         isUseDoubt = false;
-        // サボタージュUIを取得
-        sabotage = GameObject.Find("SabotageUI");
 
         // プレイヤーのモードをNOTHINGに設定
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.NOTHING;
