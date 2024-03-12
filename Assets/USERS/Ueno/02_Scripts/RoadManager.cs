@@ -32,9 +32,6 @@ public class RoadManager : MonoBehaviour
     // 煙アニメーション
     [SerializeField] GameObject smoke;
 
-    // 煙のアニメーション
-    [SerializeField] GameObject smoke;
-
     // 敵
     GameObject enemy;
 
