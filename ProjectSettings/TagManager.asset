@@ -9,8 +9,11 @@ TagManager:
   - RoadBlock
   - Treasure
   - Mimic
+  - Insider
+  - EventPanel
+  - AbnormalPanel
+  - Bomb
   - StartPanel
-  - EventBlock
   layers:
   - Default
   - TransparentFX

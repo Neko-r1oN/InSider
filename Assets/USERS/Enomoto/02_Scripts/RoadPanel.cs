@@ -31,7 +31,7 @@ public class RoadPanel : MonoBehaviour
     public bool isFillSelect;
 
     // ボムを設置する場所を選択したかどうか
-    public bool isBombSelect;
+    public bool isbombPrefabSelect;
 
     // マネージャーを取得する
     GameObject manager;
@@ -65,7 +65,7 @@ public class RoadPanel : MonoBehaviour
 
         isFillSelect = false;
 
-        isBombSelect = false;
+        isbombPrefabSelect = false;
     }
 
     // Update is called once per frame
@@ -103,13 +103,13 @@ public class RoadPanel : MonoBehaviour
             //  埋める(サボタージュ)モードの場合
             //**********************
             else if (player.GetComponent<Player>().mode == Player.PLAYER_MODE.SABOTAGEFILL)
-            {// モード：MOVE
+            {// モード：SABOTAGEFILL
 
                 if (hit.transform.gameObject == this.gameObject)
                 {// 自分にカーソルが当たった
 
                     // スタートパネル以外だったら
-                    if(hit.transform.gameObject.tag != "StartPanel")
+                    if(hit.transform.gameObject.tag != "AbnormalPanel")
                     {
                         // 色を黄色に変更
                         gameObject.GetComponent<Renderer>().material.color = Color.yellow; // 黄色
@@ -122,10 +122,10 @@ public class RoadPanel : MonoBehaviour
                         if (isFillSelect == false)
                         {
                             // 埋める場所選択数をカウント
-                            roadManager.fillCount++;
+                            roadManager.selectPanelCount++;
 
                             // リストにオブジェクト情報を格納
-                            roadManager.blokObjList.Add(this.gameObject);
+                            roadManager.selectPanelList.Add(this.gameObject);
                             Debug.Log("追加しました。");
 
                             // trueに変更
@@ -150,7 +150,7 @@ public class RoadPanel : MonoBehaviour
                     gameObject.GetComponent<Renderer>().material.color = Color.green; // 緑色
 
                     // 左クリックした
-                    if (Input.GetMouseButtonDown(0) && hit.transform.gameObject.tag != "StartPanel")
+                    if (Input.GetMouseButtonDown(0) && hit.transform.gameObject.tag != "AbnormalPanel")
                     {
                         if (EditorManager.Instance.useServer == true)
                         {// サーバーを使用する場合
@@ -179,6 +179,9 @@ public class RoadPanel : MonoBehaviour
                             stageManager.GetComponent<StageManager>().StartBake();
                         }
 
+                        buttonManager.GetComponent<ButtonManager>().canselButton.SetActive(false);
+                        buttonManager.GetComponent<ButtonManager>().DisplayButton();
+
                         // スタミナを減らす
                         player.GetComponent<Player>().SubStamina(20);
                         Debug.Log("残りスタミナ" + player.GetComponent<Player>().stamina);
@@ -200,27 +203,27 @@ public class RoadPanel : MonoBehaviour
                 {// 自分にカーソルが当たった
 
                     // スタートパネル以外だったら
-                    if (hit.transform.gameObject.tag != "StartPanel")
+                    if (hit.transform.gameObject.tag != "AbnormalPanel")
                     {
                         // 色を黄色に変更
                         gameObject.GetComponent<Renderer>().material.color = Color.yellow; // 黄色
                     }
 
                     // 左クリックした
-                    if (Input.GetMouseButtonDown(0) && hit.transform.gameObject.tag != "StartPanel")
+                    if (Input.GetMouseButtonDown(0) && hit.transform.gameObject.tag != "AbnormalPanel")
                     {
                         // falseだったら
-                        if (isBombSelect == false)
+                        if (isbombPrefabSelect == false)
                         {
                             // 埋める場所選択数をカウント
-                            roadManager.bombCount++;
+                            roadManager.selectPanelCount++;
 
                             // リストにオブジェクト情報を格納
-                            roadManager.bombOgjList.Add(this.gameObject);
+                            roadManager.selectPanelList.Add(this.gameObject);
                             Debug.Log("追加しました。");
 
                             // trueに変更
-                            isBombSelect = true;
+                            isbombPrefabSelect = true;
                         }
                     }
                 }
