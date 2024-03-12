@@ -1582,7 +1582,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &838227625
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3387,7 +3387,7 @@ MonoBehaviour:
   isFill: 0
   objeID: 0
   isFillSelect: 0
-  isBombSelect: 0
+  isbombPrefabSelect: 0
   smoke: {fileID: 0}
 --- !u!1 &21087385231406754
 GameObject:
@@ -5920,7 +5920,7 @@ MonoBehaviour:
   isFill: 0
   objeID: 0
   isFillSelect: 0
-  isBombSelect: 0
+  isbombPrefabSelect: 0
   smoke: {fileID: 0}
 --- !u!23 &1383735133169260930
 MeshRenderer:
@@ -8065,7 +8065,7 @@ MonoBehaviour:
   isFill: 0
   objeID: 0
   isFillSelect: 0
-  isBombSelect: 0
+  isbombPrefabSelect: 0
   smoke: {fileID: 0}
 --- !u!33 &2549073451201829243
 MeshFilter:
@@ -8157,7 +8157,7 @@ MonoBehaviour:
   isFill: 0
   objeID: 0
   isFillSelect: 0
-  isBombSelect: 0
+  isbombPrefabSelect: 0
   smoke: {fileID: 0}
 --- !u!1 &2631789401711840389
 GameObject:
@@ -8823,7 +8823,7 @@ MonoBehaviour:
   isFill: 0
   objeID: 0
   isFillSelect: 0
-  isBombSelect: 0
+  isbombPrefabSelect: 0
   smoke: {fileID: 0}
 --- !u!4 &3149131372698545880
 Transform:
@@ -12058,7 +12058,7 @@ MonoBehaviour:
   isFill: 0
   objeID: 0
   isFillSelect: 0
-  isBombSelect: 0
+  isbombPrefabSelect: 0
   smoke: {fileID: 0}
 --- !u!1 &5323656753141040784
 GameObject:
@@ -13612,7 +13612,7 @@ MonoBehaviour:
   isFill: 0
   objeID: 0
   isFillSelect: 0
-  isBombSelect: 0
+  isbombPrefabSelect: 0
   smoke: {fileID: 0}
 --- !u!1 &6376734665553419485
 GameObject:
@@ -18003,7 +18003,7 @@ MonoBehaviour:
   isFill: 0
   objeID: 0
   isFillSelect: 0
-  isBombSelect: 0
+  isbombPrefabSelect: 0
   smoke: {fileID: 0}
 --- !u!1 &8998340199414803847
 GameObject:
@@ -18120,7 +18120,7 @@ MonoBehaviour:
   isFill: 0
   objeID: 0
   isFillSelect: 0
-  isBombSelect: 0
+  isbombPrefabSelect: 0
   smoke: {fileID: 0}
 --- !u!4 &9112985025958951328
 Transform:
