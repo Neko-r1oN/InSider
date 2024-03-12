@@ -157,7 +157,7 @@ public class RoadManager : MonoBehaviour
             }
             else
             {
-                mineData.isEventBlock = true;   // 偽
+                mineData.isEventBlock = false;   // 偽
             }
             
 

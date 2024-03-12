@@ -5,13 +5,7 @@ using DG.Tweening;  //DOTween‚ðŽg‚¤‚Æ‚«‚Í‚±‚Ìusing‚ð“ü‚ê‚é
 
 
 public class TurnUI : MonoBehaviour
-{
-    // Start is called before the first frame update
-    private void Start()
-    {
-        //StartCoroutine(PanelAnim());
-    }
-    
+{   
     public IEnumerator PanelAnim()
     {
         transform.rotation = Quaternion.Euler(90, 0, 0);

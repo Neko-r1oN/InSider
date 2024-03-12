@@ -23,6 +23,11 @@ internal class RevisionPosData
     public bool isBuried { get; set; }
 
     /// <summary>
+    /// “G‚ÉG‚ê‚ç‚ê‚½‚Ì‚©‚Ç‚¤‚©
+    /// </summary>
+    public bool isEnemy { get; set; }
+
+    /// <summary>
     /// –Ú“I’n‚ÌXÀ•W
     /// </summary>
     public float targetPosX { get; set; }
