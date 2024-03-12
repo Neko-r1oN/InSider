@@ -248,8 +248,9 @@ MonoBehaviour:
   isFill: 0
   objeID: 0
   isFillSelect: 0
-  isBombSelect: 0
+  isbombPrefabSelect: 0
   smoke: {fileID: 5408633052442516991, guid: 1d6651dd79e115c4fb7cb9604b460ad1, type: 3}
+  isColor: 0
 --- !u!1 &4181179818797949992
 GameObject:
   m_ObjectHideFlags: 0

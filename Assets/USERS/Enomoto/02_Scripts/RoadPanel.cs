@@ -39,6 +39,9 @@ public class RoadPanel : MonoBehaviour
     //モクモクアニメーションのプレハブを取得
     [SerializeField] GameObject smoke;
 
+    // 色が変更されているかどうか
+    public bool isColor;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +69,8 @@ public class RoadPanel : MonoBehaviour
         isFillSelect = false;
 
         isbombPrefabSelect = false;
+
+        isColor = false;
     }
 
     // Update is called once per frame
@@ -92,11 +97,6 @@ public class RoadPanel : MonoBehaviour
                 {// 自分にカーソルが当たった
                     gameObject.GetComponent<Renderer>().material.color = Color.blue; // 青色
                 }
-                else
-                {
-                    // デフォルトカラーに戻す
-                    gameObject.GetComponent<Renderer>().material.color = defaultMaterial;
-                }
             }
 
             //**********************
@@ -109,15 +109,17 @@ public class RoadPanel : MonoBehaviour
                 {// 自分にカーソルが当たった
 
                     // スタートパネル以外だったら
-                    if(hit.transform.gameObject.tag != "AbnormalPanel")
+                    if (hit.transform.gameObject.tag != "AbnormalPanel")
                     {
-                        // 色を黄色に変更
-                        gameObject.GetComponent<Renderer>().material.color = Color.yellow; // 黄色
+                       // 色を黄色に変更
+                       gameObject.GetComponent<Renderer>().material.color = Color.yellow; // 黄色
                     }
-                    
+
                     // 左クリックした
-                    if (Input.GetMouseButtonDown(0))
+                    if (Input.GetMouseButtonDown(0) && hit.transform.gameObject.tag != "AbnormalPanel")
                     {
+                        isColor = true;
+
                         // falseだったら
                         if (isFillSelect == false)
                         {
@@ -133,10 +135,42 @@ public class RoadPanel : MonoBehaviour
                         }
                     }
                 }
-                else
-                {
-                    // デフォルトカラーに戻す
-                    gameObject.GetComponent<Renderer>().material.color = defaultMaterial;
+            }
+            //**********************
+            //  サボタージュ(爆弾)モードの場合
+            //**********************
+            else if (player.GetComponent<Player>().mode == Player.PLAYER_MODE.SABOTAGEBOMB)
+            {// モード：SABOTAGEBOMB
+
+                if (hit.transform.gameObject == this.gameObject)
+                {// 自分にカーソルが当たった
+
+                    // スタートパネル以外だったら
+                    if (hit.transform.gameObject.tag != "AbnormalPanel")
+                    {
+                        // 色を黄色に変更
+                        gameObject.GetComponent<Renderer>().material.color = Color.yellow; // 黄色
+                    }
+
+                    // 左クリックした
+                    if (Input.GetMouseButtonDown(0) && hit.transform.gameObject.tag != "AbnormalPanel")
+                    {
+                        isColor = true;
+
+                        // falseだったら
+                        if (isbombPrefabSelect == false)
+                        {
+                            // 埋める場所選択数をカウント
+                            roadManager.selectPanelCount++;
+
+                            // リストにオブジェクト情報を格納
+                            roadManager.selectPanelList.Add(this.gameObject);
+                            Debug.Log("追加しました。");
+
+                            // trueに変更
+                            isbombPrefabSelect = true;
+                        }
+                    }
                 }
             }
 
@@ -147,6 +181,7 @@ public class RoadPanel : MonoBehaviour
             {// モード：FILL
                 if (hit.transform.gameObject == this.gameObject)
                 {// 自分にカーソルが当たった
+
                     gameObject.GetComponent<Renderer>().material.color = Color.green; // 緑色
 
                     // 左クリックした
@@ -168,7 +203,7 @@ public class RoadPanel : MonoBehaviour
                         {// サーバーを使用しない
                             // オブジェクトを生成する
                             GameObject block = Instantiate(blockPrefab, new Vector3(transform.position.x, 1.47f, transform.position.z), Quaternion.identity);
-                            
+
                             //モクモクするアニメーションの再生
                             Instantiate(smoke, new Vector3(transform.position.x, 1.47f, transform.position.z), Quaternion.identity);
 
@@ -187,57 +222,16 @@ public class RoadPanel : MonoBehaviour
                         Debug.Log("残りスタミナ" + player.GetComponent<Player>().stamina);
                     }
                 }
-                else
-                {
-                    gameObject.GetComponent<Renderer>().material.color = Color.yellow; // 黄色
-                }
             }
 
-            //**********************
-            //  サボタージュ(爆弾)モードの場合
-            //**********************
-            else if (player.GetComponent<Player>().mode == Player.PLAYER_MODE.SABOTAGEBOMB)
-            {// モード：SABOTAGEBOMB
+        }
 
-                if (hit.transform.gameObject == this.gameObject)
-                {// 自分にカーソルが当たった
-
-                    // スタートパネル以外だったら
-                    if (hit.transform.gameObject.tag != "AbnormalPanel")
-                    {
-                        // 色を黄色に変更
-                        gameObject.GetComponent<Renderer>().material.color = Color.yellow; // 黄色
-                    }
-
-                    // 左クリックした
-                    if (Input.GetMouseButtonDown(0) && hit.transform.gameObject.tag != "AbnormalPanel")
-                    {
-                        // falseだったら
-                        if (isbombPrefabSelect == false)
-                        {
-                            // 埋める場所選択数をカウント
-                            roadManager.selectPanelCount++;
-
-                            // リストにオブジェクト情報を格納
-                            roadManager.selectPanelList.Add(this.gameObject);
-                            Debug.Log("追加しました。");
-
-                            // trueに変更
-                            isbombPrefabSelect = true;
-                        }
-                    }
-                }
-                else
-                {
-                    // デフォルトカラーに戻す
-                    gameObject.GetComponent<Renderer>().material.color = defaultMaterial;
-                }
-            }
-
-            //************************************
-            //  その他
-            //************************************
-            else
+        //********************************************
+        //  自分自身にRayが当っていない場合
+        //********************************************
+        if (hit.transform.gameObject != this.gameObject)
+        {
+            if (isColor == false)
             {
                 // デフォルトカラーに戻す
                 gameObject.GetComponent<Renderer>().material.color = defaultMaterial;

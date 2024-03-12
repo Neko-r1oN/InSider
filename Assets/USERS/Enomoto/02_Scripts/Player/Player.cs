@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
     public bool isEnd = false;
 
     // スタミナ
-    public int stamina = 100;
+    public int stamina;
 
     // 無敵状態かどうか
     public bool isInvincible;
@@ -107,6 +107,8 @@ public class Player : MonoBehaviour
         // アニメーター情報を取得
         animator = GetComponent<Animator>();
 
+        stamina = 50;
+        
         // PLayerManagerを取得
         manager = this.transform.parent.gameObject;
 
