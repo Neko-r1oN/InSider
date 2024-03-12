@@ -38,8 +38,7 @@ public class RoadManager : MonoBehaviour
     // ボタンマネージャーを取得
     ButtonManager buttonManager;
 
-    // ロードパネルを取得
-    RoadPanel roadPanel;
+    GameObject textUI;
 
     public GameObject targetBlock;
     public int rotY;
@@ -65,6 +64,8 @@ public class RoadManager : MonoBehaviour
 
         // UIManager
         uiMnager = GameObject.Find("UIManager");
+
+        textUI = GameObject.Find("TextUIManager");
 
         stageManager = GameObject.Find("StageManager");
 
@@ -101,6 +102,7 @@ public class RoadManager : MonoBehaviour
                     GameObject block = Instantiate(blockObj, new Vector3(selectPanelList[i].transform.position.x,
                         1.47f, selectPanelList[i].transform.position.z), Quaternion.identity);
 
+                    // カラー変更を元に戻す
                     selectPanelList[i].GetComponent<RoadPanel>().isColor = false;
 
                     // オブジェクトを破棄
@@ -111,6 +113,9 @@ public class RoadManager : MonoBehaviour
                 selectPanelList = new List<GameObject>();
                 selectPanelCount = 0;
 
+                textUI.GetComponent<TextUIManager>().HideText();
+
+                // 非表示にしていたボタンをすべて戻す
                 buttonManager.GetComponent<ButtonManager>().DisplayButton();
 
                 // ベイクを開始
@@ -128,10 +133,13 @@ public class RoadManager : MonoBehaviour
                     GameObject bomb = Instantiate(bombPrefab, new Vector3(selectPanelList[n].transform.position.x,
                                        0.5f, selectPanelList[n].transform.position.z), Quaternion.identity);
 
+                    // リストのn番目の情報を渡す
                     bomb.GetComponent<Bomb>().roadPanel = selectPanelList[n];
 
+                    // リストのn番目のカラーを元に戻す
                     selectPanelList[n].GetComponent<RoadPanel>().isColor = false;
 
+                    // リストのn番目のタグをAbnormalPanelに変更
                     selectPanelList[n].tag = "AbnormalPanel";
                 }
 
@@ -139,6 +147,9 @@ public class RoadManager : MonoBehaviour
                 selectPanelList = new List<GameObject>();
                 selectPanelCount = 0;
 
+                textUI.GetComponent<TextUIManager>().HideText();
+
+                // 非表示にしていたボタンをすべて戻す
                 buttonManager.GetComponent<ButtonManager>().DisplayButton();
 
                 // ベイクを開始
@@ -207,34 +218,77 @@ public class RoadManager : MonoBehaviour
 
         isGold = true;
 
-        if(num == 0 && script.stamina >= 30)
-        {// I字
-            player.GetComponent<Player>().SubStamina(30);
+        //************************************
+        // 混乱イベントが発生してるとき
+        //************************************
+        if(uiMnager.GetComponent<UIManager>().isEvent == true)
+        {
+            if(script.stamina >= 40)
+            {
+                if (num >= 76 && num <= 85)
+                {// I字
+                    num = 0;
+                }
+                else if (num >= 61 && num <= 75)
+                {// L字
+                    num = 1;
+                }
+                else if (num >= 86 && num <= 95)
+                {// T字
+                    num = 2;
+                }
+                else if (num >= 96 && num <= 100)
+                {// 十字
+                    num = 3;
+                }
+                else if (num >= 1 && num <= 60)
+                {// ゴミみたいな道
+                    num = 4;
+                }
+
+                player.GetComponent<Player>().SubStamina(40);
+            }
+            else
+            {
+                Debug.Log("スタミナ不足のため切り開けない");
+
+                return;
+            }
         }
-        else if(num == 1 && script.stamina >= 40)
-        {// L字
-            player.GetComponent<Player>().SubStamina(40);
-        }
-        else if (num == 2 && script.stamina >= 60)
-        {// T字
-            player.GetComponent<Player>().SubStamina(60);
-        }
-        else if (num == 3 && script.stamina >= 80)
-        {// 十字
-            player.GetComponent<Player>().SubStamina(80);
-        }
-        else if (num == 4 && script.stamina >= 10)
-        {// ゴミみたいな道
-            player.GetComponent<Player>().SubStamina(10);
-        }
+        //************************************
+        // 混乱イベントが発生してないとき
+        //************************************
         else
         {
-            Debug.Log("スタミナ不足のため切り開けない");
+            if (num == 0 && script.stamina >= 30)
+            {// I字
+                player.GetComponent<Player>().SubStamina(30);
+            }
+            else if (num == 1 && script.stamina >= 40)
+            {// L字
+                player.GetComponent<Player>().SubStamina(40);
+            }
+            else if (num == 2 && script.stamina >= 60)
+            {// T字
+                player.GetComponent<Player>().SubStamina(60);
+            }
+            else if (num == 3 && script.stamina >= 80)
+            {// 十字
+                player.GetComponent<Player>().SubStamina(80);
+            }
+            else if (num == 4 && script.stamina >= 10)
+            {// ゴミみたいな道
+                player.GetComponent<Player>().SubStamina(10);
+            }
+            else
+            {
+                Debug.Log("スタミナ不足のため切り開けない");
 
-            return;
+                return;
+            }
+
+            ShowRoad(num);
         }
-
-        ShowRoad(num);
 
         roadNum = num;
 
@@ -254,19 +308,22 @@ public class RoadManager : MonoBehaviour
         // 選択した道UIを非表示にする
         uiMnager.GetComponent<UIManager>().roadUIList[num].SetActive(false);
 
-        for (int i = 0; i < selectRoad.Length; i++)
+        if(uiMnager.GetComponent<UIManager>().isEvent != true)
         {
-            if (selectRoad[i] > 0)
+            for (int i = 0; i < selectRoad.Length; i++)
             {
-                // カウントを減らす
-                selectRoad[i] --;  // カウントをここで2にすることで2ターン非表示が可能
-            }
+                if (selectRoad[i] > 0)
+                {
+                    // カウントを減らす
+                    selectRoad[i]--;  // カウントをここで2にすることで2ターン非表示が可能
+                }
 
-            if (selectRoad[i] <= 0)
-            {// カウントが0だったら
-                
-                // 2ターン前に選択した道UI表示する
-                uiMnager.GetComponent<UIManager>().roadUIList[i].SetActive(true);
+                if (selectRoad[i] <= 0)
+                {// カウントが0だったら
+
+                    // 2ターン前に選択した道UI表示する
+                    uiMnager.GetComponent<UIManager>().roadUIList[i].SetActive(true);
+                }
             }
         }
     }

@@ -8,6 +8,9 @@ public class EventManager : MonoBehaviour
     [SerializeField] GameObject enemyPrefab;
     [SerializeField] GameObject goldPrefab;
 
+    // 混乱の際の混乱テクスチャのリスト
+    GameObject chaos;
+
     /// <summary>
     /// 発生するイベントのID (ただのメモ)
     /// </summary>
@@ -27,11 +30,19 @@ public class EventManager : MonoBehaviour
     // 起こしたいイベントのID
     public int eventNum;
 
+    GameObject uiManager;
+
     GameObject player;
 
     private void Start()
     {
         player = GameObject.Find("Player1");
+
+        chaos = GameObject.Find("ChaosList");
+
+        uiManager = GameObject.Find("UIManager");
+
+        chaos.SetActive(false);
     }
 
     private void Update()
@@ -48,6 +59,8 @@ public class EventManager : MonoBehaviour
                 case 1: // Confusion
 
                     GameObject childObject = Instantiate(chaosPrefab, player.transform);
+
+                    uiManager.GetComponent<UIManager>().isEvent = true;
 
                     break;
                 case 2: // SpownEnemys

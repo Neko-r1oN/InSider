@@ -26,12 +26,12 @@ public class Bomb : MonoBehaviour
         camera = cameraManager.GetComponent<CameraManager>();
 
         obj = GameObject.Find("Object001");
-
-        obj.GetComponent<SkinnedMeshRenderer>().material.SetColor("_Color", new Color(255, 0, 0));
     }
 
     private void Update()
     {
+        //obj.GetComponent<SkinnedMeshRenderer>().material.SetColor("_SpecColor", new Color(255,0,0));
+
         if (Input.GetKeyDown(KeyCode.A))
         {// Aキーを押したら爆発処理を実行
             AtackbombPrefab();
@@ -48,6 +48,8 @@ public class Bomb : MonoBehaviour
 
         // 0.6秒後に爆発のエフェクト処理を実行
         Invoke("Explosion", 0.6f);
+
+        Invoke("DestroyBomb", 3f);
     }
 
     /// <summary>
@@ -64,6 +66,16 @@ public class Bomb : MonoBehaviour
 
         // カメラを揺らす処理
         camera.ShakeCamera();
+    }
+
+    /// <summary>
+    /// ボムを消すためだけの処理
+    /// </summary>
+    public void DestroyBomb()
+    {
+        Destroy(this.gameObject);
+
+        roadPanel.tag = "RoadPanel";
     }
 
     /// <summary>
