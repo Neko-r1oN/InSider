@@ -12,10 +12,17 @@ public class Goldmanager : MonoBehaviour
     void Start()
     {
         parentObj = transform.parent.gameObject;
+
+        //ドロップする軌道の設定
+        Rigidbody rb = parentObj.GetComponent<Rigidbody>();  // rigidbodyを取得
+        float randx = Random.Range(-5.0f,5.0f);
+        float randz = Random.Range(-5.0f,5.0f);
+        Vector3 force = new Vector3(randx, 12.0f, randz);  // 力を設定
+        rb.AddForce(force, ForceMode.Impulse);          // 力を加える
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         // Y座標だけを回転させる
         rotY += 1;

@@ -1395,8 +1395,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af8bedbff057c15479b7e3648c23b701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerManager: {fileID: 840676508}
-  touch: 0
 --- !u!1001 &75537412
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4296,9 +4294,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8479ec9ee856a5b45b777bc33c5fe3b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectRoadNum: -1
+  playerObjID: 0
+  spawnEffectPrefab: {fileID: 0}
+  gold: {fileID: 1194406521208508902, guid: 95dd1c8f833063f48bd9de35b7511a6a, type: 3}
   isEnd: 0
   stamina: 100
+  isInvincible: 0
+  _cycle: 1
   mode: 0
 --- !u!195 &210333113
 NavMeshAgent:
@@ -4355,7 +4357,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0126c239c1b25784d8d4f878ac8a2f3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEnd: 0
 --- !u!136 &210333116
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -11309,7 +11310,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0126c239c1b25784d8d4f878ac8a2f3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEnd: 0
 --- !u!114 &630176434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11322,9 +11322,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8479ec9ee856a5b45b777bc33c5fe3b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectRoadNum: -1
+  playerObjID: 0
+  spawnEffectPrefab: {fileID: 0}
+  gold: {fileID: 1194406521208508902, guid: 95dd1c8f833063f48bd9de35b7511a6a, type: 3}
   isEnd: 0
   stamina: 100
+  isInvincible: 0
+  _cycle: 1
   mode: 0
 --- !u!195 &630176435
 NavMeshAgent:
@@ -15421,6 +15425,7 @@ MonoBehaviour:
   - {fileID: 1286726695}
   - {fileID: 630176426}
   - {fileID: 1213451747}
+  triggerList: []
 --- !u!4 &840676510
 Transform:
   m_ObjectHideFlags: 0
@@ -22442,9 +22447,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8479ec9ee856a5b45b777bc33c5fe3b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectRoadNum: -1
+  playerObjID: 0
+  spawnEffectPrefab: {fileID: 0}
+  gold: {fileID: 1194406521208508902, guid: 95dd1c8f833063f48bd9de35b7511a6a, type: 3}
   isEnd: 0
   stamina: 100
+  isInvincible: 0
+  _cycle: 1
   mode: 0
 --- !u!195 &1213451756
 NavMeshAgent:
@@ -22501,7 +22510,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0126c239c1b25784d8d4f878ac8a2f3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEnd: 0
 --- !u!136 &1213451759
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -23826,7 +23834,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0126c239c1b25784d8d4f878ac8a2f3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEnd: 0
 --- !u!114 &1286726703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23839,9 +23846,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8479ec9ee856a5b45b777bc33c5fe3b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectRoadNum: -1
+  playerObjID: 0
+  spawnEffectPrefab: {fileID: 0}
+  gold: {fileID: 1194406521208508902, guid: 95dd1c8f833063f48bd9de35b7511a6a, type: 3}
   isEnd: 0
   stamina: 100
+  isInvincible: 0
+  _cycle: 1
   mode: 0
 --- !u!195 &1286726704
 NavMeshAgent:
@@ -27033,9 +27044,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8479ec9ee856a5b45b777bc33c5fe3b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectRoadNum: -1
+  playerObjID: 0
+  spawnEffectPrefab: {fileID: 0}
+  gold: {fileID: 1194406521208508902, guid: 95dd1c8f833063f48bd9de35b7511a6a, type: 3}
   isEnd: 0
   stamina: 100
+  isInvincible: 0
+  _cycle: 1
   mode: 0
 --- !u!195 &1483753234
 NavMeshAgent:
@@ -27092,7 +27107,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0126c239c1b25784d8d4f878ac8a2f3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEnd: 0
 --- !u!136 &1483753237
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -31286,9 +31300,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8479ec9ee856a5b45b777bc33c5fe3b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectRoadNum: -1
+  playerObjID: 0
+  spawnEffectPrefab: {fileID: 0}
+  gold: {fileID: 1194406521208508902, guid: 95dd1c8f833063f48bd9de35b7511a6a, type: 3}
   isEnd: 0
   stamina: 100
+  isInvincible: 0
+  _cycle: 1
   mode: 0
 --- !u!54 &1727096695
 Rigidbody:
@@ -31372,7 +31390,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0126c239c1b25784d8d4f878ac8a2f3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEnd: 0
 --- !u!136 &1727096700
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -32344,6 +32361,7 @@ MonoBehaviour:
   - {fileID: 3720628406363261294, guid: fcedcdba8d80e6545b3cfe7a378abe9a, type: 3}
   blockPrefab: {fileID: 1691180745474395491, guid: 31734e6361752504c9dda7ca5f342164,
     type: 3}
+  goldPrefab: {fileID: 0}
 --- !u!1 &1764112307
 GameObject:
   m_ObjectHideFlags: 0
@@ -45554,7 +45572,7 @@ GameObject:
   - component: {fileID: 8616917445924130638}
   m_Layer: 0
   m_Name: Road_00
-  m_TagString: StartPanel
+  m_TagString: AbnormalPanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -49382,7 +49400,7 @@ GameObject:
   - component: {fileID: 6708300813727519728}
   m_Layer: 0
   m_Name: Road_00 (2)
-  m_TagString: StartPanel
+  m_TagString: AbnormalPanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -49402,7 +49420,7 @@ GameObject:
   - component: {fileID: 6708300812891672817}
   m_Layer: 0
   m_Name: Road_00 (1)
-  m_TagString: StartPanel
+  m_TagString: AbnormalPanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -49422,7 +49440,7 @@ GameObject:
   - component: {fileID: 6708300812643408686}
   m_Layer: 0
   m_Name: Road_00 (3)
-  m_TagString: StartPanel
+  m_TagString: AbnormalPanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -50847,7 +50865,10 @@ MonoBehaviour:
     type: 3}
   isFill: 0
   objeID: 0
+  isFillSelect: 0
+  isbombPrefabSelect: 0
   smoke: {fileID: 0}
+  isColor: 0
 --- !u!114 &6708300812891672817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50864,7 +50885,10 @@ MonoBehaviour:
     type: 3}
   isFill: 0
   objeID: 0
+  isFillSelect: 0
+  isbombPrefabSelect: 0
   smoke: {fileID: 0}
+  isColor: 0
 --- !u!114 &6708300813727519728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50881,7 +50905,10 @@ MonoBehaviour:
     type: 3}
   isFill: 0
   objeID: 0
+  isFillSelect: 0
+  isbombPrefabSelect: 0
   smoke: {fileID: 0}
+  isColor: 0
 --- !u!23 &6722989447443447707
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -54060,7 +54087,10 @@ MonoBehaviour:
     type: 3}
   isFill: 0
   objeID: 0
+  isFillSelect: 0
+  isbombPrefabSelect: 0
   smoke: {fileID: 0}
+  isColor: 0
 --- !u!23 &8623606252122486537
 MeshRenderer:
   m_ObjectHideFlags: 0

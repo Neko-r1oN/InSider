@@ -28,6 +28,9 @@ public class RoadManager : MonoBehaviour
 
     // ゴールド
     [SerializeField] GameObject gold;
+    
+    // 煙アニメーション
+    [SerializeField] GameObject smoke;
 
     // 敵
     GameObject enemy;
@@ -40,6 +43,9 @@ public class RoadManager : MonoBehaviour
 
     // ロードパネルを取得
     RoadPanel roadPanel;
+
+    // スタミナ不足UI
+    [SerializeField] GameObject staminaUI;
 
     public GameObject targetBlock;
     public int rotY;
@@ -86,6 +92,9 @@ public class RoadManager : MonoBehaviour
         // Button
         GameObject buttonManagerObject = GameObject.Find("ButtonManager");
         buttonManager = buttonManagerObject.GetComponent<ButtonManager>();
+
+        // スタミナUIの取得
+        staminaUI.SetActive(false);
     }
 
     private void Update()
@@ -229,10 +238,16 @@ public class RoadManager : MonoBehaviour
         }
         else
         {
+            //スタミナ不足UIの表示
+            staminaUI.SetActive(true);
+
             Debug.Log("スタミナ不足のため切り開けない");
 
             return;
         }
+
+        // スタミナ不足UIの非表示
+        staminaUI.SetActive(false);
 
         ShowRoad(num);
 
@@ -303,7 +318,10 @@ public class RoadManager : MonoBehaviour
         Baker.GetComponent<StageManager>().StartBake();
 
         //ゴールドを生成
-        //Instantiate(gold, block.transform.position, Quaternion.identity);
+        Instantiate(gold, block.transform.position, Quaternion.identity);
+        
+        //煙アニメーションを生成
+        Instantiate(smoke, block.transform.position, Quaternion.identity);
 
         // 初期化
         targetBlock = null;
