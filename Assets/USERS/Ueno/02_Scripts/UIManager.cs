@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] public GameObject road;
-    [SerializeField] List<GameObject> roadUIList;
+    [SerializeField] public List<GameObject> roadUIList;
 
     // 残りターン表示のテキスト
     [SerializeField] GameObject remainingTurnsText;
@@ -50,8 +50,8 @@ public class UIManager : MonoBehaviour
 
     private Quaternion _initialRotation; // 初期回転
 
-    // 連続選択ができないよう前回の選択した数値を保存
-    public int selectRoadNum;
+    //// 連続選択ができないよう前回の選択した数値を保存
+    //public int selectRoadNum;
 
     // 情報を取得
     RoadManager roadManager;
@@ -148,46 +148,30 @@ public class UIManager : MonoBehaviour
             //-----------------------------
             playerUIList[ClientManager.Instance.turnPlayerID].GetComponent<MovePlayerUI>().MoveOrReturn(true);
         }
-
-        selectRoadNum = -1;
     }
 
     /// <summary>
     /// 前回選択された道UIの非表示処理
     /// </summary>
     /// <param name="selectNum"></param>
-    public void ShowRoad(int selectNum)
+    public void ShowRoadUI()
     {
         // RoadUIを表示する
         road.SetActive(true);
-
-        // 引数で来た値が0以上なら
-        if (selectNum >= 0)
-        {
-            // 前回選んだ道UIを非表示にする
-            roadUIList[selectNum].SetActive(false);
-        }
     }
 
-    /// <summary>
-    /// 前回選択した道UIの表示処理
-    /// </summary>
-    /// <param name="selectNum"></param>
-    public void HideRoad(int selectNum)
-    {
-        // 引数で来た値が0以上なら
-        if (selectNum >= 0)
-        {
-            // 非表示にしていた道UIを表示
-            roadUIList[selectNum].SetActive(true);
-        }
+    ///// <summary>
+    ///// 前回選択した道UIの表示処理
+    ///// </summary>
+    ///// <param name="selectNum"></param>
+    //public void HideRoad(int selectNum)
+    //{
+    //    // 道UIを非表示
+    //    road.SetActive(false);
 
-        // 道UIを非表示
-        road.SetActive(false);
-
-        // プレイヤーモードをMOVEに変更
-        player.GetComponent<Player>().mode = Player.PLAYER_MODE.MOVE;
-    }
+    //    // プレイヤーモードをMOVEに変更
+    //    player.GetComponent<Player>().mode = Player.PLAYER_MODE.MOVE;
+    //}
 
     /// <summary>
     /// 道UIがtrue・falseかを返す処理
@@ -217,6 +201,8 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public void ResetRoadUI()
     {
+        roadManager.rotY = 0;
+
         for (int i = 0; i < roadUIList.Count; i++)
         {// リストの中身をカウントする
 

@@ -92,7 +92,7 @@ public class Block : MonoBehaviour
                     // 左クリックした && 選択肢のUIが非表示の場合
                     if(Input.GetMouseButtonDown(0) && uiMnager.GetComponent<UIManager>().ActiveRoad() == false)
                     {
-                        uiMnager.GetComponent<UIManager>().ShowRoad(uiMnager.GetComponent<UIManager>().selectRoadNum);
+                        uiMnager.GetComponent<UIManager>().ShowRoadUI();
 
                         // ブロックの情報を渡す
                         RoadManager.GetComponent<RoadManager>().targetBlock = this.gameObject;

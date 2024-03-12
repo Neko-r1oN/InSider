@@ -12,6 +12,8 @@ public class RoadManager : MonoBehaviour
 
     [SerializeField] GameObject bombPrefab;
 
+    public int[] selectRoad = new int[5];
+
     // sabotageの時に使うどこを選択したかのリスト
     public List<GameObject> selectPanelList;
 
@@ -88,47 +90,60 @@ public class RoadManager : MonoBehaviour
 
     private void Update()
     {
-        // 埋める場所を選択した数が4回以上なら
-        if (selectPanelCount >= 4)
+        if (player.GetComponent<Player>().mode == Player.PLAYER_MODE.SABOTAGEFILL)
         {
-            for (int i = 0; i < selectPanelList.Count; i++)
+            // 埋める場所を選択した数が4回以上なら
+            if (selectPanelCount >= 4)
             {
-                // オブジェクトを生成する
-                GameObject block = Instantiate(blockObj, new Vector3(selectPanelList[i].transform.position.x, 
-                    1.47f, selectPanelList[i].transform.position.z), Quaternion.identity);
+                for (int i = 0; i < selectPanelList.Count; i++)
+                {
+                    // オブジェクトを生成する
+                    GameObject block = Instantiate(blockObj, new Vector3(selectPanelList[i].transform.position.x,
+                        1.47f, selectPanelList[i].transform.position.z), Quaternion.identity);
 
-                // オブジェクトを破棄
-                Destroy(selectPanelList[i]);
+                    selectPanelList[i].GetComponent<RoadPanel>().isColor = false;
+
+                    // オブジェクトを破棄
+                    Destroy(selectPanelList[i]);
+                }
+
+                //リストの中身・カウントを初期化
+                selectPanelList = new List<GameObject>();
+                selectPanelCount = 0;
+
+                buttonManager.GetComponent<ButtonManager>().DisplayButton();
+
+                // ベイクを開始
+                stageManager.GetComponent<StageManager>().StartBake();
             }
-
-            //リストの中身・カウントを初期化
-            selectPanelList = new List<GameObject>();
-            selectPanelCount = 0;
-
-            // ベイクを開始
-            stageManager.GetComponent<StageManager>().StartBake();
         }
-
-        // ボムを設置する場所を2回以上選択されたら
-        if (selectPanelCount >= 2)
+        else if (player.GetComponent<Player>().mode == Player.PLAYER_MODE.SABOTAGEBOMB)
         {
-            for (int n = 0; n < selectPanelList.Count; n++)
+            // ボムを設置する場所を2回以上選択されたら
+            if (selectPanelCount >= 2)
             {
-                // オブジェクトを生成する
-                GameObject bomb = Instantiate(bombPrefab, new Vector3(selectPanelList[n].transform.position.x,
-                                   0.5f, selectPanelList[n].transform.position.z), Quaternion.identity);
+                for (int n = 0; n < selectPanelList.Count; n++)
+                {
+                    // オブジェクトを生成する
+                    GameObject bomb = Instantiate(bombPrefab, new Vector3(selectPanelList[n].transform.position.x,
+                                       0.5f, selectPanelList[n].transform.position.z), Quaternion.identity);
 
-                bomb.GetComponent<Bomb>().roadPanel = selectPanelList[n];
+                    bomb.GetComponent<Bomb>().roadPanel = selectPanelList[n];
 
-                selectPanelList[n].tag = "AbnormalPanel";
-            }
+                    selectPanelList[n].GetComponent<RoadPanel>().isColor = false;
 
-            //リストの中身・カウントを初期化
-            selectPanelList = new List<GameObject>();
-            selectPanelCount = 0;
+                    selectPanelList[n].tag = "AbnormalPanel";
+                }
 
-            // ベイクを開始
-            stageManager.GetComponent<StageManager>().StartBake();
+                //リストの中身・カウントを初期化
+                selectPanelList = new List<GameObject>();
+                selectPanelCount = 0;
+
+                buttonManager.GetComponent<ButtonManager>().DisplayButton();
+
+                // ベイクを開始
+                stageManager.GetComponent<StageManager>().StartBake();
+            }   
         }
     }
 
@@ -172,8 +187,8 @@ public class RoadManager : MonoBehaviour
 
         }
 
-        // 前回選択した道UIを表示 & 道選択UI(Parent)を閉じる
-        uiMnager.GetComponent<UIManager>().HideRoad(uiMnager.GetComponent<UIManager>().selectRoadNum);
+        //// 前回選択した道UIを表示 & 道選択UI(Parent)を閉じる
+        //uiMnager.GetComponent<UIManager>().HideRoad(uiMnager.GetComponent<UIManager>().selectRoadNum);
 
         // 消えているボタンを表示する
         buttonManager.DisplayButton();
@@ -219,13 +234,43 @@ public class RoadManager : MonoBehaviour
             return;
         }
 
+        ShowRoad(num);
+
         roadNum = num;
 
         Road(RoadPrefab[num]);
 
-        uiMnager.GetComponent<UIManager>().selectRoadNum = num;
+        // 道の選択肢を非表示
+        uiMnager.GetComponent<UIManager>().road.SetActive(false);
+
+        //uiMnager.GetComponent<UIManager>().selectRoadNum = num;
     }
    
+    public void ShowRoad(int num)
+    {
+        // 2ターン非表示のカウントを持たせる
+        selectRoad[num] = 3;  // 強制的にマイナスされるため1カウント多く
+
+        // 選択した道UIを非表示にする
+        uiMnager.GetComponent<UIManager>().roadUIList[num].SetActive(false);
+
+        for (int i = 0; i < selectRoad.Length; i++)
+        {
+            if (selectRoad[i] > 0)
+            {
+                // カウントを減らす
+                selectRoad[i] --;  // カウントをここで2にすることで2ターン非表示が可能
+            }
+
+            if (selectRoad[i] <= 0)
+            {// カウントが0だったら
+                
+                // 2ターン前に選択した道UI表示する
+                uiMnager.GetComponent<UIManager>().roadUIList[i].SetActive(true);
+            }
+        }
+    }
+
 
     /// <summary>
     /// 道の回転処理
