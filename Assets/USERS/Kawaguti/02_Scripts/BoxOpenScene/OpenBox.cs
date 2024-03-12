@@ -10,6 +10,8 @@ public class OpenBox : MonoBehaviour
     [SerializeField] GameObject Chest;
     [SerializeField] GameObject Gold;
 
+    public AudioSource eat;
+
     private float _repeatSpan;    //繰り返す間隔
     private float _timeElapsed;   //経過時間
 
@@ -19,6 +21,7 @@ public class OpenBox : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        eat = GetComponent<AudioSource>();
         //表示切り替え時間を指定
         _repeatSpan = 2.0f;
         _timeElapsed = 0;
@@ -48,9 +51,10 @@ public class OpenBox : MonoBehaviour
             Chest.SetActive(false);
         }
 
-        if (_timeElapsed  >= _repeatSpan && !Once)
+        if (_timeElapsed  >= _repeatSpan +3.0f && !Once)
         {//時間経過でアニメーション
             Anim();
+            eat.Play();
             Once = true;
         }
 

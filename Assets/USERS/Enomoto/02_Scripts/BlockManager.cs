@@ -82,7 +82,7 @@ public class BlockManager : MonoBehaviour
     /// <param name="objeID">破棄するオブジェクトID</param>
     /// <param name="prefabID">プレファブのナンバー</param>
     /// <param name="rotY">回転度</param>
-    public void MineObject(int objeID,int prefabID,int rotY,bool isGetGold)
+    public void MineObject(int playerID,int objeID,int prefabID,int rotY,bool isGetGold)
     {
         // 座標を設定
         Vector3 minePos = blocks[objeID].gameObject.transform.position;
@@ -106,8 +106,15 @@ public class BlockManager : MonoBehaviour
 
         if(isGetGold == true)
         {// フラグが真の場合
+
+            Debug.Log("金の生成");
+            Debug.Log(playerID);
+
             //ゴールドを生成
-            Instantiate(goldPrefab, minePos, Quaternion.identity);
+            GameObject gold = Instantiate(goldPrefab, minePos, Quaternion.identity);
+
+            // Update処理を開始 & 追尾させるプレイヤーIDを代入する
+            gold.GetComponent<BlockGoldManager>().StartMove(playerID);
         }
     }
 }
