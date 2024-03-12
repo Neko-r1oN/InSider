@@ -18,6 +18,8 @@ public class RoadPanel : MonoBehaviour
 
     GameObject buttonManager;
 
+    TextUIManager textUI;
+
     // デフォルトカラー
     Color defaultMaterial;
 
@@ -42,6 +44,8 @@ public class RoadPanel : MonoBehaviour
     // 色が変更されているかどうか
     public bool isColor;
 
+    public int putCnt;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,6 +55,9 @@ public class RoadPanel : MonoBehaviour
 
         GameObject roadManagerobj = GameObject.Find("RoadManager");
         roadManager = roadManagerobj.GetComponent<RoadManager>();
+
+        GameObject textUIObj = GameObject.Find("TextUIManager");
+        textUI = textUIObj.GetComponent<TextUIManager>();
 
         buttonManager = GameObject.Find("ButtonManager");
 
@@ -108,6 +115,9 @@ public class RoadPanel : MonoBehaviour
                 if (hit.transform.gameObject == this.gameObject)
                 {// 自分にカーソルが当たった
 
+                    // 埋めれる最大数4を渡す
+                    textUI.PossibleNum(4);
+
                     // スタートパネル以外だったら
                     if (hit.transform.gameObject.tag != "AbnormalPanel")
                     {
@@ -126,6 +136,9 @@ public class RoadPanel : MonoBehaviour
                             // 埋める場所選択数をカウント
                             roadManager.selectPanelCount++;
 
+                            // カウントした数を渡す
+                            textUI.PutNum(roadManager.selectPanelCount);
+
                             // リストにオブジェクト情報を格納
                             roadManager.selectPanelList.Add(this.gameObject);
                             Debug.Log("追加しました。");
@@ -141,6 +154,9 @@ public class RoadPanel : MonoBehaviour
             //**********************
             else if (player.GetComponent<Player>().mode == Player.PLAYER_MODE.SABOTAGEBOMB)
             {// モード：SABOTAGEBOMB
+
+                // 爆弾が設置できる最大数2を渡す
+                textUI.PossibleNum(2);
 
                 if (hit.transform.gameObject == this.gameObject)
                 {// 自分にカーソルが当たった
@@ -162,6 +178,9 @@ public class RoadPanel : MonoBehaviour
                         {
                             // 埋める場所選択数をカウント
                             roadManager.selectPanelCount++;
+
+                            // カウントした数を渡す
+                            textUI.PutNum(roadManager.selectPanelCount);
 
                             // リストにオブジェクト情報を格納
                             roadManager.selectPanelList.Add(this.gameObject);
