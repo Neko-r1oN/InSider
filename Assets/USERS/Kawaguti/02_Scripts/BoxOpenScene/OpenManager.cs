@@ -201,30 +201,6 @@ public class OpenManager : MonoBehaviour
             winText.SetActive(true);
         }
 
-        //// 勝敗のテキストを表示する
-        //if (ClientManager.Instance.isInsider == true)
-        //{// 自分自身がInsiderの場合
-        //    if (ismimic == true)
-        //    {// ミミックの場合
-        //        winText.SetActive(true);
-        //    }
-        //    else
-        //    {// 宝箱の場合
-        //        loseText.SetActive(true);
-        //    }
-        //}
-        //else
-        //{
-        //    if (ismimic == true)
-        //    {// ミミックの場合
-        //        loseText.SetActive(true);
-        //    }
-        //    else
-        //    {// 宝箱の場合
-        //        winText.SetActive(true);
-        //    }
-        //}
-
         // Update処理を開始
         isStart = true;
     }

@@ -72,6 +72,9 @@ public class ClientManager : MonoBehaviour
     // 必要接続人数
     int RequiredNum = 1;
 
+    // ゲームが終了したかどうか
+    bool isGameSet;
+
     //===========================
     //  [公開]フィールド
     //===========================
@@ -216,14 +219,12 @@ public class ClientManager : MonoBehaviour
     /// </summary>
     void Start()
     {
-        //フェードアウト
-        //fade.FadeOut(1f);
-
         // 初期化
         tcpClient = new TcpClient();
         context = SynchronizationContext.Current;
 
         playerID = 0;
+        isGameSet = false;
 
         // 取得する
         clientName = TitleManager.UserName;
@@ -310,8 +311,16 @@ public class ClientManager : MonoBehaviour
             int length = await stream.ReadAsync(receiveBuffer, 0, receiveBuffer.Length);  // 受信する
 
             // 接続切断チェック
-            if (isDisconnect == true)
+            if (isDisconnect == true || isGameSet == true)
             {
+                // 真
+                Instance = null;
+
+                // 接続を切断
+                tcpClient.Close();
+
+                Destroy(this.gameObject);
+
                 return;
             }
 
@@ -484,14 +493,12 @@ public class ClientManager : MonoBehaviour
                         if (roundEndData.isTurnEnd == true)
                         {// ラウンド終了による通知の場合
 
-                            // 途中結果のリザルトを表示する
-
                             // フェード＆シーン遷移
-                            //Initiate.DoneFading();
-                            //Initiate.Fade("BoxOpenScene", Color.black, 1.0f);
+                            Initiate.DoneFading();
+                            Initiate.Fade("RoundResultScene", Color.black, 1f);
 
                             // 遷移先にあるオブジェクトの関数を呼ぶためのコルーチン
-                            //StartCoroutine(SetResultUI(roundEndData));
+                            StartCoroutine(SetRoundResultUI(roundEndData));
                         }
                         else
                         {
@@ -688,7 +695,20 @@ public class ClientManager : MonoBehaviour
                         uiManager.GetComponent<UIManager>().UdScoreText(allieScoreData.originalID, allieScoreData.allieScore);
 
                         break;
-                    case 15:    // 受信しない
+                    case 15:    // リザルト画面に遷移するときだけ受信する
+
+                        Debug.Log("リザルトシーン遷移");
+
+                        isGameSet = true;
+                        
+                        // JSONデシリアライズで取得する
+                        GameEndData gameEndData = JsonConvert.DeserializeObject<GameEndData>(jsonString);
+                        scoreList = gameEndData.scoreList;
+
+                        // フェード＆シーン遷移
+                        Initiate.DoneFading();
+                        Initiate.Fade("ResultScene", Color.black, 1.0f);
+
                         break;
 
                     //*****************************
@@ -881,6 +901,17 @@ public class ClientManager : MonoBehaviour
             roundEndData.isMimic,
             roundEndData.totalScore,
             roundEndData.allieScore);
+    }
+
+    IEnumerator SetRoundResultUI(RoundEndData roundEndData)
+    {
+        yield return new WaitForSeconds(1.05f);
+
+        // シーン設定
+        RoundResultManager.Instance.SetUI(
+            roundEndData.totalScore,
+            roundEndData.allieScore,
+            roundEndData.insiderID);
     }
 
     /// <summary>
