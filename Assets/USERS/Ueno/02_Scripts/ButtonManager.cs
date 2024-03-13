@@ -37,6 +37,9 @@ public class ButtonManager : MonoBehaviour
     // サボタージュ(埋める)のボタン
     [SerializeField] GameObject sabotage2;
 
+    // スタミナ不足UI
+    [SerializeField] GameObject noStaminaUI;
+
     // 情報を取得
     GameObject player;
     GameObject roadManager;
