@@ -801,7 +801,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4961284136462444877}
   m_Layer: 0
-  m_Name: ObjectList
+  m_Name: MarkObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1187,7 +1187,7 @@ GameObject:
   - component: {fileID: 6942722649392877611}
   - component: {fileID: 5159586374240132934}
   - component: {fileID: 3204632299630295028}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Event_FallingRock
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -160,7 +160,7 @@ public class ClientManager : MonoBehaviour
         PlayerID = 0,         // プレイヤーID(1P,2P・・・)
         ListenerList,         // リスナーデータ
         ReadyData,            // 準備完了
-        JobAndTurn,           // 役職と先行のプレイヤーID
+        RoundReady,           // ラウンド開始に必要な情報
         RoundEnd,             // ラウンド終了通知
         MoveData,             // 移動
         Action_FillData,      // 行動：埋める
@@ -170,8 +170,9 @@ public class ClientManager : MonoBehaviour
         UdTurns,              // ターンを更新
         DoubtData,            // ダウトのデータ
         RevisionPos,          // 座標の修正
-        EventAlertData,       // イベント通知
+        Start_Game,           // 接続中のクライアント全員がゲームシーンに突入したらゲームスタート通知を送る
         AllieScore,           // スコアの加算
+        Start_RoundReady,     // 接続中のクライアント全員がOpenBoxシーンから遷移するときに通知を送る
 
         //+++++++++++++++++++++++++
         //  発生するイベントのID
@@ -182,14 +183,14 @@ public class ClientManager : MonoBehaviour
         SpownEnemys,                // 敵が出現
         RiStaminaCn,                // スタミナの消費量を減らす
         RndSpawnGold,               // ランダムにゴールドが空から降ってくる
-                                    //Decoy,                    // デコイ
         EvendFinish = 110,          // イベント終了通知
-
-
 
         //++++++++++++++++++++++++++
         //  サボタージュのID
         //++++++++++++++++++++++++++
+        Sabotage_Set = 200,         // サボタージュの生成
+        Sabotage_Bomb_Cancell,      // 爆弾の解除
+        Sabotage_Bomb_Explosion,    // 爆弾の爆発
     }
 
     //===========================
@@ -536,6 +537,9 @@ public class ClientManager : MonoBehaviour
                         // 道を埋める処理
                         blockManager.GetComponent<BlockManager>().FillObject(fillData.objeID);
 
+                        // もしも同じオブジェクトの場合＆＆サボタージュ中の場合リストから削除
+                        // textmanagerの表記も変更する
+
                         break;
                     case 7: // 切り開く
 
@@ -643,12 +647,13 @@ public class ClientManager : MonoBehaviour
                         // プレイヤーのモデルリストを取得する
                         List<GameObject> objeList1 = playerManager.GetComponent<PlayerManager>().players;
 
-                        if (revisionPos.isEnemy == true)
+                        if (revisionPos.isDown == true)
                         {// 敵による座標修正
 
                             Debug.Log(revisionPos.targetID + "がダウンした");
 
-                            objeList1[revisionPos.targetID].GetComponent<Player>().DownPlayer();
+                            // プレイヤーのダウン処理
+                            objeList1[revisionPos.targetID].GetComponent<Player>().DownPlayer(revisionPos.goldDropNum);
                         }
                         else
                         {
@@ -743,6 +748,11 @@ public class ClientManager : MonoBehaviour
 
                         break;
                     case 102:   // 混乱
+
+                        
+                        // フラグをTrueにする
+
+
                         break;
                     case 103:   // 敵出現
 
@@ -760,6 +770,9 @@ public class ClientManager : MonoBehaviour
 
                         break;
                     case 104:   // スタミナバフ
+
+                        // フラグをTrueにする
+
                         break;
                     case 105:   // ランダムに金が降ってくる
 
@@ -788,11 +801,60 @@ public class ClientManager : MonoBehaviour
 
                         if(eventFinishData.eventID == 103)
                         {// 敵の場合
+
+                            List<GameObject> oldEnemys = new List<GameObject>();
+
+                            for (int i = 0; i < 2; i++)
+                            {
+                                oldEnemys.Add(enemyObjList[0]);
+
+                                // 古い敵の要素を削除する
+                                enemyObjList.RemoveAt(0);
+                            }
+
                             // 点滅のコルーチンを開始
-                            enemyManager.GetComponent<EnemyManager>().StartCoroutine
-                            (enemyManager.GetComponent<EnemyManager>().StartBlink(enemyObjList));
-                            enemyObjList = new List<GameObject>();  // 初期化する
+                            enemyManager.GetComponent<EnemyManager>().StartCoroutine(
+                                enemyManager.GetComponent<EnemyManager>().StartBlink(oldEnemys));
                         }
+                        else if(eventFinishData.eventID == 102)
+                        {// 混乱イベントの場合
+                            // フラグをfalse
+                        }
+                        else if (eventFinishData.eventID == 104)
+                        {// バフイベントの場合
+                            // フラグをfalse
+                        }
+
+                        break;
+
+                    //*****************************
+                    //  サボタージュのDataを受信
+                    //*****************************
+                    case 200:   // サボタージュ生成する
+
+                        // JSONデシリアライズで取得する
+                        Sabotage_SetData setSabotageData = JsonConvert.DeserializeObject<Sabotage_SetData>(jsonString);
+
+                        Debug.Log("サボタージュ発生 : " + setSabotageData.sabotageID);
+
+                        // RoadManager,リストもRoadManager
+
+                        break;
+                    case 201:   // 爆弾の解除
+
+                        // JSONデシリアライズで取得する
+                        Sabotage_Bomb_CancellData cancellBombData = JsonConvert.DeserializeObject<Sabotage_Bomb_CancellData>(jsonString);
+
+                        Debug.Log("爆弾が解除された : " + cancellBombData.bombID);
+
+                        break;
+                    case 202:   // 爆弾を爆発させる
+
+                        // JSONデシリアライズで取得する
+                        Sabotage_Bomb_ExplosionData explosionData = JsonConvert.DeserializeObject<Sabotage_Bomb_ExplosionData>(jsonString);
+
+                        Debug.Log("爆弾が爆発 [ -" + explosionData.subTurnNum + "ターン ]");
+
 
                         break;
                 }

@@ -15,13 +15,7 @@ public class Event_FallingStone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 3)
-        {// プレイヤーの場合
-            // ダウン処理
-
-            Debug.Log("プレイヤーに命中した");
-        }
-        else if (other.gameObject == parentObj)
+        if (other.gameObject == parentObj)
         {// 道パネルかスタートパネルの場合
 
             Debug.Log("石を破棄する");
