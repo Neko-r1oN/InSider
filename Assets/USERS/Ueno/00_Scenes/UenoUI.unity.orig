@@ -1665,7 +1665,10 @@ MonoBehaviour:
   textBack: {fileID: 1556263908}
   sabotage1: {fileID: 617920431}
   sabotage2: {fileID: 1486385383}
+<<<<<<< HEAD
+=======
   noStaminaUI: {fileID: 688306345}
+>>>>>>> feature/fujisaki
   sabotageUI: {fileID: 860535216}
   sabotage: {fileID: 1642309403}
   isCancel: 0
@@ -3027,8 +3030,16 @@ MonoBehaviour:
   selectRoad: 0000000000000000000000000000000000000000
   selectPanelList: []
   gold: {fileID: 8750506531741430590, guid: 61519c250e03a8e40a21ac3a3b618672, type: 3}
+<<<<<<< HEAD
   smoke: {fileID: 839660796216691157, guid: 1f54bcff7f641f64b8c3adceb060c18c, type: 3}
   targetBlock: {fileID: 0}
+=======
+  smoke: {fileID: 1714296003195134422, guid: 22a9905e32edbab45ab2c71274ab9d12, type: 3}
+  staminaUI: {fileID: 1194406521208508902, guid: 95dd1c8f833063f48bd9de35b7511a6a,
+    type: 3}
+  targetBlock: {fileID: 9144859535183980866, guid: c4b26b5dad7ee244382e0e4424fdcf27,
+    type: 3}
+>>>>>>> feature/fujisaki
   rotY: 0
   selectPanelCount: 0
 --- !u!1 &350550013
