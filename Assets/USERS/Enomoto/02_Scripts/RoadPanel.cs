@@ -44,8 +44,6 @@ public class RoadPanel : MonoBehaviour
     // 色が変更されているかどうか
     public bool isColor;
 
-    public int putCnt;
-
     // Start is called before the first frame update
     void Start()
     {

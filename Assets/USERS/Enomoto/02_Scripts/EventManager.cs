@@ -42,6 +42,8 @@ public class EventManager : MonoBehaviour
 
         uiManager = GameObject.Find("UIManager");
 
+        chaos = GameObject.Find("Chaos");
+
         chaos.SetActive(false);
     }
 

@@ -131,12 +131,14 @@ public class ButtonManager : MonoBehaviour
     private void Update()
     {
         if(sabotage.GetComponent<Sabotage>().bombCount >= 1)
-        {
+        {// サボタージュのボムカウントが1以上なら
+            // サボタージュのボムを使えなくする
             uiManager.OutSabotage(0);
         }
 
         if(sabotage.GetComponent<Sabotage>().fillCount >= 1)
-        {
+        {// サボタージュの埋めるカウントが1以上なら
+            // サボタージュの埋めるを使えなくする
             uiManager.OutSabotage(1);
         }
 
