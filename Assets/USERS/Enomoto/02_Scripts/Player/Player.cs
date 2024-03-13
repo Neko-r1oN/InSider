@@ -133,6 +133,13 @@ public class Player : MonoBehaviour
                 return;
             }
         }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                DownPlayer(4);
+            }
+        }
 
         if(staminaNum == null)
         {// nullチェック
@@ -201,11 +208,6 @@ public class Player : MonoBehaviour
                     }
                 }
             }
-        }
-
-        if(Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            DownPlayer();
         }
     }
 
@@ -442,10 +444,8 @@ public class Player : MonoBehaviour
     /// <summary>
     /// ダウン処理
     /// </summary>
-    public void DownPlayer()
+    public void DownPlayer(int dropNum)
     {
-        int dropNum = 4;
-
         if(isInvincible == true)
         {// ダウンしている場合
             return;
@@ -504,8 +504,14 @@ public class Player : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// プレイヤーがダウン状態になったときに金を落とす処理
+    /// </summary>
+    /// <param name="num"></param>
     public void GoldDrop(int num)
     {
+        Debug.Log("金を落とす");
+
         for (int i = 0; i < num; i++)
         {
             // 金を生成する

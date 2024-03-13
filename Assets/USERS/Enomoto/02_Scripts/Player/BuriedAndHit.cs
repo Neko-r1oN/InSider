@@ -35,8 +35,11 @@ public class BuriedAndHit : MonoBehaviour
             // クラス変数を作成
             RevisionPosData revisionPosData = new RevisionPosData();
 
-            if (other.transform.tag == "Block" && isBuried == false) // 処理が何度も入るのを阻止
+            if (other.transform.tag == "Block" 
+                && player.GetComponent<Player>().isInvincible == false  // ダウン状態ではない場合
+                && isBuried == false) // 処理が何度も入るのを阻止
             {// ブロックに埋まった
+
                 Debug.Log("埋められた");
 
                 // クラス変数を作成
@@ -50,19 +53,23 @@ public class BuriedAndHit : MonoBehaviour
                 // [revisionPosData]サーバーに送信
                 await ClientManager.Instance.Send(revisionPosData, 12);
             }
-            else if (other.gameObject.layer == 7 && player.GetComponent<Player>().isInvincible == false)
-            {// 敵に触れた && Playerがダウンしていない場合
-                Debug.Log("敵に攻撃された");
+            else if (other.gameObject.layer == 7)
+            {// 敵に触れた || イベントの落石が当たった
 
-                // クラス変数を作成
-                revisionPosData.playerID = ClientManager.Instance.playerID;
-                revisionPosData.targetID = ClientManager.Instance.playerID;
-                revisionPosData.isEnemy = true;
+                if (player.GetComponent<Player>().isInvincible == false)
+                {// Playerがダウンしていない場合
 
-                // [revisionPosData]サーバーに送信
-                await ClientManager.Instance.Send(revisionPosData, 12);
+                    Debug.Log("敵に攻撃された");
+
+                    // クラス変数を作成
+                    revisionPosData.playerID = ClientManager.Instance.playerID;
+                    revisionPosData.targetID = ClientManager.Instance.playerID;
+                    revisionPosData.isDown = true;
+
+                    // [revisionPosData]サーバーに送信
+                    await ClientManager.Instance.Send(revisionPosData, 12);
+                }
             }
-
         }
         else
         {// サーバーを使用しない場合
@@ -70,7 +77,7 @@ public class BuriedAndHit : MonoBehaviour
             {// 敵に触れた && Playerがダウンしていない場合
                 Debug.Log("タッチされた");
 
-                player.GetComponent<Player>().DownPlayer();
+                player.GetComponent<Player>().DownPlayer(4);
 
                 Debug.Log(player.GetComponent<Player>().mode);
             }
