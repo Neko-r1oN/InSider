@@ -28,6 +28,14 @@ public class TimerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (EditorManager.Instance.useServer)
+        {
+            if (ClientManager.Instance.isGetNotice == false)
+            {// ゲーム開始通知を受信していない場合
+                return;
+            }
+        }
+
         if (isTimerStop == false)
         {
             seconds -= Time.deltaTime;

@@ -51,6 +51,8 @@ public class UIManager : MonoBehaviour
     // 使用不可にするダウトのボタンのインデックス番号
     public List<int> disabledIndexNumList;
 
+    bool isMove;
+
     private Quaternion _initialRotation; // 初期回転
 
     //// 連続選択ができないよう前回の選択した数値を保存
@@ -68,6 +70,8 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        isMove = false;
+
         // 情報を取得
         road = GameObject.Find("RoadUI");
 
@@ -141,15 +145,9 @@ public class UIManager : MonoBehaviour
             UdPlayerName(ClientManager.Instance.playerNameList);
 
             //-----------------------------
-            // 先行のプレイヤーを表示する
-            //-----------------------------
-            int indexNum = ClientManager.Instance.turnPlayerID;
-            UdTurnPlayerUI(ClientManager.Instance.playerNameList[indexNum], indexNum);
-
-            //-----------------------------
             // プレイヤーUIを動かす
             //-----------------------------
-            playerUIList[ClientManager.Instance.turnPlayerID].GetComponent<MovePlayerUI>().MoveOrReturn(true);
+            //playerUIList[ClientManager.Instance.turnPlayerID].GetComponent<MovePlayerUI>().MoveOrReturn(true);
         }
     }
 
@@ -308,6 +306,12 @@ public class UIManager : MonoBehaviour
         {
             // 元の位置へ戻す
             playerUIList[indexNum - 1].GetComponent<MovePlayerUI>().MoveOrReturn(false);
+        }
+
+        if(isMove == false)
+        {
+            isMove = true;
+            playerUIList[ClientManager.Instance.turnPlayerID].GetComponent<MovePlayerUI>().MoveOrReturn(true);
         }
     }
 

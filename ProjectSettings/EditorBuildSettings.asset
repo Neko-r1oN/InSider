@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/USERS/Enomoto/00_Scenes/EnoGame01.unity
     guid: 2520ec0a24fb600409c5c586f11707e4
+  - enabled: 1
+    path: Assets/USERS/Kawaguti/00_Scenes/BoxOpenScene.unity
+    guid: a304320b2ccacd74bb72ed21923b003a
+  - enabled: 1
+    path: Assets/USERS/Kawaguti/00_Scenes/ResultScene.unity
+    guid: 706aa5b2a31837841a2c9c87d5640c34
   m_configObjects: {}

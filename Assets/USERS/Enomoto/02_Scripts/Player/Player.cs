@@ -131,6 +131,11 @@ public class Player : MonoBehaviour
             }
         }
 
+        if(staminaNum == null)
+        {// nullチェック
+            return;
+        }
+        
         // 現在のスタミナを表示
         staminaNum.GetComponent<Text>().text = "" + stamina;
 
