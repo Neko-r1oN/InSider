@@ -23,9 +23,14 @@ internal class RevisionPosData
     public bool isBuried { get; set; }
 
     /// <summary>
-    /// 敵に触れられたのかどうか
+    /// ダウン状態になるかどうか
     /// </summary>
-    public bool isEnemy { get; set; }
+    public bool isDown { get; set; }
+
+    /// <summary>
+    /// 金のドロップ数
+    /// </summary>
+    public int goldDropNum { get; set; }
 
     /// <summary>
     /// 目的地のX座標

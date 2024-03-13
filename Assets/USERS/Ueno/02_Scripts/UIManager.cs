@@ -154,11 +154,6 @@ public class UIManager : MonoBehaviour
             // プレイヤーの名前を更新
             //------------------------------
             UdPlayerName(ClientManager.Instance.playerNameList);
-
-            //-----------------------------
-            // プレイヤーUIを動かす
-            //-----------------------------
-            //playerUIList[ClientManager.Instance.turnPlayerID].GetComponent<MovePlayerUI>().MoveOrReturn(true);
         }
 
         chaos.SetActive(false);

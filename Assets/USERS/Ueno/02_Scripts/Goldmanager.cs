@@ -44,6 +44,11 @@ public class Goldmanager : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
+        if(other.GetComponent<Player>() == null)
+        {// 非アクティブのとき
+            return;
+        }
+
         // ダウン状態だったらreturn
         if(other.GetComponent<Player>().mode == Player.PLAYER_MODE.DOWN)
         {
