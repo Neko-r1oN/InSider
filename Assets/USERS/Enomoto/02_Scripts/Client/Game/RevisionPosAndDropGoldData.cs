@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 [Serializable]
-internal class RevisionPosData
+internal class RevisionPosAndDropGoldData
 {
     /// <summary>
     /// 送信したプレイヤーのID

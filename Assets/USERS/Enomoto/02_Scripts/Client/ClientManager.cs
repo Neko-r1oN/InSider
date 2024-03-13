@@ -173,6 +173,7 @@ public class ClientManager : MonoBehaviour
         Start_Game,           // 接続中のクライアント全員がゲームシーンに突入したらゲームスタート通知を送る
         AllieScore,           // スコアの加算
         Start_RoundReady,     // 接続中のクライアント全員がOpenBoxシーンから遷移するときに通知を送る
+        MapData,              // 宝箱の中身の情報を共有する際に、ウソをつくかどうか
 
         //+++++++++++++++++++++++++
         //  発生するイベントのID
@@ -191,6 +192,16 @@ public class ClientManager : MonoBehaviour
         Sabotage_Set = 200,         // サボタージュの生成
         Sabotage_Bomb_Cancell,      // 爆弾の解除
         Sabotage_Bomb_Explosion,    // 爆弾の爆発
+    }
+
+    /// <summary>
+    /// サボタージュのID
+    /// </summary>
+    public enum SabotageID
+    {
+        Fill = 0,   // 道を埋める
+        Bomb,       // 爆弾設置
+        Trap        // トラップ設置
     }
 
     //===========================
@@ -642,7 +653,7 @@ public class ClientManager : MonoBehaviour
                     case 12: // 対象のプレイヤーオブジェクトの座標を修正する
 
                         // JSONデシリアライズで取得する
-                        RevisionPosData revisionPos = JsonConvert.DeserializeObject<RevisionPosData>(jsonString);
+                        RevisionPosAndDropGoldData revisionPos = JsonConvert.DeserializeObject<RevisionPosAndDropGoldData>(jsonString);
 
                         // プレイヤーのモデルリストを取得する
                         List<GameObject> objeList1 = playerManager.GetComponent<PlayerManager>().players;
@@ -672,10 +683,10 @@ public class ClientManager : MonoBehaviour
                         // JSONデシリアライズで取得する
                         RoundStartData roundStartData = JsonConvert.DeserializeObject<RoundStartData>(jsonString);
 
-                        GameObject chestManager = GameObject.Find("ChestList");
+                        GameObject chestManager1 = GameObject.Find("ChestList");
 
                         // ミミックを設定する
-                        chestManager.GetComponent<MimicManager>().SetMimic(roundStartData.isMimicList);
+                        chestManager1.GetComponent<MimicManager>().SetMimic(roundStartData.isMimicList);
 
                         isGetNotice = true;
 
@@ -713,6 +724,18 @@ public class ClientManager : MonoBehaviour
                         // フェード＆シーン遷移
                         Initiate.DoneFading();
                         Initiate.Fade("ResultScene", Color.black, 1.0f);
+
+                        break;
+
+                    case 16:    // 宝箱の中身の情報
+
+                        Debug.Log("宝の地図が使用された！！");
+
+                        // JSONデシリアライズで取得する
+                        MapData mapData = JsonConvert.DeserializeObject<MapData>(jsonString);
+
+                        GameObject chestManager2 = GameObject.Find("ChestList");
+                        chestManager2.GetComponent<MimicManager>().SetImg(mapData.isLie, mapData.playerID);   // 宝の地図の内容を共有する
 
                         break;
 
@@ -788,8 +811,6 @@ public class ClientManager : MonoBehaviour
 
                         Debug.Log("イベント：金");
 
-                        // 金の生成
-
                         break;
 
                     case 110:   // イベント終了通知
@@ -840,12 +861,14 @@ public class ClientManager : MonoBehaviour
                         // RoadManager,リストもRoadManager
 
                         break;
-                    case 201:   // 爆弾の解除
+                    case 201:   // 爆弾の解除 [送信用のため受信しない]
 
                         // JSONデシリアライズで取得する
                         Sabotage_Bomb_CancellData cancellBombData = JsonConvert.DeserializeObject<Sabotage_Bomb_CancellData>(jsonString);
 
                         Debug.Log("爆弾が解除された : " + cancellBombData.bombID);
+
+                        // IDに沿った爆弾を破棄する
 
                         break;
                     case 202:   // 爆弾を爆発させる
