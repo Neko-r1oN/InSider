@@ -33,7 +33,10 @@ public class RoadPanel : MonoBehaviour
     public bool isFillSelect;
 
     // ボムを設置する場所を選択したかどうか
-    public bool isbombPrefabSelect;
+    public bool isbombSelect;
+
+    // スロートラップを設置する場所を選択したかどうか
+    public bool isThrowTrapSelect;
 
     // マネージャーを取得する
     GameObject manager;
@@ -73,7 +76,7 @@ public class RoadPanel : MonoBehaviour
 
         isFillSelect = false;
 
-        isbombPrefabSelect = false;
+        isbombSelect = false;
 
         isColor = false;
     }
@@ -104,9 +107,9 @@ public class RoadPanel : MonoBehaviour
                 }
             }
 
-            //**********************
+            //*************************************
             //  埋める(サボタージュ)モードの場合
-            //**********************
+            //*************************************
             else if (player.GetComponent<Player>().mode == Player.PLAYER_MODE.SABOTAGEFILL)
             {// モード：SABOTAGEFILL
 
@@ -147,9 +150,9 @@ public class RoadPanel : MonoBehaviour
                     }
                 }
             }
-            //**********************
+            //**************************************
             //  サボタージュ(爆弾)モードの場合
-            //**********************
+            //**************************************
             else if (player.GetComponent<Player>().mode == Player.PLAYER_MODE.SABOTAGEBOMB)
             {// モード：SABOTAGEBOMB
 
@@ -172,7 +175,7 @@ public class RoadPanel : MonoBehaviour
                         isColor = true;
 
                         // falseだったら
-                        if (isbombPrefabSelect == false)
+                        if (isbombSelect == false)
                         {
                             // 埋める場所選択数をカウント
                             roadManager.selectPanelCount++;
@@ -185,7 +188,50 @@ public class RoadPanel : MonoBehaviour
                             Debug.Log("追加しました。");
 
                             // trueに変更
-                            isbombPrefabSelect = true;
+                            isbombSelect = true;
+                        }
+                    }
+                }
+            }
+
+            //***********************************************
+            //  サボタージュ(スロートラップ)モードの場合
+            //***********************************************
+            else if(player.GetComponent<Player>().mode == Player.PLAYER_MODE.SABOTAGETRAP)
+            {
+                // 爆弾が設置できる最大数2を渡す
+                textUI.PossibleNum(1);
+
+                if (hit.transform.gameObject == this.gameObject)
+                {// 自分にカーソルが当たった
+
+                    // スタートパネル以外だったら
+                    if (hit.transform.gameObject.tag != "AbnormalPanel")
+                    {
+                        // 色を黄色に変更
+                        gameObject.GetComponent<Renderer>().material.color = Color.yellow; // 黄色
+                    }
+
+                    // 左クリックした
+                    if (Input.GetMouseButtonDown(0) && hit.transform.gameObject.tag != "AbnormalPanel")
+                    {
+                        isColor = true;
+
+                        // falseだったら
+                        if (isThrowTrapSelect == false)
+                        {
+                            // 埋める場所選択数をカウント
+                            roadManager.selectPanelCount++;
+
+                            // カウントした数を渡す
+                            textUI.PutNum(roadManager.selectPanelCount);
+
+                            // リストにオブジェクト情報を格納
+                            roadManager.selectPanelList.Add(this.gameObject);
+                            Debug.Log("追加しました。");
+
+                            // trueに変更
+                            isbombSelect = true;
                         }
                     }
                 }

@@ -40,6 +40,8 @@ public class Player : MonoBehaviour
     // GoldDrop
     [SerializeField] GameObject gold;
 
+    EventManager eventManager;
+
     // 目的地を設定したかどうか
     bool isSetTarget = false;
 
@@ -104,6 +106,9 @@ public class Player : MonoBehaviour
         // 初期化
         clickedTarget = transform.position;
 
+        GameObject eventManagerObj = GameObject.Find("EventManager");
+        eventManager = eventManagerObj.GetComponent<EventManager>();
+
         // スタミナゲージのオブジェクト情報を取得
         staminaGauge = GameObject.Find("staminaGauge");
 
@@ -161,13 +166,13 @@ public class Player : MonoBehaviour
                 Debug.Log(hit.transform.name);
 
                 if (hit.transform.tag == "RoadPanel" || hit.transform.tag == "AbnormalPanel"
-                    || hit.transform.tag == "EventPanel")
+                    || hit.transform.tag == "EventPanel" || hit.transform.tag == "SlowTrap")
                 {// 道パネルの場合
 
                     Vector3 pos = Input.mousePosition;
                     clickedTarget = hit.point;
 
-                    //// NavMeshのパスを取得
+                    // NavMeshのパスを取得
                     NavMesh.CalculatePath(transform.position, clickedTarget, NavMesh.AllAreas, path);
 
                     if (path.corners.Length > 0)
@@ -195,6 +200,15 @@ public class Player : MonoBehaviour
                             {// サーバーを使用しない場合
                                 // 目的地へ移動
                                 agent.destination = clickedTarget;
+
+                                //if (hit.transform.tag == "SlowTrap")
+                                //{
+                                //    agent.speed = 1.5f;
+                                //}
+                                //else
+                                //{
+                                //    agent.speed = 4;
+                                //}
                             }
                         }
                         else
@@ -385,7 +399,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (this.gameObject.tag == "Insider")
+        if (eventManager.isEventStamina == true)
         {
             // スタミナを減らす
             stamina -= num - 10;

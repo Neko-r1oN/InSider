@@ -10,20 +10,22 @@ public class Sabotage : MonoBehaviour
     ButtonManager button;
 
     [SerializeField] Text sabotageText;
-
-    // サボタージュ(スロートラップ)のボタン
-    [SerializeField] GameObject sabotage3;
-
     TextUIManager textUI;
 
+    [SerializeField] Text timeText;
+
+    GameObject parent;
+
     // サボタージュ(埋める)を何回選択したか
-    public int fillCount;
+    public bool isFill;
 
     // サボタージュ(爆弾)を何回選択したか
-    public int bombCount;
+    public bool isBomb;
 
     // サボタージュ(スロートラップ)を何回選択したか
-    public int trapCount;
+    public bool isTrap;
+
+    public int timeNum;
 
     private void Start()
     {
@@ -43,6 +45,20 @@ public class Sabotage : MonoBehaviour
 
         GameObject buttonManager = GameObject.Find("ButtonManager");
         button = buttonManager.GetComponent<ButtonManager>();
+
+        //parent = this.transform.parent.gameObject;
+
+        if(timeNum > 0)
+        {
+            InvokeRepeating("SubCoolTime", 0, 1);
+
+            Debug.Log("ee");
+            //ResetCoolTime();
+        }
+
+        isFill = false;
+        isBomb = false;
+        isTrap = false;
     }
 
     /// <summary>
@@ -50,19 +66,20 @@ public class Sabotage : MonoBehaviour
     /// </summary>
     public void SabotageFill()
     {
-        if(fillCount <= 0)
+        if(timeNum <= 0)
         {
-            // モード変更
-            player.GetComponent<Player>().mode = Player.PLAYER_MODE.SABOTAGEFILL;
+            if (isFill == false)
+            {
+                // モード変更
+                player.GetComponent<Player>().mode = Player.PLAYER_MODE.SABOTAGEFILL;
 
-            textUI.saboText.SetActive(true);
+                textUI.saboText.SetActive(true);
 
-            // サボタージュボタンを非表示
-            button.sabotageUI.SetActive(false);
-            // キャンセルボタンを表示
-            button.canselButton.SetActive(true);
-
-            fillCount++;
+                // サボタージュボタンを非表示
+                button.sabotageUI.SetActive(false);
+                // キャンセルボタンを表示
+                button.canselButton.SetActive(true);
+            }
         }
     }
 
@@ -71,20 +88,88 @@ public class Sabotage : MonoBehaviour
     /// </summary>
     public void SabotageBomb()
     {
-        if(bombCount <= 0)
+        if (timeNum <= 0)
         {
-            // モード変更
-            player.GetComponent<Player>().mode = Player.PLAYER_MODE.SABOTAGEBOMB;
+            if (isBomb == false)
+            {
+                // モード変更
+                player.GetComponent<Player>().mode = Player.PLAYER_MODE.SABOTAGEBOMB;
 
-            textUI.saboText.SetActive(true);
+                textUI.saboText.SetActive(true);
 
-            // サボタージュボタンを非表示
-            button.sabotageUI.SetActive(false);
-            // キャンセルボタンを表示
-            button.canselButton.SetActive(true);
-
-            bombCount++;
+                // サボタージュボタンを非表示
+                button.sabotageUI.SetActive(false);
+                // キャンセルボタンを表示
+                button.canselButton.SetActive(true);
+            }
         }
+            
+    }
+
+    /// <summary>
+    /// サボタージュ(スロートラップ)モード
+    /// </summary>
+    public void SbotageTrap()
+    {
+        if (timeNum <= 0)
+        {
+            if (isTrap == false)
+            {
+                // モード変更
+                player.GetComponent<Player>().mode = Player.PLAYER_MODE.SABOTAGETRAP;
+
+                // サボタージュボタンを非表示
+                button.sabotageUI.SetActive(false);
+                // キャンセルボタンを表示
+                button.canselButton.SetActive(true);
+            }
+        }
+    }
+
+    /// <summary>
+    /// boolを戻す
+    /// </summary>
+    public void ResetBool()
+    {
+        if(player.GetComponent<Player>().mode == Player.PLAYER_MODE.SABOTAGEFILL)
+        {
+            isFill = false;
+        }
+        else if (player.GetComponent<Player>().mode == Player.PLAYER_MODE.SABOTAGEBOMB)
+        {
+            isBomb = false;
+        }
+        else if (player.GetComponent<Player>().mode == Player.PLAYER_MODE.SABOTAGETRAP)
+        {
+            isTrap = false;
+        }
+    }
+
+    /// <summary>
+    /// サボタージュのクールタイム処理
+    /// </summary>
+    /// <returns></returns>
+    public void SubCoolTime()
+    {
+        timeNum--;
+
+        if(timeText != null)
+        {
+            timeText.text = "" + timeNum;
+        }
+        
+        if (timeNum <= 0)
+        {
+            button.sabotageCoolTime.SetActive(false);
+            CancelInvoke("SubCoolTime");
+        }
+    }
+
+    public void ResetCoolTime()
+    {
+        timeNum = 60;
+
+        InvokeRepeating("SubCoolTime", 0, 1);
     }
 
     public void SabotageText(int num)

@@ -34,6 +34,9 @@ public class EventManager : MonoBehaviour
 
     GameObject player;
 
+    // スタミナの消費量を減らすイベントになったかどうか
+    public bool isEventStamina; 
+
     private void Start()
     {
         player = GameObject.Find("Player1");
@@ -62,7 +65,7 @@ public class EventManager : MonoBehaviour
 
                     GameObject childObject = Instantiate(chaosPrefab, player.transform);
 
-                    uiManager.GetComponent<UIManager>().isEvent = true;
+                    uiManager.GetComponent<UIManager>().isChaos = true;
 
                     break;
                 case 2: // SpownEnemys
@@ -73,6 +76,7 @@ public class EventManager : MonoBehaviour
                 case 3: // RiStaminaCn
 
                     // 処理内容
+                    isEventStamina = true;
 
                     break;
                 case 4: // RndSpawnGold

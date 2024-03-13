@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6608998527673244454}
   - component: {fileID: 1549604734124915851}
   - component: {fileID: 566668214349113606}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (1)
   m_TagString: RoadBlock
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 6469484747534115406}
   - component: {fileID: 1716954513674404058}
   - component: {fileID: 1374155698762825005}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Road_05
   m_TagString: RoadPanel
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3720628406363261294}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: -0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 5, y: 1, z: 5}
   m_ConstrainProportionsScale: 0
@@ -247,8 +247,11 @@ MonoBehaviour:
     type: 3}
   isFill: 0
   objeID: 0
-  isSelect: 0
+  isFillSelect: 0
+  isbombSelect: 0
+  isThrowTrapSelect: 0
   smoke: {fileID: 5408633052442516991, guid: 1d6651dd79e115c4fb7cb9604b460ad1, type: 3}
+  isColor: 0
 --- !u!1 &4872085139645853409
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,7 +265,7 @@ GameObject:
   - component: {fileID: 1203321213534341208}
   - component: {fileID: 8049750822083884157}
   - component: {fileID: 8874032372510118953}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (2)
   m_TagString: RoadBlock
   m_Icon: {fileID: 0}
@@ -384,7 +387,7 @@ GameObject:
   - component: {fileID: 8692356846796831397}
   - component: {fileID: 3293697109057054161}
   - component: {fileID: 5437162637040401283}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: RoadBlock
   m_Icon: {fileID: 0}
