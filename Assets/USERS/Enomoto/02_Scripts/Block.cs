@@ -120,7 +120,6 @@ public class Block : MonoBehaviour
                 // デフォルトカラーに戻す
                 gameObject.GetComponent<Renderer>().material.color = defaultMaterial;
             }
-
         }
 
     }

@@ -38,9 +38,10 @@ public class RoadManager : MonoBehaviour
     // ステージの管理
     GameObject stageManager;
 
-    // ボタンマネージャーを取得
+    // ボタンマネージャー
     ButtonManager buttonManager;
 
+    // テキストUI
     GameObject textUI;
 
     public GameObject targetBlock;
@@ -116,6 +117,7 @@ public class RoadManager : MonoBehaviour
                 selectPanelList = new List<GameObject>();
                 selectPanelCount = 0;
 
+                // テキストを全て非表示にする
                 textUI.GetComponent<TextUIManager>().HideText();
 
                 // 非表示にしていたボタンをすべて戻す
@@ -150,6 +152,7 @@ public class RoadManager : MonoBehaviour
                 selectPanelList = new List<GameObject>();
                 selectPanelCount = 0;
 
+                // テキストを全て非表示にする
                 textUI.GetComponent<TextUIManager>().HideText();
 
                 // 非表示にしていたボタンをすべて戻す
@@ -212,10 +215,11 @@ public class RoadManager : MonoBehaviour
         rotY = 0;
     }
 
-   //====================
-   // 道を選択
-   //====================
-   public void Road(int num)
+    /// <summary>
+    /// 道を選択
+    /// </summary>
+    /// <param name="num"></param>
+    public void Road(int num)
     {
         Player script = player.GetComponent<Player>();
 
@@ -226,29 +230,36 @@ public class RoadManager : MonoBehaviour
         //************************************
         if(uiMnager.GetComponent<UIManager>().isEvent == true)
         {
+            // スタミナが40以上なら
             if(script.stamina >= 40)
             {
                 if (num >= 76 && num <= 85)
-                {// I字
+                {// 数値が76～85の間なら(多分10%)
+                    // I字
                     num = 0;
                 }
                 else if (num >= 61 && num <= 75)
-                {// L字
+                {// 数値が61～75の間なら(多分15%)
+                    // L字
                     num = 1;
                 }
                 else if (num >= 86 && num <= 95)
-                {// T字
+                {// 数値が86～95の間なら(多分10%)
+                    // T字
                     num = 2;
                 }
                 else if (num >= 96 && num <= 100)
-                {// 十字
+                {// 数値が96～100の間なら(多分5%)
+                    // 十字
                     num = 3;
                 }
                 else if (num >= 1 && num <= 60)
-                {// ゴミみたいな道
+                {// 数値が1～60の間なら(多分60%)
+                    // ゴミみたいな道
                     num = 4;
                 }
 
+                // スタミナを全て40固定で減らす
                 player.GetComponent<Player>().SubStamina(40);
             }
             else
@@ -264,23 +275,23 @@ public class RoadManager : MonoBehaviour
         else
         {
             if (num == 0 && script.stamina >= 30)
-            {// I字
+            {// I字 & スタミナが30以上なら
                 player.GetComponent<Player>().SubStamina(30);
             }
             else if (num == 1 && script.stamina >= 40)
-            {// L字
+            {// L字 & スタミナが40以上なら
                 player.GetComponent<Player>().SubStamina(40);
             }
             else if (num == 2 && script.stamina >= 60)
-            {// T字
+            {// T字 & スタミナ60以上なら
                 player.GetComponent<Player>().SubStamina(60);
             }
             else if (num == 3 && script.stamina >= 80)
-            {// 十字
+            {// 十字 & スタミナが80以上なら
                 player.GetComponent<Player>().SubStamina(80);
             }
             else if (num == 4 && script.stamina >= 10)
-            {// ゴミみたいな道
+            {// ゴミみたいな道 & スタミナが10以上なら
                 player.GetComponent<Player>().SubStamina(10);
             }
             else
@@ -290,19 +301,28 @@ public class RoadManager : MonoBehaviour
                 return;
             }
 
+            // 前回、前々回選択した道UIを非表示にしてその他を表示する
             ShowRoad(num);
         }
 
         roadNum = num;
 
+        // 選択されたUI番号を渡す
         Road(RoadPrefab[num]);
 
         // 道の選択肢を非表示
         uiMnager.GetComponent<UIManager>().road.SetActive(false);
 
+        // プレイヤーのモードを戻す
+        player.GetComponent<Player>().mode = Player.PLAYER_MODE.MOVE;
+
         //uiMnager.GetComponent<UIManager>().selectRoadNum = num;
     }
    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="num"></param>
     public void ShowRoad(int num)
     {
         // 2ターン非表示のカウントを持たせる
@@ -312,7 +332,7 @@ public class RoadManager : MonoBehaviour
         uiMnager.GetComponent<UIManager>().roadUIList[num].SetActive(false);
 
         if(uiMnager.GetComponent<UIManager>().isEvent != true)
-        {
+        {// イベント(混乱)が起こっていない時
             for (int i = 0; i < selectRoad.Length; i++)
             {
                 if (selectRoad[i] > 0)

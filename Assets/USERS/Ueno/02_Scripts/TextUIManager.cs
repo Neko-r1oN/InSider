@@ -19,19 +19,16 @@ public class TextUIManager : MonoBehaviour
     // サボタージュでのいくつ置く場所を選択したかのテキスト
     Text saboPlaceText;
 
-    public int putCnt;
-
     private void Awake()
     {
+        // テキストを非表示にする前にサボタージュ回数表示テキストを取得
         saboPosstext = GameObject.Find("SaboPossNum").GetComponent<Text>();
-
         saboPlaceText = GameObject.Find("SaboPlaceNum").GetComponent<Text>();
-
-        putCnt = 0;
     }
 
     private void Start()
     {
+        // テキストを非表示にする
         saboText.SetActive(false);
     }
 
@@ -41,6 +38,8 @@ public class TextUIManager : MonoBehaviour
     /// <param name="num"></param>
     public void OnMouseEnter(int num)
     {
+        Debug.Log("当たってるよ");
+
         // テキストの背景を表示
         textBack.SetActive(true);
         // 表示されていた説明文を非表示
@@ -53,6 +52,8 @@ public class TextUIManager : MonoBehaviour
     /// <param name="num"></param>
     public void OnMouseExit(int num)
     {
+        Debug.Log("抜けた");
+
         // テキストの背景を非表示
         textBack.SetActive(false);
         // 表示されていた説明文を非表示
@@ -68,6 +69,7 @@ public class TextUIManager : MonoBehaviour
         // テキストの背景を非表示
         textBack.SetActive(false);
 
+        // サボタージュのテキストを非表示にする
         saboText.SetActive(false);
 
         // 説明文を非表示
