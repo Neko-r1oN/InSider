@@ -24,5 +24,8 @@ public class LoadingUI : MonoBehaviour
         }
 
         GetComponent<Transform>().DOLocalRotate(Vector3.up * (360f / circles.Length), DURATION).SetLoops(-1);
+
+        // ç¿ïWÇê›íËÇ∑ÇÈ
+        transform.localPosition = new Vector3(266, -12, 0);
     }
 }

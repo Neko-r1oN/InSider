@@ -41,6 +41,8 @@ public class TextUIManager : MonoBehaviour
     /// <param name="num"></param>
     public void OnMouseEnter(int num)
     {
+        Debug.Log("aaaas");
+
         // テキストの背景を表示
         textBack.SetActive(true);
         // 表示されていた説明文を非表示

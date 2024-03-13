@@ -23,6 +23,15 @@ public class JudgeLogo : MonoBehaviour
    
     private void move()
     {
+        if (OpenManager.Instance.isMimic == true)
+        {
+            logo.text = "ƒnƒYƒŒ";
+        }
+        else
+        {
+            logo.text = "‚ ‚½‚è";
+        }
+
         this.transform.DOLocalMove(new Vector3(-580.67f, 412f, 772f), 5.0f);
     }
 }
