@@ -1395,7 +1395,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af8bedbff057c15479b7e3648c23b701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerManager: {fileID: 840676508}
 --- !u!1001 &75537412
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4296,9 +4295,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerObjID: 0
+  spawnEffectPrefab: {fileID: 0}
+  gold: {fileID: 1194406521208508902, guid: 95dd1c8f833063f48bd9de35b7511a6a, type: 3}
   isEnd: 0
   stamina: 100
-  cnt: 0
+  isInvincible: 0
   _cycle: 1
   mode: 0
 --- !u!195 &210333113
@@ -11322,9 +11323,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerObjID: 0
+  spawnEffectPrefab: {fileID: 0}
+  gold: {fileID: 1194406521208508902, guid: 95dd1c8f833063f48bd9de35b7511a6a, type: 3}
   isEnd: 0
   stamina: 100
-  cnt: 0
+  isInvincible: 0
   _cycle: 1
   mode: 0
 --- !u!195 &630176435
@@ -22445,9 +22448,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerObjID: 0
+  spawnEffectPrefab: {fileID: 0}
+  gold: {fileID: 1194406521208508902, guid: 95dd1c8f833063f48bd9de35b7511a6a, type: 3}
   isEnd: 0
   stamina: 100
-  cnt: 0
+  isInvincible: 0
   _cycle: 1
   mode: 0
 --- !u!195 &1213451756
@@ -23842,9 +23847,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerObjID: 0
+  spawnEffectPrefab: {fileID: 0}
+  gold: {fileID: 1194406521208508902, guid: 95dd1c8f833063f48bd9de35b7511a6a, type: 3}
   isEnd: 0
   stamina: 100
-  cnt: 0
+  isInvincible: 0
   _cycle: 1
   mode: 0
 --- !u!195 &1286726704
@@ -27038,9 +27045,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerObjID: 0
+  spawnEffectPrefab: {fileID: 0}
+  gold: {fileID: 1194406521208508902, guid: 95dd1c8f833063f48bd9de35b7511a6a, type: 3}
   isEnd: 0
   stamina: 100
-  cnt: 0
+  isInvincible: 0
   _cycle: 1
   mode: 0
 --- !u!195 &1483753234
@@ -31292,9 +31301,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerObjID: 0
+  spawnEffectPrefab: {fileID: 0}
+  gold: {fileID: 1194406521208508902, guid: 95dd1c8f833063f48bd9de35b7511a6a, type: 3}
   isEnd: 0
   stamina: 100
-  cnt: 0
+  isInvincible: 0
   _cycle: 1
   mode: 0
 --- !u!54 &1727096695
@@ -45561,7 +45572,7 @@ GameObject:
   - component: {fileID: 8616917445924130638}
   m_Layer: 0
   m_Name: Road_00
-  m_TagString: StartPanel
+  m_TagString: AbnormalPanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -49389,7 +49400,7 @@ GameObject:
   - component: {fileID: 6708300813727519728}
   m_Layer: 0
   m_Name: Road_00 (2)
-  m_TagString: StartPanel
+  m_TagString: AbnormalPanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -49409,7 +49420,7 @@ GameObject:
   - component: {fileID: 6708300812891672817}
   m_Layer: 0
   m_Name: Road_00 (1)
-  m_TagString: StartPanel
+  m_TagString: AbnormalPanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -49429,7 +49440,7 @@ GameObject:
   - component: {fileID: 6708300812643408686}
   m_Layer: 0
   m_Name: Road_00 (3)
-  m_TagString: StartPanel
+  m_TagString: AbnormalPanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -50857,6 +50868,7 @@ MonoBehaviour:
   isFillSelect: 0
   isbombPrefabSelect: 0
   smoke: {fileID: 0}
+  isColor: 0
 --- !u!114 &6708300812891672817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50876,6 +50888,7 @@ MonoBehaviour:
   isFillSelect: 0
   isbombPrefabSelect: 0
   smoke: {fileID: 0}
+  isColor: 0
 --- !u!114 &6708300813727519728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50895,6 +50908,7 @@ MonoBehaviour:
   isFillSelect: 0
   isbombPrefabSelect: 0
   smoke: {fileID: 0}
+  isColor: 0
 --- !u!23 &6722989447443447707
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -54076,6 +54090,7 @@ MonoBehaviour:
   isFillSelect: 0
   isbombPrefabSelect: 0
   smoke: {fileID: 0}
+  isColor: 0
 --- !u!23 &8623606252122486537
 MeshRenderer:
   m_ObjectHideFlags: 0

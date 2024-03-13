@@ -18,44 +18,49 @@ public class ChestTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if(isPlayer == true)
+        {
+            return;
+        }
+
         if (other.gameObject.layer == 3)
         {// プレイヤーの場合
-            Invoke("IsMimic", 2f);
+            if (other.GetComponent<Player>().playerObjID == ClientManager.Instance.playerID)
+            {// 自分自身の場合
+                if (ClientManager.Instance.isInsider == false)
+                {// Insiderではない場合
+                    SendRoundEndData();
+                }
+            }
         }
     }
 
-    private void IsMimic()
+    private async void SendRoundEndData()
     {
         if (isPlayer == true)
         {
             return;
         }
 
+        Debug.Log("送信準備");
+
         isPlayer = true;
+
+        // クラス変数を作成
+        RoundEndData roundEndData = new RoundEndData();
+        roundEndData.isMimic = isMimic;
+        roundEndData.openPlayerID = ClientManager.Instance.playerID;
 
         if (isMimic == true)
         {// 自身がミミックの場合
-            text[0].SetActive(true);
-
-            // ミミックにすり替える
-            Instantiate(mimicPrefab, transform.position, Quaternion.Euler(0, 180, 0), transform.parent);    // リストに格納
-            Destroy(this.gameObject);
-            
+            Debug.Log("ミミック");
         }
         else
         {// 宝箱の場合
-            text[1].SetActive(true);
+            Debug.Log("宝箱");
         }
 
-        Invoke("SceneChange", 5f);
-    }
-
-    private void SceneChange()
-    {
-        // フェード＆シーン遷移
-        //Initiate.DoneFading();
-        //SceneManager.LoadScene("TitleKawaguchi");
-
-        ClientManager.Instance.DisconnectButton();
+        // サーバーに送信する
+        await ClientManager.Instance.Send(roundEndData, 4);
     }
 }

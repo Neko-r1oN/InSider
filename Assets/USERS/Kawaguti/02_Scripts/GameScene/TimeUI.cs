@@ -98,6 +98,14 @@ public class TimeUI : MonoBehaviour
     // Update is called once per frame
     async Task Update()
     {
+        if (EditorManager.Instance.useServer)
+        {
+            if (ClientManager.Instance.isGetNotice == false)
+            {// ゲーム開始通知を受信していない場合
+                return;
+            }
+        }
+
         _timeElapsed += Time.deltaTime;     //時間をカウントする
 
         if (_timeElapsed >= _repeatSpan)

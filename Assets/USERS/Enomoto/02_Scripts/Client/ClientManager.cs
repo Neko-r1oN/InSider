@@ -122,6 +122,21 @@ public class ClientManager : MonoBehaviour
     public List<int> scoreList { get; set; }
 
     /// <summary>
+    /// サーバーから通知を受け取ったかどうか
+    /// </summary>
+    public bool isGetNotice { get; set; }
+
+    /// <summary>
+    /// 破棄する通信中のテキスト
+    /// </summary>
+    public GameObject loadingObj { get; set; }
+
+    /// <summary>
+    /// リザルトシーンで使用
+    /// </summary>
+    public List<int> totalScoreList { get; set; }
+
+    /// <summary>
     /// ゲームモード
     /// </summary>
     public enum GAMEMODE
@@ -232,9 +247,11 @@ public class ClientManager : MonoBehaviour
 
         // フェード＆シーン遷移
         Initiate.DoneFading();
-        SceneManager.LoadScene("TitleKawaguchi_copy");
+        Initiate.Fade("TitleKawaguchi_copy", Color.black, 3.0f);
 
         Debug.Log("退出");
+
+        Destroy(this.gameObject);
     }
 
     /// <summary>
@@ -295,7 +312,7 @@ public class ClientManager : MonoBehaviour
             // 接続切断チェック
             if (isDisconnect == true)
             {
-                break;
+                return;
             }
 
             // 受信データからイベントIDを取り出す
@@ -410,6 +427,8 @@ public class ClientManager : MonoBehaviour
                         // 疑われた回数を初期化
                         doubtNum = 0;
 
+                        isGetNotice = false;
+
                         // プレイヤーの名前リストを初期化する
                         playerNameList = new List<string>();
 
@@ -450,7 +469,7 @@ public class ClientManager : MonoBehaviour
 
                         // フェード＆シーン遷移
                         Initiate.DoneFading();
-                        SceneManager.LoadScene("JobScene_copy");
+                        Initiate.Fade("JobScene_copy", Color.black, 10f);
 
                         break;
                     case 4: // ラウンド終了通知
@@ -460,13 +479,29 @@ public class ClientManager : MonoBehaviour
                         // JSONデシリアライズで取得する
                         RoundEndData roundEndData = JsonConvert.DeserializeObject<RoundEndData>(jsonString);
 
-                        // 現在接続中のプレイヤー情報を更新
-                        listenerList = roundEndData.listeners;
+                        totalScoreList = roundEndData.totalScore;
 
-                        // マネージャー情報を初期化する
-                        playerManager = new GameObject();
-                        blockManager = new GameObject();
-                        uiManager = new GameObject();
+                        if (roundEndData.isTurnEnd == true)
+                        {// ラウンド終了による通知の場合
+
+                            // 途中結果のリザルトを表示する
+
+                            // フェード＆シーン遷移
+                            //Initiate.DoneFading();
+                            //Initiate.Fade("BoxOpenScene", Color.black, 1.0f);
+
+                            // 遷移先にあるオブジェクトの関数を呼ぶためのコルーチン
+                            //StartCoroutine(SetResultUI(roundEndData));
+                        }
+                        else
+                        {
+                            // フェード＆シーン遷移
+                            Initiate.DoneFading();
+                            Initiate.Fade("BoxOpenScene", Color.black, 2f);
+
+                            // 遷移先にあるオブジェクトの関数を呼ぶためのコルーチン
+                            StartCoroutine(SetPlayerAndMimic(roundEndData));
+                        }
 
                         break;
                     case 5: // 移動
@@ -620,9 +655,25 @@ public class ClientManager : MonoBehaviour
                         }
 
                         break;
-                    case 13:
+                    case 13:    // ゲーム開始通知 (どの宝箱をミミックにするか受信)
 
-                        // 募集中
+                        // JSONデシリアライズで取得する
+                        RoundStartData roundStartData = JsonConvert.DeserializeObject<RoundStartData>(jsonString);
+
+                        GameObject chestManager = GameObject.Find("ChestList");
+
+                        // ミミックを設定する
+                        chestManager.GetComponent<ChestManager>().SetMimic(roundStartData.isMimicList);
+
+                        isGetNotice = true;
+
+                        if(loadingObj != null)
+                        {
+                            Destroy(loadingObj);
+                        }
+
+                        // ターンテキストを更新（先行のプレイヤー）
+                        uiManager.GetComponent<UIManager>().UdTurnPlayerUI(playerNameList[turnPlayerID], turnPlayerID);
 
                         break;
                     case 14: // スコアのテキストを更新する
@@ -636,6 +687,8 @@ public class ClientManager : MonoBehaviour
                         // スコアテキストを更新する
                         uiManager.GetComponent<UIManager>().UdScoreText(allieScoreData.originalID, allieScoreData.allieScore);
 
+                        break;
+                    case 15:    // 受信しない
                         break;
 
                     //*****************************
@@ -726,15 +779,6 @@ public class ClientManager : MonoBehaviour
 
             }, null);
         }
-
-        Instance = null;
-
-        // 接続を切断
-        tcpClient.Close();
-
-        // フェード＆シーン遷移
-        Initiate.DoneFading();
-        SceneManager.LoadScene("TitleKawaguchi_copy");
     }
 
     /// <summary>
@@ -824,6 +868,19 @@ public class ClientManager : MonoBehaviour
         uiManager = GameObject.Find("UIManager");
         eventManager = GameObject.Find("EventManager");
         enemyManager = GameObject.Find("EnemyManager");
+    }
+
+    IEnumerator SetPlayerAndMimic(RoundEndData roundEndData)
+    {
+        yield return new WaitForSeconds(2.1f);
+
+        // シーン設定
+        OpenManager.Instance.SetPlayerAndMimic(
+            roundEndData.insiderID,
+            roundEndData.openPlayerID,
+            roundEndData.isMimic,
+            roundEndData.totalScore,
+            roundEndData.allieScore);
     }
 
     /// <summary>

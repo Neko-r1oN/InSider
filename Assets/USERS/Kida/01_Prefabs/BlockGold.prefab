@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 6948609995018861061}
   - component: {fileID: 1550324276184557003}
   - component: {fileID: 794802345651762226}
-  - component: {fileID: -6363378840242350535}
+  - component: {fileID: 3999743364027593285}
   m_Layer: 0
   m_Name: BlockGold
   m_TagString: Untagged
@@ -286,7 +286,7 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   priority: 0
---- !u!114 &-6363378840242350535
+--- !u!114 &3999743364027593285
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -295,6 +295,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8750506531741430590}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 910fd6c3958b8764dbce7e972d15bdec, type: 3}
+  m_Script: {fileID: 11500000, guid: 3855c2bea53e8e447927dccdb2a906e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 5
+  targetID: 0

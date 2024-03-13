@@ -123,6 +123,9 @@ public class ButtonManager : MonoBehaviour
 
         // キャンセルボタンを非表示 
         canselButton.SetActive(false);
+
+        // スタミナ不足UIを非表示にする
+        noStaminaUI.SetActive(false);
     }
 
     private void Update()
@@ -147,6 +150,9 @@ public class ButtonManager : MonoBehaviour
         // プレイヤーのモードをMOVEに変更
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.MOVE;
 
+        // スタミナ不足UIを非表示
+        noStaminaUI.SetActive(false);
+
         // 行動説明テキストを非表示
         textUI.HideText();
     }
@@ -161,6 +167,8 @@ public class ButtonManager : MonoBehaviour
                 return;
             }
         }
+        // スタミナ不足UIを非表示
+        noStaminaUI.SetActive(false);
 
         // 行動説明テキストを非表示
         textUI.HideText();
@@ -213,6 +221,14 @@ public class ButtonManager : MonoBehaviour
             }
         }
 
+        // スタミナがない場合 
+        if (player.GetComponent<Player>().stamina < 20)
+        {
+            noStaminaUI.SetActive(true);
+
+            return;
+        }
+
         // 全てのボタンを非表示
         HideButton();
 
@@ -223,8 +239,8 @@ public class ButtonManager : MonoBehaviour
         textUI.HideText();
 
         if (player.GetComponent<Player>().isEnd == false
-            || player.GetComponent<Player>().stamina < 20 || TimeUI.Instance.nowTime <= 0)
-        {// プレイヤーが移動中の場合 || スタミナがない場合 || 制限時間が0以下の場合
+            || TimeUI.Instance.nowTime <= 0)
+        {// プレイヤーが移動中の場合 || 制限時間が0以下の場合
             return;
         }
 
@@ -242,6 +258,9 @@ public class ButtonManager : MonoBehaviour
                 return;
             }
         }
+
+        // スタミナ不足UIを非表示
+        noStaminaUI.SetActive(false);
 
         // 行動説明テキストを非表示にする
         textUI.HideText();
@@ -343,6 +362,9 @@ public class ButtonManager : MonoBehaviour
         // キャンセルボタンを非表示にする
         canselButton.SetActive(false);
 
+        // スタミナ不足UIを非表示
+        noStaminaUI.SetActive(false);
+
         // プレイヤーのモードを元に戻す
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.MOVE;
     }
@@ -362,8 +384,11 @@ public class ButtonManager : MonoBehaviour
         canselButton.SetActive(false);
         textBack.SetActive(false);
 
+        // スタミナ不足UIを非表示
+        noStaminaUI.SetActive(false);
+
         // 全ての道UIのテキストを非表示
-        for(int i = 0;i < roadTextUIList.Count; i++)
+        for (int i = 0;i < roadTextUIList.Count; i++)
         {
             roadTextUIList[i].SetActive(false);
         }
@@ -392,6 +417,9 @@ public class ButtonManager : MonoBehaviour
         nothingButton.SetActive(false);
         actionButton.SetActive(false);
 
+        // スタミナ不足UIを非表示
+        noStaminaUI.SetActive(false);
+
         if (EditorManager.Instance.useServer == false)
         {// サーバーを使用しない場合
             sabotageButton.SetActive(false); // true : サボタージュUI表示
@@ -409,7 +437,11 @@ public class ButtonManager : MonoBehaviour
     /// 道UIの回転処理
     /// </summary>
     public void RotRoad()
-    {// 道・道UIを回転
+    {
+        // スタミナ不足UIを非表示
+        noStaminaUI.SetActive(false);
+
+        // 道・道UIを回転
         roadManager.GetComponent<RoadManager>().AddRotButton();
         uiManager.RotRoadUI();
     }
@@ -418,7 +450,11 @@ public class ButtonManager : MonoBehaviour
     /// カメラの切り替え処理
     /// </summary>
     public void ChangeCamera()
-    {// カメラ切り替え
+    {
+        // スタミナ不足UIを非表示
+        noStaminaUI.SetActive(false);
+
+        // カメラ切り替え
         cameraManager.GetComponent<CameraManager>().SwitchCamera();
     }
 
@@ -428,6 +464,9 @@ public class ButtonManager : MonoBehaviour
     /// <param name="indexNumber"></param>
     public async void DoubtButton(int indexNumber)
     {
+        // スタミナ不足UIを非表示
+        noStaminaUI.SetActive(false);
+
         if (EditorManager.Instance.useServer == true)
         {
             foreach (int num in uiManager.disabledIndexNumList)
@@ -471,6 +510,9 @@ public class ButtonManager : MonoBehaviour
     /// <param name="num"></param>
     public void HideRoadText(int num)
     {
+        // スタミナ不足UIを非表示
+        noStaminaUI.SetActive(false);
+
         textBack.SetActive(false);
         roadTextUIList[num].SetActive(false);
     }

@@ -26,7 +26,7 @@ public class OpenBox : MonoBehaviour
         _repeatSpan = 2.0f;
         _timeElapsed = 0;
 
-        isMimic = true;
+        isMimic = OpenManager.Instance.isMimic;
         Once = false;
         Gold.SetActive(false);
         animator = GetComponent<Animator>();
@@ -37,19 +37,18 @@ public class OpenBox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         _timeElapsed += Time.deltaTime;     //時間をカウントする
 
-        if (!isMimic)
-        {
-            Mimic.SetActive(false);
-            Chest.SetActive(true);
-        }
-        else if (isMimic)
-        {
-            Mimic.SetActive(true);
-            Chest.SetActive(false);
-        }
+        //if (!isMimic)
+        //{
+        //    Mimic.SetActive(false);
+        //    Chest.SetActive(true);
+        //}
+        //else if (isMimic)
+        //{
+        //    Mimic.SetActive(true);
+        //    Chest.SetActive(false);
+        //}
 
         if (_timeElapsed  >= _repeatSpan +3.0f && !Once)
         {//時間経過でアニメーション

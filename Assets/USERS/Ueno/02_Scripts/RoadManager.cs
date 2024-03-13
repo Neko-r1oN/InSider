@@ -28,6 +28,9 @@ public class RoadManager : MonoBehaviour
 
     // ゴールド
     [SerializeField] GameObject gold;
+    
+    // 煙アニメーション
+    [SerializeField] GameObject smoke;
 
     // 煙のアニメーション
     [SerializeField] GameObject smoke;
@@ -43,6 +46,9 @@ public class RoadManager : MonoBehaviour
 
     // テキストUI
     GameObject textUI;
+
+    // スタミナ不足UI
+    [SerializeField] GameObject staminaUI;
 
     public GameObject targetBlock;
     public int rotY;
@@ -91,6 +97,9 @@ public class RoadManager : MonoBehaviour
         // Button
         GameObject buttonManagerObject = GameObject.Find("ButtonManager");
         buttonManager = buttonManagerObject.GetComponent<ButtonManager>();
+
+        // スタミナUIの取得
+        staminaUI.SetActive(false);
     }
 
     private void Update()
@@ -305,6 +314,11 @@ public class RoadManager : MonoBehaviour
             ShowRoad(num);
         }
 
+        // スタミナ不足UIの非表示
+        staminaUI.SetActive(false);
+
+        ShowRoad(num);
+
         roadNum = num;
 
         // 選択されたUI番号を渡す
@@ -382,8 +396,11 @@ public class RoadManager : MonoBehaviour
         // ベイクを開始
         Baker.GetComponent<StageManager>().StartBake();
 
-        // ゴールドを生成
-        Instantiate(gold, new Vector3(block.transform.position.x,1.0f, block.transform.position.z), Quaternion.identity);
+        //ゴールドを生成
+        Instantiate(gold, block.transform.position, Quaternion.identity);
+        
+        //煙アニメーションを生成
+        Instantiate(smoke, block.transform.position, Quaternion.identity);
 
         // ゴールドを生成
         Instantiate(smoke, block.transform.position, Quaternion.identity);
