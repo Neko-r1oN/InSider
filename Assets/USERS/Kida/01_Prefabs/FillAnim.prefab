@@ -5265,7 +5265,7 @@ ParticleSystem:
   startDelay:
     serializedVersion: 2
     minMaxState: 0
-    scalar: 1.5
+    scalar: 0.7
     minScalar: 0
     maxCurve:
       serializedVersion: 2
@@ -5325,7 +5325,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -10375,7 +10375,7 @@ ParticleSystem:
   startDelay:
     serializedVersion: 2
     minMaxState: 0
-    scalar: 1.5
+    scalar: 0.7
     minScalar: 0
     maxCurve:
       serializedVersion: 2
@@ -10435,7 +10435,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -16668,7 +16668,7 @@ ParticleSystem:
   startDelay:
     serializedVersion: 2
     minMaxState: 0
-    scalar: 1.5
+    scalar: 0.7
     minScalar: 0
     maxCurve:
       serializedVersion: 2
@@ -16728,7 +16728,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -24019,7 +24019,7 @@ ParticleSystem:
   startDelay:
     serializedVersion: 2
     minMaxState: 0
-    scalar: 1.5
+    scalar: 0.7
     minScalar: 0
     maxCurve:
       serializedVersion: 2
@@ -24079,7 +24079,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -30395,7 +30395,7 @@ ParticleSystem:
   startDelay:
     serializedVersion: 2
     minMaxState: 0
-    scalar: 1.5
+    scalar: 0.7
     minScalar: 0
     maxCurve:
       serializedVersion: 2
@@ -30455,7 +30455,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -38594,7 +38594,7 @@ ParticleSystem:
   startDelay:
     serializedVersion: 2
     minMaxState: 0
-    scalar: 1.5
+    scalar: 0.7
     minScalar: 0
     maxCurve:
       serializedVersion: 2
@@ -38654,7 +38654,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -44970,7 +44970,7 @@ ParticleSystem:
   startDelay:
     serializedVersion: 2
     minMaxState: 0
-    scalar: 1.5
+    scalar: 0.7
     minScalar: 0
     maxCurve:
       serializedVersion: 2
@@ -45030,7 +45030,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -50578,7 +50578,7 @@ ParticleSystem:
   startDelay:
     serializedVersion: 2
     minMaxState: 0
-    scalar: 1.5
+    scalar: 0.7
     minScalar: 0
     maxCurve:
       serializedVersion: 2
@@ -50638,7 +50638,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -57452,7 +57452,7 @@ ParticleSystem:
   startDelay:
     serializedVersion: 2
     minMaxState: 0
-    scalar: 1.5
+    scalar: 0.7
     minScalar: 0
     maxCurve:
       serializedVersion: 2
@@ -57512,7 +57512,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -65032,7 +65032,7 @@ ParticleSystem:
   startDelay:
     serializedVersion: 2
     minMaxState: 0
-    scalar: 1.5
+    scalar: 0.7
     minScalar: 0
     maxCurve:
       serializedVersion: 2
@@ -65092,7 +65092,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -70361,12 +70361,12 @@ PrefabInstance:
     - target: {fileID: 1218337384542949515, guid: 1f54bcff7f641f64b8c3adceb060c18c,
         type: 3}
       propertyPath: startDelay.scalar
-      value: 1.5
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 1218337384542949515, guid: 1f54bcff7f641f64b8c3adceb060c18c,
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1218337384542949515, guid: 1f54bcff7f641f64b8c3adceb060c18c,
         type: 3}
@@ -70386,12 +70386,12 @@ PrefabInstance:
     - target: {fileID: 3710369578288290082, guid: 1f54bcff7f641f64b8c3adceb060c18c,
         type: 3}
       propertyPath: startDelay.scalar
-      value: 1.5
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 3710369578288290082, guid: 1f54bcff7f641f64b8c3adceb060c18c,
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3710369578288290082, guid: 1f54bcff7f641f64b8c3adceb060c18c,
         type: 3}
@@ -70506,12 +70506,12 @@ PrefabInstance:
     - target: {fileID: 8013296900955983483, guid: 1f54bcff7f641f64b8c3adceb060c18c,
         type: 3}
       propertyPath: startDelay.scalar
-      value: 1.5
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 8013296900955983483, guid: 1f54bcff7f641f64b8c3adceb060c18c,
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8013296900955983483, guid: 1f54bcff7f641f64b8c3adceb060c18c,
         type: 3}

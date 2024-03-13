@@ -48,6 +48,12 @@ public class UIManager : MonoBehaviour
     // イベントテキストの親オブジェクト
     [SerializeField] GameObject eventTextsParent;
 
+    // サボタージュが使えなくなったときのUI
+    [SerializeField] List<GameObject> saboOutImgList;
+
+    // 混乱時の混乱UI
+    [SerializeField] GameObject chaos;
+
     // 使用不可にするダウトのボタンのインデックス番号
     public List<int> disabledIndexNumList;
 
@@ -61,6 +67,9 @@ public class UIManager : MonoBehaviour
     // 情報を取得
     RoadManager roadManager;
     GameObject player;
+    GameObject eventManager;
+
+    public bool isEvent;
 
     public GameObject GetRoadUI()
     {
@@ -91,6 +100,8 @@ public class UIManager : MonoBehaviour
         // ロードマネージャーの情報を格納
         GameObject roadManagerObject = GameObject.Find("RoadManager");
         roadManager = roadManagerObject.GetComponent<RoadManager>();
+
+        eventManager = GameObject.Find("EventManager");
 
         // 回転の初期値を格納
         _initialRotation = gameObject.transform.rotation;
@@ -149,30 +160,29 @@ public class UIManager : MonoBehaviour
             //-----------------------------
             //playerUIList[ClientManager.Instance.turnPlayerID].GetComponent<MovePlayerUI>().MoveOrReturn(true);
         }
+
+        chaos.SetActive(false);
     }
 
     /// <summary>
-    /// 前回選択された道UIの非表示処理
+    /// 道UIの表示処理
     /// </summary>
     /// <param name="selectNum"></param>
     public void ShowRoadUI()
     {
         // RoadUIを表示する
         road.SetActive(true);
+
+        if (isEvent == true)
+        {
+            chaos.SetActive(true);
+
+            for(int i = 0;i< roadUIList.Count; i++)
+            {
+                roadUIList[i].SetActive(false);
+            }
+        }
     }
-
-    ///// <summary>
-    ///// 前回選択した道UIの表示処理
-    ///// </summary>
-    ///// <param name="selectNum"></param>
-    //public void HideRoad(int selectNum)
-    //{
-    //    // 道UIを非表示
-    //    road.SetActive(false);
-
-    //    // プレイヤーモードをMOVEに変更
-    //    player.GetComponent<Player>().mode = Player.PLAYER_MODE.MOVE;
-    //}
 
     /// <summary>
     /// 道UIがtrue・falseかを返す処理
@@ -367,5 +377,30 @@ public class UIManager : MonoBehaviour
 
         // 使用できないインデックス番号を追加
         disabledIndexNumList.Add(indexNum);
+    }
+
+    /// <summary>
+    /// どのサボタージュが使えなくなったか分かるようにする処理
+    /// </summary>
+    /// <param name="num"></param>
+    public void OutSabotage(int num)
+    {
+        saboOutImgList[num].SetActive(true);
+    }
+
+    /// <summary>
+    /// イベント(混乱)が発生したときに使うUIを表示する処理
+    /// </summary>
+    public void DisplayChaos()
+    {
+        chaos.SetActive(true);
+    }
+
+    /// <summary>
+    /// イベント(混乱)が起きていないときに混乱UIを非表示にする
+    /// </summary>
+    public void HideChaos()
+    {
+        chaos.SetActive(false);
     }
 }

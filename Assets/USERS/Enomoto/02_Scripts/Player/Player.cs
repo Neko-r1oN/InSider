@@ -37,6 +37,9 @@ public class Player : MonoBehaviour
     // PlayerManager
     GameObject manager;
 
+    // GoldDrop
+    [SerializeField] GameObject gold;
+
     // 目的地を設定したかどうか
     bool isSetTarget = false;
 
@@ -109,7 +112,7 @@ public class Player : MonoBehaviour
 
         stamina = 50;
         
-        // PLayerManagerを取得
+        // PlayerManagerを取得
         manager = this.transform.parent.gameObject;
 
         animator.keepAnimatorStateOnDisable = true;
@@ -198,6 +201,11 @@ public class Player : MonoBehaviour
                     }
                 }
             }
+        }
+
+        if(Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            DownPlayer();
         }
     }
 
@@ -436,6 +444,8 @@ public class Player : MonoBehaviour
     /// </summary>
     public void DownPlayer()
     {
+        int dropNum = 4;
+
         if(isInvincible == true)
         {// ダウンしている場合
             return;
@@ -449,6 +459,9 @@ public class Player : MonoBehaviour
 
         // Restアニメを再生する
         animator.Play("Rest");
+
+        // 金のドロップ処理
+        GoldDrop(dropNum);
 
         // 点滅のコルーチンを開始する
         manager.GetComponent<PlayerManager>().StartCoroutine
@@ -488,6 +501,15 @@ public class Player : MonoBehaviour
         {
             // 座標を設定
             RevisionPos(new Vector3(0f, 0.9f, -5f));
+        }
+    }
+
+    public void GoldDrop(int num)
+    {
+        for (int i = 0; i < num; i++)
+        {
+            // 金を生成する
+            Instantiate(gold, this.gameObject.transform.position, Quaternion.identity);
         }
     }
 }
