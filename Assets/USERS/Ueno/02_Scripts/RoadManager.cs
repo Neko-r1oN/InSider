@@ -10,7 +10,11 @@ public class RoadManager : MonoBehaviour
 
     [SerializeField] GameObject blockObj;
 
+    // 爆弾のプレファブ
     [SerializeField] GameObject bombPrefab;
+
+    // スロートラップのプレファブ
+    [SerializeField] GameObject throwPrefab;
 
     public int[] selectRoad = new int[5];
 
@@ -45,7 +49,9 @@ public class RoadManager : MonoBehaviour
     GameObject textUI;
 
     // スタミナ不足UI
-    //[SerializeField] GameObject staminaUI;
+    [SerializeField] GameObject staminaUI;
+
+    GameObject sabotage;
 
     public GameObject targetBlock;
     public int rotY;
@@ -76,6 +82,8 @@ public class RoadManager : MonoBehaviour
 
         stageManager = GameObject.Find("StageManager");
 
+        sabotage = GameObject.Find("Sabotage");
+
         // Player
         if (EditorManager.Instance.useServer)
         {// サーバーを使用する場合
@@ -95,12 +103,15 @@ public class RoadManager : MonoBehaviour
         GameObject buttonManagerObject = GameObject.Find("ButtonManager");
         buttonManager = buttonManagerObject.GetComponent<ButtonManager>();
 
-        // スタミナUIの取得
-        //staminaUI.SetActive(false);
+        // スタミナ不足UIの取得
+        staminaUI.SetActive(false);
     }
 
     private void Update()
     {
+        //*************************************************
+        // プレイヤーモードがサボタージュ(埋める)だったら
+        //*************************************************
         if (player.GetComponent<Player>().mode == Player.PLAYER_MODE.SABOTAGEFILL)
         {
             // 埋める場所を選択した数が4回以上なら
@@ -119,6 +130,10 @@ public class RoadManager : MonoBehaviour
                     Destroy(selectPanelList[i]);
                 }
 
+                sabotage.GetComponent<Sabotage>().isFill = true;
+
+                //sabotage.GetComponent<Sabotage>().timeNum = 60;
+
                 //リストの中身・カウントを初期化
                 selectPanelList = new List<GameObject>();
                 selectPanelCount = 0;
@@ -133,6 +148,9 @@ public class RoadManager : MonoBehaviour
                 stageManager.GetComponent<StageManager>().StartBake();
             }
         }
+        //************************************************
+        // プレイヤーモードがサボタージュ(爆弾)だったら
+        //************************************************
         else if (player.GetComponent<Player>().mode == Player.PLAYER_MODE.SABOTAGEBOMB)
         {
             // ボムを設置する場所を2回以上選択されたら
@@ -154,6 +172,10 @@ public class RoadManager : MonoBehaviour
                     selectPanelList[n].tag = "AbnormalPanel";
                 }
 
+                sabotage.GetComponent<Sabotage>().isBomb = true;
+
+                sabotage.GetComponent<Sabotage>().ResetCoolTime();
+
                 //リストの中身・カウントを初期化
                 selectPanelList = new List<GameObject>();
                 selectPanelCount = 0;
@@ -167,6 +189,42 @@ public class RoadManager : MonoBehaviour
                 // ベイクを開始
                 stageManager.GetComponent<StageManager>().StartBake();
             }   
+        }
+
+        //**********************************************************
+        // プレイヤーモードがサボタージュ(スロートラップ)だったら
+        //**********************************************************
+        else if (player.GetComponent<Player>().mode == Player.PLAYER_MODE.SABOTAGETRAP)
+        {
+            for (int n = 0; n < selectPanelList.Count; n++)
+            {
+                // オブジェクトを生成する
+                GameObject throwTrap = Instantiate(throwPrefab, new Vector3(selectPanelList[n].transform.position.x,
+                                   1.47f, selectPanelList[n].transform.position.z), Quaternion.identity);
+
+                // リストのn番目のカラーを元に戻す
+                selectPanelList[n].GetComponent<RoadPanel>().isColor = false;
+
+                // リストのn番目のタグをAbnormalPanelに変更
+                selectPanelList[n].tag = "AbnormalPanel";
+
+                sabotage.GetComponent<Sabotage>().isTrap = true;
+
+                //リストの中身・カウントを初期化
+                selectPanelList = new List<GameObject>();
+                selectPanelCount = 0;
+
+                sabotage.GetComponent<Sabotage>().ResetCoolTime();
+
+                // テキストを全て非表示にする
+                textUI.GetComponent<TextUIManager>().HideText();
+
+                // 非表示にしていたボタンをすべて戻す
+                buttonManager.GetComponent<ButtonManager>().DisplayButton();
+
+                // ベイクを開始
+                stageManager.GetComponent<StageManager>().StartBake();
+            }
         }
     }
 
@@ -234,7 +292,7 @@ public class RoadManager : MonoBehaviour
         //************************************
         // 混乱イベントが発生してるとき
         //************************************
-        if(uiMnager.GetComponent<UIManager>().isEvent == true)
+        if(uiMnager.GetComponent<UIManager>().isChaos == true)
         {
             // スタミナが40以上なら
             if(script.stamina >= 40)
@@ -272,6 +330,9 @@ public class RoadManager : MonoBehaviour
             {
                 Debug.Log("スタミナ不足のため切り開けない");
 
+                // スタミナ不足UIの表示
+                staminaUI.SetActive(true);
+
                 return;
             }
         }
@@ -304,16 +365,17 @@ public class RoadManager : MonoBehaviour
             {
                 Debug.Log("スタミナ不足のため切り開けない");
 
+                // スタミナ不足UIの表示
+                staminaUI.SetActive(true);
+
                 return;
             }
-
-            // 前回、前々回選択した道UIを非表示にしてその他を表示する
-            ShowRoad(num);
         }
 
         // スタミナ不足UIの非表示
-        //staminaUI.SetActive(false);
+        staminaUI.SetActive(false);
 
+        // 前回、前々回選択した道UIを非表示にしてその他を表示する
         ShowRoad(num);
 
         roadNum = num;
@@ -342,7 +404,7 @@ public class RoadManager : MonoBehaviour
         // 選択した道UIを非表示にする
         uiMnager.GetComponent<UIManager>().roadUIList[num].SetActive(false);
 
-        if(uiMnager.GetComponent<UIManager>().isEvent != true)
+        if(uiMnager.GetComponent<UIManager>().isChaos != true)
         {// イベント(混乱)が起こっていない時
             for (int i = 0; i < selectRoad.Length; i++)
             {

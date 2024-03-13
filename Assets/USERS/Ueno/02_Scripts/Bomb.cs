@@ -73,9 +73,9 @@ public class Bomb : MonoBehaviour
     /// </summary>
     public void DestroyBomb()
     {
-        Destroy(this.gameObject);
-
         roadPanel.tag = "RoadPanel";
+
+        Destroy(this.gameObject);
     }
 
     /// <summary>

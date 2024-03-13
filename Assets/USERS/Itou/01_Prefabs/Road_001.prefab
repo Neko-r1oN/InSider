@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5422803339727867862}
   - component: {fileID: 4585363981822868565}
   - component: {fileID: 17083033772702083}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Road_001
   m_TagString: RoadPanel
   m_Icon: {fileID: 0}
@@ -121,3 +121,8 @@ MonoBehaviour:
   blockPrefab: {fileID: 6631279111351683114, guid: fa47040f2e25d5f4e8c58d9f79558619,
     type: 3}
   isFill: 0
+  objeID: 0
+  isFillSelect: 0
+  isbombPrefabSelect: 0
+  smoke: {fileID: 0}
+  isColor: 0
