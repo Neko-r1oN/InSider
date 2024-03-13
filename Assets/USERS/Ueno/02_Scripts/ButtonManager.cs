@@ -54,13 +54,16 @@ public class ButtonManager : MonoBehaviour
     // サボタージュのカウントを使うために情報を格納
     [SerializeField] GameObject sabotage;
 
+    // アニメーター
+    Animator animator;
+
     // ランダム関数
     System.Random rnd = new System.Random();
 
     // ランダムの数値を入れるための変数
     int rand;
 
-    int randRoad;
+    public int randRoad;
 
     public bool isCancel;
 
@@ -69,6 +72,8 @@ public class ButtonManager : MonoBehaviour
 
     // ダウトを使用したかどうか
     bool isUseDoubt;
+
+    public int roadNum;
 
     private void Start()
     {
@@ -93,6 +98,8 @@ public class ButtonManager : MonoBehaviour
         // テキストUIマネージャーを取得
         GameObject textUIObject = GameObject.Find("TextUIManager");
         textUI = textUIObject.GetComponent<TextUIManager>();
+
+        animator = player.GetComponent<Animator>();
 
         // カメラマネージャーを取得
         cameraManager = GameObject.Find("CameraManager");
@@ -537,12 +544,32 @@ public class ButtonManager : MonoBehaviour
         roadTextUIList[num].SetActive(false);
     }
 
-    /// <summary>
-    /// 混乱時にランダムで道を生成
-    /// </summary>
-    public void randChaosRoad()
+    ///// <summary>
+    ///// 混乱時にランダムで道を生成
+    ///// </summary>
+    //public void randChaosRoad(int num)
+    //{
+        
+    //}
+
+    public void RoadNum(int num)
     {
-        roadManager.GetComponent<RoadManager>().Road(randRoad);
+        // プレイヤースクリプトのroadNumへnumを代入
+        player.GetComponent<Player>().roadNum = num;
+
+        // 道UIを非表示
+        uiManager.road.SetActive(false);
+
+        // テキストUIを非表示
+        textUI.HideText();
+
+        for(int i= 0; i < roadTextUIList.Count; i++)
+        {
+            roadTextUIList[i].SetActive(false);
+        }
+
+        // アニメーションを開始するboolをtrue
+        animator.SetBool("Mining", true);
     }
 
     //public void DisplayCoolTime()

@@ -53,6 +53,10 @@ public class RoadManager : MonoBehaviour
 
     GameObject sabotage;
 
+    Animator animator;
+
+    public bool isAnimMining;
+
     public GameObject targetBlock;
     public int rotY;
 
@@ -292,34 +296,34 @@ public class RoadManager : MonoBehaviour
         //************************************
         // 混乱イベントが発生してるとき
         //************************************
-        if(uiMnager.GetComponent<UIManager>().isChaos == true)
+        if (uiMnager.GetComponent<UIManager>().isChaos == true)
         {
             // スタミナが40以上なら
-            if(script.stamina >= 40)
+            if (script.stamina >= 40)
             {
                 if (num >= 76 && num <= 85)
                 {// 数値が76～85の間なら(多分10%)
-                    // I字
+                 // I字
                     num = 0;
                 }
                 else if (num >= 61 && num <= 75)
                 {// 数値が61～75の間なら(多分15%)
-                    // L字
+                 // L字
                     num = 1;
                 }
                 else if (num >= 86 && num <= 95)
                 {// 数値が86～95の間なら(多分10%)
-                    // T字
+                 // T字
                     num = 2;
                 }
                 else if (num >= 96 && num <= 100)
                 {// 数値が96～100の間なら(多分5%)
-                    // 十字
+                 // 十字
                     num = 3;
                 }
                 else if (num >= 1 && num <= 60)
                 {// 数値が1～60の間なら(多分60%)
-                    // ゴミみたいな道
+                 // ゴミみたいな道
                     num = 4;
                 }
 
@@ -371,9 +375,6 @@ public class RoadManager : MonoBehaviour
                 return;
             }
         }
-
-        // スタミナ不足UIの非表示
-        staminaUI.SetActive(false);
 
         // 前回、前々回選択した道UIを非表示にしてその他を表示する
         ShowRoad(num);

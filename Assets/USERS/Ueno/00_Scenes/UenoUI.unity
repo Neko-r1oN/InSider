@@ -1746,8 +1746,10 @@ MonoBehaviour:
   noStaminaUI: {fileID: 688306345}
   sabotageUI: {fileID: 860535216}
   sabotage: {fileID: 1642309403}
+  randRoad: 0
   isCancel: 0
   subStamina: 0
+  roadNum: 0
 --- !u!1 &173993931
 GameObject:
   m_ObjectHideFlags: 0
@@ -2155,9 +2157,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 348306947}
-        m_TargetAssemblyTypeName: RoadManager, Assembly-CSharp
-        m_MethodName: Road
+      - m_Target: {fileID: 158606399}
+        m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
+        m_MethodName: RoadNum
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3261,6 +3263,7 @@ MonoBehaviour:
   gold: {fileID: 8750506531741430590, guid: 61519c250e03a8e40a21ac3a3b618672, type: 3}
   smoke: {fileID: 839660796216691157, guid: 1f54bcff7f641f64b8c3adceb060c18c, type: 3}
   staminaUI: {fileID: 688306345}
+  isAnimMining: 0
   targetBlock: {fileID: 0}
   rotY: 0
   selectPanelCount: 0
@@ -8263,9 +8266,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 348306947}
-        m_TargetAssemblyTypeName: RoadManager, Assembly-CSharp
-        m_MethodName: Road
+      - m_Target: {fileID: 158606399}
+        m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
+        m_MethodName: RoadNum
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8668,9 +8671,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 348306947}
-        m_TargetAssemblyTypeName: RoadManager, Assembly-CSharp
-        m_MethodName: Road
+      - m_Target: {fileID: 158606399}
+        m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
+        m_MethodName: RoadNum
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10096,12 +10099,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 158606399}
         m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
-        m_MethodName: randChaosRoad
-        m_Mode: 1
+        m_MethodName: RoadNum
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -10164,6 +10167,22 @@ MonoBehaviour:
         - m_Target: {fileID: 158606399}
           m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
           m_MethodName: DisplayRoadText
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 5
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 158606399}
+          m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
+          m_MethodName: HideRoadText
           m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -10410,9 +10429,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 348306947}
-        m_TargetAssemblyTypeName: RoadManager, Assembly-CSharp
-        m_MethodName: Road
+      - m_Target: {fileID: 158606399}
+        m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
+        m_MethodName: RoadNum
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14462,9 +14481,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 348306947}
-        m_TargetAssemblyTypeName: RoadManager, Assembly-CSharp
-        m_MethodName: Road
+      - m_Target: {fileID: 158606399}
+        m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
+        m_MethodName: RoadNum
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
