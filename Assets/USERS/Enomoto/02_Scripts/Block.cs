@@ -98,17 +98,11 @@ public class Block : MonoBehaviour
                         RoadManager.GetComponent<RoadManager>().targetBlock = this.gameObject;
 
                         buttonManager.GetComponent<ButtonManager>().canselButton.SetActive(false);
-
-                        // 任意のアニメーションをtrueに変更
-                        animator.SetBool("Mining", true);
                     }
                 }
                 else
                 {
                     gameObject.GetComponent<Renderer>().material.color = Color.blue; // 青色
-
-                    // 任意のアニメーションをfalseに変更
-                    animator.SetBool("Mining", false);
                 }
             }
 

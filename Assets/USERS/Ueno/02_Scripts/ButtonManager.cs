@@ -28,14 +28,16 @@ public class ButtonManager : MonoBehaviour
     // ダウトの補足テキスト
     [SerializeField] Text supplementText;
 
-    // テキスト背景
-    [SerializeField] GameObject textBack;
-
     // サボタージュ(爆弾)のボタン
     [SerializeField] GameObject sabotage1;
 
     // サボタージュ(埋める)のボタン
     [SerializeField] GameObject sabotage2;
+
+    // サボタージュ(スロートラップ)のボタン
+    [SerializeField] GameObject sabotage3;
+
+    [SerializeField] public GameObject sabotageCoolTime;
 
     // スタミナ不足UI
     [SerializeField] GameObject noStaminaUI;
@@ -52,13 +54,16 @@ public class ButtonManager : MonoBehaviour
     // サボタージュのカウントを使うために情報を格納
     [SerializeField] GameObject sabotage;
 
+    // アニメーター
+    Animator animator;
+
     // ランダム関数
     System.Random rnd = new System.Random();
 
     // ランダムの数値を入れるための変数
     int rand;
 
-    int randRoad;
+    public int randRoad;
 
     public bool isCancel;
 
@@ -67,6 +72,8 @@ public class ButtonManager : MonoBehaviour
 
     // ダウトを使用したかどうか
     bool isUseDoubt;
+
+    public int roadNum;
 
     private void Start()
     {
@@ -92,9 +99,12 @@ public class ButtonManager : MonoBehaviour
         GameObject textUIObject = GameObject.Find("TextUIManager");
         textUI = textUIObject.GetComponent<TextUIManager>();
 
+        animator = player.GetComponent<Animator>();
+
         // カメラマネージャーを取得
         cameraManager = GameObject.Find("CameraManager");
 
+        // イベントマネージャー
         eventManager = GameObject.Find("EventManager");
 
         // 偽
@@ -128,21 +138,28 @@ public class ButtonManager : MonoBehaviour
         canselButton.SetActive(false);
 
         // スタミナ不足UIを非表示にする
-        //noStaminaUI.SetActive(false);
+        noStaminaUI.SetActive(false);
+
+        sabotageCoolTime.SetActive(false);
     }
 
     private void Update()
     {
-        if(sabotage.GetComponent<Sabotage>().bombCount >= 1)
+        if(sabotage.GetComponent<Sabotage>().isBomb)
         {// サボタージュのボムカウントが1以上なら
             // サボタージュのボムを使えなくする
             uiManager.OutSabotage(0);
         }
 
-        if(sabotage.GetComponent<Sabotage>().fillCount >= 1)
+        if(sabotage.GetComponent<Sabotage>().isFill)
         {// サボタージュの埋めるカウントが1以上なら
             // サボタージュの埋めるを使えなくする
             uiManager.OutSabotage(1);
+        }
+
+        if(sabotage.GetComponent<Sabotage>().isTrap)
+        {
+            uiManager.OutSabotage(2);
         }
 
         randRoad = rnd.Next(1, 101); // 1～100までのランダムの数値
@@ -154,7 +171,7 @@ public class ButtonManager : MonoBehaviour
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.MOVE;
 
         // スタミナ不足UIを非表示
-        //noStaminaUI.SetActive(false);
+        noStaminaUI.SetActive(false);
 
         // 行動説明テキストを非表示
         textUI.HideText();
@@ -171,7 +188,7 @@ public class ButtonManager : MonoBehaviour
             }
         }
         // スタミナ不足UIを非表示
-        //noStaminaUI.SetActive(false);
+        noStaminaUI.SetActive(false);
 
         // 行動説明テキストを非表示
         textUI.HideText();
@@ -227,7 +244,7 @@ public class ButtonManager : MonoBehaviour
         // スタミナがない場合 
         if (player.GetComponent<Player>().stamina < 20)
         {
-            //noStaminaUI.SetActive(true);
+            noStaminaUI.SetActive(true);
 
             return;
         }
@@ -263,7 +280,7 @@ public class ButtonManager : MonoBehaviour
         }
 
         // スタミナ不足UIを非表示
-        //noStaminaUI.SetActive(false);
+        noStaminaUI.SetActive(false);
 
         // 行動説明テキストを非表示にする
         textUI.HideText();
@@ -301,6 +318,12 @@ public class ButtonManager : MonoBehaviour
     {
         // サボタージュの行動ボタン表示
         sabotageUI.SetActive(true);
+        
+        if(sabotage.GetComponent<Sabotage>().timeNum > 0)
+        {
+            //DisplayCoolTime();
+            sabotageCoolTime.SetActive(true);
+        }
 
         textUI.HideText();
 
@@ -323,8 +346,10 @@ public class ButtonManager : MonoBehaviour
             nothingButton.SetActive(true);
             actionButton.SetActive(true);
 
-            // サボタージュボタンを非表示にする
+            // サボタージュUIを非表示にする
             sabotageUI.SetActive(false);
+
+            sabotageCoolTime.SetActive(false);
 
             if (EditorManager.Instance.useServer == false)
             {// サーバーを使用しない場合
@@ -344,29 +369,28 @@ public class ButtonManager : MonoBehaviour
                 // 選択した回数を0にする
                 roadManager.GetComponent<RoadManager>().selectPanelList[i].GetComponent<RoadPanel>().isFillSelect = false;
 
+                // 選択した回数を0にする
+                roadManager.GetComponent<RoadManager>().selectPanelList[i].GetComponent<RoadPanel>().isbombSelect = false;
+
                 // 選択した場所のカラー変更を元に戻す
                 roadManager.GetComponent<RoadManager>().selectPanelList[i].GetComponent<RoadPanel>().isColor = false;
             }
-
-            // リストの中身・カウントを初期化
-            roadManager.GetComponent<RoadManager>().selectPanelList = new List<GameObject>();
-            roadManager.GetComponent<RoadManager>().selectPanelCount = 0;
         }
 
-        if (sabotage.GetComponent<Sabotage>().fillCount <= 0)
-        {
-            sabotage.GetComponent<Sabotage>().fillCount = 0;
-        }
-        else if(sabotage.GetComponent<Sabotage>().bombCount <= 0)
-        {
-            sabotage.GetComponent<Sabotage>().bombCount = 0;
-        }
+        // リストの中身・カウントを初期化
+        roadManager.GetComponent<RoadManager>().selectPanelList = new List<GameObject>();
+        roadManager.GetComponent<RoadManager>().selectPanelCount = 0;
+
+        textUI.GetComponent<TextUIManager>().PutNum(0);
+
+        // サボタージュのカウントを戻す
+        sabotage.GetComponent<Sabotage>().ResetBool();
 
         // キャンセルボタンを非表示にする
         canselButton.SetActive(false);
 
         // スタミナ不足UIを非表示
-        //noStaminaUI.SetActive(false);
+        noStaminaUI.SetActive(false);
 
         // プレイヤーのモードを元に戻す
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.MOVE;
@@ -385,10 +409,10 @@ public class ButtonManager : MonoBehaviour
 
         // キャンセルボタン・テキスト背景を非表示
         canselButton.SetActive(false);
-        textBack.SetActive(false);
+        //textBack.SetActive(false);
 
         // スタミナ不足UIを非表示
-        //noStaminaUI.SetActive(false);
+        noStaminaUI.SetActive(false);
 
         // 全ての道UIのテキストを非表示
         for (int i = 0;i < roadTextUIList.Count; i++)
@@ -421,7 +445,7 @@ public class ButtonManager : MonoBehaviour
         actionButton.SetActive(false);
 
         // スタミナ不足UIを非表示
-        //noStaminaUI.SetActive(false);
+        noStaminaUI.SetActive(false);
 
         if (EditorManager.Instance.useServer == false)
         {// サーバーを使用しない場合
@@ -442,7 +466,7 @@ public class ButtonManager : MonoBehaviour
     public void RotRoad()
     {
         // スタミナ不足UIを非表示
-        //noStaminaUI.SetActive(false);
+        noStaminaUI.SetActive(false);
 
         // 道・道UIを回転
         roadManager.GetComponent<RoadManager>().AddRotButton();
@@ -455,7 +479,7 @@ public class ButtonManager : MonoBehaviour
     public void ChangeCamera()
     {
         // スタミナ不足UIを非表示
-        //noStaminaUI.SetActive(false);
+        noStaminaUI.SetActive(false);
 
         // カメラ切り替え
         cameraManager.GetComponent<CameraManager>().SwitchCamera();
@@ -468,7 +492,7 @@ public class ButtonManager : MonoBehaviour
     public async void DoubtButton(int indexNumber)
     {
         // スタミナ不足UIを非表示
-        //noStaminaUI.SetActive(false);
+        noStaminaUI.SetActive(false);
 
         if (EditorManager.Instance.useServer == true)
         {
@@ -503,7 +527,7 @@ public class ButtonManager : MonoBehaviour
     /// <param name="num"></param>
     public void DisplayRoadText(int num)
     {
-        textBack.SetActive(true);
+        //textBack.SetActive(true);
         roadTextUIList[num].SetActive(true);
     }
 
@@ -514,17 +538,49 @@ public class ButtonManager : MonoBehaviour
     public void HideRoadText(int num)
     {
         // スタミナ不足UIを非表示
-        //noStaminaUI.SetActive(false);
+        noStaminaUI.SetActive(false);
 
-        textBack.SetActive(false);
+        //textBack.SetActive(false);
         roadTextUIList[num].SetActive(false);
     }
 
-    /// <summary>
-    /// 混乱時にランダムで道を生成
-    /// </summary>
-    public void randChaosRoad()
+    ///// <summary>
+    ///// 混乱時にランダムで道を生成
+    ///// </summary>
+    //public void randChaosRoad(int num)
+    //{
+        
+    //}
+
+    public void RoadNum(int num)
     {
-        roadManager.GetComponent<RoadManager>().Road(randRoad);
+        // プレイヤースクリプトのroadNumへnumを代入
+        player.GetComponent<Player>().roadNum = num;
+
+        // 道UIを非表示
+        uiManager.road.SetActive(false);
+
+        // テキストUIを非表示
+        textUI.HideText();
+
+        for(int i= 0; i < roadTextUIList.Count; i++)
+        {
+            roadTextUIList[i].SetActive(false);
+        }
+
+        // アニメーションを開始するboolをtrue
+        animator.SetBool("Mining", true);
     }
+
+    //public void DisplayCoolTime()
+    //{
+    //    sabotageCoolTime.SetActive(true);
+
+    //    if(sabotage.GetComponent<Sabotage>().timeNum > 0)
+    //    {
+    //        sabotage.GetComponent<Sabotage>().InvokeRepeating("SubCoolTime", 0, 1);
+    //    }
+
+    //    Debug.Log("aa");
+    //}
 }

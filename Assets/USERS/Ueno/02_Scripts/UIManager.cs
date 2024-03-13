@@ -69,7 +69,7 @@ public class UIManager : MonoBehaviour
     GameObject player;
     GameObject eventManager;
 
-    public bool isEvent;
+    public bool isChaos;
 
     public GameObject GetRoadUI()
     {
@@ -168,7 +168,7 @@ public class UIManager : MonoBehaviour
         // RoadUI‚ð•\Ž¦‚·‚é
         road.SetActive(true);
 
-        if (isEvent == true)
+        if (isChaos == true)
         {
             chaos.SetActive(true);
 
