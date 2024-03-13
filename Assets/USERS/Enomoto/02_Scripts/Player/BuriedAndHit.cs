@@ -33,7 +33,7 @@ public class BuriedAndHit : MonoBehaviour
         {// サーバーを使用する場合
 
             // クラス変数を作成
-            RevisionPosData revisionPosData = new RevisionPosData();
+            RevisionPosAndDropGoldData revisionPosData = new RevisionPosAndDropGoldData();
 
             if (other.transform.tag == "Block" 
                 && player.GetComponent<Player>().isInvincible == false  // ダウン状態ではない場合

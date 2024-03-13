@@ -4,23 +4,24 @@ using UnityEngine;
 
 public class MapManager : MonoBehaviour
 {
-    [SerializeField] GameObject GoldImg;
-    [SerializeField] GameObject MimicImg;
+    [SerializeField] GameObject TreasureUI;
 
-    // Update is called once per frame
-    void Update()
+    public void SetActiveTreasureUI()
     {
-        
-    }
-    public void honto()
-    {
-        GoldImg.SetActive(false);
-        MimicImg.SetActive(true);
-    }
-    public void uso()
-    {
-        GoldImg.SetActive(true);
-        MimicImg.SetActive(false);
+        TreasureUI.SetActive(true);
     }
 
+    public async void SendLie(bool isFlag)
+    {
+        // クラス変数を作成
+        MapData mapData = new MapData();
+        mapData.playerID = ClientManager.Instance.playerID;
+        mapData.isLie = isFlag; // ウソをつく場合はfalse
+
+        Debug.Log(mapData.playerID);
+
+        await ClientManager.Instance.Send(mapData, 16);
+
+        TreasureUI.SetActive(false);
+    }
 }

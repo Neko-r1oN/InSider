@@ -14,6 +14,8 @@ public class tenmetuTest : MonoBehaviour
         isOK = false;
         cnt = 0;
 
+        this.gameObject.SetActive(false);
+
         Debug.Log("aaaa");
 
         InvokeRepeating("IsOK", 0, 1f);

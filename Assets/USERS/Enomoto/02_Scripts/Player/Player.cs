@@ -329,7 +329,7 @@ public class Player : MonoBehaviour
             NavMesh.CalculatePath(transform.position, targetPos, NavMesh.AllAreas, path);
 
             // クラス変数を作成
-            RevisionPosData revisionPosData = new RevisionPosData();
+            RevisionPosAndDropGoldData revisionPosData = new RevisionPosAndDropGoldData();
 
             if (path.corners.Length > 0)
             {// パスが取れた場合
@@ -514,7 +514,7 @@ public class Player : MonoBehaviour
         if (EditorManager.Instance.useServer == true)
         {// サーバーを使用している場合
             // クラス変数を作成
-            RevisionPosData revisionPosData = new RevisionPosData();
+            RevisionPosAndDropGoldData revisionPosData = new RevisionPosAndDropGoldData();
             revisionPosData.playerID = ClientManager.Instance.playerID;
             revisionPosData.targetID = ClientManager.Instance.playerID;
             revisionPosData.isBuried = true;

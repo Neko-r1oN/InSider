@@ -8,7 +8,7 @@ public class ScoreMethodList : MonoBehaviour
     public static ScoreMethodList Instance;
 
     // ゴールド1つに対してのスコアの値
-    const int scoreNum = 2;
+    const int scoreNum = 1;
 
     // サーバーに送信するためのクラス変数
     AllieScoreData scoreData = new AllieScoreData();

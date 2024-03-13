@@ -5,15 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 
 [Serializable]
-internal class Sabotage_Bomb_ExplosionData
+internal class MapData
 {
     /// <summary>
-    /// 減るターン数
+    /// プレイヤーID
     /// </summary>
-    public int subTurnNum { get; set; }
+    public int playerID { get; set; }
 
     /// <summary>
-    /// 残りのターン数
+    /// ウソをつくかどうか
     /// </summary>
-    public int restTurnNum { get; set; }
+    public bool isLie { get; set; }
 }
