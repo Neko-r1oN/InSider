@@ -1663,8 +1663,10 @@ MonoBehaviour:
   - {fileID: 2078977938}
   supplementText: {fileID: 114692122}
   textBack: {fileID: 1556263908}
-  noStaminaUI: {fileID: 688306345}
-  sabotage: {fileID: 860535216}
+  sabotage1: {fileID: 617920431}
+  sabotage2: {fileID: 1486385383}
+  sabotageUI: {fileID: 860535216}
+  sabotage: {fileID: 1642309403}
   isCancel: 0
   subStamina: 0
 --- !u!1 &173993931
@@ -3024,7 +3026,7 @@ MonoBehaviour:
   selectRoad: 0000000000000000000000000000000000000000
   selectPanelList: []
   gold: {fileID: 8750506531741430590, guid: 61519c250e03a8e40a21ac3a3b618672, type: 3}
-  smoke: {fileID: 9144859535183980866, guid: c4b26b5dad7ee244382e0e4424fdcf27, type: 3}
+  smoke: {fileID: 839660796216691157, guid: 1f54bcff7f641f64b8c3adceb060c18c, type: 3}
   targetBlock: {fileID: 0}
   rotY: 0
   selectPanelCount: 0
@@ -16393,7 +16395,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 700385764}
   m_Father: {fileID: 1556263909}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}

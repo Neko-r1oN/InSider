@@ -125,7 +125,7 @@ public class ButtonManager : MonoBehaviour
         canselButton.SetActive(false);
 
         // スタミナ不足UIを非表示にする
-        noStaminaUI.SetActive(false);
+        //noStaminaUI.SetActive(false);
     }
 
     private void Update()
@@ -151,7 +151,7 @@ public class ButtonManager : MonoBehaviour
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.MOVE;
 
         // スタミナ不足UIを非表示
-        noStaminaUI.SetActive(false);
+        //noStaminaUI.SetActive(false);
 
         // 行動説明テキストを非表示
         textUI.HideText();
@@ -168,7 +168,7 @@ public class ButtonManager : MonoBehaviour
             }
         }
         // スタミナ不足UIを非表示
-        noStaminaUI.SetActive(false);
+        //noStaminaUI.SetActive(false);
 
         // 行動説明テキストを非表示
         textUI.HideText();
@@ -224,7 +224,7 @@ public class ButtonManager : MonoBehaviour
         // スタミナがない場合 
         if (player.GetComponent<Player>().stamina < 20)
         {
-            noStaminaUI.SetActive(true);
+            //noStaminaUI.SetActive(true);
 
             return;
         }
@@ -260,7 +260,7 @@ public class ButtonManager : MonoBehaviour
         }
 
         // スタミナ不足UIを非表示
-        noStaminaUI.SetActive(false);
+        //noStaminaUI.SetActive(false);
 
         // 行動説明テキストを非表示にする
         textUI.HideText();
@@ -363,7 +363,7 @@ public class ButtonManager : MonoBehaviour
         canselButton.SetActive(false);
 
         // スタミナ不足UIを非表示
-        noStaminaUI.SetActive(false);
+        //noStaminaUI.SetActive(false);
 
         // プレイヤーのモードを元に戻す
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.MOVE;
@@ -385,7 +385,7 @@ public class ButtonManager : MonoBehaviour
         textBack.SetActive(false);
 
         // スタミナ不足UIを非表示
-        noStaminaUI.SetActive(false);
+        //noStaminaUI.SetActive(false);
 
         // 全ての道UIのテキストを非表示
         for (int i = 0;i < roadTextUIList.Count; i++)
@@ -418,7 +418,7 @@ public class ButtonManager : MonoBehaviour
         actionButton.SetActive(false);
 
         // スタミナ不足UIを非表示
-        noStaminaUI.SetActive(false);
+        //noStaminaUI.SetActive(false);
 
         if (EditorManager.Instance.useServer == false)
         {// サーバーを使用しない場合
@@ -439,7 +439,7 @@ public class ButtonManager : MonoBehaviour
     public void RotRoad()
     {
         // スタミナ不足UIを非表示
-        noStaminaUI.SetActive(false);
+        //noStaminaUI.SetActive(false);
 
         // 道・道UIを回転
         roadManager.GetComponent<RoadManager>().AddRotButton();
@@ -452,7 +452,7 @@ public class ButtonManager : MonoBehaviour
     public void ChangeCamera()
     {
         // スタミナ不足UIを非表示
-        noStaminaUI.SetActive(false);
+        //noStaminaUI.SetActive(false);
 
         // カメラ切り替え
         cameraManager.GetComponent<CameraManager>().SwitchCamera();
@@ -465,7 +465,7 @@ public class ButtonManager : MonoBehaviour
     public async void DoubtButton(int indexNumber)
     {
         // スタミナ不足UIを非表示
-        noStaminaUI.SetActive(false);
+        //noStaminaUI.SetActive(false);
 
         if (EditorManager.Instance.useServer == true)
         {
@@ -511,7 +511,7 @@ public class ButtonManager : MonoBehaviour
     public void HideRoadText(int num)
     {
         // スタミナ不足UIを非表示
-        noStaminaUI.SetActive(false);
+        //noStaminaUI.SetActive(false);
 
         textBack.SetActive(false);
         roadTextUIList[num].SetActive(false);

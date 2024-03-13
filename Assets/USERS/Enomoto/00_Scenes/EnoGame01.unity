@@ -4029,6 +4029,7 @@ MonoBehaviour:
   playerObjID: 0
   spawnEffectPrefab: {fileID: 1808395025434123022, guid: 308f7ac46df6b7846bcc3be4f49e12b0,
     type: 3}
+  gold: {fileID: 0}
   isEnd: 0
   stamina: 100
   isInvincible: 0
@@ -4636,7 +4637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb7cbb749471d4f41b356a75e241722e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useServer: 0
+  useServer: 1
 --- !u!4 &260213651
 Transform:
   m_ObjectHideFlags: 0
@@ -11011,6 +11012,7 @@ MonoBehaviour:
   playerObjID: 0
   spawnEffectPrefab: {fileID: 1808395025434123022, guid: 308f7ac46df6b7846bcc3be4f49e12b0,
     type: 3}
+  gold: {fileID: 0}
   isEnd: 0
   stamina: 100
   isInvincible: 0
@@ -21326,6 +21328,7 @@ MonoBehaviour:
   playerObjID: 0
   spawnEffectPrefab: {fileID: 1808395025434123022, guid: 308f7ac46df6b7846bcc3be4f49e12b0,
     type: 3}
+  gold: {fileID: 0}
   isEnd: 0
   stamina: 100
   isInvincible: 0
@@ -22729,6 +22732,7 @@ MonoBehaviour:
   playerObjID: 0
   spawnEffectPrefab: {fileID: 1808395025434123022, guid: 308f7ac46df6b7846bcc3be4f49e12b0,
     type: 3}
+  gold: {fileID: 0}
   isEnd: 0
   stamina: 100
   isInvincible: 0
@@ -25847,6 +25851,7 @@ MonoBehaviour:
   playerObjID: 0
   spawnEffectPrefab: {fileID: 1808395025434123022, guid: 308f7ac46df6b7846bcc3be4f49e12b0,
     type: 3}
+  gold: {fileID: 0}
   isEnd: 0
   stamina: 100
   isInvincible: 0
@@ -29880,7 +29885,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1727096689
 Transform:
   m_ObjectHideFlags: 0
@@ -29998,6 +30003,7 @@ MonoBehaviour:
   playerObjID: 0
   spawnEffectPrefab: {fileID: 1808395025434123022, guid: 308f7ac46df6b7846bcc3be4f49e12b0,
     type: 3}
+  gold: {fileID: 0}
   isEnd: 0
   stamina: 100
   isInvincible: 0

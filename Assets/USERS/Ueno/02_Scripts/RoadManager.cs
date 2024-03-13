@@ -32,9 +32,6 @@ public class RoadManager : MonoBehaviour
     // 煙アニメーション
     [SerializeField] GameObject smoke;
 
-    // 煙のアニメーション
-    [SerializeField] GameObject smoke;
-
     // 敵
     GameObject enemy;
 
@@ -48,7 +45,7 @@ public class RoadManager : MonoBehaviour
     GameObject textUI;
 
     // スタミナ不足UI
-    [SerializeField] GameObject staminaUI;
+    //[SerializeField] GameObject staminaUI;
 
     public GameObject targetBlock;
     public int rotY;
@@ -99,7 +96,7 @@ public class RoadManager : MonoBehaviour
         buttonManager = buttonManagerObject.GetComponent<ButtonManager>();
 
         // スタミナUIの取得
-        staminaUI.SetActive(false);
+        //staminaUI.SetActive(false);
     }
 
     private void Update()
@@ -315,7 +312,7 @@ public class RoadManager : MonoBehaviour
         }
 
         // スタミナ不足UIの非表示
-        staminaUI.SetActive(false);
+        //staminaUI.SetActive(false);
 
         ShowRoad(num);
 
@@ -400,9 +397,6 @@ public class RoadManager : MonoBehaviour
         Instantiate(gold, block.transform.position, Quaternion.identity);
         
         //煙アニメーションを生成
-        Instantiate(smoke, block.transform.position, Quaternion.identity);
-
-        // ゴールドを生成
         Instantiate(smoke, block.transform.position, Quaternion.identity);
 
         // 初期化

@@ -497,7 +497,7 @@ public class ClientManager : MonoBehaviour
                         {
                             // フェード＆シーン遷移
                             Initiate.DoneFading();
-                            Initiate.Fade("BoxOpenScene", Color.black, 2f);
+                            Initiate.Fade("BoxOpenScene", Color.black, 1f);
 
                             // 遷移先にあるオブジェクトの関数を呼ぶためのコルーチン
                             StartCoroutine(SetPlayerAndMimic(roundEndData));
@@ -663,7 +663,7 @@ public class ClientManager : MonoBehaviour
                         GameObject chestManager = GameObject.Find("ChestList");
 
                         // ミミックを設定する
-                        chestManager.GetComponent<ChestManager>().SetMimic(roundStartData.isMimicList);
+                        chestManager.GetComponent<MimicManager>().SetMimic(roundStartData.isMimicList);
 
                         isGetNotice = true;
 
@@ -872,7 +872,7 @@ public class ClientManager : MonoBehaviour
 
     IEnumerator SetPlayerAndMimic(RoundEndData roundEndData)
     {
-        yield return new WaitForSeconds(2.1f);
+        yield return new WaitForSeconds(1.1f);
 
         // シーン設定
         OpenManager.Instance.SetPlayerAndMimic(
