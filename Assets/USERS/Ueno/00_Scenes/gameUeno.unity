@@ -4033,6 +4033,7 @@ MonoBehaviour:
   isEnd: 0
   stamina: 100
   isInvincible: 0
+  roadNum: 0
   _cycle: 1
   mode: 0
 --- !u!195 &210333113
@@ -10895,6 +10896,7 @@ MonoBehaviour:
   isEnd: 0
   stamina: 100
   isInvincible: 0
+  roadNum: 0
   _cycle: 1
   mode: 0
 --- !u!195 &630176435
@@ -15185,7 +15187,7 @@ MonoBehaviour:
     type: 3}
   chaosPrefab: {fileID: 4727419194395133498, guid: 637093d00aee74b418b918c2ec99bdb4,
     type: 3}
-  eventNum: 3
+  eventNum: 1
   isEventStamina: 0
 --- !u!4 &847601769
 Transform:
@@ -21058,6 +21060,7 @@ MonoBehaviour:
   isEnd: 0
   stamina: 100
   isInvincible: 0
+  roadNum: 0
   _cycle: 1
   mode: 0
 --- !u!195 &1213451756
@@ -22462,6 +22465,7 @@ MonoBehaviour:
   isEnd: 0
   stamina: 100
   isInvincible: 0
+  roadNum: 0
   _cycle: 1
   mode: 0
 --- !u!195 &1286726704
@@ -25511,6 +25515,7 @@ MonoBehaviour:
   isEnd: 0
   stamina: 100
   isInvincible: 0
+  roadNum: 0
   _cycle: 1
   mode: 0
 --- !u!195 &1483753234
@@ -29235,6 +29240,7 @@ MonoBehaviour:
   isEnd: 0
   stamina: 100
   isInvincible: 0
+  roadNum: 0
   _cycle: 1
   mode: 0
 --- !u!54 &1727096695
@@ -47804,7 +47810,8 @@ MonoBehaviour:
   isFill: 0
   objeID: 0
   isFillSelect: 0
-  isbombPrefabSelect: 0
+  isbombSelect: 0
+  isThrowTrapSelect: 0
   smoke: {fileID: 0}
   isColor: 0
 --- !u!114 &6708300812891672817
@@ -47824,7 +47831,8 @@ MonoBehaviour:
   isFill: 0
   objeID: 0
   isFillSelect: 0
-  isbombPrefabSelect: 0
+  isbombSelect: 0
+  isThrowTrapSelect: 0
   smoke: {fileID: 0}
   isColor: 0
 --- !u!114 &6708300813727519728
@@ -47844,7 +47852,8 @@ MonoBehaviour:
   isFill: 0
   objeID: 0
   isFillSelect: 0
-  isbombPrefabSelect: 0
+  isbombSelect: 0
+  isThrowTrapSelect: 0
   smoke: {fileID: 0}
   isColor: 0
 --- !u!23 &6722989447443447707
@@ -51026,7 +51035,8 @@ MonoBehaviour:
   isFill: 0
   objeID: 0
   isFillSelect: 0
-  isbombPrefabSelect: 0
+  isbombSelect: 0
+  isThrowTrapSelect: 0
   smoke: {fileID: 0}
   isColor: 0
 --- !u!23 &8623606252122486537

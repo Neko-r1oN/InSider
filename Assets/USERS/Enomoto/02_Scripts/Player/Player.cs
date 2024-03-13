@@ -42,6 +42,10 @@ public class Player : MonoBehaviour
 
     EventManager eventManager;
 
+    RoadManager roadManager;
+
+    ButtonManager button;
+
     // 目的地を設定したかどうか
     bool isSetTarget = false;
 
@@ -56,6 +60,10 @@ public class Player : MonoBehaviour
 
     // 無敵状態かどうか
     public bool isInvincible;
+
+    public int roadNum;
+
+    int roadRandNum;
 
     private double _time;
 
@@ -108,6 +116,12 @@ public class Player : MonoBehaviour
 
         GameObject eventManagerObj = GameObject.Find("EventManager");
         eventManager = eventManagerObj.GetComponent<EventManager>();
+
+        GameObject buttonObj = GameObject.Find("ButtonManager");
+        button = buttonObj.GetComponent<ButtonManager>();
+
+        GameObject roadObj = GameObject.Find("RoadManager");
+        roadManager = roadObj.GetComponent<RoadManager>();
 
         // スタミナゲージのオブジェクト情報を取得
         staminaGauge = GameObject.Find("staminaGauge");
@@ -530,6 +544,41 @@ public class Player : MonoBehaviour
         {
             // 金を生成する
             Instantiate(gold, this.gameObject.transform.position, Quaternion.identity);
+        }
+    }
+
+    /// <summary>
+    /// アニメーションイベント
+    /// </summary>
+    public void PlayAnim()
+    {
+        // 任意のアニメーションをfalseに変更
+        animator.SetBool("Mining", false);
+
+        if (roadNum == 0)
+        {// I字
+            roadManager.Road(0);
+        }
+        else if (roadNum == 1)
+        {// L字
+            roadManager.Road(1);
+        }
+        else if (roadNum == 2)
+        {// T字
+            roadManager.Road(2);
+        }
+        else if (roadNum == 3)
+        {// 十字
+            roadManager.Road(3);
+        }
+        else if (roadNum == 4)
+        {// ゴミ
+            roadManager.Road(4);
+        }
+        else if(roadNum == 5)
+        {// 混乱時
+            // ランダムの道を生成するためボタンマネージャーのランダムの数値を引数に渡す
+            roadManager.Road(button.randRoad);
         }
     }
 }
