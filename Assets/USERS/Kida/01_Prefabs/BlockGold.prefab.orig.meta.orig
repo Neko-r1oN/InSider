@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<< HEAD
+guid: df86ed52c5b00124380b0b03f4d46e63
+=======
+<<<<<<<< HEAD:Assets/USERS/Fujisaki/00_Scenes/gameFuji.unity.orig.meta
+guid: 5078ad58c397f6444ad3cc18646d0310
+========
+guid: ed1bb93137b518c4c9be44d084d863c9
+>>>>>>>> feature/fujisaki:Assets/USERS/Kida/01_Prefabs/BlockGold.prefab.orig.meta
+>>>>>>> feature/fujisaki
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

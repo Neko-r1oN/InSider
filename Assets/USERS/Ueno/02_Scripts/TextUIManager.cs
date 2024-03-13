@@ -7,70 +7,72 @@ using UnityEngine.UI;
 
 public class TextUIManager : MonoBehaviour
 {
-    [SerializeField] GameObject textBack;       // ƒeƒLƒXƒg”wŒi‚ÌƒIƒuƒWƒFƒNƒg
-    [SerializeField] List<GameObject> textList; // s“®ƒeƒLƒXƒgƒŠƒXƒg
+    [SerializeField] GameObject textBack;       // ãƒ†ã‚­ã‚¹ãƒˆèƒŒæ™¯ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+    [SerializeField] List<GameObject> textList; // è¡Œå‹•ãƒ†ã‚­ã‚¹ãƒˆãƒªã‚¹ãƒˆ
 
-    // ƒTƒ{ƒ^[ƒWƒ…‚Å‚Ì‚¢‚­‚Â’u‚¢‚½‚©Šm”F‚·‚éƒeƒLƒXƒg
+    // ã‚µãƒœã‚¿ãƒ¼ã‚¸ãƒ¥ã§ã®ã„ãã¤ç½®ã„ãŸã‹ç¢ºèªã™ã‚‹ãƒ†ã‚­ã‚¹ãƒˆ
     [SerializeField] public GameObject saboText;
 
-    // ƒTƒ{ƒ^[ƒWƒ…‚Å‚Ì‚¢‚­‚Â’u‚¯‚é‚©‚ÌƒeƒLƒXƒg
+    // ã‚µãƒœã‚¿ãƒ¼ã‚¸ãƒ¥ã§ã®ã„ãã¤ç½®ã‘ã‚‹ã‹ã®ãƒ†ã‚­ã‚¹ãƒˆ
     Text saboPosstext;
 
-    // ƒTƒ{ƒ^[ƒWƒ…‚Å‚Ì‚¢‚­‚Â’u‚­êŠ‚ğ‘I‘ğ‚µ‚½‚©‚ÌƒeƒLƒXƒg
+    // ã‚µãƒœã‚¿ãƒ¼ã‚¸ãƒ¥ã§ã®ã„ãã¤ç½®ãå ´æ‰€ã‚’é¸æŠã—ãŸã‹ã®ãƒ†ã‚­ã‚¹ãƒˆ
     Text saboPlaceText;
-
-    public int putCnt;
 
     private void Awake()
     {
+        // ãƒ†ã‚­ã‚¹ãƒˆã‚’éè¡¨ç¤ºã«ã™ã‚‹å‰ã«ã‚µãƒœã‚¿ãƒ¼ã‚¸ãƒ¥å›æ•°è¡¨ç¤ºãƒ†ã‚­ã‚¹ãƒˆã‚’å–å¾—
         saboPosstext = GameObject.Find("SaboPossNum").GetComponent<Text>();
-
         saboPlaceText = GameObject.Find("SaboPlaceNum").GetComponent<Text>();
-
-        putCnt = 0;
     }
 
     private void Start()
     {
+        // ãƒ†ã‚­ã‚¹ãƒˆã‚’éè¡¨ç¤ºã«ã™ã‚‹
         saboText.SetActive(false);
     }
 
     /// <summary>
-    /// ƒJ[ƒ\ƒ‹‚ª‚ ‚Á‚Ä‚é‚É•\¦‚·‚é
+    /// ã‚«ãƒ¼ã‚½ãƒ«ãŒã‚ã£ã¦ã‚‹æ™‚ã«è¡¨ç¤ºã™ã‚‹
     /// </summary>
     /// <param name="num"></param>
     public void OnMouseEnter(int num)
     {
-        // ƒeƒLƒXƒg‚Ì”wŒi‚ğ•\¦
+        Debug.Log("aaaas");
+
+        // ãƒ†ã‚­ã‚¹ãƒˆã®èƒŒæ™¯ã‚’è¡¨ç¤º
         textBack.SetActive(true);
-        // •\¦‚³‚ê‚Ä‚¢‚½à–¾•¶‚ğ”ñ•\¦
+        // è¡¨ç¤ºã•ã‚Œã¦ã„ãŸèª¬æ˜æ–‡ã‚’éè¡¨ç¤º
         textList[num].SetActive(true);
     }
 
     /// <summary>
-    /// ƒJ[ƒ\ƒ‹‚ªŠO‚ê‚½‚Æ‚«‚É”ñ•\¦‚É‚·‚é
+    /// ã‚«ãƒ¼ã‚½ãƒ«ãŒå¤–ã‚ŒãŸã¨ãã«éè¡¨ç¤ºã«ã™ã‚‹
     /// </summary>
     /// <param name="num"></param>
     public void OnMouseExit(int num)
     {
-        // ƒeƒLƒXƒg‚Ì”wŒi‚ğ”ñ•\¦
+        Debug.Log("æŠœã‘ãŸ");
+
+        // ãƒ†ã‚­ã‚¹ãƒˆã®èƒŒæ™¯ã‚’éè¡¨ç¤º
         textBack.SetActive(false);
-        // •\¦‚³‚ê‚Ä‚¢‚½à–¾•¶‚ğ”ñ•\¦
+        // è¡¨ç¤ºã•ã‚Œã¦ã„ãŸèª¬æ˜æ–‡ã‚’éè¡¨ç¤º
         textList[num].SetActive(false);
     }
 
 
     /// <summary>
-    /// ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚Æ‚«‚É”ñ•\¦‚É‚·‚é
+    /// ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸã¨ãã«éè¡¨ç¤ºã«ã™ã‚‹
     /// </summary>
     public void HideText()
     {
-        // ƒeƒLƒXƒg‚Ì”wŒi‚ğ”ñ•\¦
+        // ãƒ†ã‚­ã‚¹ãƒˆã®èƒŒæ™¯ã‚’éè¡¨ç¤º
         textBack.SetActive(false);
 
+        // ã‚µãƒœã‚¿ãƒ¼ã‚¸ãƒ¥ã®ãƒ†ã‚­ã‚¹ãƒˆã‚’éè¡¨ç¤ºã«ã™ã‚‹
         saboText.SetActive(false);
 
-        // à–¾•¶‚ğ”ñ•\¦
+        // èª¬æ˜æ–‡ã‚’éè¡¨ç¤º
         for (int i = 0;i < textList.Count; i++)
         {
             textList[i].SetActive(false);
@@ -78,8 +80,8 @@ public class TextUIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// –„‚ß‚é“¹E”š’e‚Ìİ’uˆÊ’u‚ğ‘I‘ğ‚Å‚«‚é”‚Ì•\¦ˆ—
-    /// ˆø”‚É‚¢‚­‚Â’u‚¯‚é‚©‚ÌÅ‘å”‚ğ“n‚·
+    /// åŸ‹ã‚ã‚‹é“ãƒ»çˆ†å¼¾ã®è¨­ç½®ä½ç½®ã‚’é¸æŠã§ãã‚‹æ•°ã®è¡¨ç¤ºå‡¦ç†
+    /// å¼•æ•°ã«ã„ãã¤ç½®ã‘ã‚‹ã‹ã®æœ€å¤§æ•°ã‚’æ¸¡ã™
     /// </summary>
     public void PossibleNum(int num)
     {
@@ -87,8 +89,8 @@ public class TextUIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// –„‚ß‚é“¹E”š’e‚Ìİ’uˆÊ’u‚ğ‘I‘ğ‚µ‚½”‚Ì•\¦ˆ—
-    /// ˆø”‚É‚¢‚­‚Â’u‚¢‚½‚©‚ğ“n‚·
+    /// åŸ‹ã‚ã‚‹é“ãƒ»çˆ†å¼¾ã®è¨­ç½®ä½ç½®ã‚’é¸æŠã—ãŸæ•°ã®è¡¨ç¤ºå‡¦ç†
+    /// å¼•æ•°ã«ã„ãã¤ç½®ã„ãŸã‹ã‚’æ¸¡ã™
     /// </summary>
     /// <param name="num"></param>
     public void PutNum(int num)

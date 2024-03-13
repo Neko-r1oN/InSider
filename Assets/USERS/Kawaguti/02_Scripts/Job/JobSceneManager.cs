@@ -93,6 +93,6 @@ public class JobSceneManager : MonoBehaviour
     {
         // フェード＆シーン遷移
         Initiate.DoneFading();
-        SceneManager.LoadScene("EnoGame01");
+        Initiate.Fade("EnoGame01", Color.black, 1f);
     }
 }

@@ -24,7 +24,7 @@ public class OpenPlayer : MonoBehaviour
         _repeatSpan = 4.5f;
         _timeElapsed = 0;
 
-        Mimic = true;
+        Mimic = OpenManager.Instance.isMimic;
         Once = false;
         animator = GetComponent<Animator>();
     }

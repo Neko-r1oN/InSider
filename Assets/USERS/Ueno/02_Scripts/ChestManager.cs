@@ -21,8 +21,6 @@ public class ChestManager : MonoBehaviour
             if (hit.transform.gameObject == this.gameObject)
             {
                 textUI.GetComponent<TextUIManager>().OnMouseEnter(10);
-
-                Debug.Log("‚½‚©‚ç‚Î‚±‚§");
             }
             if(hit.transform.gameObject != this.gameObject)
             {

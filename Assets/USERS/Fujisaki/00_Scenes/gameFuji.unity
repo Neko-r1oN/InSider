@@ -50869,6 +50869,7 @@ MonoBehaviour:
   isbombPrefabSelect: 0
   smoke: {fileID: 0}
   isColor: 0
+  putCnt: 0
 --- !u!114 &6708300812891672817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50889,6 +50890,7 @@ MonoBehaviour:
   isbombPrefabSelect: 0
   smoke: {fileID: 0}
   isColor: 0
+  putCnt: 0
 --- !u!114 &6708300813727519728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50909,6 +50911,7 @@ MonoBehaviour:
   isbombPrefabSelect: 0
   smoke: {fileID: 0}
   isColor: 0
+  putCnt: 0
 --- !u!23 &6722989447443447707
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -54091,6 +54094,7 @@ MonoBehaviour:
   isbombPrefabSelect: 0
   smoke: {fileID: 0}
   isColor: 0
+  putCnt: 0
 --- !u!23 &8623606252122486537
 MeshRenderer:
   m_ObjectHideFlags: 0

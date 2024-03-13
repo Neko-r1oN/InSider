@@ -9,7 +9,7 @@ public class EventManager : MonoBehaviour
     [SerializeField] GameObject goldPrefab;
 
     // 混乱の際の混乱テクスチャのリスト
-    GameObject chaos;
+    //GameObject chaos;
 
     /// <summary>
     /// 発生するイベントのID (ただのメモ)
@@ -38,11 +38,13 @@ public class EventManager : MonoBehaviour
     {
         player = GameObject.Find("Player1");
 
-        chaos = GameObject.Find("ChaosList");
+        //chaos = GameObject.Find("ChaosList");
 
         uiManager = GameObject.Find("UIManager");
 
-        chaos.SetActive(false);
+        //chaos = GameObject.Find("Chaos");
+
+        //chaos.SetActive(false);
     }
 
     private void Update()

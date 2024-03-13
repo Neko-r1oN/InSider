@@ -10,7 +10,6 @@ TagManager:
   - Treasure
   - Mimic
   - Insider
-  - EventPanel
   - AbnormalPanel
   - Bomb
   - EventBlock
@@ -23,8 +22,8 @@ TagManager:
   - UI
   - Gold
   - Enemy
-  - 
-  - 
+  - Chest
+  - Block
   - 
   - 
   - 

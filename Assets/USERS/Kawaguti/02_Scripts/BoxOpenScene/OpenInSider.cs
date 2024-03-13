@@ -5,7 +5,6 @@ using UnityEngine;
 public class OpenInSider : MonoBehaviour
 {
     Animator animator;
-   
 
     private float _repeatSpan;    //ŒJ‚è•Ô‚·ŠÔŠu
     private float _timeElapsed;   //Œo‰ßŽžŠÔ
@@ -20,7 +19,7 @@ public class OpenInSider : MonoBehaviour
         _repeatSpan = 2.0f;
         _timeElapsed = 0;
 
-        Mimic = true;
+        Mimic = OpenManager.Instance.isMimic;
         Once = false;
         animator = GetComponent<Animator>();
     }
