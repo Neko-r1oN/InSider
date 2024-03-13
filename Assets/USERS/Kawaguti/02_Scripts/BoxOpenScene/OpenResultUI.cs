@@ -11,7 +11,6 @@ public class OpenResultUI : MonoBehaviour
     [SerializeField] GameObject loadingPrefab;
     [SerializeField] GameObject canvasObj;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -26,32 +25,25 @@ public class OpenResultUI : MonoBehaviour
     {
         //logo.material.color = Color.Lerp(logo.material.color, new Color(1, 1, 1.0f, 1), 0.350f * Time.deltaTime);
     }
+
     private void move()
     {
         this.transform.DOLocalMove(new Vector3(0f, 0f, 0f), 3.0f);
         Invoke("SendNotification", 9f);
     }
+
     private async void SendNotification()
     {
-        Debug.Log("現在のラウンド数："+ ClientManager.Instance.roundNum);
+        Debug.Log("現在のラウンド数：" + ClientManager.Instance.roundNum);
 
-        if (ClientManager.Instance.roundNum >= 3)
-        {// 最終ラウンドだった場合
-            // フェード＆シーン遷移
-            Initiate.DoneFading();
-            Initiate.Fade("ResultScene", Color.black, 1.0f);
-        }
-        else
-        {
-            // 通信中のテキストを生成
-            GameObject text = Instantiate(loadingPrefab, canvasObj.transform);
-            text.transform.localPosition = new Vector3(508, -495, 0);
+        // 通信中のテキストを生成
+        GameObject text = Instantiate(loadingPrefab, canvasObj.transform);
+        text.transform.localPosition = new Vector3(508, -495, 0);
 
-            // 適当なクラス変数を作成
-            ReadyData readyData = new ReadyData();
+        // 適当なクラス変数を作成
+        ReadyData readyData = new ReadyData();
 
-            // 次のラウンドシーンに遷移する準備ができたことを通知
-            await ClientManager.Instance.Send(readyData, 15);
-        }
+        // 次のラウンドシーンに遷移する準備ができたことを通知
+        await ClientManager.Instance.Send(readyData, 15);
     }
 }

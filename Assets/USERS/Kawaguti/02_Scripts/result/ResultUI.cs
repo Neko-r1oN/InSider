@@ -19,21 +19,23 @@ public class ResultUI : MonoBehaviour
         isOK = false;
     }
 
+    public void Disconnect()
+    {
+        // 接続を終了＆タイトル画面へ遷移
+        ClientManager.Instance.DisconnectButton();
+    }
+
     private void Update()
     {
         if (ResultManager.isResult == true && isOK == false)
         {
             isOK = true;
-            StartCoroutine(MoveResult());
+            MoveResult();
         }
     }
-    IEnumerator MoveResult()
+
+    public void MoveResult()
     {
         this.transform.DOMove(new Vector3(958f, 561f, 0f), 0.35f).SetEase(Ease.OutBounce);
-
-        yield return new WaitForSeconds(5f);
-
-        // 接続を終了＆タイトル画面へ遷移
-        ClientManager.Instance.DisconnectButton();
     }
 }
