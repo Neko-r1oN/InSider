@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class ChestTrigger : MonoBehaviour
@@ -9,12 +10,154 @@ public class ChestTrigger : MonoBehaviour
     [SerializeField] List<GameObject> text;
     public bool isMimic;    // ミミックかどうか
 
-    bool isPlayer;  // プレイヤーを検知したかどうか
+    GameObject textUI;
 
+    // チェストの中身を表示するテキスト
+    Text chestText;
+
+    GameObject player;
+
+    public int chestNum;
+
+    bool isPlayer;  // プレイヤーを検知したかどうか
     private void Start()
     {
         isPlayer = false;
+
+        textUI = GameObject.Find("TextUIManager");
     }
+
+    private void Update()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit = new RaycastHit();
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            //**********************************
+            // rayがチェストに当たっていたら
+            //**********************************
+            if (hit.transform.gameObject == this.gameObject)
+            {
+                //*********************************
+                //サーバーを使っているとき
+                //*********************************
+                if (EditorManager.Instance.useServer == true)
+                {
+                    if (ClientManager.Instance.isInsider)
+                    {
+                        if (isMimic == true)
+                        {// ミミックだったら
+                            if (chestNum == 1 || chestNum == 2 || chestNum == 3)
+                            {
+                                // ミミックのテキストを表示
+                                textUI.GetComponent<TextUIManager>().OnMouseEnter(10);
+                            }
+                        }
+                        else
+                        {// ミミックじゃないとき
+                            // 真ん中のチェスト
+                            if (chestNum == 1)
+                            {
+                                // OnMouseEnter(11)はたからばこ
+                                textUI.GetComponent<TextUIManager>().OnMouseEnter(11);
+                            }
+                            // 右のチェスト
+                            else if (chestNum == 2)
+                            {
+                                // OnMouseEnter(12)はたからばこ
+                                textUI.GetComponent<TextUIManager>().OnMouseEnter(12);
+                            }
+                            // 左のチェスト
+                            else if (chestNum == 3)
+                            {
+                                // OnMouseEnter(13)はたからばこ
+                                textUI.GetComponent<TextUIManager>().OnMouseEnter(13);
+                            }
+                        }
+                    }
+                }
+                //********************************
+                // サーバーを使っていないとき
+                //********************************
+                else
+                {
+                    // 真ん中のチェスト
+                    if (chestNum == 1)
+                    {
+                        if (isMimic == true)
+                        {
+                            // OnMouseEnter(11)はたからばこ
+                            textUI.GetComponent<TextUIManager>().OnMouseEnter(10);
+                        }
+                        else
+                        {
+                            // OnMouseEnter(11)はたからばこ
+                            textUI.GetComponent<TextUIManager>().OnMouseEnter(11);
+                        }
+                            
+                    }
+                    // 右のチェスト
+                    else if (chestNum == 2)
+                    {
+                        // OnMouseEnter(12)はたからばこ
+                        textUI.GetComponent<TextUIManager>().OnMouseEnter(12);
+                    }
+                    // 左のチェスト
+                    else if (chestNum == 3)
+                    {
+                        // OnMouseEnter(13)はたからばこ
+                        textUI.GetComponent<TextUIManager>().OnMouseEnter(13);
+                    }
+                }
+            }
+            //***************************************
+            // rayが外れたら
+            //***************************************
+            else if (hit.transform.gameObject != this.gameObject)
+            {
+                //*********************************
+                //サーバーを使っているとき
+                //*********************************
+                if (EditorManager.Instance.useServer == true)
+                {
+                    if (ClientManager.Instance.isInsider)
+                    {
+                        if (isMimic == true)
+                        {
+                            if(chestNum == 1 || chestNum == 2 || chestNum == 3)
+                            {
+                                textUI.GetComponent<TextUIManager>().OnMouseEnter(10);
+                            }   
+                        }
+                    }
+                }
+                //*********************************
+                //サーバーを使っていないとき
+                //*********************************
+                else
+                {
+                    // 真ん中のチェスト
+                    if (chestNum == 1)
+                    {
+                        textUI.GetComponent<TextUIManager>().OnMouseExit(11);
+                    }
+                    // 右のチェスト
+                    else if (chestNum == 2)
+                    {
+                        textUI.GetComponent<TextUIManager>().OnMouseExit(12);
+                    }
+                    // 左のチェスト
+                    else if (chestNum == 3)
+                    {
+                        textUI.GetComponent<TextUIManager>().OnMouseExit(13);
+                    }
+                }
+            }
+
+        }
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {

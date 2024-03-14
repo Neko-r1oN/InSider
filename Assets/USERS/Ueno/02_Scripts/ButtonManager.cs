@@ -183,6 +183,11 @@ public class ButtonManager : MonoBehaviour
     public void CutOpen()
     {//切り開くを選んだ場合
 
+        if(player.GetComponent<Player>().mode == Player.PLAYER_MODE.MOVE)
+        {
+            return;
+        }
+
         if (EditorManager.Instance.useServer == true)
         {// サーバーを使用する場合
             if (ClientManager.Instance.turnPlayerID != ClientManager.Instance.playerID)
@@ -235,6 +240,11 @@ public class ButtonManager : MonoBehaviour
 
     public void fill()
     {//埋めるを選んだ場合
+
+        if (player.GetComponent<Player>().mode == Player.PLAYER_MODE.MOVE)
+        {
+            return;
+        }
 
         if (EditorManager.Instance.useServer == true)
         {// サーバーを使用する場合
@@ -321,7 +331,9 @@ public class ButtonManager : MonoBehaviour
     {
         // サボタージュの行動ボタン表示
         sabotageUI.SetActive(true);
-        
+
+        cameraManager.GetComponent<CameraManager>().SabotageChengeCam();
+
         if(sabotage.GetComponent<Sabotage>().timeNum > 0)
         {
             //DisplayCoolTime();
@@ -589,8 +601,8 @@ public class ButtonManager : MonoBehaviour
 
         player.GetComponent<Player>().isMotionMining = true;
 
-        // プレイヤーのモードをMOVEに変更
-        player.GetComponent<Player>().mode = Player.PLAYER_MODE.MOVE;
+        // プレイヤーのモードをNOTHINGに変更
+        player.GetComponent<Player>().mode = Player.PLAYER_MODE.NOTHING;
 
         // 道UIを非表示
         uiManager.road.SetActive(false);

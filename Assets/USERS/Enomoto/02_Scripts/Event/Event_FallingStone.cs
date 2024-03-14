@@ -7,6 +7,8 @@ public class Event_FallingStone : MonoBehaviour
     // 親オブジェクト(Warningmark)
     GameObject parentObj;
 
+    [SerializeField] GameObject smoke;
+
     private void Start()
     {
         // 取得する

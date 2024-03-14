@@ -25,7 +25,6 @@ public class CameraManager : MonoBehaviour
 
     public void ShakeCamera()
     {
-
         if (vcam1.Priority == 1)
         {// vcam1の優先度が1なら
             var impulseSource = vcam1.GetComponent<CinemachineImpulseSource>();
@@ -38,7 +37,16 @@ public class CameraManager : MonoBehaviour
 
             impulseSource2.GenerateImpulse();
         }
+    }
 
+    /// <summary>
+    /// サボタージュの際のカメラ切り替え
+    /// </summary>
+    public void SabotageChengeCam()
+    {
+        // プレイヤー追従カメラから全体カメラに切り替え
+        vcam1.Priority = 1; // 全体カメラ
+        vcam2.Priority = 0; // 追従カメラ
     }
 
     public void SwitchCamera()

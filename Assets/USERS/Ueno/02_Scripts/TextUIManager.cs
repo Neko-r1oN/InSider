@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class TextUIManager : MonoBehaviour
 {
     //[SerializeField] List<GameObject> textBackList;  // テキスト背景のオブジェクト
-    [SerializeField] List<GameObject> textList;      // 行動テキストリスト
+    [SerializeField] public List<GameObject> textList;      // 行動テキストリスト
 
     // サボタージュでのいくつ置いたか確認するテキスト
     [SerializeField] public GameObject saboText;
@@ -50,9 +50,6 @@ public class TextUIManager : MonoBehaviour
     /// <param name="num"></param>
     public void OnMouseEnter(int num)
     {
-        // テキストの背景を表示
-        //textBack.SetActive(true);
-
         // 表示されていた説明文を非表示
         textList[num].SetActive(true);
     }
@@ -63,8 +60,8 @@ public class TextUIManager : MonoBehaviour
     /// <param name="num"></param>
     public void OnMouseExit(int num)
     {
-        // テキストの背景を非表示
-        //textBack.SetActive(false);
+        Debug.Log("はずれた");
+
         // 表示されていた説明文を非表示
         textList[num].SetActive(false);
     }
