@@ -398,8 +398,10 @@ public class Player : MonoBehaviour
         // コンポーネントを有効にする
         agent.enabled = true;
 
-        // 数秒後にboolをfalseにする
-        Invoke("IsHitFalse", 2f);
+        isEnd = true;
+        mode = PLAYER_MODE.NOTHING;
+        // Idleアニメを再生する
+        animator.Play("MinerIdle");
     }
 
     public void SubStamina(int num)
@@ -504,7 +506,7 @@ public class Player : MonoBehaviour
     /// </summary>
     public async void RecoverPlayer()
     {
-        mode = PLAYER_MODE.MOVE;
+        mode = PLAYER_MODE.NOTHING;
 
         // Idleアニメを再生する
         animator.Play("MinerIdle");
@@ -518,7 +520,7 @@ public class Player : MonoBehaviour
             RevisionPosAndDropGoldData revisionPosData = new RevisionPosAndDropGoldData();
             revisionPosData.playerID = ClientManager.Instance.playerID;
             revisionPosData.targetID = ClientManager.Instance.playerID;
-            revisionPosData.isBuried = true;
+            revisionPosData.isDown = false;
             revisionPosData.targetPosX = 0f;
             revisionPosData.targetPosY = 0.9f;
             revisionPosData.targetPosZ = -5f;
