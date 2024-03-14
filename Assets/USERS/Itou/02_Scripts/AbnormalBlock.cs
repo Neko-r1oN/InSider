@@ -24,12 +24,15 @@ public class NewBehaviourScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer == 3)
+        if (other.gameObject.layer == 3)
         {
-            Debug.Log("Player");
+            if (other.GetComponent<NavMeshAgent>() != null)
+            {
+                Debug.Log(other.name);
 
-            // プレイヤーのスピードを変更
-            other.GetComponent<NavMeshAgent>().speed = 1.5f;
+                // プレイヤーのスピードを変更
+                other.GetComponent<NavMeshAgent>().speed = 1.5f;
+            }
         }
     }
 
@@ -37,8 +40,11 @@ public class NewBehaviourScript : MonoBehaviour
     {
         if(other.gameObject.layer == 3)
         {
-            // プレイヤーのスピードを元に戻す
-            other.GetComponent<NavMeshAgent>().speed = 4;
+            if (other.GetComponent<NavMeshAgent>() != null)
+            {
+                // プレイヤーのスピードを元に戻す
+                other.GetComponent<NavMeshAgent>().speed = 4;
+            }
         }
     }
 }
