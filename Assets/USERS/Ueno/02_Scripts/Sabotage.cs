@@ -165,6 +165,9 @@ public class Sabotage : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// クールタイムを戻す
+    /// </summary>
     public void ResetCoolTime()
     {
         timeNum = 60;
@@ -172,6 +175,10 @@ public class Sabotage : MonoBehaviour
         InvokeRepeating("SubCoolTime", 0, 1);
     }
 
+    /// <summary>
+    ///  サボタージュの説明文を表示する処理
+    /// </summary>
+    /// <param name="num"></param>
     public void SabotageText(int num)
     {
         switch (num)

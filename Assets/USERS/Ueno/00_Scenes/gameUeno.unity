@@ -4033,6 +4033,7 @@ MonoBehaviour:
   isEnd: 0
   stamina: 100
   isInvincible: 0
+  lookTarget: {x: 0, y: 0, z: 0}
   roadNum: 0
   _cycle: 1
   mode: 0
@@ -10896,6 +10897,7 @@ MonoBehaviour:
   isEnd: 0
   stamina: 100
   isInvincible: 0
+  lookTarget: {x: 0, y: 0, z: 0}
   roadNum: 0
   _cycle: 1
   mode: 0
@@ -12467,6 +12469,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 1348810048}
   - {fileID: 142217613}
+  goldImg: []
+  mimicImg: []
+  minerImg1: []
+  minerImg2: []
+  minerImg3: []
 --- !u!1 &721179321
 GameObject:
   m_ObjectHideFlags: 0
@@ -21060,6 +21067,7 @@ MonoBehaviour:
   isEnd: 0
   stamina: 100
   isInvincible: 0
+  lookTarget: {x: 0, y: 0, z: 0}
   roadNum: 0
   _cycle: 1
   mode: 0
@@ -22465,6 +22473,7 @@ MonoBehaviour:
   isEnd: 0
   stamina: 100
   isInvincible: 0
+  lookTarget: {x: 0, y: 0, z: 0}
   roadNum: 0
   _cycle: 1
   mode: 0
@@ -25515,6 +25524,7 @@ MonoBehaviour:
   isEnd: 0
   stamina: 100
   isInvincible: 0
+  lookTarget: {x: 0, y: 0, z: 0}
   roadNum: 0
   _cycle: 1
   mode: 0
@@ -29240,6 +29250,7 @@ MonoBehaviour:
   isEnd: 0
   stamina: 100
   isInvincible: 0
+  lookTarget: {x: 0, y: 0, z: 0}
   roadNum: 0
   _cycle: 1
   mode: 0

@@ -283,6 +283,45 @@ public class RoadManager : MonoBehaviour
         rotY = 0;
     }
 
+    public bool IsDigPossible(int num)
+    {
+        int stamina = player.GetComponent<Player>().stamina;
+
+        if (uiMnager.GetComponent<UIManager>().isChaos == true)
+        {
+            // スタミナが40以上なら
+            if (stamina >= 40)
+            {
+                return true;
+            }
+        }
+        else
+        {
+            if (num == 0 && stamina >= 30)
+            {// I字 & スタミナが30以上なら
+                return true;
+            }
+            else if (num == 1 && stamina >= 40)
+            {// L字 & スタミナが40以上なら
+                return true;
+            }
+            else if (num == 2 && stamina >= 60)
+            {// T字 & スタミナ60以上なら
+                return true;
+            }
+            else if (num == 3 && stamina >= 80)
+            {// 十字 & スタミナが80以上なら
+                return true;
+            }
+            else if (num == 4 && stamina >= 10)
+            {// ゴミみたいな道 & スタミナが10以上なら
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     /// <summary>
     /// 道を選択
     /// </summary>
