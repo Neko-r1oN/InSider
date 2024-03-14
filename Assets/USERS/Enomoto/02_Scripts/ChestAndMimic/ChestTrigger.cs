@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class ChestTrigger : MonoBehaviour
 {
-    [SerializeField] GameObject mimicPrefab;
     [SerializeField] List<GameObject> text;
     public bool isMimic;    // ミミックかどうか
 
@@ -179,15 +178,22 @@ public class ChestTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(isPlayer == true)
+        if (isPlayer == true)
         {
+            Debug.Log("②:++++++++++++++++++");
             return;
         }
 
         if (other.gameObject.layer == 3)
         {// プレイヤーの場合
+
+            Debug.Log("①:"+other.gameObject.name);
+
             if (other.GetComponent<Player>().playerObjID == ClientManager.Instance.playerID)
             {// 自分自身の場合
+
+                Debug.Log("OKOKOKOKO:" + other.gameObject.name);
+
                 if (ClientManager.Instance.isInsider == false)
                 {// Insiderではない場合
                     SendRoundEndData();
@@ -200,6 +206,7 @@ public class ChestTrigger : MonoBehaviour
     {
         if (isPlayer == true)
         {
+            Debug.Log("②:++++++++++++++++++");
             return;
         }
 

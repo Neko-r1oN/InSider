@@ -69,6 +69,8 @@ public class RoundResultManager : MonoBehaviour
 
     public void SetUI(List<int> totalScore, List<int> allieScore, List<int> insiderID)
     {
+        Debug.Log("途中結果表示用シーン、DataのCnt：" + totalScore.Count);
+
         for (int i = 0; i < playerUIList.Count; i++)
         {
             if (i >= totalScore.Count)
@@ -79,6 +81,7 @@ public class RoundResultManager : MonoBehaviour
 
             totalScoreList[i].text = "" + totalScore[i];
             allieScoreList[i].text = "(+" + allieScore[i] + ")";
+            playerNameList[i].text = ClientManager.Instance.playerNameList[i];
         }
 
         for (int i = 0; i < insiderID.Count; i++)

@@ -715,6 +715,8 @@ public class ClientManager : MonoBehaviour
                         break;
                     case 13:    // ゲーム開始通知 (どの宝箱をミミックにするか受信)
 
+                        Debug.Log("ラウンド開始通知を受信");
+
                         // JSONデシリアライズで取得する
                         RoundStartData roundStartData = JsonConvert.DeserializeObject<RoundStartData>(jsonString);
 
