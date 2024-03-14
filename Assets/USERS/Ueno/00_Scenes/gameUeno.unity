@@ -4390,6 +4390,7 @@ MonoBehaviour:
   lookTarget: {x: 0, y: 0, z: 0}
   roadNum: 0
   _cycle: 1
+  ohSE: {fileID: 0}
   mode: 0
 --- !u!195 &210333113
 NavMeshAgent:
@@ -11903,6 +11904,7 @@ MonoBehaviour:
   lookTarget: {x: 0, y: 0, z: 0}
   roadNum: 0
   _cycle: 1
+  ohSE: {fileID: 0}
   mode: 0
 --- !u!195 &630176435
 NavMeshAgent:
@@ -16709,7 +16711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3533882a525343847bdb69e9ec48b89c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stonePrefab: {fileID: 4713331306689490616, guid: f087ead93e3795148a8d564e550d9482,
+  stonePrefab: {fileID: 4713331306689490616, guid: 7ef78ef52c66fd348b1356a3dabfd7fc,
     type: 3}
   enemyPrefab: {fileID: 8902166855417294600, guid: 9add92084ee2ccb4eae98617b20020e7,
     type: 3}
@@ -16721,6 +16723,10 @@ MonoBehaviour:
     type: 3}
   confusionObjList: []
   buffObjList: []
+  buffSE: {fileID: 0}
+  debuffSE: {fileID: 0}
+  enemySpawnSE: {fileID: 0}
+  stoneFallSE: {fileID: 0}
   chaosPrefab: {fileID: 4727419194395133498, guid: 637093d00aee74b418b918c2ec99bdb4,
     type: 3}
   eventNum: 0
@@ -23645,6 +23651,7 @@ MonoBehaviour:
   lookTarget: {x: 0, y: 0, z: 0}
   roadNum: 0
   _cycle: 1
+  ohSE: {fileID: 0}
   mode: 0
 --- !u!195 &1213451756
 NavMeshAgent:
@@ -24927,6 +24934,7 @@ MonoBehaviour:
   lookTarget: {x: 0, y: 0, z: 0}
   roadNum: 0
   _cycle: 1
+  ohSE: {fileID: 0}
   mode: 0
 --- !u!195 &1286726704
 NavMeshAgent:
@@ -28580,6 +28588,7 @@ MonoBehaviour:
   lookTarget: {x: 0, y: 0, z: 0}
   roadNum: 0
   _cycle: 1
+  ohSE: {fileID: 0}
   mode: 0
 --- !u!195 &1483753234
 NavMeshAgent:
@@ -32644,7 +32653,7 @@ MonoBehaviour:
   playerObjID: 0
   spawnEffectPrefab: {fileID: 1808395025434123022, guid: 308f7ac46df6b7846bcc3be4f49e12b0,
     type: 3}
-  gold: {fileID: 1194406521208508902, guid: 95dd1c8f833063f48bd9de35b7511a6a, type: 3}
+  gold: {fileID: 1194406521208508902, guid: 92eb0764bbd913c43a64e1799ee2c47f, type: 3}
   isEnd: 0
   stamina: 100
   isInvincible: 0
@@ -32652,6 +32661,7 @@ MonoBehaviour:
   lookTarget: {x: 0, y: 0, z: 0}
   roadNum: 0
   _cycle: 1
+  ohSE: {fileID: 0}
   mode: 0
 --- !u!54 &1727096695
 Rigidbody:

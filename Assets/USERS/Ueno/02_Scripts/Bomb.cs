@@ -90,8 +90,6 @@ public class Bomb : MonoBehaviour
     {
         roadPanel.tag = "RoadPanel";
 
-        
-
         Destroy(this.gameObject);
     }
 
