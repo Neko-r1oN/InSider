@@ -559,7 +559,8 @@ public class ClientManager : MonoBehaviour
                         Debug.Log("[" + fillData.playerID + "]" + " : 埋める");
 
                         // 道を埋める処理
-                        blockManager.GetComponent<BlockManager>().FillObject(fillData.objeID);
+                        blockManager.GetComponent<BlockManager>().StartCoroutine(
+                            blockManager.GetComponent<BlockManager>().FillObject(fillData.objeID)); 
 
                         //****************************************************************
                         //  サボタージュで選択中のパネルが埋められて消えた時の処理
@@ -1021,7 +1022,7 @@ public class ClientManager : MonoBehaviour
             tcpClient.ReceiveTimeout = 1000;    // 受信
 
             // サーバーへ接続要求    (IP:"20.249.92.21"  "127.0.0.1")
-            await tcpClient.ConnectAsync("127.0.0.1", 20000);
+            await tcpClient.ConnectAsync("20.249.92.21", 20000);
             Debug.Log("***サーバーと通信確立***");
 
             //**********************************

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System.Threading.Tasks;
 
 public class Bomb : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class Bomb : MonoBehaviour
     // オーディオソース系
     AudioSource audio;
     [SerializeField] AudioClip explosionSE;
+
+    public int bombID;
 
     private void Start()
     {
@@ -88,8 +91,14 @@ public class Bomb : MonoBehaviour
     /// </summary>
     public void DestroyBomb()
     {
+        // ロードパネルのタグをRoadPanel戻す
         roadPanel.tag = "RoadPanel";
 
+        // 解除エフェクトを生成
+        GameObject childEffectObj = Instantiate(effectBomb,
+            new Vector3(this.gameObject.transform.position.x, 0.9f, this.transform.position.z), Quaternion.identity);
+
+        // ボムを消す
         Destroy(this.gameObject);
     }
 
@@ -97,19 +106,56 @@ public class Bomb : MonoBehaviour
     /// ボムを消す処理
     /// </summary>
     /// <param name="other"></param>
-    private void OnTriggerEnter(Collider other)
+    private async Task OnTriggerEnter(Collider other)
     {
         if(other.gameObject.layer == 3)
         {// 当たったレイヤーが3(Player)なら
-            // ロードパネルのタグをRoadPanel戻す
-            roadPanel.tag = "RoadPanel";
 
-            // 解除エフェクトを生成
-            GameObject childEffectObj = Instantiate(effectBomb, 
-                new Vector3(this.gameObject.transform.position.x,0.9f,this.transform.position.z), Quaternion.identity);
+            Debug.Log("aaaaaaaa");
 
-            // ボムを消す
-            Destroy(this.gameObject);
+            if (EditorManager.Instance.useServer == true)
+            {// サーバーを使用する場合
+
+                Debug.Log("iiiiiiiiiiiiiii");
+
+                if (other.GetComponent<Player>() != null)
+                {// Playerスクリプトがない場合
+                    return;
+                }
+
+                Debug.Log("uuuuuu");
+
+                //int A = other.GetComponent<Player>().playerObjID;
+                //int B = ClientManager.Instance.playerID;
+
+                //Debug.Log(A);
+                //Debug.Log(B);
+
+                //if (other.GetComponent<Player>().playerObjID == ClientManager.Instance.playerID)
+                //{// プレイヤーのオブジェクトが自分自身の場合
+
+                //    Debug.Log("eeeeee");
+
+                    // クラス変数を作成
+                    Sabotage_Bomb_CancellData cancellData = new Sabotage_Bomb_CancellData();
+                    cancellData.playerID = ClientManager.Instance.playerID;
+                    cancellData.bombID = bombID;
+
+                    await ClientManager.Instance.Send(cancellData, 201);
+                //}
+            }
+            else
+            {// サーバーを使用しない
+                // ロードパネルのタグをRoadPanel戻す
+                roadPanel.tag = "RoadPanel";
+
+                // 解除エフェクトを生成
+                GameObject childEffectObj = Instantiate(effectBomb,
+                    new Vector3(this.gameObject.transform.position.x, 0.9f, this.transform.position.z), Quaternion.identity);
+
+                // ボムを消す
+                Destroy(this.gameObject);
+            }
         }
     }
 }

@@ -6,10 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Title.unity
+    path: Assets/Scenes/title.unity
     guid: ce52bb6533576fa4480f349dba812462
   - enabled: 1
-    path: Assets/USERS/Ueno/00_Scenes/UI.unity
+    path: Assets/Scenes/UI.unity
     guid: 5f09041b4627416459bdb5bd11803dae
   - enabled: 1
     path: Assets/Scenes/Standby.unity
@@ -26,4 +26,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/USERS/Kawaguti/00_Scenes/RoundResultScene.unity
     guid: ad0727fdefd25fb4483cec73500f7330
+  - enabled: 1
+    path: Assets/Scenes/GameStage1.unity
+    guid: 56a5176a442d7d642adce3ff8d456c39
+  - enabled: 1
+    path: Assets/Scenes/GameStage2.unity
+    guid: 1a3e8641a4ff3de478ac17a2b74b12b8
+  - enabled: 1
+    path: Assets/Scenes/GameStage3.unity
+    guid: 6e88dc45b5e808246a02b8125c1fb014
   m_configObjects: {}
