@@ -78,6 +78,10 @@ public class ButtonManager : MonoBehaviour
 
     public int roadNum;
 
+    // オーディオソース系
+    AudioSource audio;
+    [SerializeField] AudioClip noStaminaSE;
+
     private void Start()
     {
         // 情報を取得
@@ -144,6 +148,8 @@ public class ButtonManager : MonoBehaviour
         noStaminaUI.SetActive(false);
 
         sabotageCoolTime.SetActive(false);
+
+        audio = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -258,6 +264,8 @@ public class ButtonManager : MonoBehaviour
         if (player.GetComponent<Player>().stamina < 20)
         {
             noStaminaUI.SetActive(true);
+
+            audio.PlayOneShot(noStaminaSE);
 
             return;
         }
@@ -590,6 +598,8 @@ public class ButtonManager : MonoBehaviour
         if (isDig == false)
         {
             noStaminaUI.SetActive(true);
+
+            audio.PlayOneShot(noStaminaSE);
 
             return;
         }

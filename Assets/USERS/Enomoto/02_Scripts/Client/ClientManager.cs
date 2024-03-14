@@ -75,6 +75,14 @@ public class ClientManager : MonoBehaviour
     // ゲームが終了したかどうか
     bool isGameSet;
 
+    // オーディオソース系
+    AudioSource audio;
+    [SerializeField] AudioClip eventAndSubotageSE;
+    [SerializeField] AudioClip getScoreSE;
+    [SerializeField] AudioClip relaxSE;
+    [SerializeField] AudioClip fillSE;
+    [SerializeField] AudioClip mineSE;
+
     //===========================
     //  [公開]フィールド
     //===========================
@@ -235,6 +243,7 @@ public class ClientManager : MonoBehaviour
         // 初期化
         tcpClient = new TcpClient();
         context = SynchronizationContext.Current;
+        audio = GetComponent<AudioSource>();
 
         playerID = 0;
         isGameSet = false;
@@ -541,6 +550,8 @@ public class ClientManager : MonoBehaviour
                         break;
                     case 6: // 埋める
 
+                        audio.PlayOneShot(fillSE);
+
                         // JSONデシリアライズで取得する
                         Action_FillData fillData = JsonConvert.DeserializeObject<Action_FillData>(jsonString);
 
@@ -574,6 +585,8 @@ public class ClientManager : MonoBehaviour
                         break;
                     case 7: // 切り開く
 
+                        audio.PlayOneShot(mineSE);
+
                         // JSONデシリアライズで取得する
                         Action_MiningData mineData = JsonConvert.DeserializeObject<Action_MiningData>(jsonString);
 
@@ -584,6 +597,8 @@ public class ClientManager : MonoBehaviour
 
                         break;
                     case 8: // やすむ(スタミナ回復)
+
+                        audio.PlayOneShot(relaxSE);
 
                         // JSONデシリアライズで取得する
                         Action_NothingData restData = JsonConvert.DeserializeObject<Action_NothingData>(jsonString);
@@ -721,6 +736,8 @@ public class ClientManager : MonoBehaviour
                         break;
                     case 14: // スコアのテキストを更新する
 
+                        audio.PlayOneShot(getScoreSE);
+
                         // JSONデシリアライズで取得する
                         AllieScoreData allieScoreData = JsonConvert.DeserializeObject<AllieScoreData>(jsonString);
 
@@ -783,6 +800,8 @@ public class ClientManager : MonoBehaviour
 
                         // イベント用テキストを更新する
                         uiManager.GetComponent<UIManager>().UdEventText(eventData.eventID);
+
+                        audio.PlayOneShot(eventAndSubotageSE);
 
                         break;
 
@@ -889,6 +908,8 @@ public class ClientManager : MonoBehaviour
                     //  サボタージュのDataを受信
                     //*****************************
                     case 200:   // サボタージュ生成する
+
+                        audio.PlayOneShot(eventAndSubotageSE);
 
                         // JSONデシリアライズで取得する
                         Sabotage_SetData setSabotageData = JsonConvert.DeserializeObject<Sabotage_SetData>(jsonString);

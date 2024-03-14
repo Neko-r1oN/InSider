@@ -16,6 +16,13 @@ public class EventManager : MonoBehaviour
 
     GameObject playerManager;
 
+    // オーディオソース系
+    AudioSource audio;
+    [SerializeField] AudioClip buffSE;
+    [SerializeField] AudioClip debuffSE;
+    [SerializeField] AudioClip enemySpawnSE;
+    [SerializeField] AudioClip stoneFallSE;
+
     /// <summary>
     /// 発生するイベントのID (ただのメモ)
     /// </summary>
@@ -57,10 +64,17 @@ public class EventManager : MonoBehaviour
 
         confusionObjList = new List<GameObject>();
         buffObjList = new List<GameObject>();
+
+        audio = GetComponent<AudioSource>();
     }
 
     private void Update()
     {
+        if(EditorManager.Instance.useServer)
+        {
+            return;
+        }
+
         if(Input.GetKeyDown(KeyCode.S))
         {// Sキーを押すとイベントが起きる
             switch(eventNum)
@@ -117,6 +131,8 @@ public class EventManager : MonoBehaviour
 
         // 混乱状態にするフラグ(true)
         uiManager.GetComponent<UIManager>().isChaos = true;
+
+        audio.PlayOneShot(debuffSE);
     }
 
     /// <summary>
@@ -150,6 +166,8 @@ public class EventManager : MonoBehaviour
             // 格納する
             buffObjList.Add(Instantiate(buffPrefab, manager.players[i].transform));
         }
+
+        audio.PlayOneShot(buffSE);
     }
 
     /// <summary>
@@ -175,6 +193,7 @@ public class EventManager : MonoBehaviour
     public GameObject SpawnEnemy(Vector3 pos)
     {
         GameObject enemy = Instantiate(enemyPrefab,pos,Quaternion.identity);
+        audio.PlayOneShot(enemySpawnSE);
 
         return enemy;
     }
@@ -187,6 +206,7 @@ public class EventManager : MonoBehaviour
     {
         // 生成する
         Instantiate(stonePrefab, pos,Quaternion.identity);
+        audio.PlayOneShot(stoneFallSE);
     }
 
     /// <summary>
