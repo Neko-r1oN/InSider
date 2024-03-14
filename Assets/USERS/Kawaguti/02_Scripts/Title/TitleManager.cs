@@ -134,7 +134,7 @@ public class TitleManager : MonoBehaviour
     {
         if (NGJudge == true)
         {    
-            Initiate.Fade("StandbyScene_copy", Color.black, 1.0f);
+            Initiate.Fade("Standby", Color.black, 1.0f);
         }
     }
 }

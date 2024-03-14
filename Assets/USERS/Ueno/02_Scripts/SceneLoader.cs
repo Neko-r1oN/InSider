@@ -10,6 +10,6 @@ public class SceneLoader : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        SceneManager.LoadScene("UenoUI", LoadSceneMode.Additive);    // 現在のシーンにUIManagerシーンを追加する
+        SceneManager.LoadScene("UI", LoadSceneMode.Additive);    // 現在のシーンにUIManagerシーンを追加する
     }
 }

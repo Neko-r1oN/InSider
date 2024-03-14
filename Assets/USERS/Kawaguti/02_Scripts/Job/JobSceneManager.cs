@@ -93,6 +93,20 @@ public class JobSceneManager : MonoBehaviour
     {
         // フェード＆シーン遷移
         Initiate.DoneFading();
-        Initiate.Fade("EnoGame01", Color.black, 1f);
+
+        Debug.Log("現在のラウンド数：" + ClientManager.Instance.roundNum);
+
+        if (ClientManager.Instance.roundNum == 1)
+        {
+            Initiate.Fade("GameStage1", Color.black, 1f);
+        }
+        else if (ClientManager.Instance.roundNum == 2)
+        {
+            Initiate.Fade("GameStage2", Color.black, 1f);
+        }
+        else if (ClientManager.Instance.roundNum == 3)
+        {
+            Initiate.Fade("GameStage3", Color.black, 1f);
+        }
     }
 }

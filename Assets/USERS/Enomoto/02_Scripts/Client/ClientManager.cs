@@ -70,7 +70,7 @@ public class ClientManager : MonoBehaviour
     GameObject enemyManager;
 
     // 必要接続人数
-    int RequiredNum = 1;
+    int RequiredNum = 4;
 
     // ゲームが終了したかどうか
     bool isGameSet;
@@ -244,6 +244,7 @@ public class ClientManager : MonoBehaviour
         tcpClient = new TcpClient();
         context = SynchronizationContext.Current;
         audio = GetComponent<AudioSource>();
+        roundNum = 0;
 
         playerID = 0;
         isGameSet = false;
@@ -270,7 +271,7 @@ public class ClientManager : MonoBehaviour
 
         // フェード＆シーン遷移
         Initiate.DoneFading();
-        Initiate.Fade("TitleKawaguchi_copy", Color.black, 3.0f);
+        Initiate.Fade("Title", Color.black, 3.0f);
 
         Debug.Log("退出");
 
@@ -500,7 +501,7 @@ public class ClientManager : MonoBehaviour
 
                         // フェード＆シーン遷移
                         Initiate.DoneFading();
-                        Initiate.Fade("JobScene_copy", Color.black, 10f);
+                        Initiate.Fade("Job", Color.black, 10f);
 
                         break;
                     case 4: // ラウンド終了通知
