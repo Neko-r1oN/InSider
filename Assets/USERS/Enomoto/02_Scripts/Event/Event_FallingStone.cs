@@ -23,7 +23,8 @@ public class Event_FallingStone : MonoBehaviour
             Debug.Log("石を破棄する");
 
             // パーティクル生成
-            // Instantiate();
+           GameObject childObj = Instantiate(smoke,
+               new Vector3(this.gameObject.transform.position.x,0,this.gameObject.transform.position.z), Quaternion.identity);
 
             // 親オブジェクトを破棄する
             Destroy(parentObj);

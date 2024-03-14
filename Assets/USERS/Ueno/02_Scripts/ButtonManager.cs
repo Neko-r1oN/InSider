@@ -79,6 +79,10 @@ public class ButtonManager : MonoBehaviour
 
     public int roadNum;
 
+
+    // 回復の際のパーティクル
+    public GameObject childObj;
+
     // オーディオソース系
     AudioSource audio;
     [SerializeField] AudioClip noStaminaSE;
@@ -185,6 +189,8 @@ public class ButtonManager : MonoBehaviour
 
         // 行動説明テキストを非表示
         textUI.HideText();
+
+        Destroy(childObj);
     }
 
     public void CutOpen()
@@ -243,6 +249,8 @@ public class ButtonManager : MonoBehaviour
                 }
             }
         }
+
+        Destroy(childObj);
     }
 
     public void fill()
@@ -288,6 +296,8 @@ public class ButtonManager : MonoBehaviour
 
         // プレイヤーのモードをFILLに変更
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.FILL;
+
+        Destroy(childObj);
     }
 
     public async void Nothing()
@@ -315,9 +325,8 @@ public class ButtonManager : MonoBehaviour
         // プレイヤーのモードをNOTHINGに変更
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.NOTHING;
 
-        GameObject childObj = Instantiate(healing, new Vector3(player.transform.position.x, 0.9f, player.transform.position.z),
+        childObj = Instantiate(healing, new Vector3(player.transform.position.x, 0.9f, player.transform.position.z),
             Quaternion.identity);
-
 
         rand = rnd.Next(1, 71); // 1～70までのランダムの数値
 
@@ -357,6 +366,8 @@ public class ButtonManager : MonoBehaviour
 
         // その他ボタン削除
         HideButton();
+
+        Destroy(childObj);
     }
 
     public void ButtonCancel()
@@ -421,7 +432,7 @@ public class ButtonManager : MonoBehaviour
         noStaminaUI.SetActive(false);
 
         // プレイヤーのモードを元に戻す
-        player.GetComponent<Player>().mode = Player.PLAYER_MODE.MOVE;
+        player.GetComponent<Player>().mode = Player.PLAYER_MODE.NOTHING;
     }
 
     /// <summary>

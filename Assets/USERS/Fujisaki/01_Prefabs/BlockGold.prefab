@@ -128,6 +128,8 @@ MonoBehaviour:
   speed: 5
   goldEffect: {fileID: 4868924246256173959, guid: 0145888bd3dba2f4798f055730114988,
     type: 3}
+  goldEffect2: {fileID: 7101334870954230749, guid: 2734472489d8d234c93587809f35e137,
+    type: 3}
   targetID: 0
 --- !u!65 &4969215241218466484
 BoxCollider:

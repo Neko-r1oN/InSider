@@ -8,10 +8,17 @@ public class Goldmanager : MonoBehaviour
 
     GameObject parentObj;
 
+    // キラキラエフェクト
+    [SerializeField] GameObject goldEffect;
+    GameObject childObj;
+
     // Start is called before the first frame update
     void Start()
     {
         parentObj = transform.parent.gameObject;
+
+        childObj = Instantiate(goldEffect, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, this.gameObject.transform.position.z),
+             Quaternion.identity);
 
         //ドロップする軌道の設定
         Rigidbody rb = parentObj.GetComponent<Rigidbody>();  // rigidbodyを取得
@@ -65,6 +72,7 @@ public class Goldmanager : MonoBehaviour
         }
 
         Destroy(parentObj);
+        Destroy(childObj);
         Debug.Log("当たった");
     }
 }

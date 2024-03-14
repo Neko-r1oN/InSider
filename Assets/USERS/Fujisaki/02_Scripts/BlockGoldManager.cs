@@ -18,6 +18,11 @@ public class BlockGoldManager : MonoBehaviour
     // アイテムを拾ったときのエフェクト
     [SerializeField] GameObject goldEffect;
 
+    // キラキラしてるやつ
+    [SerializeField] GameObject goldEffect2;
+
+    GameObject childEffect;
+
     // 追尾するプレイヤーのID
     public int targetID;
 
@@ -38,6 +43,10 @@ public class BlockGoldManager : MonoBehaviour
         }
 
         player = GameObject.Find("Player1");
+
+        childEffect = Instantiate(goldEffect2,
+            new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y,this.gameObject.transform.position.z),
+             Quaternion.identity);
 
         Debug.Log("あたいは金だよ");
     }
@@ -97,6 +106,7 @@ public class BlockGoldManager : MonoBehaviour
 
                     // 破棄する
                     Destroy(this.gameObject);
+                    Destroy(childEffect);
                     Debug.Log("あたりめ");
                 }
 
@@ -105,13 +115,18 @@ public class BlockGoldManager : MonoBehaviour
         }
         else
         {
-            GameObject childObject = Instantiate(goldEffect, player.transform);
+            if (other.gameObject.layer == 3)
+            {
+                GameObject childObject = Instantiate(goldEffect, player.transform);
 
-            childObject.transform.position = new Vector3(player.transform.position.x, 0.9f, player.transform.position.z);
+                childObject.transform.position = new Vector3(player.transform.position.x, 0.9f, player.transform.position.z);
 
-            // 破棄する
-            Destroy(this.gameObject);
-            Debug.Log("あたりめ");
+                // 破棄する
+                Destroy(this.gameObject);
+                Destroy(childEffect);
+                Debug.Log("あたりめ");
+            }
+               
         }
     }
 }

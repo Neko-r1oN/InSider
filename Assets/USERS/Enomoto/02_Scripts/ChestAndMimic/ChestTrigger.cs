@@ -48,11 +48,8 @@ public class ChestTrigger : MonoBehaviour
                     {
                         if (isMimic == true)
                         {// ミミックだったら
-                            if (chestNum == 1 || chestNum == 2 || chestNum == 3)
-                            {
-                                // ミミックのテキストを表示
-                                textUI.GetComponent<TextUIManager>().OnMouseEnter(10);
-                            }
+                            // ミミックのテキストを表示
+                            textUI.GetComponent<TextUIManager>().OnMouseEnter(10);
                         }
                         else
                         {// ミミックじゃないとき
@@ -85,17 +82,8 @@ public class ChestTrigger : MonoBehaviour
                     // 真ん中のチェスト
                     if (chestNum == 1)
                     {
-                        if (isMimic == true)
-                        {
-                            // OnMouseEnter(11)はたからばこ
-                            textUI.GetComponent<TextUIManager>().OnMouseEnter(10);
-                        }
-                        else
-                        {
-                            // OnMouseEnter(11)はたからばこ
-                            textUI.GetComponent<TextUIManager>().OnMouseEnter(11);
-                        }
-                            
+                        // OnMouseEnter(11)はたからばこ
+                        textUI.GetComponent<TextUIManager>().OnMouseEnter(11);
                     }
                     // 右のチェスト
                     else if (chestNum == 2)
@@ -125,10 +113,25 @@ public class ChestTrigger : MonoBehaviour
                     {
                         if (isMimic == true)
                         {
-                            if(chestNum == 1 || chestNum == 2 || chestNum == 3)
+                            textUI.GetComponent<TextUIManager>().OnMouseExit(10);
+                        }
+                        else
+                        {
+                            // 真ん中のチェスト
+                            if (chestNum == 1)
                             {
-                                textUI.GetComponent<TextUIManager>().OnMouseEnter(10);
-                            }   
+                                textUI.GetComponent<TextUIManager>().OnMouseExit(11);
+                            }
+                            // 右のチェスト
+                            else if (chestNum == 2)
+                            {
+                                textUI.GetComponent<TextUIManager>().OnMouseExit(12);
+                            }
+                            // 左のチェスト
+                            else if (chestNum == 3)
+                            {
+                                textUI.GetComponent<TextUIManager>().OnMouseExit(13);
+                            }
                         }
                     }
                 }
@@ -140,16 +143,31 @@ public class ChestTrigger : MonoBehaviour
                     // 真ん中のチェスト
                     if (chestNum == 1)
                     {
+                        if (isMimic == true)
+                        {
+                            textUI.GetComponent<TextUIManager>().OnMouseExit(10);
+                        }
+
                         textUI.GetComponent<TextUIManager>().OnMouseExit(11);
                     }
                     // 右のチェスト
                     else if (chestNum == 2)
                     {
+                        if (isMimic == true)
+                        {
+                            textUI.GetComponent<TextUIManager>().OnMouseExit(10);
+                        }
+
                         textUI.GetComponent<TextUIManager>().OnMouseExit(12);
                     }
                     // 左のチェスト
                     else if (chestNum == 3)
                     {
+                        if (isMimic == true)
+                        {
+                            textUI.GetComponent<TextUIManager>().OnMouseExit(10);
+                        }
+
                         textUI.GetComponent<TextUIManager>().OnMouseExit(13);
                     }
                 }

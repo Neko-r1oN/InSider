@@ -165,13 +165,13 @@ public class Player : MonoBehaviour
                 return;
             }
         }
-        else
-        {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                DownPlayer(4);
-            }
-        }
+        //else
+        //{
+        //    if (Input.GetKeyDown(KeyCode.UpArrow))
+        //    {
+        //        DownPlayer(4);
+        //    }
+        //}
 
         if(staminaNum == null)
         {// nullチェック

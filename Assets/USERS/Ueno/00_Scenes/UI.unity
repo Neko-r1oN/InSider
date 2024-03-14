@@ -684,7 +684,7 @@ GameObject:
   - component: {fileID: 88455958}
   - component: {fileID: 88455957}
   m_Layer: 5
-  m_Name: ChestTextBack
+  m_Name: MimicTextBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1971,6 +1971,7 @@ MonoBehaviour:
   isCancel: 0
   subStamina: 0
   roadNum: 0
+  childObj: {fileID: 0}
   noStaminaSE: {fileID: 8300000, guid: 31ca9e4954f86df4ba76e60113bb9430, type: 3}
 --- !u!82 &158606400
 AudioSource:
