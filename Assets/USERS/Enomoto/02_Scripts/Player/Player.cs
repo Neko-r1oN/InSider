@@ -165,18 +165,6 @@ public class Player : MonoBehaviour
                 return;
             }
         }
-        //else
-        //{
-        //    if (Input.GetKeyDown(KeyCode.UpArrow))
-        //    {
-        //        DownPlayer(4);
-        //    }
-        //}
-
-        if(staminaNum == null)
-        {// nullチェック
-            return;
-        }
         
         // 現在のスタミナを表示
         staminaNum.GetComponent<Text>().text = "" + stamina;
@@ -227,15 +215,6 @@ public class Player : MonoBehaviour
                             {// サーバーを使用しない場合
                                 // 目的地へ移動
                                 agent.destination = clickedTarget;
-
-                                //if (hit.transform.tag == "SlowTrap")
-                                //{
-                                //    agent.speed = 1.5f;
-                                //}
-                                //else
-                                //{
-                                //    agent.speed = 4;
-                                //}
                             }
                         }
                         else

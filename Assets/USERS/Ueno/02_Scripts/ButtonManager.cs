@@ -325,9 +325,6 @@ public class ButtonManager : MonoBehaviour
         // プレイヤーのモードをNOTHINGに変更
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.NOTHING;
 
-        childObj = Instantiate(healing, new Vector3(player.transform.position.x, 0.9f, player.transform.position.z),
-            Quaternion.identity);
-
         rand = rnd.Next(1, 71); // 1～70までのランダムの数値
 
         // スタミナを増やす
@@ -343,6 +340,11 @@ public class ButtonManager : MonoBehaviour
 
             // 送信する
             await ClientManager.Instance.Send(restData, 8);
+        }
+        else
+        {
+            childObj = Instantiate(healing, new Vector3(player.transform.position.x, 0.9f, player.transform.position.z),
+    Quaternion.identity);
         }
     }
 

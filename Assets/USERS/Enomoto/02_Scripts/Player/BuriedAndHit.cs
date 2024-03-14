@@ -51,7 +51,7 @@ public class BuriedAndHit : MonoBehaviour
 
                 // クラス変数を作成
                 revisionPosData.playerID = ClientManager.Instance.playerID;
-                revisionPosData.targetID = ClientManager.Instance.playerID;
+                revisionPosData.targetID = player.GetComponent<Player>().playerObjID;
                 revisionPosData.isBuried = true;
                 revisionPosData.targetPosX = 0f;
                 revisionPosData.targetPosY = 0.9f;
@@ -70,7 +70,7 @@ public class BuriedAndHit : MonoBehaviour
 
                     // クラス変数を作成
                     revisionPosData.playerID = ClientManager.Instance.playerID;
-                    revisionPosData.targetID = ClientManager.Instance.playerID;
+                    revisionPosData.targetID = player.GetComponent<Player>().playerObjID;
                     revisionPosData.isDown = true;
 
                     // [revisionPosData]サーバーに送信

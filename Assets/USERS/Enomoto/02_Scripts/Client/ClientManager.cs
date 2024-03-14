@@ -83,6 +83,9 @@ public class ClientManager : MonoBehaviour
     [SerializeField] AudioClip fillSE;
     [SerializeField] AudioClip mineSE;
 
+    // パーティクル
+    [SerializeField] GameObject heelingPrefab;
+
     //===========================
     //  [公開]フィールド
     //===========================
@@ -96,6 +99,8 @@ public class ClientManager : MonoBehaviour
     /// 自身のプレイヤーID (1P,2Pなど)
     /// </summary>
     public int playerID { get; set; }
+
+    public int PLAYERID;
 
     /// <summary>
     /// 元々のプレイヤーID 
@@ -254,6 +259,11 @@ public class ClientManager : MonoBehaviour
 
         // 非同期処理を実行する
         StartConnect();
+    }
+
+    private void Update()
+    {
+        PLAYERID = playerID;
     }
 
     /// <summary>
@@ -605,6 +615,10 @@ public class ClientManager : MonoBehaviour
 
                         Debug.Log("[" + restData.playerID + "]が休んだ→(回復量：" + restData.addStamina + ") 合計：" + restData.totalStamina);
 
+                        GameObject heelPlayer = playerManager.GetComponent<PlayerManager>().players[restData.playerID];
+
+                        Instantiate(heelingPrefab, new Vector3(heelPlayer.transform.position.x, 0.9f, heelPlayer.transform.position.z),Quaternion.identity);
+
                         break;
                     case 9: // ゲーム中に切断したプレイヤーのIDを受信
 
@@ -859,7 +873,7 @@ public class ClientManager : MonoBehaviour
                         goldPos = new Vector3(goldPos.x + event_goldData.addPosX, 10f, goldPos.z + event_goldData.addPosZ);
 
                         // 金のオブジェクトの生成処理
-                        eventManager.GetComponent<EventManager>().GenerateEventStone(goldPos);
+                        eventManager.GetComponent<EventManager>().GenerateEventGold(goldPos);
 
                         Debug.Log("イベント：金");
 

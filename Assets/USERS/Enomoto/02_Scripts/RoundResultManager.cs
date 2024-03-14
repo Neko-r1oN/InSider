@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -37,7 +38,7 @@ public class RoundResultManager : MonoBehaviour
         isClick = false;
     }
 
-    private void Update()
+    private async Task Update()
     {
         if(isClick == true)
         {
@@ -52,19 +53,14 @@ public class RoundResultManager : MonoBehaviour
             GameObject text = Instantiate(loadingPrefab, canvasObj.transform);
             text.transform.localPosition = new Vector3(508, -507, 0);
 
-            Invoke("SendNotification", 5f);
+            Debug.Log("現在のラウンド数：" + ClientManager.Instance.roundNum);
+
+            // 適当なクラス変数を作成
+            ReadyData readyData = new ReadyData();
+
+            // 次のラウンドシーンに遷移する準備ができたことを通知
+            await ClientManager.Instance.Send(readyData, 15);
         }
-    }
-
-    private async void SendNotification()
-    {
-        Debug.Log("現在のラウンド数：" + ClientManager.Instance.roundNum);
-
-        // 適当なクラス変数を作成
-        ReadyData readyData = new ReadyData();
-
-        // 次のラウンドシーンに遷移する準備ができたことを通知
-        await ClientManager.Instance.Send(readyData, 15);
     }
 
     public void SetUI(List<int> totalScore, List<int> allieScore, List<int> insiderID)
