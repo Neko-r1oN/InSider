@@ -4033,6 +4033,7 @@ MonoBehaviour:
   isEnd: 0
   stamina: 100
   isInvincible: 0
+  isMotionMining: 0
   lookTarget: {x: 0, y: 0, z: 0}
   roadNum: 0
   _cycle: 1
@@ -10897,6 +10898,7 @@ MonoBehaviour:
   isEnd: 0
   stamina: 100
   isInvincible: 0
+  isMotionMining: 0
   lookTarget: {x: 0, y: 0, z: 0}
   roadNum: 0
   _cycle: 1
@@ -21067,6 +21069,7 @@ MonoBehaviour:
   isEnd: 0
   stamina: 100
   isInvincible: 0
+  isMotionMining: 0
   lookTarget: {x: 0, y: 0, z: 0}
   roadNum: 0
   _cycle: 1
@@ -22473,6 +22476,7 @@ MonoBehaviour:
   isEnd: 0
   stamina: 100
   isInvincible: 0
+  isMotionMining: 0
   lookTarget: {x: 0, y: 0, z: 0}
   roadNum: 0
   _cycle: 1
@@ -25524,6 +25528,7 @@ MonoBehaviour:
   isEnd: 0
   stamina: 100
   isInvincible: 0
+  isMotionMining: 0
   lookTarget: {x: 0, y: 0, z: 0}
   roadNum: 0
   _cycle: 1
@@ -29250,6 +29255,7 @@ MonoBehaviour:
   isEnd: 0
   stamina: 100
   isInvincible: 0
+  isMotionMining: 0
   lookTarget: {x: 0, y: 0, z: 0}
   roadNum: 0
   _cycle: 1

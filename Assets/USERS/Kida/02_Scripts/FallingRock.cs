@@ -5,10 +5,11 @@ using UnityEngine;
 public class FallingRock : MonoBehaviour
 {
     [SerializeField] GameObject smok;
+
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("DestroyStone",5.0f);
+        Invoke("DestroyStone", 5.0f);
     }
 
     // Update is called once per frame
