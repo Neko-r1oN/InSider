@@ -14,6 +14,7 @@ public class BlockManager : MonoBehaviour
 {
     // 格納用
     public GameObject[] blocks;
+    public GameObject[] bombs;
 
     // 道パネルのプレファブ
     [SerializeField] List<GameObject> roadPrefab;
@@ -23,6 +24,12 @@ public class BlockManager : MonoBehaviour
 
     // ゴールドのプレファブ
     [SerializeField] GameObject goldPrefab;
+
+    // 爆弾のプレファブ
+    [SerializeField] GameObject bombPrefab;
+
+    // トラップのプレファブ
+    [SerializeField] GameObject trapPrefab;
 
     // 格納用
     GameObject stageManager;
@@ -118,5 +125,40 @@ public class BlockManager : MonoBehaviour
             // Update処理を開始 & 追尾させるプレイヤーIDを代入する
             gold.GetComponent<BlockGoldManager>().StartMove(playerID);
         }
+    }
+
+    /// <summary>
+    /// 爆弾を生成する
+    /// </summary>
+    public void SetSabotage_Bomb(int objID,int bombID)
+    {
+        // 座標を設定
+        Vector3 minePos = blocks[objID].gameObject.transform.position;
+        minePos.y = 0.5f;
+
+        // 爆弾を生成する
+        GameObject bomb = Instantiate(bombPrefab, minePos, Quaternion.identity);
+
+        // オブジェクトの情報を格納する
+        bombs[bombID] = bomb;
+
+        // 爆弾の下にあるパネルの情報を爆弾に渡す
+        bomb.GetComponent<Bomb>().roadPanel = blocks[objID];
+
+        // パネルのタグをAbnormalPanelに変更
+        blocks[objID].tag = "AbnormalPanel";    // 爆弾が存在する限り、「埋める」の対象外になる
+    }
+
+    /// <summary>
+    /// トラップを設定する
+    /// </summary>
+    public void SetSabotage_Trap(int objID)
+    {
+        // 座標を設定
+        Vector3 minePos = blocks[objID].gameObject.transform.position;
+        minePos.y = 0f;
+
+        // トラップを生成する
+        GameObject bomb = Instantiate(trapPrefab, minePos, Quaternion.identity);
     }
 }

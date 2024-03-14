@@ -42,6 +42,9 @@ public class ButtonManager : MonoBehaviour
     // スタミナ不足UI
     [SerializeField] GameObject noStaminaUI;
 
+    // スタミナ消費量の説明
+    [SerializeField] List<GameObject> subStaminaText;
+
     // 情報を取得
     GameObject player;
     GameObject roadManager;
@@ -527,8 +530,29 @@ public class ButtonManager : MonoBehaviour
     /// <param name="num"></param>
     public void DisplayRoadText(int num)
     {
-        //textBack.SetActive(true);
+        int stamina = 0;
+
+        switch(num)
+        {
+            case 0:
+                stamina = 30 - RoadManager.Instance.buffStamina;
+                break;
+            case 1:
+                stamina = 40 - RoadManager.Instance.buffStamina;
+                break;
+            case 2:
+                stamina = 60 - RoadManager.Instance.buffStamina;
+                break;
+            case 3:
+                stamina = 80 - RoadManager.Instance.buffStamina;
+                break;
+            case 4:
+                stamina = 10 - RoadManager.Instance.buffStamina;
+                break;
+        }
+
         roadTextUIList[num].SetActive(true);
+        subStaminaText[num].GetComponent<Text>().text = "スタミナ -" + stamina;
     }
 
     // <summary>
@@ -544,15 +568,7 @@ public class ButtonManager : MonoBehaviour
         roadTextUIList[num].SetActive(false);
     }
 
-    ///// <summary>
-    ///// 混乱時にランダムで道を生成
-    ///// </summary>
-    //public void randChaosRoad(int num)
-    //{
-        
-    //}
-
-    public void RoadNum(int num)
+    public async void RoadNum(int num)
     {
         // プレイヤースクリプトのroadNumへnumを代入
         player.GetComponent<Player>().roadNum = num;
@@ -568,19 +584,19 @@ public class ButtonManager : MonoBehaviour
             roadTextUIList[i].SetActive(false);
         }
 
-        // アニメーションを開始するboolをtrue
-        animator.SetBool("Mining", true);
+        if (EditorManager.Instance.useServer == true)
+        {// サーバーを使用する場合
+            // データ変数を設定
+            PlayerIdData idData = new PlayerIdData();
+            idData.id = ClientManager.Instance.playerID;
+
+            // 送信する
+            await ClientManager.Instance.Send(idData, 17);
+        }
+        else
+        {// サーバーを使用しない
+            // アニメーションを開始するboolをtrue
+            animator.SetBool("Mining", true);
+        }
     }
-
-    //public void DisplayCoolTime()
-    //{
-    //    sabotageCoolTime.SetActive(true);
-
-    //    if(sabotage.GetComponent<Sabotage>().timeNum > 0)
-    //    {
-    //        sabotage.GetComponent<Sabotage>().InvokeRepeating("SubCoolTime", 0, 1);
-    //    }
-
-    //    Debug.Log("aa");
-    //}
 }

@@ -69,12 +69,31 @@ public class RoadManager : MonoBehaviour
 
     public int selectPanelCount;
 
+    // 消費量を抑えるスタミナの値
+    public int buffStamina;
+
+    // シングルトン用
+    public static RoadManager Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         rotY = 0;
         targetBlock = null;
         isGold = false;
+        buffStamina = 0;
 
         // Bake
         Baker = GameObject.Find("StageManager");
@@ -111,8 +130,12 @@ public class RoadManager : MonoBehaviour
         staminaUI.SetActive(false);
     }
 
-    private void Update()
+    private async Task Update()
     {
+        // 送信用のクラス変数
+        Sabotage_SetData setData = new Sabotage_SetData();
+        setData.objID = new List<int>();
+
         //*************************************************
         // プレイヤーモードがサボタージュ(埋める)だったら
         //*************************************************
@@ -123,15 +146,39 @@ public class RoadManager : MonoBehaviour
             {
                 for (int i = 0; i < selectPanelList.Count; i++)
                 {
-                    // オブジェクトを生成する
-                    GameObject block = Instantiate(blockObj, new Vector3(selectPanelList[i].transform.position.x,
-                        1.47f, selectPanelList[i].transform.position.z), Quaternion.identity);
+                    if (EditorManager.Instance.useServer == true)
+                    {// サーバーを使用する場合
+
+                        GameObject panel = selectPanelList[i];
+
+                        // データ変数を設定
+                        setData.objID.Add(panel.GetComponent<RoadPanel>().objeID);
+
+                        Debug.Log("選択したオブジェクトID : " + panel.GetComponent<RoadPanel>().objeID);
+
+                        if (i == selectPanelList.Count - 1)
+                        {// クラス変数に代入し終えたら
+
+                            // プレイヤーID・サボタージュのID設定
+                            setData.playerID = ClientManager.Instance.playerID;
+                            setData.sabotageID = 0;
+
+                            // 送信処理
+                            await ClientManager.Instance.Send(setData, 6);
+                        }
+                    }
+                    else
+                    {
+                        // オブジェクトを生成する
+                        GameObject block = Instantiate(blockObj, new Vector3(selectPanelList[i].transform.position.x,
+                            1.47f, selectPanelList[i].transform.position.z), Quaternion.identity);
+
+                        // オブジェクトを破棄
+                        Destroy(selectPanelList[i]);
+                    }
 
                     // カラー変更を元に戻す
                     selectPanelList[i].GetComponent<RoadPanel>().isColor = false;
-
-                    // オブジェクトを破棄
-                    Destroy(selectPanelList[i]);
                 }
 
                 sabotage.GetComponent<Sabotage>().isFill = true;
@@ -162,18 +209,42 @@ public class RoadManager : MonoBehaviour
             {
                 for (int n = 0; n < selectPanelList.Count; n++)
                 {
-                    // オブジェクトを生成する
-                    GameObject bomb = Instantiate(bombPrefab, new Vector3(selectPanelList[n].transform.position.x,
+                    if (EditorManager.Instance.useServer == true)
+                    {// サーバーを使用する場合
+
+                        GameObject panel = selectPanelList[n];
+
+                        // データ変数を設定
+                        setData.objID.Add(panel.GetComponent<RoadPanel>().objeID);
+
+                        Debug.Log("選択したオブジェクトID : " + panel.GetComponent<RoadPanel>().objeID);
+
+                        if (n == selectPanelList.Count - 1)
+                        {// クラス変数に代入し終えたら
+
+                            // プレイヤーID・サボタージュのID設定
+                            setData.playerID = ClientManager.Instance.playerID;
+                            setData.sabotageID = 1;
+
+                            // 送信処理
+                            await ClientManager.Instance.Send(setData, 6);
+                        }
+                    }
+                    else
+                    {
+                        // オブジェクトを生成する
+                        GameObject bomb = Instantiate(bombPrefab, new Vector3(selectPanelList[n].transform.position.x,
                                        0.5f, selectPanelList[n].transform.position.z), Quaternion.identity);
 
-                    // リストのn番目の情報を渡す
-                    bomb.GetComponent<Bomb>().roadPanel = selectPanelList[n];
+                        // リストのn番目の情報を渡す
+                        bomb.GetComponent<Bomb>().roadPanel = selectPanelList[n];
+
+                        // リストのn番目のタグをAbnormalPanelに変更
+                        selectPanelList[n].tag = "AbnormalPanel";
+                    }
 
                     // リストのn番目のカラーを元に戻す
                     selectPanelList[n].GetComponent<RoadPanel>().isColor = false;
-
-                    // リストのn番目のタグをAbnormalPanelに変更
-                    selectPanelList[n].tag = "AbnormalPanel";
                 }
 
                 sabotage.GetComponent<Sabotage>().isBomb = true;
@@ -202,15 +273,32 @@ public class RoadManager : MonoBehaviour
         {
             for (int n = 0; n < selectPanelList.Count; n++)
             {
-                // オブジェクトを生成する
-                GameObject throwTrap = Instantiate(throwPrefab, new Vector3(selectPanelList[n].transform.position.x,
-                                   1.47f, selectPanelList[n].transform.position.z), Quaternion.identity);
+                if (EditorManager.Instance.useServer == true)
+                {// サーバーを使用する場合
+
+                    GameObject panel = selectPanelList[n];
+
+                    // データ変数を設定
+                    setData.objID.Add(panel.GetComponent<RoadPanel>().objeID);
+
+                    Debug.Log("選択したオブジェクトID : " + panel.GetComponent<RoadPanel>().objeID);
+
+                    // プレイヤーID・サボタージュのID設定
+                    setData.playerID = ClientManager.Instance.playerID;
+                    setData.sabotageID = 2;
+
+                    // 送信処理
+                    await ClientManager.Instance.Send(setData, 6);
+                }
+                else
+                {
+                    // オブジェクトを生成する
+                    GameObject throwTrap = Instantiate(throwPrefab, new Vector3(selectPanelList[n].transform.position.x,
+                                       0f, selectPanelList[n].transform.position.z), Quaternion.identity);
+                }
 
                 // リストのn番目のカラーを元に戻す
                 selectPanelList[n].GetComponent<RoadPanel>().isColor = false;
-
-                // リストのn番目のタグをAbnormalPanelに変更
-                selectPanelList[n].tag = "AbnormalPanel";
 
                 sabotage.GetComponent<Sabotage>().isTrap = true;
 
@@ -299,7 +387,7 @@ public class RoadManager : MonoBehaviour
         if (uiMnager.GetComponent<UIManager>().isChaos == true)
         {
             // スタミナが40以上なら
-            if (script.stamina >= 40)
+            if (script.stamina >= 40 - buffStamina)
             {
                 if (num >= 76 && num <= 85)
                 {// 数値が76～85の間なら(多分10%)
@@ -328,7 +416,7 @@ public class RoadManager : MonoBehaviour
                 }
 
                 // スタミナを全て40固定で減らす
-                player.GetComponent<Player>().SubStamina(40);
+                player.GetComponent<Player>().SubStamina(40 - buffStamina);
             }
             else
             {
@@ -345,25 +433,25 @@ public class RoadManager : MonoBehaviour
         //************************************
         else
         {
-            if (num == 0 && script.stamina >= 30)
+            if (num == 0 && script.stamina >= 30 - buffStamina)
             {// I字 & スタミナが30以上なら
-                player.GetComponent<Player>().SubStamina(30);
+                player.GetComponent<Player>().SubStamina(30 - buffStamina);
             }
-            else if (num == 1 && script.stamina >= 40)
+            else if (num == 1 && script.stamina >= 40 - buffStamina)
             {// L字 & スタミナが40以上なら
-                player.GetComponent<Player>().SubStamina(40);
+                player.GetComponent<Player>().SubStamina(40 - buffStamina);
             }
-            else if (num == 2 && script.stamina >= 60)
+            else if (num == 2 && script.stamina >= 60 - buffStamina)
             {// T字 & スタミナ60以上なら
-                player.GetComponent<Player>().SubStamina(60);
+                player.GetComponent<Player>().SubStamina(60 - buffStamina);
             }
-            else if (num == 3 && script.stamina >= 80)
+            else if (num == 3 && script.stamina >= 80 - buffStamina)
             {// 十字 & スタミナが80以上なら
-                player.GetComponent<Player>().SubStamina(80);
+                player.GetComponent<Player>().SubStamina(80 - buffStamina);
             }
-            else if (num == 4 && script.stamina >= 10)
+            else if (num == 4 && script.stamina >= 10 - buffStamina)
             {// ゴミみたいな道 & スタミナが10以上なら
-                player.GetComponent<Player>().SubStamina(10);
+                player.GetComponent<Player>().SubStamina(10 - buffStamina);
             }
             else
             {

@@ -19,11 +19,23 @@ public class TextUIManager : MonoBehaviour
     // サボタージュでのいくつ置く場所を選択したかのテキスト
     Text saboPlaceText;
 
+    // シングルトン用
+    public static TextUIManager Instance;
+
     private void Awake()
     {
-        // テキストを非表示にする前にサボタージュ回数表示テキストを取得
-        saboPosstext = GameObject.Find("SaboPossNum").GetComponent<Text>();
-        saboPlaceText = GameObject.Find("SaboPlaceNum").GetComponent<Text>();
+        if (Instance == null)
+        {
+            Instance = this;
+
+            // テキストを非表示にする前にサボタージュ回数表示テキストを取得
+            saboPosstext = GameObject.Find("SaboPossNum").GetComponent<Text>();
+            saboPlaceText = GameObject.Find("SaboPlaceNum").GetComponent<Text>();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Start()

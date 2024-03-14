@@ -174,6 +174,7 @@ public class ClientManager : MonoBehaviour
         AllieScore,           // スコアの加算
         Start_RoundReady,     // 接続中のクライアント全員がOpenBoxシーンから遷移するときに通知を送る
         MapData,              // 宝箱の中身の情報を共有する際に、ウソをつくかどうか
+        PlayerMiningAnim,     // 採掘アニメーションをするプレイヤーのID
 
         //+++++++++++++++++++++++++
         //  発生するイベントのID
@@ -548,8 +549,27 @@ public class ClientManager : MonoBehaviour
                         // 道を埋める処理
                         blockManager.GetComponent<BlockManager>().FillObject(fillData.objeID);
 
-                        // もしも同じオブジェクトの場合＆＆サボタージュ中の場合リストから削除
-                        // textmanagerの表記も変更する
+                        //****************************************************************
+                        //  サボタージュで選択中のパネルが埋められて消えた時の処理
+                        //****************************************************************
+                        for (int i = 0; i < RoadManager.Instance.selectPanelList.Count; i++)
+                        {
+                            GameObject selectPanel = RoadManager.Instance.selectPanelList[i];
+
+                            if(selectPanel.GetComponent<RoadPanel>().objeID == fillData.objeID)
+                            {
+                                // 選択中のリストから削除＆選択数を減算
+                                RoadManager.Instance.selectPanelList.RemoveAt(i);
+                                RoadManager.Instance.selectPanelCount--;
+                                if(RoadManager.Instance.selectPanelCount <= 0)
+                                {
+                                    RoadManager.Instance.selectPanelCount = 0;
+                                }
+
+                                // テキストを更新する
+                                TextUIManager.Instance.PutNum(RoadManager.Instance.selectPanelCount);
+                            }
+                        }
 
                         break;
                     case 7: // 切り開く
@@ -738,6 +758,17 @@ public class ClientManager : MonoBehaviour
                         chestManager2.GetComponent<MimicManager>().SetImg(mapData.isLie, mapData.playerID);   // 宝の地図の内容を共有する
 
                         break;
+                    case 17:    // 採掘アニメーションをするプレイヤーID
+
+                        // JSONデシリアライズで取得する
+                        PlayerIdData idData = JsonConvert.DeserializeObject<PlayerIdData>(jsonString);
+
+                        Debug.Log("アニメーションプレイヤーID：" + idData.id);
+
+                        // プレイヤーが採掘するアニメーションを再生する
+                        playerManager.GetComponent<PlayerManager>().players[idData.id].GetComponent<Animator>().SetBool("Mining", true);
+
+                        break;
 
                     //*****************************
                     //  イベントのDataを受信
@@ -772,9 +803,8 @@ public class ClientManager : MonoBehaviour
                         break;
                     case 102:   // 混乱
 
-                        
-                        // フラグをTrueにする
-
+                        // パーティクル生成＆フラグをTrue
+                        eventManager.GetComponent<EventManager>().SetConfusion();
 
                         break;
                     case 103:   // 敵出現
@@ -794,7 +824,8 @@ public class ClientManager : MonoBehaviour
                         break;
                     case 104:   // スタミナバフ
 
-                        // フラグをTrueにする
+                        // パーティクル生成＆スタミナ消費量を抑える値を設定
+                        eventManager.GetComponent<EventManager>().SetBuff();
 
                         break;
                     case 105:   // ランダムに金が降ってくる
@@ -839,11 +870,11 @@ public class ClientManager : MonoBehaviour
                         }
                         else if(eventFinishData.eventID == 102)
                         {// 混乱イベントの場合
-                            // フラグをfalse
+                            eventManager.GetComponent<EventManager>().EndConfusion();
                         }
                         else if (eventFinishData.eventID == 104)
                         {// バフイベントの場合
-                            // フラグをfalse
+                            eventManager.GetComponent<EventManager>().EndBuff();
                         }
 
                         break;
@@ -858,7 +889,38 @@ public class ClientManager : MonoBehaviour
 
                         Debug.Log("サボタージュ発生 : " + setSabotageData.sabotageID);
 
-                        // RoadManager,リストもRoadManager
+                        if(setSabotageData.sabotageID == 0)
+                        {// 道を埋める
+                            for (int i = 0; i < setSabotageData.objID.Count; i++)
+                            {
+                                // ブロックを一つずつ生成
+                                blockManager.GetComponent<BlockManager>().FillObject(setSabotageData.objID[i]);
+                            }
+
+                            // 誰かによって使われたサボタージュを使用禁止にする
+                            Sabotage.Instance.GetComponent<Sabotage>().isFill = true;
+                        }
+                        else if (setSabotageData.sabotageID == 1)
+                        {// 爆弾を生成
+                            for (int i = 0; i < setSabotageData.objID.Count; i++)
+                            {
+                                // 一つずつ生成
+                                blockManager.GetComponent<BlockManager>().SetSabotage_Bomb(
+                                    setSabotageData.objID[i], setSabotageData.bombID[i]);
+                            }
+
+                            // 誰かによって使われたサボタージュを使用禁止にする
+                            Sabotage.Instance.GetComponent<Sabotage>().isBomb = true;
+                        }
+                        else if (setSabotageData.sabotageID == 2)
+                        {// トラップ生成
+                            blockManager.GetComponent<BlockManager>().SetSabotage_Trap(setSabotageData.objID[0]);
+
+                            // 誰かによって使われたサボタージュを使用禁止にする
+                            Sabotage.Instance.GetComponent<Sabotage>().isTrap = true;
+                        }
+
+
 
                         break;
                     case 201:   // 爆弾の解除 [送信用のため受信しない]
@@ -868,7 +930,9 @@ public class ClientManager : MonoBehaviour
 
                         Debug.Log("爆弾が解除された : " + cancellBombData.bombID);
 
-                        // IDに沿った爆弾を破棄する
+                        // 爆弾を破棄する
+                        blockManager.GetComponent<BlockManager>().bombs[cancellBombData.bombID].
+                        GetComponent<Bomb>().DestroyBomb();
 
                         break;
                     case 202:   // 爆弾を爆発させる
@@ -876,8 +940,21 @@ public class ClientManager : MonoBehaviour
                         // JSONデシリアライズで取得する
                         Sabotage_Bomb_ExplosionData explosionData = JsonConvert.DeserializeObject<Sabotage_Bomb_ExplosionData>(jsonString);
 
-                        Debug.Log("爆弾が爆発 [ -" + explosionData.subTurnNum + "ターン ]");
+                        Debug.Log("爆弾が爆発 [ 残り" + explosionData.restTurnNum + "ターン ]");
 
+                        for (int i = 0; i < blockManager.GetComponent<BlockManager>().bombs.Length; i++)
+                        {
+                            if(blockManager.GetComponent<BlockManager>().bombs[i] != null)
+                            {// 存在する場合
+                                // 爆発させる
+                                blockManager.GetComponent<BlockManager>().bombs[i].
+                                GetComponent<Bomb>().AtackbombPrefab();
+                            }
+                        }
+
+                        // 残りターン数を更新する
+                        UIManager manager = uiManager.GetComponent<UIManager>();
+                        manager.StartCoroutine(manager.UdRestTurnTextAnim(explosionData.restTurnNum));
 
                         break;
                 }
