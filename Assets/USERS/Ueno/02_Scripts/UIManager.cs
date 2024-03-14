@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class UIManager : MonoBehaviour
 {
@@ -68,6 +69,9 @@ public class UIManager : MonoBehaviour
     RoadManager roadManager;
     GameObject player;
     GameObject eventManager;
+
+    // 現在のターン数
+    public int turnsNum;
 
     public bool isChaos;
 
@@ -255,6 +259,19 @@ public class UIManager : MonoBehaviour
     public void UdRemainingTurns(int turnNum)
     {
         remainingTurnsText.GetComponent<Text>().text = "" + turnNum;
+        turnsNum = turnNum;
+    }
+
+    /// <summary>
+    /// 残りのターン数のテキストをアニメーションさせて更新する
+    /// </summary>
+    /// <param name="turnNum"></param>
+    public IEnumerator UdRestTurnTextAnim(int turnNum)
+    {
+        yield return new WaitForSeconds(0.6f);
+
+        remainingTurnsText.GetComponent<Text>().DOCounter(turnsNum, turnNum, 2.4f);  // スコアを0~最後まで更新する
+        turnsNum = turnNum;
     }
 
     /// <summary>

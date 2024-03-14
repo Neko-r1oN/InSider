@@ -27,6 +27,22 @@ public class Sabotage : MonoBehaviour
 
     public int timeNum;
 
+    // シングルトン用
+    public static Sabotage Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+
     private void Start()
     {
         // Player
@@ -188,7 +204,7 @@ public class Sabotage : MonoBehaviour
                 break;
 
             case 1:
-                sabotageText.text = "道の上に爆弾を3個設置します";
+                sabotageText.text = "道の上に爆弾を2個設置します";
                 break;
 
             case 2:

@@ -18,14 +18,12 @@ internal class Sabotage_SetData
     public int sabotageID { get; set; }  // サボタージュのID
 
     /// <summary>
-    /// 生成する座標のリスト
-    /// </summary>
-    List<float> posX { get; set; }
-    List<float> posY { get; set; }
-    List<float> posZ { get; set; }
-
-    /// <summary>
-    /// 生成したらオブジェクトにつけるID
+    /// 選択したブロックについているID
     /// </summary>
     public List<int> objID { get; set; }
+
+    /// <summary>
+    /// 爆弾のID
+    /// </summary>
+    public List<int> bombID { get; set; }
 }

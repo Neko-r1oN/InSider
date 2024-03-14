@@ -7,9 +7,14 @@ public class EventManager : MonoBehaviour
     [SerializeField] GameObject stonePrefab;
     [SerializeField] GameObject enemyPrefab;
     [SerializeField] GameObject goldPrefab;
+    [SerializeField] GameObject confusionPrefab;    // 混乱イベント用
+    [SerializeField] GameObject buffPrefab;         // スタミナ消費量が減るイベント用
 
-    // 混乱の際の混乱テクスチャのリスト
-    //GameObject chaos;
+    // 格納用
+    public List<GameObject> confusionObjList;
+    public List<GameObject> buffObjList;
+
+    GameObject playerManager;
 
     /// <summary>
     /// 発生するイベントのID (ただのメモ)
@@ -39,15 +44,19 @@ public class EventManager : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.Find("Player1");
-
-        //chaos = GameObject.Find("ChaosList");
+        if (EditorManager.Instance.useServer == true)
+        {// サーバーを使用する場合
+            playerManager = GameObject.Find("player-List");
+        }
+        else
+        {
+            player = GameObject.Find("Player1");
+        }
 
         uiManager = GameObject.Find("UIManager");
 
-        //chaos = GameObject.Find("Chaos");
-
-        //chaos.SetActive(false);
+        confusionObjList = new List<GameObject>();
+        buffObjList = new List<GameObject>();
     }
 
     private void Update()
@@ -91,6 +100,70 @@ public class EventManager : MonoBehaviour
                     break;
             }
         }
+    }
+
+    /// <summary>
+    /// 混乱状態にする
+    /// </summary>
+    public void SetConfusion()
+    {
+        PlayerManager manager = playerManager.GetComponent<PlayerManager>();
+
+        for (int i = 0; i < manager.players.Count; i++)
+        {
+            // 格納する
+            confusionObjList.Add(Instantiate(chaosPrefab, manager.players[i].transform));
+        }
+
+        // 混乱状態にするフラグ(true)
+        uiManager.GetComponent<UIManager>().isChaos = true;
+    }
+
+    /// <summary>
+    /// 混乱イベントを終了する
+    /// </summary>
+    public void EndConfusion()
+    {
+        foreach (GameObject particl in confusionObjList)
+        {
+            Destroy(particl);
+        }
+
+        confusionObjList = new List<GameObject>();
+
+        // 混乱状態にするフラグ(false)
+        uiManager.GetComponent<UIManager>().isChaos = false;
+    }
+
+    /// <summary>
+    /// バフをかける
+    /// </summary>
+    public void SetBuff()
+    {
+        RoadManager.Instance.buffStamina = 10;
+
+        PlayerManager manager = playerManager.GetComponent<PlayerManager>();
+
+        for (int i = 0; i < manager.players.Count; i++)
+        {
+            // 格納する
+            buffObjList.Add(Instantiate(buffPrefab, manager.players[i].transform));
+        }
+    }
+
+    /// <summary>
+    /// バフイベントを終了する
+    /// </summary>
+    public void EndBuff()
+    {
+        foreach (GameObject particl in buffObjList)
+        {
+            Destroy(particl);
+        }
+
+        buffObjList = new List<GameObject>();
+
+        RoadManager.Instance.buffStamina = 0;
     }
 
     /// <summary>

@@ -8,12 +8,7 @@ using System.Threading.Tasks;
 internal class Sabotage_Bomb_ExplosionData
 {
     /// <summary>
-    /// 減るターン数
-    /// </summary>
-    public int subTurnNum { get; set; }
-
-    /// <summary>
-    /// 残りのターン数
+    /// 更新後の残りのターン数
     /// </summary>
     public int restTurnNum { get; set; }
 }

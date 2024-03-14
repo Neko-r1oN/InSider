@@ -1956,6 +1956,12 @@ MonoBehaviour:
   sabotage3: {fileID: 2049312761}
   sabotageCoolTime: {fileID: 223534802}
   noStaminaUI: {fileID: 688306345}
+  subStaminaText:
+  - {fileID: 711993082}
+  - {fileID: 80256974}
+  - {fileID: 142941390}
+  - {fileID: 1253924418}
+  - {fileID: 178205368}
   sabotageUI: {fileID: 860535216}
   sabotage: {fileID: 1642309403}
   randRoad: 0
@@ -3479,6 +3485,7 @@ MonoBehaviour:
   targetBlock: {fileID: 0}
   rotY: 0
   selectPanelCount: 0
+  buffStamina: 0
 --- !u!1 &350550013
 GameObject:
   m_ObjectHideFlags: 0
@@ -11542,6 +11549,7 @@ MonoBehaviour:
   - {fileID: 809438460}
   chaos: {fileID: 1162193279}
   disabledIndexNumList: 
+  turnsNum: 0
   isChaos: 0
 --- !u!1 &1250558622
 GameObject:

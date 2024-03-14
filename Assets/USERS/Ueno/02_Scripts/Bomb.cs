@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Bomb : MonoBehaviour
 {
@@ -26,6 +27,9 @@ public class Bomb : MonoBehaviour
         camera = cameraManager.GetComponent<CameraManager>();
 
         obj = GameObject.Find("Object001");
+
+        // èôÅXÇ…ëÂÇ´Ç≠Ç∑ÇÈ
+        transform.DOScale(new Vector3(4f, 4f, 4f), 20f);
     }
 
     private void Update()

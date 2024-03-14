@@ -1,14 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class colorTest : MonoBehaviour
 {
-    [SerializeField] Material mat = default;
-
-    // Start is called before the first frame update
     void Start()
     {
-        this.GetComponent<SkinnedMeshRenderer>().material.SetColor("_BaseColor", Color.red);
+        transform.DOScale(new Vector3(4f, 4f, 4f), 20f);
     }
 }
