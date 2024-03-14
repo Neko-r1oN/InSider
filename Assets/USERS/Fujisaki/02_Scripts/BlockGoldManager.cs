@@ -13,6 +13,11 @@ public class BlockGoldManager : MonoBehaviour
     public float speed = 5.0f;
     bool isStart;
 
+    GameObject player;
+
+    // アイテムを拾ったときのエフェクト
+    [SerializeField] GameObject goldEffect;
+
     // 追尾するプレイヤーのID
     public int targetID;
 
@@ -31,6 +36,8 @@ public class BlockGoldManager : MonoBehaviour
 
             StartMove(0);
         }
+
+        player = GameObject.Find("Player1");
 
         Debug.Log("あたいは金だよ");
     }
@@ -82,6 +89,12 @@ public class BlockGoldManager : MonoBehaviour
                         ScoreMethodList.Instance.SendAddScore();
                     }
 
+                    GameObject childObject = Instantiate(goldEffect, player.transform);
+
+                    childObject.transform.position = new Vector3(player.transform.position.x, 0.9f, player.transform.position.z);
+
+                    Debug.Log(childObject);
+
                     // 破棄する
                     Destroy(this.gameObject);
                     Debug.Log("あたりめ");
@@ -92,6 +105,10 @@ public class BlockGoldManager : MonoBehaviour
         }
         else
         {
+            GameObject childObject = Instantiate(goldEffect, player.transform);
+
+            childObject.transform.position = new Vector3(player.transform.position.x, 0.9f, player.transform.position.z);
+
             // 破棄する
             Destroy(this.gameObject);
             Debug.Log("あたりめ");

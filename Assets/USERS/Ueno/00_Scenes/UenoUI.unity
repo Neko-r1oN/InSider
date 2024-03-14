@@ -1964,6 +1964,7 @@ MonoBehaviour:
   - {fileID: 178205368}
   - {fileID: 2044048716}
   sabotageUI: {fileID: 860535216}
+  healing: {fileID: 2528933531953519518, guid: 687b857aedcd1704c80ea5751594f27c, type: 3}
   sabotage: {fileID: 1642309403}
   randRoad: 0
   isCancel: 0
@@ -3479,7 +3480,7 @@ MonoBehaviour:
     type: 3}
   selectRoad: 0000000000000000000000000000000000000000
   selectPanelList: []
-  gold: {fileID: 8750506531741430590, guid: 61519c250e03a8e40a21ac3a3b618672, type: 3}
+  gold: {fileID: 4295556386234032078, guid: 50cfbcb366cc89440a166799628fab76, type: 3}
   smoke: {fileID: 839660796216691157, guid: 1f54bcff7f641f64b8c3adceb060c18c, type: 3}
   staminaUI: {fileID: 688306345}
   isAnimMining: 0

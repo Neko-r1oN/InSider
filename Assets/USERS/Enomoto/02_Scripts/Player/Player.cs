@@ -89,7 +89,7 @@ public class Player : MonoBehaviour
     }
 
     // プレイヤーのモード
-    public PLAYER_MODE mode = PLAYER_MODE.MOVE;
+    public PLAYER_MODE mode = PLAYER_MODE.NOTHING;
 
     // Start is called before the first frame update
     void Start()

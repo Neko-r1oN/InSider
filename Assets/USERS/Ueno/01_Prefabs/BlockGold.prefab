@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  goldEffect: {fileID: 4868924246256173959, guid: 0145888bd3dba2f4798f055730114988,
+  goldEffect: {fileID: 4868924246256173959, guid: f37a9e575dd84024880f347ce001874d,
     type: 3}
   targetID: 0
 --- !u!65 &4969215241218466484

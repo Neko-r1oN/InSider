@@ -517,7 +517,7 @@ public class RoadManager : MonoBehaviour
         uiMnager.GetComponent<UIManager>().road.SetActive(false);
 
         // プレイヤーのモードを戻す
-        player.GetComponent<Player>().mode = Player.PLAYER_MODE.MOVE;
+        player.GetComponent<Player>().mode = Player.PLAYER_MODE.NOTHING;
 
         //uiMnager.GetComponent<UIManager>().selectRoadNum = num;
     }
