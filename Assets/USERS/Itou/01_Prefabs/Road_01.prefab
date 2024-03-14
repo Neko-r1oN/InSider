@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2380855699057139250}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: -1}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: -0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 5, y: 1, z: 5}
   m_ConstrainProportionsScale: 0
@@ -126,7 +126,8 @@ MonoBehaviour:
   isFill: 0
   objeID: 0
   isFillSelect: 0
-  isbombPrefabSelect: 0
+  isbombSelect: 0
+  isThrowTrapSelect: 0
   smoke: {fileID: 5408633052442516991, guid: 1d6651dd79e115c4fb7cb9604b460ad1, type: 3}
   isColor: 0
 --- !u!1 &4045988123800060591

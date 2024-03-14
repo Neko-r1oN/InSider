@@ -71,19 +71,24 @@ public class BlockGoldManager : MonoBehaviour
         if (EditorManager.Instance.useServer == true)
         {// サーバーを使用する場合
 
-            if(other.GetComponent<Player>().playerObjID == targetID)
-            {// プレイヤーオブジェクトのIDがターゲットのIDと一致する
+            if (other.gameObject.layer == 3)
+            {// Playerのレイヤー
+                if (other.GetComponent<Player>().playerObjID == targetID)
+                {// プレイヤーオブジェクトのIDがターゲットのIDと一致する
 
-                if (ClientManager.Instance.playerID == targetID)
-                {// ターゲットのIDが自分自身のIDの場合は送信する
-                    // 加算するスコアをサーバーに送信する関数
-                    ScoreMethodList.Instance.SendAddScore();
+                    if (ClientManager.Instance.playerID == targetID)
+                    {// ターゲットのIDが自分自身のIDの場合は送信する
+                     // 加算するスコアをサーバーに送信する関数
+                        ScoreMethodList.Instance.SendAddScore();
+                    }
+
+                    // 破棄する
+                    Destroy(this.gameObject);
+                    Debug.Log("あたりめ");
                 }
 
-                // 破棄する
-                Destroy(this.gameObject);
-                Debug.Log("あたりめ");
             }
+
         }
         else
         {

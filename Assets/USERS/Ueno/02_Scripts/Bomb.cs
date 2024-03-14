@@ -29,7 +29,7 @@ public class Bomb : MonoBehaviour
         obj = GameObject.Find("Object001");
 
         // ™X‚É‘å‚«‚­‚·‚é
-        transform.DOScale(new Vector3(4f, 4f, 4f), 20f);
+        transform.DOScale(new Vector3(4f, 4f, 4f), 15f);
     }
 
     private void Update()
