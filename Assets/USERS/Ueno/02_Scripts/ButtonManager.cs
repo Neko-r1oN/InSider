@@ -554,8 +554,24 @@ public class ButtonManager : MonoBehaviour
 
     public void RoadNum(int num)
     {
+        bool isDig = roadManager.GetComponent<RoadManager>().IsDigPossible(num);
+
+        if (isDig == false)
+        {
+            noStaminaUI.SetActive(true);
+
+            return;
+        }
+
+        player.transform.LookAt(player.GetComponent<Player>().lookTarget);
+
         // プレイヤースクリプトのroadNumへnumを代入
         player.GetComponent<Player>().roadNum = num;
+
+        player.GetComponent<Player>().isMotionMining = true;
+
+        // プレイヤーのモードをMOVEに変更
+        player.GetComponent<Player>().mode = Player.PLAYER_MODE.MOVE;
 
         // 道UIを非表示
         uiManager.road.SetActive(false);
@@ -563,6 +579,7 @@ public class ButtonManager : MonoBehaviour
         // テキストUIを非表示
         textUI.HideText();
 
+        // 道UIの説明テキストを非表示
         for(int i= 0; i < roadTextUIList.Count; i++)
         {
             roadTextUIList[i].SetActive(false);

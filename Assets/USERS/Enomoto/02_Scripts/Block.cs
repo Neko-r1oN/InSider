@@ -97,6 +97,8 @@ public class Block : MonoBehaviour
                         // ブロックの情報を渡す
                         RoadManager.GetComponent<RoadManager>().targetBlock = this.gameObject;
 
+                        player.GetComponent<Player>().lookTarget = this.gameObject.transform.position;
+
                         buttonManager.GetComponent<ButtonManager>().canselButton.SetActive(false);
                     }
                 }

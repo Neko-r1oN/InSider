@@ -61,6 +61,12 @@ public class Player : MonoBehaviour
     // 無敵状態かどうか
     public bool isInvincible;
 
+    // 掘るモーション中かどうか
+    public bool isMotionMining;
+
+    // 見る方向
+    public Vector3 lookTarget;
+
     public int roadNum;
 
     int roadRandNum;
@@ -137,6 +143,8 @@ public class Player : MonoBehaviour
         animator.keepAnimatorStateOnDisable = true;
 
         isInvincible = false;
+
+        isMotionMining = false;
     }
 
     // Update is called once per frame
@@ -241,6 +249,11 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (isMotionMining == true)
+        {
+            return;
+        }
+
         if (agent.remainingDistance <= 0.1f)
         {// 移動量が0以下
             // 滑らかに回転
@@ -554,6 +567,8 @@ public class Player : MonoBehaviour
     {
         // 任意のアニメーションをfalseに変更
         animator.SetBool("Mining", false);
+
+        isMotionMining = false;
 
         if (roadNum == 0)
         {// I字
