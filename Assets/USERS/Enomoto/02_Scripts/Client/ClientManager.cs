@@ -367,11 +367,12 @@ public class ClientManager : MonoBehaviour
                         // JSONデシリアライズで取得する
                         PlayerIdData receiveData = JsonConvert.DeserializeObject<PlayerIdData>(jsonString);
 
-                        Debug.Log("新しく受信したID : " + receiveData.id);
+                        if (receiveData.id != null)
+                        {
+                            Debug.Log("新しく受信したID : " + receiveData.id);
 
-                        playerID = receiveData.id;   // 代入
-
-                        
+                            playerID = receiveData.id;   // 代入
+                        }
 
                         break;
                     case 1: // イベントIDが１の処理実行
