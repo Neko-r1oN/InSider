@@ -5199,7 +5199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb7cbb749471d4f41b356a75e241722e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useServer: 1
+  useServer: 0
 --- !u!4 &260213651
 Transform:
   m_ObjectHideFlags: 0
@@ -12138,6 +12138,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   isMimic: 0
+  chestNum: 1
 --- !u!65 &643850658
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26049,6 +26050,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   isMimic: 0
+  chestNum: 2
 --- !u!65 &1348810051
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -32282,7 +32284,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1727096689
 Transform:
   m_ObjectHideFlags: 0
@@ -39357,6 +39359,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   isMimic: 0
+  chestNum: 3
 --- !u!65 &2047405091
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -172,7 +172,11 @@ public class UIManager : MonoBehaviour
         // RoadUI‚ð•\Ž¦‚·‚é
         road.SetActive(true);
 
-        if (isChaos == true)
+        if(isChaos == false)
+        {
+            chaos.SetActive(false);
+        }
+        else if (isChaos == true)
         {
             chaos.SetActive(true);
 

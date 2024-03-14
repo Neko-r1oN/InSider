@@ -183,6 +183,8 @@ public class RoadManager : MonoBehaviour
 
                 sabotage.GetComponent<Sabotage>().isFill = true;
 
+                sabotage.GetComponent<Sabotage>().ResetCoolTime();
+
                 //sabotage.GetComponent<Sabotage>().timeNum = 60;
 
                 //リストの中身・カウントを初期化

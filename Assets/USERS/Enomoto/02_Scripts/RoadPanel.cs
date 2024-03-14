@@ -282,6 +282,8 @@ public class RoadPanel : MonoBehaviour
 
                         // スタミナを減らす
                         player.GetComponent<Player>().SubStamina(20);
+
+                        player.GetComponent<Player>().mode = Player.PLAYER_MODE.NOTHING;
                         Debug.Log("残りスタミナ" + player.GetComponent<Player>().stamina);
                     }
                 }
