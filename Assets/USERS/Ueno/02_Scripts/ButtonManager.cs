@@ -53,6 +53,7 @@ public class ButtonManager : MonoBehaviour
     GameObject cameraManager;
     GameObject eventManager;
     [SerializeField] public GameObject sabotageUI;
+    [SerializeField] GameObject healing;
 
     // サボタージュのカウントを使うために情報を格納
     [SerializeField] GameObject sabotage;
@@ -314,7 +315,11 @@ public class ButtonManager : MonoBehaviour
         // プレイヤーのモードをNOTHINGに変更
         player.GetComponent<Player>().mode = Player.PLAYER_MODE.NOTHING;
 
-        rand = rnd.Next(0, 71); // 0～70までのランダムの数値
+        GameObject childObj = Instantiate(healing, new Vector3(player.transform.position.x, 0.9f, player.transform.position.z),
+            Quaternion.identity);
+
+
+        rand = rnd.Next(1, 71); // 1～70までのランダムの数値
 
         // スタミナを増やす
         player.GetComponent<Player>().AddStamina(rand);

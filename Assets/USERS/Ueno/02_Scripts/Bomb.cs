@@ -11,6 +11,9 @@ public class Bomb : MonoBehaviour
     // 爆発エフェクトプレファブを格納
     [SerializeField] GameObject explosion;
 
+    // ボム解除のエフェクト
+    [SerializeField] GameObject effectBomb;
+
     // パネル情報を他のスクリプトから取得
     public GameObject roadPanel;
 
@@ -87,6 +90,8 @@ public class Bomb : MonoBehaviour
     {
         roadPanel.tag = "RoadPanel";
 
+        
+
         Destroy(this.gameObject);
     }
 
@@ -100,6 +105,10 @@ public class Bomb : MonoBehaviour
         {// 当たったレイヤーが3(Player)なら
             // ロードパネルのタグをRoadPanel戻す
             roadPanel.tag = "RoadPanel";
+
+            // 解除エフェクトを生成
+            GameObject childEffectObj = Instantiate(effectBomb, 
+                new Vector3(this.gameObject.transform.position.x,0.9f,this.transform.position.z), Quaternion.identity);
 
             // ボムを消す
             Destroy(this.gameObject);
