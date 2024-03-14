@@ -31,6 +31,12 @@ public class BlockManager : MonoBehaviour
     // トラップのプレファブ
     [SerializeField] GameObject trapPrefab;
 
+    // 埋めるときのアニメプレハブ
+    [SerializeField] GameObject fillAnim;
+
+    // 切り開くときのアニメプレハブ
+    [SerializeField] GameObject mineAnim;
+
     // 格納用
     GameObject stageManager;
 
@@ -65,11 +71,16 @@ public class BlockManager : MonoBehaviour
     /// </summary>
     /// <param name="objeID">破棄するオブジェクトID</param>
     /// <param name="fillPos">座標</param>
-    public void FillObject(int objeID)
+    public IEnumerator FillObject(int objeID)
     {
         // 座標を設定
         Vector3 fillPos = blocks[objeID].gameObject.transform.position;
         fillPos.y = 1.47f;
+
+        // 切り開くときのアニメプレファブ
+        Instantiate(fillAnim, new Vector3(fillPos.x, 1f, fillPos.z), Quaternion.identity);
+
+        yield return new WaitForSeconds(0.5f);    // ↑↑のアニメーションの都合で遅らせる
 
         // オブジェクトを生成する
         GameObject block = Instantiate(blockPrefab, fillPos, Quaternion.identity);
@@ -102,6 +113,9 @@ public class BlockManager : MonoBehaviour
 
         // オブジェクトを生成する
         GameObject road = Instantiate(roadPrefab[prefabID], minePos, Quaternion.Euler(0, rotY, 0));
+
+        // 切り開くときのアニメプレファブ
+        Instantiate(mineAnim, new Vector3(road.transform.position.x,1f,road.transform.position.z),Quaternion.identity);
 
         // ブロック情報を更新＆破棄する
         GameObject dieObje = blocks[objeID];
@@ -143,6 +157,9 @@ public class BlockManager : MonoBehaviour
 
         // 爆弾を生成する
         GameObject bomb = Instantiate(bombPrefab, minePos, Quaternion.identity);
+
+        // 爆弾にIDを設定
+        bomb.GetComponent<Bomb>().bombID = bombID;
 
         // オブジェクトの情報を格納する
         bombs[bombID] = bomb;

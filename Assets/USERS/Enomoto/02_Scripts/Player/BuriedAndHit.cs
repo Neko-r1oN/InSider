@@ -35,8 +35,15 @@ public class BuriedAndHit : MonoBehaviour
             // クラス変数を作成
             RevisionPosAndDropGoldData revisionPosData = new RevisionPosAndDropGoldData();
 
+            Player playerCom = player.GetComponent<Player>();
+
+            if(playerCom.mode == Player.PLAYER_MODE.MINING || playerCom.mode == Player.PLAYER_MODE.FILL)
+            {// 採掘・埋めるModeのとき
+                return;
+            }
+
             if (other.transform.tag == "Block" 
-                && player.GetComponent<Player>().isInvincible == false  // ダウン状態ではない場合
+                && playerCom.isInvincible == false  // ダウン状態ではない場合
                 && isBuried == false) // 処理が何度も入るのを阻止
             {// ブロックに埋まった
 
