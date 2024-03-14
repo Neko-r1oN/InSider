@@ -128,16 +128,16 @@ public class Bomb : MonoBehaviour
                 //int A = other.GetComponent<Player>().playerObjID;
                 //int B = ClientManager.Instance.playerID;
 
-                //Debug.Log(A);
-                //Debug.Log(B);
+                Debug.Log("プレイヤーのオブジェクトID：" + other.GetComponent<Player>().playerObjID);
+                Debug.Log("プレイヤーID：" + ClientManager.Instance.playerID);
 
                 //if (other.GetComponent<Player>().playerObjID == ClientManager.Instance.playerID)
                 //{// プレイヤーのオブジェクトが自分自身の場合
 
                 //    Debug.Log("eeeeee");
 
-                    // クラス変数を作成
-                    Sabotage_Bomb_CancellData cancellData = new Sabotage_Bomb_CancellData();
+                // クラス変数を作成
+                Sabotage_Bomb_CancellData cancellData = new Sabotage_Bomb_CancellData();
                     cancellData.playerID = ClientManager.Instance.playerID;
                     cancellData.bombID = bombID;
 
