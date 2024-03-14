@@ -70,7 +70,7 @@ public class ClientManager : MonoBehaviour
     GameObject enemyManager;
 
     // 必要接続人数
-    int RequiredNum = 1;
+    int RequiredNum = 4;
 
     // ゲームが終了したかどうか
     bool isGameSet;
