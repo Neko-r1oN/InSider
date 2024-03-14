@@ -70,7 +70,7 @@ public class ClientManager : MonoBehaviour
     GameObject enemyManager;
 
     // 必要接続人数
-    int RequiredNum = 4;
+    int RequiredNum = 3;
 
     // ゲームが終了したかどうか
     bool isGameSet;
@@ -367,12 +367,9 @@ public class ClientManager : MonoBehaviour
                         // JSONデシリアライズで取得する
                         PlayerIdData receiveData = JsonConvert.DeserializeObject<PlayerIdData>(jsonString);
 
-                        if (receiveData.id != null)
-                        {
-                            Debug.Log("新しく受信したID : " + receiveData.id);
+                        Debug.Log("新しく受信したID : " + receiveData.id);
 
-                            playerID = receiveData.id;   // 代入
-                        }
+                        playerID = receiveData.id;   // 代入
 
                         break;
                     case 1: // イベントIDが１の処理実行
