@@ -118,7 +118,7 @@ public class Bomb : MonoBehaviour
 
                 Debug.Log("iiiiiiiiiiiiiii");
 
-                if (other.GetComponent<Player>() != null)
+                if (other.gameObject.GetComponent<Player>() != null)
                 {// Playerスクリプトがない場合
                     return;
                 }
@@ -128,8 +128,10 @@ public class Bomb : MonoBehaviour
                 //int A = other.GetComponent<Player>().playerObjID;
                 //int B = ClientManager.Instance.playerID;
 
-                Debug.Log("プレイヤーのオブジェクトID：" + other.GetComponent<Player>().playerObjID);
+                Debug.Log("プレイヤーのオブジェクトID：" + other.gameObject.GetComponent<Player>().playerObjID);
                 Debug.Log("プレイヤーID：" + ClientManager.Instance.playerID);
+
+                Debug.Log("ppppp");
 
                 //if (other.GetComponent<Player>().playerObjID == ClientManager.Instance.playerID)
                 //{// プレイヤーのオブジェクトが自分自身の場合

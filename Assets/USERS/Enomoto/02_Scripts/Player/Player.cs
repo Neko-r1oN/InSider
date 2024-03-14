@@ -511,28 +511,28 @@ public class Player : MonoBehaviour
         // Idleアニメを再生する
         animator.Play("MinerIdle");
 
-        //----------------
-        //  座標を修正
-        //----------------
-        if (EditorManager.Instance.useServer == true)
-        {// サーバーを使用している場合
-            // クラス変数を作成
-            RevisionPosAndDropGoldData revisionPosData = new RevisionPosAndDropGoldData();
-            revisionPosData.playerID = ClientManager.Instance.playerID;
-            revisionPosData.targetID = ClientManager.Instance.playerID;
-            revisionPosData.isDown = false;
-            revisionPosData.targetPosX = 0f;
-            revisionPosData.targetPosY = 0.9f;
-            revisionPosData.targetPosZ = -5f;
+        ////----------------
+        ////  座標を修正
+        ////----------------
+        //if (EditorManager.Instance.useServer == true)
+        //{// サーバーを使用している場合
+        //    // クラス変数を作成
+        //    RevisionPosAndDropGoldData revisionPosData = new RevisionPosAndDropGoldData();
+        //    revisionPosData.playerID = ClientManager.Instance.playerID;
+        //    revisionPosData.targetID = ClientManager.Instance.playerID;
+        //    revisionPosData.isDown = false;
+        //    revisionPosData.targetPosX = 0f;
+        //    revisionPosData.targetPosY = 0.9f;
+        //    revisionPosData.targetPosZ = -5f;
 
-            // [revisionPosData]サーバーに送信
-            await ClientManager.Instance.Send(revisionPosData, 12);
-        }
-        else
-        {
-            // 座標を設定
-            RevisionPos(new Vector3(0f, 0.9f, -5f));
-        }
+        //    // [revisionPosData]サーバーに送信
+        //    await ClientManager.Instance.Send(revisionPosData, 12);
+        //}
+        //else
+        //{
+        //    // 座標を設定
+        //    RevisionPos(new Vector3(0f, 0.9f, -5f));
+        //}
     }
 
     /// <summary>

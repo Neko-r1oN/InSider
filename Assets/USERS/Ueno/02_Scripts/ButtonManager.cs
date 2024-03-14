@@ -205,6 +205,9 @@ public class ButtonManager : MonoBehaviour
         {// サーバーを使用する場合
             if (ClientManager.Instance.turnPlayerID != ClientManager.Instance.playerID)
             {// 自身のターンではない場合
+
+                Debug.Log("俺のターンではない");
+
                 return;
             }
         }
@@ -256,7 +259,7 @@ public class ButtonManager : MonoBehaviour
     public void fill()
     {//埋めるを選んだ場合
 
-        if (player.GetComponent<Player>().mode == Player.PLAYER_MODE.MOVE)
+        if (player.GetComponent<Player>().mode == Player.PLAYER_MODE.NOTHING)   // MOVE
         {
             return;
         }
@@ -291,6 +294,9 @@ public class ButtonManager : MonoBehaviour
         if (player.GetComponent<Player>().isEnd == false
             || TimeUI.Instance.nowTime <= 0)
         {// プレイヤーが移動中の場合 || 制限時間が0以下の場合
+
+            Debug.Log("俺のターンではない");
+
             return;
         }
 
@@ -307,6 +313,9 @@ public class ButtonManager : MonoBehaviour
         {// サーバーを使用する場合
             if (ClientManager.Instance.turnPlayerID != ClientManager.Instance.playerID)
             {// 自身のターンではない場合
+
+                Debug.Log("俺のターンではない");
+
                 return;
             }
         }
@@ -319,6 +328,9 @@ public class ButtonManager : MonoBehaviour
 
         if (player.GetComponent<Player>().isEnd == false || TimeUI.Instance.nowTime <= 0)
         {// プレイヤーが移動中の場合 || 制限時間が0以下の場合
+
+            Debug.Log("俺のターンではない");
+
             return;
         }
 
