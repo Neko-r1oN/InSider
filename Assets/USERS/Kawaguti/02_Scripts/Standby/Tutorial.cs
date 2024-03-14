@@ -8,7 +8,7 @@ public class Tutorial : MonoBehaviour
     [SerializeField] GameObject StartButton;
 
     [SerializeField] GameObject ButtonUI;
-   
+
 
     public void Start()
     {
@@ -24,9 +24,14 @@ public class Tutorial : MonoBehaviour
         ButtonUI.SetActive(true);
        
     }
-    public void BackTutorial()
+    public void NextButton()
     {
-        
+       
+    }
+
+    public void BackButton()
+    {
+       
     }
 
     public void StoptTutorial()
