@@ -60,8 +60,6 @@ public class TextUIManager : MonoBehaviour
     /// <param name="num"></param>
     public void OnMouseExit(int num)
     {
-        Debug.Log("はずれた");
-
         // 表示されていた説明文を非表示
         textList[num].SetActive(false);
     }

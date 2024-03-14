@@ -75,6 +75,10 @@ public class RoadManager : MonoBehaviour
     // シングルトン用
     public static RoadManager Instance;
 
+    // オーディオソース系
+    AudioSource audio;
+    [SerializeField] AudioClip noStaminaSE;
+
     private void Awake()
     {
         if (Instance == null)
@@ -94,6 +98,7 @@ public class RoadManager : MonoBehaviour
         targetBlock = null;
         isGold = false;
         buffStamina = 0;
+        audio = GetComponent<AudioSource>();
 
         // Bake
         Baker = GameObject.Find("StageManager");
@@ -465,6 +470,8 @@ public class RoadManager : MonoBehaviour
 
                 // スタミナ不足UIの表示
                 staminaUI.SetActive(true);
+
+                audio.PlayOneShot(noStaminaSE);
 
                 return;
             }

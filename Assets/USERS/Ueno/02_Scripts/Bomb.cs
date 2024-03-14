@@ -19,6 +19,10 @@ public class Bomb : MonoBehaviour
     // カメラマネージャー
     CameraManager camera;
 
+    // オーディオソース系
+    AudioSource audio;
+    [SerializeField] AudioClip explosionSE;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -30,6 +34,8 @@ public class Bomb : MonoBehaviour
 
         // 徐々に大きくする
         transform.DOScale(new Vector3(4f, 4f, 4f), 15f);
+
+        audio = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -70,6 +76,8 @@ public class Bomb : MonoBehaviour
 
         // カメラを揺らす処理
         camera.ShakeCamera();
+
+        audio.PlayOneShot(explosionSE);
     }
 
     /// <summary>

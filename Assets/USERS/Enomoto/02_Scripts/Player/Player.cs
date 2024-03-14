@@ -76,6 +76,9 @@ public class Player : MonoBehaviour
     // 点滅周期[s]
     [SerializeField] private float _cycle = 1;
 
+    AudioSource audio;
+    [SerializeField] AudioClip ohSE;
+
     public enum PLAYER_MODE
     {
         MOVE,         // 移動
@@ -145,6 +148,8 @@ public class Player : MonoBehaviour
         isInvincible = false;
 
         isMotionMining = false;
+
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -493,6 +498,8 @@ public class Player : MonoBehaviour
         {// ダウンしている場合
             return;
         }
+
+        audio.PlayOneShot(ohSE);
 
         // フラグを真
         isInvincible = true;

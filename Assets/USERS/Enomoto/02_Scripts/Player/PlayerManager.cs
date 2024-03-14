@@ -10,7 +10,7 @@ public class PlayerManager : MonoBehaviour
     // トリガーのリスト
     public List<GameObject> triggerList;
 
-    void Awake()
+    private void Start()
     {
         if (EditorManager.Instance.useServer == false)
         {// サーバーを使用しない場合
