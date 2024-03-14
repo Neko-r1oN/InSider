@@ -164,7 +164,7 @@ public class RoadManager : MonoBehaviour
                             setData.sabotageID = 0;
 
                             // 送信処理
-                            await ClientManager.Instance.Send(setData, 6);
+                            await ClientManager.Instance.Send(setData, 200);
                         }
                     }
                     else
@@ -219,7 +219,7 @@ public class RoadManager : MonoBehaviour
                         // データ変数を設定
                         setData.objID.Add(panel.GetComponent<RoadPanel>().objeID);
 
-                        Debug.Log("選択したオブジェクトID : " + panel.GetComponent<RoadPanel>().objeID);
+                        Debug.Log("選択したオブジェクトID : " + setData.objID[n]);
 
                         if (n == selectPanelList.Count - 1)
                         {// クラス変数に代入し終えたら
@@ -229,7 +229,7 @@ public class RoadManager : MonoBehaviour
                             setData.sabotageID = 1;
 
                             // 送信処理
-                            await ClientManager.Instance.Send(setData, 6);
+                            await ClientManager.Instance.Send(setData, 200);
                         }
                     }
                     else
@@ -290,7 +290,7 @@ public class RoadManager : MonoBehaviour
                     setData.sabotageID = 2;
 
                     // 送信処理
-                    await ClientManager.Instance.Send(setData, 6);
+                    await ClientManager.Instance.Send(setData, 200);
                 }
                 else
                 {

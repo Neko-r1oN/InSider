@@ -561,6 +561,9 @@ public class ButtonManager : MonoBehaviour
             case 4:
                 stamina = 10 - RoadManager.Instance.buffStamina;
                 break;
+            case 5:
+                stamina = 40 - RoadManager.Instance.buffStamina;
+                break;
         }
 
         roadTextUIList[num].SetActive(true);

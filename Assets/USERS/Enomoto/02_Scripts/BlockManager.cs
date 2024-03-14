@@ -55,6 +55,9 @@ public class BlockManager : MonoBehaviour
         }
 
         Debug.Log("ブロックの数:"+blocks.Length);
+
+        // 爆弾の最大数
+        bombs = new GameObject[2];
     }
 
     /// <summary>
@@ -132,6 +135,8 @@ public class BlockManager : MonoBehaviour
     /// </summary>
     public void SetSabotage_Bomb(int objID,int bombID)
     {
+        Debug.Log("生成する");
+
         // 座標を設定
         Vector3 minePos = blocks[objID].gameObject.transform.position;
         minePos.y = 0.5f;

@@ -570,6 +570,14 @@ public class Player : MonoBehaviour
         // 任意のアニメーションをfalseに変更
         animator.SetBool("Mining", false);
 
+        if(EditorManager.Instance.useServer)
+        {// サーバーを使用する場合
+            if (this.playerObjID != ClientManager.Instance.playerID)
+            {// アニメーションイベントを起こしたプレイヤーオブジェクトが自分自身の場合
+                return;
+            }
+        }
+
         isMotionMining = false;
 
         if (roadNum == 0)

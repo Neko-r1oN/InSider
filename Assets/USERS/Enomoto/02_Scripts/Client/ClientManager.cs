@@ -870,10 +870,16 @@ public class ClientManager : MonoBehaviour
                         }
                         else if(eventFinishData.eventID == 102)
                         {// 混乱イベントの場合
+
+                            Debug.Log("あああ");
+
                             eventManager.GetComponent<EventManager>().EndConfusion();
                         }
                         else if (eventFinishData.eventID == 104)
                         {// バフイベントの場合
+
+                            Debug.Log("いいい");
+
                             eventManager.GetComponent<EventManager>().EndBuff();
                         }
 
@@ -899,11 +905,18 @@ public class ClientManager : MonoBehaviour
 
                             // 誰かによって使われたサボタージュを使用禁止にする
                             Sabotage.Instance.GetComponent<Sabotage>().isFill = true;
+
+                            Debug.Log(Sabotage.Instance.GetComponent<Sabotage>().isFill);
                         }
                         else if (setSabotageData.sabotageID == 1)
                         {// 爆弾を生成
+
+                            Debug.Log(setSabotageData.objID.Count);
+
                             for (int i = 0; i < setSabotageData.objID.Count; i++)
                             {
+                                Debug.Log(setSabotageData.objID[i] + ":" + setSabotageData.bombID[i]);
+
                                 // 一つずつ生成
                                 blockManager.GetComponent<BlockManager>().SetSabotage_Bomb(
                                     setSabotageData.objID[i], setSabotageData.bombID[i]);
@@ -911,6 +924,9 @@ public class ClientManager : MonoBehaviour
 
                             // 誰かによって使われたサボタージュを使用禁止にする
                             Sabotage.Instance.GetComponent<Sabotage>().isBomb = true;
+
+                            Debug.Log(Sabotage.Instance.GetComponent<Sabotage>().isBomb);
+
                         }
                         else if (setSabotageData.sabotageID == 2)
                         {// トラップ生成
@@ -918,9 +934,9 @@ public class ClientManager : MonoBehaviour
 
                             // 誰かによって使われたサボタージュを使用禁止にする
                             Sabotage.Instance.GetComponent<Sabotage>().isTrap = true;
+
+                            Debug.Log(Sabotage.Instance.GetComponent<Sabotage>().isTrap);
                         }
-
-
 
                         break;
                     case 201:   // 爆弾の解除 [送信用のため受信しない]

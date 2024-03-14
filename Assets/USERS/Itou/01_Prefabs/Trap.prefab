@@ -275,8 +275,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8262468188899552840}
   m_Layer: 0
-  m_Name: AbnormalBlock
-  m_TagString: Untagged
+  m_Name: Trap
+  m_TagString: SlowTrap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

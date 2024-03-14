@@ -126,6 +126,7 @@ public class EventManager : MonoBehaviour
     {
         foreach (GameObject particl in confusionObjList)
         {
+            Debug.Log("îjä¸ÅF" + particl.name);
             Destroy(particl);
         }
 
@@ -158,6 +159,7 @@ public class EventManager : MonoBehaviour
     {
         foreach (GameObject particl in buffObjList)
         {
+            Debug.Log("îjä¸ÅF" + particl.name);
             Destroy(particl);
         }
 
