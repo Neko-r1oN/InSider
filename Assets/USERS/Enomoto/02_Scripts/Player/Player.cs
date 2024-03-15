@@ -399,7 +399,12 @@ public class Player : MonoBehaviour
         agent.enabled = true;
 
         isEnd = true;
+
         mode = PLAYER_MODE.NOTHING;
+
+        // 任意のアニメーションをfalseに変更
+        animator.SetBool("Run", false);
+
         // Idleアニメを再生する
         animator.Play("MinerIdle");
     }

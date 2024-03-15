@@ -42,7 +42,7 @@ public class BuriedAndHit : MonoBehaviour
                 return;
             }
 
-            if (player.GetComponent<Player>().playerObjID == ClientManager.Instance.playerID)
+            if (playerCom.playerObjID == ClientManager.Instance.playerID)
             {
                 if (other.transform.tag == "Block"
                     && playerCom.isInvincible == false  // ダウン状態ではない場合
@@ -62,7 +62,7 @@ public class BuriedAndHit : MonoBehaviour
                 else if (other.gameObject.layer == 7)
                 {// 敵に触れた || イベントの落石が当たった
 
-                    if (player.GetComponent<Player>().isInvincible == false)
+                    if (playerCom.isInvincible == false)
                     {// Playerがダウンしていない場合
 
                         Debug.Log("敵に攻撃された");
