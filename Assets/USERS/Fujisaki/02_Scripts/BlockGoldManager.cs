@@ -89,6 +89,12 @@ public class BlockGoldManager : MonoBehaviour
 
             if (other.gameObject.layer == 3)
             {// Playerのレイヤー
+
+                if(other.gameObject.GetComponent<Player>() == null)
+                {
+                    return;
+                }
+
                 if (other.gameObject.GetComponent<Player>().playerObjID == targetID)
                 {// プレイヤーオブジェクトのIDがターゲットのIDと一致する
 

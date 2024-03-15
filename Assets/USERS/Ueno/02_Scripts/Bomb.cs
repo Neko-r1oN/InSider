@@ -125,8 +125,10 @@ public class Bomb : MonoBehaviour
 
                 Debug.Log("uuuuuu");
 
-                //int A = other.GetComponent<Player>().playerObjID;
-                //int B = ClientManager.Instance.playerID;
+                Debug.Log(other.gameObject.name);
+
+                int A = other.GetComponent<Player>().playerObjID;
+                int B = ClientManager.Instance.playerID;
 
                 Debug.Log("プレイヤーのオブジェクトID：" + other.gameObject.GetComponent<Player>().playerObjID);
                 Debug.Log("プレイヤーID：" + ClientManager.Instance.playerID);

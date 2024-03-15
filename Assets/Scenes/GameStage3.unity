@@ -18056,7 +18056,7 @@ MonoBehaviour:
     type: 3}
   enemyPrefab: {fileID: 8902166855417294600, guid: 9add92084ee2ccb4eae98617b20020e7,
     type: 3}
-  goldPrefab: {fileID: 64555726199534122, guid: f0b86846fe95bf54ca7cd3daee835bdd,
+  goldPrefab: {fileID: 1194406521208508902, guid: 92eb0764bbd913c43a64e1799ee2c47f,
     type: 3}
   confusionPrefab: {fileID: 4727419194395133498, guid: 637093d00aee74b418b918c2ec99bdb4,
     type: 3}
