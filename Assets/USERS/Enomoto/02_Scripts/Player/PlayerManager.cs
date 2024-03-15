@@ -86,7 +86,7 @@ public class PlayerManager : MonoBehaviour
         }
 
         // ƒ_ƒEƒ“ó‘Ô‚ğ‰ğœ‚·‚é
-        players[indexNum].GetComponent<Player>().RecoverPlayer();
+        players[indexNum].GetComponent<Player>().RevisionPos(new Vector3(0f, 0.9f, -5f));
 
         yield return new WaitForSeconds(5f);
 

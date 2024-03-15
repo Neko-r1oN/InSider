@@ -89,7 +89,7 @@ public class BlockGoldManager : MonoBehaviour
 
             if (other.gameObject.layer == 3)
             {// Playerのレイヤー
-                if (other.GetComponent<Player>().playerObjID == targetID)
+                if (other.gameObject.GetComponent<Player>().playerObjID == targetID)
                 {// プレイヤーオブジェクトのIDがターゲットのIDと一致する
 
                     if (ClientManager.Instance.playerID == targetID)

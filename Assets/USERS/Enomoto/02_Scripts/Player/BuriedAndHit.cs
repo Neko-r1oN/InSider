@@ -42,41 +42,42 @@ public class BuriedAndHit : MonoBehaviour
                 return;
             }
 
-            if (other.transform.tag == "Block" 
-                && playerCom.isInvincible == false  // ダウン状態ではない場合
-                && isBuried == false) // 処理が何度も入るのを阻止
-            {// ブロックに埋まった
+            if (playerCom.playerObjID == ClientManager.Instance.playerID)
+            {
+                if (other.transform.tag == "Block"
+                    && playerCom.isInvincible == false  // ダウン状態ではない場合
+                    && isBuried == false) // 処理が何度も入るのを阻止
+                {// ブロックに埋まった
 
-                Debug.Log("埋められた");
-
-                // クラス変数を作成
-                revisionPosData.playerID = ClientManager.Instance.playerID;
-                revisionPosData.targetID = player.GetComponent<Player>().playerObjID;
-                revisionPosData.isBuried = true;
-                revisionPosData.targetPosX = 0f;
-                revisionPosData.targetPosY = 0.9f;
-                revisionPosData.targetPosZ = -5f;
-
-                // [revisionPosData]サーバーに送信
-                await ClientManager.Instance.Send(revisionPosData, 12);
-            }
-            else if (other.gameObject.layer == 7)
-            {// 敵に触れた || イベントの落石が当たった
-
-                if (player.GetComponent<Player>().isInvincible == false)
-                {// Playerがダウンしていない場合
-
-                    Debug.Log("敵に攻撃された");
+                    Debug.Log("埋められた");
 
                     // クラス変数を作成
                     revisionPosData.playerID = ClientManager.Instance.playerID;
-                    revisionPosData.targetID = player.GetComponent<Player>().playerObjID;
-                    revisionPosData.isDown = true;
+                    revisionPosData.targetID = ClientManager.Instance.playerID;
+                    revisionPosData.isBuried = true;
 
                     // [revisionPosData]サーバーに送信
                     await ClientManager.Instance.Send(revisionPosData, 12);
                 }
+                else if (other.gameObject.layer == 7)
+                {// 敵に触れた || イベントの落石が当たった
+
+                    if (playerCom.isInvincible == false)
+                    {// Playerがダウンしていない場合
+
+                        Debug.Log("敵に攻撃された");
+
+                        // クラス変数を作成
+                        revisionPosData.playerID = ClientManager.Instance.playerID;
+                        revisionPosData.targetID = ClientManager.Instance.playerID;
+                        revisionPosData.isDown = true;
+
+                        // [revisionPosData]サーバーに送信
+                        await ClientManager.Instance.Send(revisionPosData, 12);
+                    }
+                }
             }
+
         }
         else
         {// サーバーを使用しない場合

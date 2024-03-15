@@ -118,7 +118,7 @@ public class Bomb : MonoBehaviour
 
                 Debug.Log("iiiiiiiiiiiiiii");
 
-                if (other.GetComponent<Player>() != null)
+                if (other.gameObject.GetComponent<Player>() != null)
                 {// Playerスクリプトがない場合
                     return;
                 }
@@ -128,21 +128,23 @@ public class Bomb : MonoBehaviour
                 //int A = other.GetComponent<Player>().playerObjID;
                 //int B = ClientManager.Instance.playerID;
 
-                Debug.Log("プレイヤーのオブジェクトID：" + other.GetComponent<Player>().playerObjID);
+                Debug.Log("プレイヤーのオブジェクトID：" + other.gameObject.GetComponent<Player>().playerObjID);
                 Debug.Log("プレイヤーID：" + ClientManager.Instance.playerID);
 
-                //if (other.GetComponent<Player>().playerObjID == ClientManager.Instance.playerID)
-                //{// プレイヤーのオブジェクトが自分自身の場合
+                Debug.Log("ppppp");
 
-                //    Debug.Log("eeeeee");
+                if (other.gameObject.GetComponent<Player>().playerObjID == ClientManager.Instance.playerID)
+                {// プレイヤーのオブジェクトが自分自身の場合
 
-                // クラス変数を作成
-                Sabotage_Bomb_CancellData cancellData = new Sabotage_Bomb_CancellData();
+                    //    Debug.Log("eeeeee");
+
+                    // クラス変数を作成
+                    Sabotage_Bomb_CancellData cancellData = new Sabotage_Bomb_CancellData();
                     cancellData.playerID = ClientManager.Instance.playerID;
                     cancellData.bombID = bombID;
 
                     await ClientManager.Instance.Send(cancellData, 201);
-                //}
+                }
             }
             else
             {// サーバーを使用しない

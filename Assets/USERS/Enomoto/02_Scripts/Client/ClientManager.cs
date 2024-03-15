@@ -70,7 +70,7 @@ public class ClientManager : MonoBehaviour
     GameObject enemyManager;
 
     // 必要接続人数
-    int RequiredNum = 3;
+    int RequiredNum = 4;
 
     // ゲームが終了したかどうか
     bool isGameSet;
@@ -377,9 +377,15 @@ public class ClientManager : MonoBehaviour
                         // JSONデシリアライズで取得する
                         PlayerIdData receiveData = JsonConvert.DeserializeObject<PlayerIdData>(jsonString);
 
-                        Debug.Log("新しく受信したID : " + receiveData.id);
+                        int? num = null;
 
-                        playerID = receiveData.id;   // 代入
+                        if (receiveData.id != num)
+                        {
+                            Debug.Log("新しく受信したID : " + receiveData.id);
+
+                            playerID = receiveData.id;   // 代入
+                        }
+
 
                         break;
                     case 1: // イベントIDが１の処理実行
@@ -714,6 +720,12 @@ public class ClientManager : MonoBehaviour
 
                             // プレイヤーのダウン処理
                             objeList1[revisionPos.targetID].GetComponent<Player>().DownPlayer(revisionPos.goldDropNum);
+                        }
+                        else if(revisionPos.isBuried == true)
+                        {
+                            Debug.Log(revisionPos.targetID + "が埋められた");
+
+                            objeList1[revisionPos.targetID].GetComponent<Player>().RevisionPos(new Vector3(0f, 0.9f, -5f));
                         }
                         else
                         {
