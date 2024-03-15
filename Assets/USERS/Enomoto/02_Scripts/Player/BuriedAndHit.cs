@@ -42,7 +42,7 @@ public class BuriedAndHit : MonoBehaviour
                 return;
             }
 
-            if (other.GetComponent<Player>().playerObjID == ClientManager.Instance.playerID)
+            if (player.GetComponent<Player>().playerObjID == ClientManager.Instance.playerID)
             {
                 if (other.transform.tag == "Block"
                     && playerCom.isInvincible == false  // ƒ_ƒEƒ“ó‘Ô‚Å‚Í‚È‚¢ê‡
