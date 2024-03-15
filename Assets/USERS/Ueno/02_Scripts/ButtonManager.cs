@@ -259,7 +259,7 @@ public class ButtonManager : MonoBehaviour
     public void fill()
     {//埋めるを選んだ場合
 
-        if (player.GetComponent<Player>().mode == Player.PLAYER_MODE.NOTHING)   // MOVE
+        if (player.GetComponent<Player>().mode == Player.PLAYER_MODE.MOVE)   // MOVE
         {
             return;
         }
