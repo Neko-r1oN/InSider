@@ -20,12 +20,15 @@ public class Goldmanager : MonoBehaviour
         childObj = Instantiate(goldEffect, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, this.gameObject.transform.position.z),
              Quaternion.identity);
 
-        //ドロップする軌道の設定
-        Rigidbody rb = parentObj.GetComponent<Rigidbody>();  // rigidbodyを取得
-        float randx = Random.Range(-5.0f,5.0f);
-        float randz = Random.Range(-5.0f,5.0f);
-        Vector3 force = new Vector3(randx, 12.0f, randz);  // 力を設定
-        rb.AddForce(force, ForceMode.Impulse);          // 力を加える
+        if (parentObj.layer != 12)
+        {// イベント用ではない場合
+         //ドロップする軌道の設定
+            Rigidbody rb = parentObj.GetComponent<Rigidbody>();  // rigidbodyを取得
+            float randx = Random.Range(-5.0f, 5.0f);
+            float randz = Random.Range(-5.0f, 5.0f);
+            Vector3 force = new Vector3(randx, 12.0f, randz);  // 力を設定
+            rb.AddForce(force, ForceMode.Impulse);          // 力を加える
+        }
     }
 
     // Update is called once per frame

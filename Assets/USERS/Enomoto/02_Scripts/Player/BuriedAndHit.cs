@@ -20,6 +20,8 @@ public class BuriedAndHit : MonoBehaviour
         // 一つ上の親を取得する
         player = transform.parent.gameObject;
 
+        Debug.Log(player.name);
+
         // Agent取得
         agent = player.GetComponent<NavMeshAgent>();
 
@@ -83,7 +85,7 @@ public class BuriedAndHit : MonoBehaviour
         {// サーバーを使用しない場合
             if (other.gameObject.layer == 7 && player.GetComponent<Player>().isInvincible == false)
             {// 敵に触れた && Playerがダウンしていない場合
-                Debug.Log("タッチされた");
+                Debug.Log("敵だ！！");
 
                 player.GetComponent<Player>().DownPlayer(4);
 
