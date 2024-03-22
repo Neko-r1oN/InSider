@@ -565,7 +565,7 @@ public class ButtonManager : MonoBehaviour
                 supplementText.text = "※ 使用済み";
 
                 DoubtData doubtData = new DoubtData();
-                doubtData.playerID = ClientManager.Instance.originalID;
+                doubtData.playerID = ClientManager.Instance.playerID;
                 doubtData.targetID = indexNumber;
 
                 // サーバーに送信する

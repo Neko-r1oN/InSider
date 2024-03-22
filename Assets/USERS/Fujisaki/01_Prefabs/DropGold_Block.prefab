@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4451988240203478129}
   - component: {fileID: 4969215241218466484}
   m_Layer: 6
-  m_Name: BlockGold
+  m_Name: DropGold_Block
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

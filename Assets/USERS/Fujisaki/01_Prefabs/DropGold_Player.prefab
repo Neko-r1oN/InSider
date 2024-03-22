@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4591724511836375690}
   - component: {fileID: 1354071365473829449}
   m_Layer: 6
-  m_Name: DropGold
+  m_Name: DropGold_Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

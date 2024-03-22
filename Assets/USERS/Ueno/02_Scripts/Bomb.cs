@@ -39,7 +39,7 @@ public class Bomb : MonoBehaviour
         obj = GameObject.Find("Object001");
 
         // 徐々に大きくする
-        transform.DOScale(new Vector3(4f, 4f, 4f), 15f);
+        transform.DOScale(new Vector3(3f, 3f, 3f), 15f);
 
         audio = GetComponent<AudioSource>();
     }
@@ -91,8 +91,11 @@ public class Bomb : MonoBehaviour
     /// </summary>
     public void DestroyBomb()
     {
-        // ロードパネルのタグをRoadPanel戻す
-        roadPanel.tag = "RoadPanel";
+        if (roadPanel != null)
+        {
+            // ロードパネルのタグをRoadPanel戻す
+            roadPanel.tag = "RoadPanel";
+        }
 
         // 解除エフェクトを生成
         GameObject childEffectObj = Instantiate(effectBomb,
@@ -111,34 +114,16 @@ public class Bomb : MonoBehaviour
         if(other.gameObject.layer == 3)
         {// 当たったレイヤーが3(Player)なら
 
-            Debug.Log("aaaaaaaa");
+            if (other.gameObject.GetComponent<Player>() == null)
+            {// Playerスクリプトがない場合
+                return;
+            }
 
             if (EditorManager.Instance.useServer == true)
             {// サーバーを使用する場合
 
-                Debug.Log("iiiiiiiiiiiiiii");
-
-                if (other.gameObject.GetComponent<Player>() != null)
-                {// Playerスクリプトがない場合
-                    return;
-                }
-
-                Debug.Log("uuuuuu");
-
-                Debug.Log(other.gameObject.name);
-
-                int A = other.GetComponent<Player>().playerObjID;
-                int B = ClientManager.Instance.playerID;
-
-                Debug.Log("プレイヤーのオブジェクトID：" + other.gameObject.GetComponent<Player>().playerObjID);
-                Debug.Log("プレイヤーID：" + ClientManager.Instance.playerID);
-
-                Debug.Log("ppppp");
-
                 if (other.gameObject.GetComponent<Player>().playerObjID == ClientManager.Instance.playerID)
                 {// プレイヤーのオブジェクトが自分自身の場合
-
-                    //    Debug.Log("eeeeee");
 
                     // クラス変数を作成
                     Sabotage_Bomb_CancellData cancellData = new Sabotage_Bomb_CancellData();
@@ -150,15 +135,8 @@ public class Bomb : MonoBehaviour
             }
             else
             {// サーバーを使用しない
-                // ロードパネルのタグをRoadPanel戻す
-                roadPanel.tag = "RoadPanel";
-
-                // 解除エフェクトを生成
-                GameObject childEffectObj = Instantiate(effectBomb,
-                    new Vector3(this.gameObject.transform.position.x, 0.9f, this.transform.position.z), Quaternion.identity);
-
-                // ボムを消す
-                Destroy(this.gameObject);
+                // 爆弾解除
+                DestroyBomb();
             }
         }
     }

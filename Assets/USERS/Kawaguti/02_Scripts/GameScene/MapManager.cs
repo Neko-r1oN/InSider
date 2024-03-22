@@ -13,14 +13,19 @@ public class MapManager : MonoBehaviour
 
     public async void SendLie(bool isFlag)
     {
-        // クラス変数を作成
-        MapData mapData = new MapData();
-        mapData.playerID = ClientManager.Instance.playerID;
-        mapData.isLie = isFlag; // ウソをつく場合はfalse
+        Debug.Log("Mapで本当のことをいうかどうか:" + isFlag);
 
-        Debug.Log(mapData.playerID);
+        if (EditorManager.Instance.useServer)
+        {
+            // クラス変数を作成
+            MapData mapData = new MapData();
+            mapData.playerID = ClientManager.Instance.playerID;
+            mapData.isLie = isFlag; // ウソをつく場合はfalse
 
-        await ClientManager.Instance.Send(mapData, 16);
+            Debug.Log(mapData.playerID);
+
+            await ClientManager.Instance.Send(mapData, 16);
+        }
 
         TreasureUI.SetActive(false);
     }

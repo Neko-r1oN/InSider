@@ -70,7 +70,7 @@ public class ClientManager : MonoBehaviour
     GameObject enemyManager;
 
     // 必要接続人数
-    int RequiredNum = 4;
+    int RequiredNum = 1;
 
     // ゲームが終了したかどうか
     bool isGameSet;
@@ -100,13 +100,6 @@ public class ClientManager : MonoBehaviour
     /// </summary>
     public int playerID { get; set; }
 
-    public int PLAYERID;
-
-    /// <summary>
-    /// 元々のプレイヤーID 
-    /// </summary>
-    public int originalID { get; set; } // 誰かが途中退出したときにプレイヤーIDがずれるため
-
     /// <summary>
     /// 自身の役職が内通者かどうか
     /// </summary>
@@ -133,12 +126,17 @@ public class ClientManager : MonoBehaviour
     public List<string> playerNameList { get; set; }
 
     /// <summary>
+    /// プレイヤーの接続状況
+    /// </summary>
+    public List<bool> isConnectList { get; set; }
+
+    /// <summary>
     /// ラウンド開始時の表示するスコアのリスト
     /// </summary>
     public List<int> scoreList { get; set; }
 
     /// <summary>
-    /// サーバーから通知を受け取ったかどうか
+    /// サーバーから通知を受け取ったかどうか [ゲーム開始通知、リザルト画面に遷移するときの通知]
     /// </summary>
     public bool isGetNotice { get; set; }
 
@@ -170,10 +168,13 @@ public class ClientManager : MonoBehaviour
     /// </summary>
     public enum EventID
     {
-        PlayerID = 0,         // プレイヤーID(1P,2P・・・)
-        ListenerList,         // リスナーデータ
+        PlayerID = 99,         // プレイヤーID設定(1P,2P・・・)
+        ListenerList = 1,     // リスナーデータ
         ReadyData,            // 準備完了
-        RoundReady,           // ラウンド開始に必要な情報
+
+        //***************************************************************
+
+        RoundReadyData,       // ラウンド開始に必要な情報
         RoundEnd,             // ラウンド終了通知
         MoveData,             // 移動
         Action_FillData,      // 行動：埋める
@@ -183,7 +184,7 @@ public class ClientManager : MonoBehaviour
         UdTurns,              // ターンを更新
         DoubtData,            // ダウトのデータ
         RevisionPos,          // 座標の修正
-        Start_Game,           // 接続中のクライアント全員がゲームシーンに突入したらゲームスタート通知を送る
+        Start_Game,           // 接続中のクライアント全員がゲームシーンに突入したらゲームスタート通知を受信
         AllieScore,           // スコアの加算
         Start_RoundReady,     // 接続中のクライアント全員がOpenBoxシーンから遷移するときに通知を送る
         MapData,              // 宝箱の中身の情報を共有する際に、ウソをつくかどうか
@@ -250,6 +251,7 @@ public class ClientManager : MonoBehaviour
         context = SynchronizationContext.Current;
         audio = GetComponent<AudioSource>();
         roundNum = 0;
+        playerNameList = new List<string>();
 
         playerID = 0;
         isGameSet = false;
@@ -259,11 +261,6 @@ public class ClientManager : MonoBehaviour
 
         // 非同期処理を実行する
         StartConnect();
-    }
-
-    private void Update()
-    {
-        PLAYERID = playerID;
     }
 
     /// <summary>
@@ -372,20 +369,14 @@ public class ClientManager : MonoBehaviour
             {
                 switch (eventID)
                 {
-                    case 0: // 自身のプレイヤーIDを取得する
+                    case 99: // 自身のプレイヤーIDを取得する
 
                         // JSONデシリアライズで取得する
                         PlayerIdData receiveData = JsonConvert.DeserializeObject<PlayerIdData>(jsonString);
 
-                        int? num = null;
+                        Debug.Log("新しく受信したID : " + receiveData.id);
 
-                        if (receiveData.id != num)
-                        {
-                            Debug.Log("新しく受信したID : " + receiveData.id);
-
-                            playerID = receiveData.id;   // 代入
-                        }
-
+                        playerID = receiveData.id;   // 代入
 
                         break;
                     case 1: // イベントIDが１の処理実行
@@ -475,19 +466,21 @@ public class ClientManager : MonoBehaviour
 
                         isGetNotice = false;
 
-                        // プレイヤーの名前リストを初期化する
-                        playerNameList = new List<string>();
-
-                        // プレイヤーの名前を取得する
-                        foreach(ListenerData nameData in listenerList)
+                        if (playerNameList.Count <= 0)
                         {
-                            playerNameList.Add(nameData.name);
+                            playerNameList = new List<string>();
+                            isConnectList = new List<bool>();
 
-                            Debug.Log("一緒にやるプレイヤー名：" + nameData.name);
+                            // プレイヤーの名前を取得する
+                            foreach (ListenerData nameData in listenerList)
+                            {
+                                playerNameList.Add(nameData.name);
+                                isConnectList.Add(nameData.isConnect);
+
+                                Debug.Log("一緒にやるプレイヤー名：" + nameData.name);
+                                Debug.Log(nameData.isConnect);
+                            }
                         }
-
-                        // 元々のプレイヤーIDを更新
-                        originalID = playerID;
 
                         // マネージャーを初期化する
                         playerManager = null;
@@ -528,7 +521,7 @@ public class ClientManager : MonoBehaviour
                         totalScoreList = roundEndData.totalScore;
 
                         if (roundEndData.isTurnEnd == true)
-                        {// ラウンド終了による通知の場合
+                        {// 残りのターン数が-1以下の場合
 
                             // フェード＆シーン遷移
                             Initiate.DoneFading();
@@ -538,7 +531,7 @@ public class ClientManager : MonoBehaviour
                             StartCoroutine(SetRoundResultUI(roundEndData));
                         }
                         else
-                        {
+                        {// 宝箱にたどり着けた場合
                             // フェード＆シーン遷移
                             Initiate.DoneFading();
                             Initiate.Fade("BoxOpenScene", Color.black, 1f);
@@ -556,8 +549,6 @@ public class ClientManager : MonoBehaviour
                         // 目的地の座標を取得
                         Vector3 targetPos = new Vector3(moveData.targetPosX, moveData.targetPosY, moveData.targetPosZ);
 
-                        Debug.Log("[" + moveData.playerID + "]" + " : 移動");
-
                         // 移動処理
                         GameObject movePlayer = playerManager.GetComponent<PlayerManager>().players[moveData.playerID];
                         movePlayer.GetComponent<Player>().MoveAgent(targetPos);
@@ -574,7 +565,7 @@ public class ClientManager : MonoBehaviour
 
                         // 道を埋める処理
                         blockManager.GetComponent<BlockManager>().StartCoroutine(
-                            blockManager.GetComponent<BlockManager>().FillObject(fillData.objeID)); 
+                            blockManager.GetComponent<BlockManager>().FillObject(fillData.objeID));
 
                         //****************************************************************
                         //  サボタージュで選択中のパネルが埋められて消えた時の処理
@@ -583,12 +574,12 @@ public class ClientManager : MonoBehaviour
                         {
                             GameObject selectPanel = RoadManager.Instance.selectPanelList[i];
 
-                            if(selectPanel.GetComponent<RoadPanel>().objeID == fillData.objeID)
+                            if (selectPanel.GetComponent<RoadPanel>().objeID == fillData.objeID)
                             {
                                 // 選択中のリストから削除＆選択数を減算
                                 RoadManager.Instance.selectPanelList.RemoveAt(i);
                                 RoadManager.Instance.selectPanelCount--;
-                                if(RoadManager.Instance.selectPanelCount <= 0)
+                                if (RoadManager.Instance.selectPanelCount <= 0)
                                 {
                                     RoadManager.Instance.selectPanelCount = 0;
                                 }
@@ -606,10 +597,10 @@ public class ClientManager : MonoBehaviour
                         // JSONデシリアライズで取得する
                         Action_MiningData mineData = JsonConvert.DeserializeObject<Action_MiningData>(jsonString);
 
-                        Debug.Log("[" + mineData.playerID + "]" + " : [" + mineData.prefabID + "]切り開く  *"+ mineData.isGetGold+"*");
+                        Debug.Log("[" + mineData.playerID + "]" + " : [" + mineData.prefabID + "]切り開く  *" + mineData.isGetGold + "*");
 
                         // 切り開く処理
-                        blockManager.GetComponent<BlockManager>().MineObject(mineData.playerID, mineData.objeID, mineData.prefabID, mineData.rotY,mineData.isGetGold);
+                        blockManager.GetComponent<BlockManager>().MineObject(mineData.playerID, mineData.objeID, mineData.prefabID, mineData.rotY, mineData.isGetGold);
 
                         break;
                     case 8: // やすむ(スタミナ回復)
@@ -623,7 +614,7 @@ public class ClientManager : MonoBehaviour
 
                         GameObject heelPlayer = playerManager.GetComponent<PlayerManager>().players[restData.playerID];
 
-                        Instantiate(heelingPrefab, new Vector3(heelPlayer.transform.position.x, 0.9f, heelPlayer.transform.position.z),Quaternion.identity);
+                        Instantiate(heelingPrefab, new Vector3(heelPlayer.transform.position.x, 0.9f, heelPlayer.transform.position.z), Quaternion.identity);
 
                         break;
                     case 9: // ゲーム中に切断したプレイヤーのIDを受信
@@ -631,13 +622,12 @@ public class ClientManager : MonoBehaviour
                         // JSONデシリアライズで取得する
                         DelPlayerData delPlayerData = JsonConvert.DeserializeObject<DelPlayerData>(jsonString);
 
+                        isConnectList[delPlayerData.playerID] = false;
+
                         // 接続中のプレイヤー情報を更新
                         listenerList = delPlayerData.listeners;
 
                         Debug.Log("切断したプレイヤーID : " + delPlayerData.playerID);
-
-                        // プレイヤーの名前リストから要素を削除
-                        playerNameList.RemoveAt(delPlayerData.playerID);
 
                         // 途中退出したことを示唆するUIを表示する
                         uiManager.GetComponent<UIManager>().UdOutUI(delPlayerData.playerID);
@@ -645,24 +635,9 @@ public class ClientManager : MonoBehaviour
                         // 途中退出したプレイヤーUIの位置を正す
                         uiManager.GetComponent<UIManager>().ReturnPlayerUI(delPlayerData.playerID);
 
-                        // UIマネージャーが持つリストから要素を削除
-                        uiManager.GetComponent<UIManager>().RemoveElement(delPlayerData.playerID);
-
-                        // プレイヤーのモデルリストを取得する
-                        List<GameObject> objeList = playerManager.GetComponent<PlayerManager>().players;
-
                         // 切断したプレイヤーのモデルを破棄する
+                        List<GameObject> objeList = playerManager.GetComponent<PlayerManager>().players;
                         Destroy(objeList[delPlayerData.playerID]);
-
-                        // プレイヤーリストから削除する
-                        objeList.RemoveAt(delPlayerData.playerID);
-
-                        // 各プレイヤーオブジェクトのIDを再設定する
-                        for (int i = 0; i < objeList.Count; i++)
-                        {
-                            // オブジェクトIDを更新する
-                            objeList[i].GetComponent<Player>().playerObjID = i;
-                        }
 
                         break;
                     case 10:    // ターン数の更新＆次に行動できるプレイヤーIDの更新
@@ -683,7 +658,7 @@ public class ClientManager : MonoBehaviour
                         // 制限時間を0にする
                         TimeUI.Instance.FinishTimer();
 
-                        if(turnPlayerID == playerID)
+                        if (turnPlayerID == playerID)
                         {// 自身のターンの場合
                             TimeUI.Instance.GenerateTimer(doubtNum);    // 制限時間を設定する
                         }
@@ -696,7 +671,7 @@ public class ClientManager : MonoBehaviour
 
                         Debug.Log("[元のID]" + doubtData.playerID + "が" + doubtData.targetID + "を疑う");
 
-                        if(doubtData.targetID == originalID)
+                        if (doubtData.targetID == playerID)
                         {// 自身が疑われた場合
                             doubtNum++;
                         }
@@ -714,21 +689,21 @@ public class ClientManager : MonoBehaviour
                         List<GameObject> objeList1 = playerManager.GetComponent<PlayerManager>().players;
 
                         if (revisionPos.isDown == true)
-                        {// 敵による座標修正
+                        {// 敵orイベント用の落石による座標修正
 
                             Debug.Log(revisionPos.targetID + "がダウンした");
 
                             // プレイヤーのダウン処理
                             objeList1[revisionPos.targetID].GetComponent<Player>().DownPlayer(revisionPos.goldDropNum);
                         }
-                        else if(revisionPos.isBuried == true)
-                        {
+                        else if (revisionPos.isBuried == true)
+                        {// ブロックに埋められた場合
                             Debug.Log(revisionPos.targetID + "が埋められた");
 
                             objeList1[revisionPos.targetID].GetComponent<Player>().RevisionPos(new Vector3(0f, 0.9f, -5f));
                         }
                         else
-                        {
+                        {// 移動する際にパスがとれなかった場合
                             // 座標を取得する
                             Vector3 targetPos1 = new Vector3(revisionPos.targetPosX, revisionPos.targetPosY, revisionPos.targetPosZ);
 
@@ -753,7 +728,7 @@ public class ClientManager : MonoBehaviour
 
                         isGetNotice = true;
 
-                        if(loadingObj != null)
+                        if (loadingObj != null)
                         {
                             Destroy(loadingObj);
                         }
@@ -773,7 +748,7 @@ public class ClientManager : MonoBehaviour
                         scoreList[allieScoreData.playerID] = allieScoreData.allieScore;
 
                         // スコアテキストを更新する
-                        uiManager.GetComponent<UIManager>().UdScoreText(allieScoreData.originalID, allieScoreData.allieScore);
+                        uiManager.GetComponent<UIManager>().UdScoreText(allieScoreData.playerID, allieScoreData.allieScore);
 
                         break;
                     case 15:    // リザルト画面に遷移するときだけ受信する
@@ -781,7 +756,7 @@ public class ClientManager : MonoBehaviour
                         Debug.Log("リザルトシーン遷移");
 
                         isGameSet = true;
-                        
+
                         // JSONデシリアライズで取得する
                         GameEndData gameEndData = JsonConvert.DeserializeObject<GameEndData>(jsonString);
                         scoreList = gameEndData.scoreList;
@@ -898,7 +873,7 @@ public class ClientManager : MonoBehaviour
 
                         Debug.Log("終了するイベント : " + eventFinishData.eventID);
 
-                        if(eventFinishData.eventID == 103)
+                        if (eventFinishData.eventID == 103)
                         {// 敵の場合
 
                             List<GameObject> oldEnemys = new List<GameObject>();
@@ -915,7 +890,7 @@ public class ClientManager : MonoBehaviour
                             enemyManager.GetComponent<EnemyManager>().StartCoroutine(
                                 enemyManager.GetComponent<EnemyManager>().StartBlink(oldEnemys));
                         }
-                        else if(eventFinishData.eventID == 102)
+                        else if (eventFinishData.eventID == 102)
                         {// 混乱イベントの場合
 
                             Debug.Log("あああ");
@@ -944,7 +919,7 @@ public class ClientManager : MonoBehaviour
 
                         Debug.Log("サボタージュ発生 : " + setSabotageData.sabotageID);
 
-                        if(setSabotageData.sabotageID == 0)
+                        if (setSabotageData.sabotageID == 0)
                         {// 道を埋める
                             for (int i = 0; i < setSabotageData.objID.Count; i++)
                             {
@@ -1009,7 +984,7 @@ public class ClientManager : MonoBehaviour
 
                         for (int i = 0; i < blockManager.GetComponent<BlockManager>().bombs.Length; i++)
                         {
-                            if(blockManager.GetComponent<BlockManager>().bombs[i] != null)
+                            if (blockManager.GetComponent<BlockManager>().bombs[i] != null)
                             {// 存在する場合
                                 // 爆発させる
                                 blockManager.GetComponent<BlockManager>().bombs[i].
@@ -1117,6 +1092,11 @@ public class ClientManager : MonoBehaviour
         enemyManager = GameObject.Find("EnemyManager");
     }
 
+    /// <summary>
+    /// 宝箱を開けるシーン
+    /// </summary>
+    /// <param name="roundEndData"></param>
+    /// <returns></returns>
     IEnumerator SetPlayerAndMimic(RoundEndData roundEndData)
     {
         yield return new WaitForSeconds(1.1f);
@@ -1130,6 +1110,11 @@ public class ClientManager : MonoBehaviour
             roundEndData.allieScore);
     }
 
+    /// <summary>
+    /// 途中結果を表示するリザルトシーン
+    /// </summary>
+    /// <param name="roundEndData"></param>
+    /// <returns></returns>
     IEnumerator SetRoundResultUI(RoundEndData roundEndData)
     {
         yield return new WaitForSeconds(1.05f);
@@ -1168,18 +1153,6 @@ public class ClientManager : MonoBehaviour
         await stream.WriteAsync(sendData, 0, sendData.Length);  // 送信
 
         Debug.Log("OKOKOK");
-    }
-
-    /// <summary>
-    /// 別のものスクリプトからデータを送信する
-    /// </summary>
-    /// <param name="data"></param>
-    /// <param name="eventID"></param>
-    public async void SendData(object data, int eventID)
-    {
-        await Send(data, eventID);
-
-        Debug.Log("OK");
     }
 
     /// <summary>

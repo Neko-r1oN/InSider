@@ -31,14 +31,16 @@ public class PlayerManager : MonoBehaviour
             // 子オブジェクトを取得
             Transform childTransform = this.transform.GetChild(i);
 
-            if (i < ClientManager.Instance.playerNameList.Count)
+            // Playerオブジェクトをリストに追加する
+            players.Add(childTransform.gameObject);
+
+            // IDを設定する
+            players[i].GetComponent<Player>().playerObjID = i;
+
+            if (i < ClientManager.Instance.playerNameList.Count && ClientManager.Instance.isConnectList[i] == true)
             {// 存在するプレイヤーの場合
 
-                // Playerオブジェクトをリストに追加する
-                players.Add(childTransform.gameObject);
-
-                // IDを設定する
-                players[i].GetComponent<Player>().playerObjID = i;
+                Debug.Log(i + "追加");
 
                 if (i != ClientManager.Instance.playerID)
                 {// 自身のプレイヤーIDと一致しない場合
@@ -61,6 +63,9 @@ public class PlayerManager : MonoBehaviour
             }
             else
             {// 存在しないプレイヤーの場合
+
+                Debug.Log(i + "破棄");
+
                 Destroy(childTransform.gameObject);
             }
         }

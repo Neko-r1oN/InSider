@@ -86,6 +86,11 @@ public class Enemy : MonoBehaviour
         {// ターゲットがいる場合
             // プレイヤーを目指して進む
             navMeshAgent.destination = targetList[indexNum].transform.position;
+
+            if(Vector3.Distance(targetList[indexNum].transform.position, transform.position) <= 2)
+            {// ターゲットのプレイヤーとの距離が縮まった場合
+                this.transform.LookAt(targetList[indexNum].transform.position);
+            }
         }
         else
         {// ターゲットがいない場合

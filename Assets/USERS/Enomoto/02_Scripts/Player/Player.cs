@@ -7,6 +7,7 @@ using Unity.AI.Navigation;
 using DG.Tweening;
 using System;
 using Cinemachine;
+using System.Threading.Tasks;
 
 public class Player : MonoBehaviour
 {
@@ -153,7 +154,7 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    async Task Update()
     {
         // Y座標を固定 → 目的地に到達したかどうかの判定が難しくなるため
         transform.position = new Vector3(transform.position.x, pos_Y, transform.position.z);
@@ -209,7 +210,7 @@ public class Player : MonoBehaviour
                                 moveData.targetPosZ = clickedTarget.z;
 
                                 // 送信する
-                                ClientManager.Instance.SendData(moveData, 5);
+                                await ClientManager.Instance.Send(moveData, 5);
                             }
                             else
                             {// サーバーを使用しない場合
