@@ -180,14 +180,11 @@ public class ChestTrigger : MonoBehaviour
     {
         if (isPlayer == true)
         {
-            Debug.Log("②:++++++++++++++++++");
             return;
         }
 
         if (other.gameObject.layer == 3)
         {// プレイヤーの場合
-
-            Debug.Log("①:"+other.gameObject.name);
 
             if (other.GetComponent<Player>().playerObjID == ClientManager.Instance.playerID)
             {// 自分自身の場合
@@ -206,11 +203,8 @@ public class ChestTrigger : MonoBehaviour
     {
         if (isPlayer == true)
         {
-            Debug.Log("②:++++++++++++++++++");
             return;
         }
-
-        Debug.Log("送信準備");
 
         isPlayer = true;
 

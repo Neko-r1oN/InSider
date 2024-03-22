@@ -16,4 +16,9 @@ internal class ListenerData
     /// プレイヤーID (1P,2P・・・)
     /// </summary>
     public int id { get; set; }
+
+    /// <summary>
+    /// 接続中かどうか
+    /// </summary>
+    public bool isConnect { get; set; }
 }

@@ -136,7 +136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa27a1b724430545b311a2f7d727e81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasObj: {fileID: 0}
+  canvasObj: {fileID: 8356907718792179015, guid: 51b4f3869f9cfe94790c5cf898c5f946,
+    type: 3}
   loadingPrefab: {fileID: 8356907718792179015, guid: 51b4f3869f9cfe94790c5cf898c5f946,
     type: 3}
 --- !u!114 &5044408549169556362
@@ -410,10 +411,10 @@ MonoBehaviour:
     type: 3}
   confusionObjList: []
   buffObjList: []
-  buffSE: {fileID: 0}
-  debuffSE: {fileID: 0}
-  enemySpawnSE: {fileID: 0}
-  stoneFallSE: {fileID: 0}
+  buffSE: {fileID: 8300000, guid: 5045306a47f8de64e891f2b9b87d5397, type: 3}
+  debuffSE: {fileID: 8300000, guid: 899c3bd8516350f4c9989c00da0f70d5, type: 3}
+  enemySpawnSE: {fileID: 8300000, guid: e36a0b57b57e7854ebb8366cac939a44, type: 3}
+  stoneFallSE: {fileID: 8300000, guid: 12bafa80192f26f4881a2576d1671375, type: 3}
   chaosPrefab: {fileID: 4727419194395133498, guid: 637093d00aee74b418b918c2ec99bdb4,
     type: 3}
   eventNum: 0

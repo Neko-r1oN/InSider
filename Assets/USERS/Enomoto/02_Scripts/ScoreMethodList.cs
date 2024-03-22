@@ -31,7 +31,6 @@ public class ScoreMethodList : MonoBehaviour
         {// サーバーを使用しない場合
             return;
         }
-        scoreData.originalID = ClientManager.Instance.originalID;
     }
 
     /// <summary>

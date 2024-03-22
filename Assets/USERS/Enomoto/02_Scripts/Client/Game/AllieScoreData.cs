@@ -13,11 +13,6 @@ internal class AllieScoreData
     public int playerID { get; set; }
 
     /// <summary>
-    /// 元々のプレイヤーID
-    /// </summary>
-    public int originalID { get; set; }
-
-    /// <summary>
     /// 送信時：加減するスコアの値 || 受信時：表示するスコアの値
     /// </summary>
     public int allieScore { get; set; }

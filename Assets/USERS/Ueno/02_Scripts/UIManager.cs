@@ -38,7 +38,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] List<GameObject> doubtImageParent;
 
     // ダウトのUI
-    GameObject[,] doubtImageUiList = new GameObject[6,6];
+    GameObject[,] doubtImageUiList = new GameObject[6,5];
 
     // ダウトのボタンのリスト
     [SerializeField] List<GameObject> doubtButtonList;
@@ -158,6 +158,17 @@ public class UIManager : MonoBehaviour
             // プレイヤーの名前を更新
             //------------------------------
             UdPlayerName(ClientManager.Instance.playerNameList);
+
+            //------------------------------------
+            // 途中退出したプレイヤーのUIを更新
+            //------------------------------------
+            for (int i = 0; i < ClientManager.Instance.isConnectList.Count; i++)
+            {
+                if (ClientManager.Instance.isConnectList[i] == false)
+                {
+                    UdOutUI(i);
+                }
+            }
         }
 
         chaos.SetActive(false);
@@ -356,7 +367,7 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 途中退出用のUIを表示する
+    /// 途中退出用のUIを表示する & 使用できないダウトボタンのIDを追加する
     /// </summary>
     /// <param name="indexNum"></param>
     public void UdOutUI(int indexNum)
@@ -364,6 +375,9 @@ public class UIManager : MonoBehaviour
         // アクティブ化
         outImageUI[indexNum].SetActive(true);
         outImageList_DoubtUI[indexNum].SetActive(true);
+
+        // 使用できないインデックス番号を追加
+        disabledIndexNumList.Add(indexNum);
     }
 
     /// <summary>
@@ -378,21 +392,6 @@ public class UIManager : MonoBehaviour
 
         // アクティブ化する
         doubtImageUiList[targetID, playerID].SetActive(true);
-    }
-
-    /// <summary>
-    /// UIリストから要素を削除する
-    /// </summary>
-    /// <param name="indexNum"></param>
-    public void RemoveElement(int indexNum)
-    {
-        playerUIList.RemoveAt(indexNum);
-        playerName.RemoveAt(indexNum);
-        outImageUI.RemoveAt(indexNum);
-        doubtButtonList.RemoveAt(indexNum);
-
-        // 使用できないインデックス番号を追加
-        disabledIndexNumList.Add(indexNum);
     }
 
     /// <summary>
